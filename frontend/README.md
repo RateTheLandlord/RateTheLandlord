@@ -10,13 +10,13 @@ To develop locally:
    own GitHub account and then
    [clone](https://help.github.com/articles/cloning-a-repository/) it to your
    local device.
-2. Switch to the Frontend Folder
-   ```
-   cd RateTheLandlord/frontend
-   ```
-3. Create a new branch:
+2. Create a new branch:
    ```
    git checkout -b MY_BRANCH_NAME
+   ```
+3. Switch to the Frontend Folder
+   ```
+   cd RateTheLandlord/frontend
    ```
 4. Install dependencies:
    ```
