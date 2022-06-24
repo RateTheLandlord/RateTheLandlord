@@ -16,7 +16,8 @@
 
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-		"project": "../frontend/tsconfig.json", // tells parser relative path of tsconfig.json
+		"project": "tsconfig.json", // tells parser relative path of tsconfig.json
+		"tsconfigRootDir": "./frontend/",
 		"ecmaFeatures": {
 			"jsx": true
 		},
