@@ -22,12 +22,5 @@
 		"incremental": true
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
-	"exclude": [
-		"node_modules",
-		".next",
-		".vercel",
-		"out",
-		"tailwind.config.js",
-		"postcss.config.js"
-	]
+	"exclude": ["node_modules", ".next", ".vercel", "out"]
 }
