@@ -26,3 +26,7 @@ To develop locally:
    ```
    npm run dev
    ```
+
+## Styling
+
+Styling with (TailwindCSS)[https://tailwindcss.com/]
