@@ -1,5 +1,5 @@
-import ReviewFilters from '@/Components/Reviews/ReviewFilters'
-import ReviewTable from '@/Components/Reviews/ReviewTable'
+import ReviewFilters from '@/components/reviews/review-filters'
+import ReviewTable from '@/components/reviews/review-table'
 import React from 'react'
 
 //This page should be statically generated for better SEO performance with getStaticProps through NextJS with a short regeneration period (30 minute?)
