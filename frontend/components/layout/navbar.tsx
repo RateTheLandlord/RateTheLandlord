@@ -1,12 +1,14 @@
-import {Fragment} from 'react'
-import {Disclosure, Menu, Transition} from '@headlessui/react'
+import {Disclosure} from '@headlessui/react'
 import {SearchIcon} from '@heroicons/react/solid'
-import {BellIcon, MenuIcon, XIcon} from '@heroicons/react/outline'
-import Logo from '../svg/logo'
+import {MenuIcon, XIcon} from '@heroicons/react/outline'
+import Logo from '../svg/logo/logo'
+import Link from 'next/link'
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
+
+//TODO Apply "Current" styling to Navbar as necessary
 
 export default function Navbar(): JSX.Element {
 	return (
@@ -18,17 +20,17 @@ export default function Navbar(): JSX.Element {
 							<div className="flex px-2 lg:px-0">
 								<div className="flex-shrink-0 flex items-center gap-4">
 									<Logo styling="h-8 w-auto" />
-
-									<p>Rate The Landlord</p>
+									<Link href="/">
+										<a>Rate The Landlord</a>
+									</Link>
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<a
-										href="#"
-										className="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-									>
-										Reviews
-									</a>
+									<Link href="/reviews">
+										<a className="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+											Reviews
+										</a>
+									</Link>
 								</div>
 							</div>
 							<div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -54,12 +56,11 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<a
-										href="#"
-										className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-									>
-										Submit a Review
-									</a>
+									<Link href="/create-review">
+										<a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+											Submit a Review
+										</a>
+									</Link>
 								</div>
 							</div>
 							<div className="flex items-center lg:hidden">
@@ -80,20 +81,22 @@ export default function Navbar(): JSX.Element {
 					<Disclosure.Panel className="lg:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-							<Disclosure.Button
-								as="a"
-								href="#"
-								className="bg-teal-50 border-teal-500 text-teal-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-							>
-								Reviews
-							</Disclosure.Button>
-							<Disclosure.Button
-								as="a"
-								href="#"
-								className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-							>
-								Submit a Review
-							</Disclosure.Button>
+							<Link href="/reviews">
+								<Disclosure.Button
+									as="a"
+									className="bg-teal-50 border-teal-500 text-teal-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
+								>
+									Reviews
+								</Disclosure.Button>
+							</Link>
+							<Link href="/create-review">
+								<Disclosure.Button
+									as="a"
+									className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
+								>
+									Submit a Review
+								</Disclosure.Button>
+							</Link>
 						</div>
 					</Disclosure.Panel>
 				</>
