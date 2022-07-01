@@ -14,9 +14,9 @@ export default function IconSection() {
 						</div>
 						<div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
 							<div className="text-center sm:flex sm:text-left lg:block lg:text-center">
-								<div className="sm:flex-shrink-0 flex justify-center">
+								<div className="sm:flex-shrink-0 flex justify-center ">
 									<div className="flow-root">
-										<Privacy styling='className="w-16 h-16 mx-auto"' />
+										<Privacy styling='className="w-16 h-16 mx-auto text-teal-600' />
 									</div>
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
