@@ -16,7 +16,7 @@ export default function Navbar(): JSX.Element {
 					<div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
 						<div className="flex justify-between h-16">
 							<div className="flex px-2 lg:px-0">
-								<div className="flex-shrink-0 flex items-center">
+								<div className="flex-shrink-0 flex items-center gap-4">
 									<Logo styling="h-8 w-auto" />
 
 									<p>Rate The Landlord</p>
@@ -25,7 +25,7 @@ export default function Navbar(): JSX.Element {
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<a
 										href="#"
-										className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+										className="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 									>
 										Reviews
 									</a>
@@ -56,7 +56,7 @@ export default function Navbar(): JSX.Element {
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<a
 										href="#"
-										className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teak-500"
+										className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
 									>
 										Submit a Review
 									</a>
@@ -64,7 +64,7 @@ export default function Navbar(): JSX.Element {
 							</div>
 							<div className="flex items-center lg:hidden">
 								{/* Mobile menu button */}
-								<Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+								<Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
 									<span className="sr-only">Open main menu</span>
 									{open ? (
 										<XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -83,7 +83,7 @@ export default function Navbar(): JSX.Element {
 							<Disclosure.Button
 								as="a"
 								href="#"
-								className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+								className="bg-teal-50 border-teal-500 text-teal-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
 							>
 								Reviews
 							</Disclosure.Button>
