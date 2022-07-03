@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Facebook(props) {
+export default function Facebook() {
 	return (
 		<svg
 			fill="currentColor"
