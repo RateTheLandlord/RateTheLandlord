@@ -17,7 +17,7 @@
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"project": "tsconfig.json", // tells parser relative path of tsconfig.json
-		"tsconfigRootDir": "./frontend/",
+
 		"ecmaFeatures": {
 			"jsx": true
 		},
@@ -26,10 +26,7 @@
 	},
 
 	// all plugins (eslint-plugin-xxx) go here:
-	"plugins": [
-		"@typescript-eslint",
-		"@next/eslint-plugin-next" // https://github.com/vercel/next.js/blob/canary/packages/eslint-plugin-next/lib/index.js
-	],
+	"plugins": ["@typescript-eslint"],
 
 	// all configs (eslint-config-xxx) go here:
 	"extends": [
@@ -37,9 +34,8 @@
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:@typescript-eslint/recommended-requiring-type-checking", // contains rules that specifically require type information
-		"plugin:@next/next/recommended",
 		"next", // https://github.com/vercel/next.js/blob/canary/packages/eslint-config-next/package.json
-		"next/core-web-vitals",
+
 		"plugin:import/typescript"
 	],
 	"rules": {
