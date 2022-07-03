@@ -13,20 +13,6 @@ services:
       - db
     volumes:
     - ./src:/usr/src/app/src
-    
-  api-prod:
-    container_name: api-prod
-    restart: always
-    build:
-      context: .
-      target: production
-      dockerfile: ./Dockerfile
-    ports:
-      - ${BEPORT}:${BEPORT}
-    depends_on:
-      - db
-    volumes:
-    - ./src:/usr/src/app/src
 
   db:
     container_name: postgres
