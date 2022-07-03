@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { SampleService } from './sample.service';
 
-@Controller()
+@Controller('sample')
 export class SampleController {
   constructor(
     private readonly sampleService: SampleService,
