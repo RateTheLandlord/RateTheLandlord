@@ -11,10 +11,7 @@ A simple website for Renter's to rate their Landlord
 3. Run docker compose to start the required services:
 ```bash
 # development
-$ docker-compose up api-dev
-
-# production
-$ docker-compose up api-prod
+$ docker compose up api-dev
 ```
 
 ## Test
