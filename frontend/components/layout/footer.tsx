@@ -8,22 +8,22 @@ const navigation = [
 	{
 		name: 'Facebook',
 		href: '#',
-		icon: (props) => <Facebook />,
+		icon: () => <Facebook />,
 	},
 	{
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',
-		icon: (props) => <Instagram />,
+		icon: () => <Instagram />,
 	},
 	{
 		name: 'Twitter',
 		href: 'https://twitter.com/r8thelandlord',
-		icon: (props) => <Twitter />,
+		icon: () => <Twitter />,
 	},
 	{
 		name: 'TikTok',
 		href: 'https://www.tiktok.com/@ratethelandlord',
-		icon: (props) => <TikTok />,
+		icon: () => <TikTok />,
 	},
 ]
 

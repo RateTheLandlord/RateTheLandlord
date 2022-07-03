@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Logo({styling}) {
+export default function Logo({styling}: {styling: string}) {
 	return (
 		<svg
 			className={styling}

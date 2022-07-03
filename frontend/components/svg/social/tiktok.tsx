@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TikTok(props) {
+export default function TikTok() {
 	return (
 		<svg
 			fill="currentColor"
