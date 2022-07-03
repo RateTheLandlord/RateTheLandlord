@@ -1,11 +1,44 @@
 version: '3.8'
 services:
-  prod-api:
-    container_name: prod-api
+  api-dev:
+    container_name: api-dev
     restart: always
-    build: .
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
     ports:
       - ${BEPORT}:${BEPORT}
+    depends_on:
+      - db
+    volumes:
+    - ./src:/usr/src/app/src
+    
+  api-prod:
+    container_name: api-prod
+    restart: always
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    ports:
+      - ${BEPORT}:${BEPORT}
+    depends_on:
+      - db
+    volumes:
+    - ./src:/usr/src/app/src
+
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - '5433:${PGPORT}'
+    volumes:
+      - data:/data/db
+    environment:
+      - POSTGRES_USER=${PGUSERNAME}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
 
 volumes: 
  data: {}
