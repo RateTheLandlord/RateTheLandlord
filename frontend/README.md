@@ -29,4 +29,4 @@ To develop locally:
 
 ## Styling
 
-Styling with (TailwindCSS)[https://tailwindcss.com/]
+Styling with [TailwindCSS](https://tailwindcss.com/)
