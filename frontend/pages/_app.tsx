@@ -1,6 +1,6 @@
 import Layout from '@/components/layout/layout'
 import {AppProps} from 'next/app'
-import '../styles/main.css'
+import '../styles/global.css'
 
 //State for Admin Login may be held here (Admin Status {Logged In? Username?})
 
