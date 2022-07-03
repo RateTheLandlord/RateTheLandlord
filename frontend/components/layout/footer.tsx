@@ -39,7 +39,7 @@ function Footer(): JSX.Element {
 							className="text-gray-400 hover:text-gray-500"
 						>
 							<span className="sr-only">{item.name}</span>
-							<item.icon className="h-6 w-6" aria-hidden="true" />
+							<item.icon aria-hidden="true" />
 						</a>
 					))}
 				</div>

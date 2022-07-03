@@ -4,10 +4,6 @@ import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import Logo from '../svg/logo/logo'
 import Link from 'next/link'
 
-function classNames(...classes) {
-	return classes.filter(Boolean).join(' ')
-}
-
 //TODO Apply "Current" styling to Navbar as necessary
 
 export default function Navbar(): JSX.Element {

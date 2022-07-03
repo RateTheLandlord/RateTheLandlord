@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Instagram(props) {
+export default function Instagram() {
 	return (
 		<svg
 			fill="currentColor"
