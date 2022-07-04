@@ -1,4 +1,4 @@
-name: Node.js CI
+name: RateTheLandlord CI
 
 on:
   push:
@@ -26,9 +26,18 @@ jobs:
           cd backend
           npm ci
           npm run build
-      - name: Run Lint
+      - name: Lint backend
         run: |
           cd backend
+          npm run lint
+      - name: Install and build frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+      - name: Lint frontend
+        run: |
+          cd frontend
           npm run lint
       - name: Deploy
         if: github.ref == 'refs/heads/main'
