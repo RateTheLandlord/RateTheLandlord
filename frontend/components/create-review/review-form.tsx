@@ -175,6 +175,9 @@ function ReviewForm(): JSX.Element {
 					</div>
 				</div>
 				<div>
+					<h3 className="text-lg leading-6 font-medium text-gray-900">
+						Please rate the following on a scale from 1(worst) to 5(best)
+					</h3>
 					<RatingsRadio title="Repair" rating={repair} setRating={setRepair} />
 					<RatingsRadio
 						title="Health and Safety"
