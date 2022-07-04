@@ -36,4 +36,4 @@ jobs:
           command: sh deploy.sh
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          passphrase: ${{ secrets.PASS }}
+          password: ${{ secrets.PASS }}
