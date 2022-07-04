@@ -12,7 +12,7 @@ const postalRegex =
 
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState('')
-	const [country, setCountry] = useState('')
+	const [country, setCountry] = useState('Canada')
 	const [city, setCity] = useState('')
 	const [province, setProvince] = useState('')
 	const [postal, setPostal] = useState('')
@@ -72,6 +72,7 @@ function ReviewForm(): JSX.Element {
 									type="text"
 									name="landlord"
 									id="landlord"
+									required
 									placeholder="Landlord/Property Management"
 									onChange={(e) => setLandlord(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -90,7 +91,7 @@ function ReviewForm(): JSX.Element {
 								<select
 									id="country"
 									name="country"
-									autoComplete="country-name"
+									required
 									onChange={(e) => setCountry(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								>
@@ -113,6 +114,7 @@ function ReviewForm(): JSX.Element {
 									name="city"
 									id="city"
 									placeholder="City"
+									required
 									onChange={(e) => setCity(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
@@ -151,6 +153,7 @@ function ReviewForm(): JSX.Element {
 									name="postal-code"
 									id="postal-code"
 									placeholder="Postal Code / ZIP"
+									required
 									onChange={(e) => setPostal(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
