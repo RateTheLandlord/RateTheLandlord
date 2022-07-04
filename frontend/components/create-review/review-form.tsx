@@ -10,6 +10,9 @@ const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/
 const postalRegex =
 	/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i
 
+//TODO hook up with backend
+//TODO create error handling for regex tests
+
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState('')
 	const [country, setCountry] = useState('Canada')
