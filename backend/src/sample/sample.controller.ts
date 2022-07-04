@@ -11,7 +11,7 @@ export class SampleController {
 
   @Get()
   async getHello(): Promise<string> {
-    const num = await this.databaseService.sql<Sample[]>`SELECT 4 + 3 as num`;
+    const num = await this.databaseService.sql<Sample[]>`SELECT 4 + 4 as num`;
     return this.sampleService.getHello() + num[0].num;
   }
 }
