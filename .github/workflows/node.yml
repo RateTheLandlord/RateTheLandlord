@@ -25,3 +25,14 @@ jobs:
         run: |
           cd backend
           npm ci
+          npm run build
+      - name: Run Lint
+        run: |
+          npm run lint
+      - name: Deploy
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: sh deploy.sh
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          passphrase: ${{ secrets.PASS }}
