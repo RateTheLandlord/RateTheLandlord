@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
+import RatingsRadio from './ratings-radio'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -14,11 +15,19 @@ const postalRegex =
 //TODO create error handling for regex tests
 
 function ReviewForm(): JSX.Element {
-	const [landlord, setLandlord] = useState('')
-	const [country, setCountry] = useState('Canada')
-	const [city, setCity] = useState('')
-	const [province, setProvince] = useState('')
-	const [postal, setPostal] = useState('')
+	const [landlord, setLandlord] = useState<string>('')
+	const [country, setCountry] = useState<string>('Canada')
+	const [city, setCity] = useState<string>('')
+	const [province, setProvince] = useState<string>('')
+	const [postal, setPostal] = useState<string>('')
+
+	const [repair, setRepair] = useState<number>(3)
+	const [health, setHealth] = useState<number>(3)
+	const [stability, setStability] = useState<number>(3)
+	const [privacy, setPrivacy] = useState<number>(3)
+	const [respect, setRespect] = useState<number>(3)
+
+	const [review, setReview] = useState<string>('')
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -36,6 +45,7 @@ function ReviewForm(): JSX.Element {
 		console.log('city: ', city)
 		console.log('province: ', province)
 		console.log('postal: ', postal)
+		console.log('review: ', review)
 
 		//This is for the eventual call to the backend
 		// const body = {
@@ -163,6 +173,50 @@ function ReviewForm(): JSX.Element {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div>
+					<RatingsRadio title="Repair" rating={repair} setRating={setRepair} />
+					<RatingsRadio
+						title="Health and Safety"
+						rating={health}
+						setRating={setHealth}
+					/>
+
+					<RatingsRadio
+						title="Rental Stability"
+						rating={stability}
+						setRating={setStability}
+					/>
+
+					<RatingsRadio
+						title="Tenant Privacy"
+						rating={privacy}
+						setRating={setPrivacy}
+					/>
+
+					<RatingsRadio
+						title="Respect"
+						rating={respect}
+						setRating={setRespect}
+					/>
+				</div>
+			</div>
+			<div>
+				<label
+					htmlFor="comment"
+					className="block text-sm font-medium text-gray-700"
+				>
+					Written Review
+				</label>
+				<div className="mt-1">
+					<textarea
+						rows={4}
+						name="comment"
+						id="comment"
+						onChange={(e) => setReview(e.target.value)}
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+						defaultValue={''}
+					/>
 				</div>
 			</div>
 
