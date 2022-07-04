@@ -6,6 +6,10 @@ import ButtonLight from '../ui/button-light'
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
 
+const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/
+const postalRegex =
+	/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i
+
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState('')
 	const [country, setCountry] = useState('')
@@ -13,8 +17,38 @@ function ReviewForm(): JSX.Element {
 	const [province, setProvince] = useState('')
 	const [postal, setPostal] = useState('')
 
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
+		if (country === 'United States') {
+			if (!zipRegex.test(postal)) {
+				//Set error message for Postal
+			}
+		} else {
+			if (!postalRegex.test(postal)) {
+				//set error message for postal
+			}
+		}
+		console.log('landlord: ', landlord)
+		console.log('country: ', country)
+		console.log('city: ', city)
+		console.log('province: ', province)
+		console.log('postal: ', postal)
+
+		//This is for the eventual call to the backend
+		// const body = {
+		// 	landlord: landlord,
+		// 	country: country,
+		// 	city: city,
+		// 	province: province,
+		// 	postal: postal
+		// }
+	}
+
 	return (
-		<form className="space-y-8 divide-y divide-gray-200">
+		<form
+			onSubmit={handleSubmit}
+			className="space-y-8 divide-y divide-gray-200"
+		>
 			<div className="space-y-8 divide-y divide-gray-200">
 				<div className="pt-8">
 					<div>
