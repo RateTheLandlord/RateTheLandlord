@@ -5,8 +5,7 @@ services:
     restart: always
     build:
       context: .
-      target: development
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.dev
     ports:
       - ${BEPORT}:${BEPORT}
     depends_on:

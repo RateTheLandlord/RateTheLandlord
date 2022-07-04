@@ -1,0 +1,49 @@
+name: RateTheLandlord CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install and build backend
+        run: |
+          cd backend
+          npm ci
+          npm run build
+      - name: Lint backend
+        run: |
+          cd backend
+          npm run lint
+      - name: Install and build frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+      - name: Lint frontend
+        run: |
+          cd frontend
+          npm run lint
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: sh deploy.sh
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
