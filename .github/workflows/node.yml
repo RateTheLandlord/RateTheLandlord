@@ -28,6 +28,7 @@ jobs:
           npm run build
       - name: Run Lint
         run: |
+          cd backend
           npm run lint
       - name: Deploy
         uses: garygrossgarten/github-action-ssh@release
