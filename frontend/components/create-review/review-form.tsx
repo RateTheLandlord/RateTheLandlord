@@ -2,14 +2,11 @@ import React, {useState} from 'react'
 import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
+import postalCodes from 'postal-codes-js'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
-
-const zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/
-const postalRegex =
-	/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i
 
 //TODO hook up with backend
 //TODO create error handling for regex tests
@@ -32,12 +29,12 @@ function ReviewForm(): JSX.Element {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		if (country === 'United States') {
-			if (!zipRegex.test(postal)) {
+			if (!postalCodes.validate('us', postal)) {
 				//Set error message for Postal
 			}
 		} else {
-			if (!postalRegex.test(postal)) {
-				//set error message for postal
+			if (!postalCodes.validate('CA', postal)) {
+				//set error message for Postal
 			}
 		}
 		console.log('landlord: ', landlord)
