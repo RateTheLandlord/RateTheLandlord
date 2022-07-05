@@ -3,6 +3,7 @@ import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import postalCodes from 'postal-codes-js'
+import countries from '@/util/countries.json'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -13,7 +14,7 @@ import postalCodes from 'postal-codes-js'
 
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
-	const [country, setCountry] = useState<string>('Canada')
+	const [country, setCountry] = useState<string>('CA')
 	const [city, setCity] = useState<string>('')
 	const [province, setProvince] = useState<string>('')
 	const [postal, setPostal] = useState<string>('')
@@ -28,15 +29,11 @@ function ReviewForm(): JSX.Element {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-		if (country === 'United States') {
-			if (!postalCodes.validate('us', postal)) {
-				//Set error message for Postal
-			}
-		} else {
-			if (!postalCodes.validate('CA', postal)) {
-				//set error message for Postal
-			}
+
+		if (!postalCodes.validate(country, postal)) {
+			//Postal error message
 		}
+
 		console.log('landlord: ', landlord)
 		console.log('country: ', country)
 		console.log('city: ', city)
@@ -63,7 +60,7 @@ function ReviewForm(): JSX.Element {
 				<div className="pt-8">
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							Landlord/Property Management Information
+							Landlord / Property Management Information
 						</h3>
 						<p className="mt-1 text-sm text-gray-500">
 							Please make sure all this information matches your Lease
@@ -75,7 +72,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="landlord"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Landlord/Property Management Company
+								Landlord / Property Management Company
 							</label>
 							<div className="mt-1">
 								<input
@@ -83,7 +80,7 @@ function ReviewForm(): JSX.Element {
 									name="landlord"
 									id="landlord"
 									required
-									placeholder="Landlord/Property Management"
+									placeholder="Landlord / Property Management"
 									onChange={(e) => setLandlord(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
@@ -105,8 +102,7 @@ function ReviewForm(): JSX.Element {
 									onChange={(e) => setCountry(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								>
-									<option>Canada</option>
-									<option>United States</option>
+									<option value="CA">Canada</option>
 								</select>
 							</div>
 						</div>
@@ -143,7 +139,7 @@ function ReviewForm(): JSX.Element {
 									type="text"
 									name="region"
 									id="region"
-									placeholder="State/Province"
+									placeholder="State / Province"
 									onChange={(e) => setProvince(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
