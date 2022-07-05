@@ -1,5 +1,6 @@
 import React from 'react'
 import Facebook from '../svg/social/facebook'
+import Github from '../svg/social/github'
 import Instagram from '../svg/social/instagram'
 import TikTok from '../svg/social/tiktok'
 import Twitter from '../svg/social/twitter'
@@ -24,6 +25,11 @@ const navigation = [
 		name: 'TikTok',
 		href: 'https://www.tiktok.com/@ratethelandlord',
 		icon: () => <TikTok />,
+	},
+	{
+		name: 'Github',
+		href: 'https://github.com/RateTheLandlord',
+		icon: () => <Github />,
 	},
 ]
 
