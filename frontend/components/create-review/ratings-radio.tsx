@@ -1,11 +1,8 @@
 import React from 'react'
 import {RadioGroup} from '@headlessui/react'
+import {classNames} from '@/util/classnames'
 
 const ratings = [1, 2, 3, 4, 5]
-
-function classNames(...classes) {
-	return classes.filter(Boolean).join(' ')
-}
 
 interface Props {
 	title: string
