@@ -12,6 +12,10 @@ import countries from '@/util/countries.json'
 //TODO hook up with backend
 //TODO create error handling for regex tests
 
+const countryCodes = Object.keys(countries).filter(
+	(c) => c === 'CA' || c === 'US',
+)
+
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
@@ -102,7 +106,13 @@ function ReviewForm(): JSX.Element {
 									onChange={(e) => setCountry(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								>
-									<option value="CA">Canada</option>
+									{countryCodes.map((country) => {
+										return (
+											<option key={country} value={country}>
+												{countries[country]}
+											</option>
+										)
+									})}
 								</select>
 							</div>
 						</div>
