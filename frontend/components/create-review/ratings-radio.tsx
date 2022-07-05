@@ -19,7 +19,7 @@ function RatingsRadio({title, rating, setRating}: Props) {
 
 			<RadioGroup value={rating} onChange={setRating} className="mt-2">
 				<RadioGroup.Label className="sr-only">Choose a rating</RadioGroup.Label>
-				<div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+				<div className="grid gap-2 sm:gap-3 grid-cols-5">
 					{ratings.map((option) => (
 						<RadioGroup.Option
 							key={option}
