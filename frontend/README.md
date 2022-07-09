@@ -22,7 +22,8 @@ To develop locally:
    ```
    npm install
    ```
-5. Start developing and watch for code changes:
+5. Created `.env` file based on `.env.example`
+6. Start developing and watch for code changes:
    ```
    npm run dev
    ```

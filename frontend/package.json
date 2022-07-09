@@ -10,6 +10,7 @@
 		"tsc": "tsc"
 	},
 	"dependencies": {
+		"@hcaptcha/react-hcaptcha": "^1.4.3",
 		"@headlessui/react": "^1.6.5",
 		"@heroicons/react": "^1.0.6",
 		"next": "12.1.6",

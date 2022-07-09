@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import ley from 'ley';
+import requestIp from 'request-ip';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,10 @@ async function bootstrap() {
     driver: 'postgres',
   });
 
+  app.use(requestIp.mw());
+  app.enableCors({
+    origin: ['http://localhost:3000', 'http://138.197.146.214:5000'],
+  });
   await app.listen(5000);
 }
 bootstrap();
