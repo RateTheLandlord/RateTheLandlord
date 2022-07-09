@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { SampleModule } from './sample/sample.module';
 import { ConfigModule } from '@nestjs/config';
+import { CaptchaModule } from './captcha/captcha.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), SampleModule],
+  imports: [ConfigModule.forRoot(), ReviewModule, CaptchaModule],
   controllers: [],
   providers: [],
 })

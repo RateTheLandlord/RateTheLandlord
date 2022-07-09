@@ -21,12 +21,14 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "postgres": "^3.2.4",
     "reflect-metadata": "^0.1.13",
+    "request-ip": "^3.3.0",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
   },

@@ -4,6 +4,7 @@ import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import postalCodes from 'postal-codes-js'
 import countries from '@/util/countries.json'
+import HCaptcha  from '@hcaptcha/react-hcaptcha'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -15,6 +16,9 @@ import countries from '@/util/countries.json'
 const countryCodes = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL as string
+const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
@@ -31,28 +35,46 @@ function ReviewForm(): JSX.Element {
 
 	const [review, setReview] = useState<string>('')
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const [token, setToken] = useState<string>('')
+
+
+	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
 
 		if (!postalCodes.validate(country, postal)) {
 			//Postal error message
 		}
 
-		console.log('landlord: ', landlord)
-		console.log('country: ', country)
-		console.log('city: ', city)
-		console.log('province: ', province)
-		console.log('postal: ', postal)
-		console.log('review: ', review)
+		fetch(`${apiUrl}/review`, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				captchaToken: token,
+				review: {
+					landlord: landlord,
+					countryCode: country,
+					city: city,
+					state: province,
+					zip: postal,
+					review: review,
+					repair: repair,
+					health: health,
+					stability: stability,
+					privacy: privacy,
+					respect: respect
+				}
+			})
+		}).then((result: Response) => {
+			console.log(result)
+		}).catch(() => {
+			console.log('error')
+		})
+	}
 
-		//This is for the eventual call to the backend
-		// const body = {
-		// 	landlord: landlord,
-		// 	country: country,
-		// 	city: city,
-		// 	province: province,
-		// 	postal: postal
-		// }
+	const onVerifyCaptcha = (token: string) => {
+		setToken(token)
 	}
 
 	return (
@@ -227,9 +249,13 @@ function ReviewForm(): JSX.Element {
 			</div>
 
 			<div className="pt-5">
+				<div className="flex justify-center mb-2">
+					<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha}/>
+				</div>
+				
 				<div className="flex justify-end">
 					<ButtonLight>Reset</ButtonLight>
-					<Button>Submit</Button>
+					<Button disabled={!token}>Submit</Button>
 				</div>
 			</div>
 		</form>
