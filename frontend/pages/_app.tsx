@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/layout'
+import {NextIntlProvider} from 'next-intl'
 import {AppProps} from 'next/app'
 import {useRouter} from 'next/router'
 import '../styles/global.css'
@@ -11,9 +11,9 @@ function MyApp({Component, pageProps}: AppProps): JSX.Element {
 	const router = useRouter()
 	console.log(router.locale)
 	return (
-		<Layout>
+		<NextIntlProvider messages={pageProps.messages}>
 			<Component {...pageProps} />
-		</Layout>
+		</NextIntlProvider>
 	)
 }
 
