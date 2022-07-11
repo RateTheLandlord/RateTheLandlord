@@ -1,7 +1,9 @@
+import {useTranslations} from 'next-intl'
 import React from 'react'
 import Privacy from '../svg/icons/privacy'
 
 export default function IconSection() {
+	const t = useTranslations('Icon-Section')
 	return (
 		<div className="bg-white min-w-full">
 			<div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
@@ -9,7 +11,7 @@ export default function IconSection() {
 					<div className="max-w-xl mx-auto lg:max-w-none">
 						<div className="text-center">
 							<h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-								Help Keep Landlords Accountable
+								{t('Accountable')}
 							</h2>
 						</div>
 						<div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
@@ -21,11 +23,9 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Anonymity
+										{t('Anonymity')}
 									</h3>
-									<p className="mt-2 text-sm text-gray-900">
-										Share your rental experience with confidence.
-									</p>
+									<p className="mt-2 text-sm text-gray-900">{t('Anon-Body')}</p>
 								</div>
 							</div>
 							<div className="text-center sm:flex sm:text-left lg:block lg:text-center">
@@ -36,11 +36,9 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Solidarity
+										{t('Solidarity')}
 									</h3>
-									<p className="mt-2 text-sm text-gray-900">
-										Join fellow Tenants by creating an informed community.
-									</p>
+									<p className="mt-2 text-sm text-gray-900">{t('Sol-Body')}</p>
 								</div>
 							</div>
 							<div className="text-center sm:flex sm:text-left lg:block lg:text-center">
@@ -51,10 +49,10 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Transparency
+										{t('Transparency')}
 									</h3>
 									<p className="mt-2 text-sm text-gray-900">
-										Empower others to make decisions about housing.
+										{t('Trans-Body')}
 									</p>
 								</div>
 							</div>

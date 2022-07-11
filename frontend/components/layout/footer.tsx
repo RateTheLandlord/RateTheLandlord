@@ -1,3 +1,4 @@
+import {useTranslations} from 'next-intl'
 import React from 'react'
 import Facebook from '../svg/social/facebook'
 import Github from '../svg/social/github'
@@ -34,6 +35,7 @@ const navigation = [
 ]
 
 function Footer(): JSX.Element {
+	const t = useTranslations('Footer')
 	return (
 		<footer className="bg-white">
 			<div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
@@ -50,9 +52,7 @@ function Footer(): JSX.Element {
 					))}
 				</div>
 				<div className="mt-8 md:mt-0 md:order-1">
-					<p className="text-center text-base text-gray-400">
-						&copy; 2022 Rate The Landlord. All Rights Reserved.
-					</p>
+					<p className="text-center text-base text-gray-400">{t('Copy')}</p>
 				</div>
 			</div>
 		</footer>

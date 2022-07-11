@@ -4,7 +4,8 @@ import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import postalCodes from 'postal-codes-js'
 import countries from '@/util/countries.json'
-import HCaptcha  from '@hcaptcha/react-hcaptcha'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import {useTranslations} from 'next-intl'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -37,6 +38,7 @@ function ReviewForm(): JSX.Element {
 
 	const [token, setToken] = useState<string>('')
 
+	const t = useTranslations('Submit-Review')
 
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
@@ -48,7 +50,7 @@ function ReviewForm(): JSX.Element {
 		fetch(`${apiUrl}/review`, {
 			method: 'POST',
 			headers: {
-				"Content-Type": "application/json"
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				captchaToken: token,
@@ -63,14 +65,16 @@ function ReviewForm(): JSX.Element {
 					health: health,
 					stability: stability,
 					privacy: privacy,
-					respect: respect
-				}
-			})
-		}).then((result: Response) => {
-			console.log(result)
-		}).catch(() => {
-			console.log('error')
+					respect: respect,
+				},
+			}),
 		})
+			.then((result: Response) => {
+				console.log(result)
+			})
+			.catch(() => {
+				console.log('error')
+			})
 	}
 
 	const onVerifyCaptcha = (token: string) => {
@@ -86,11 +90,9 @@ function ReviewForm(): JSX.Element {
 				<div className="pt-8">
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							Landlord / Property Management Information
+							{t('Form-Heading')}
 						</h3>
-						<p className="mt-1 text-sm text-gray-500">
-							Please make sure all this information matches your Lease
-						</p>
+						<p className="mt-1 text-sm text-gray-500">{t('Sub-Heading')}</p>
 					</div>
 					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 						<div className="sm:col-span-3">
@@ -98,7 +100,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="landlord"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Landlord / Property Management Company
+								{t('Landlord-Info')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -118,7 +120,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="country"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Country
+								{t('Country')}
 							</label>
 							<div className="mt-1">
 								<select
@@ -144,7 +146,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="city"
 								className="block text-sm font-medium text-gray-700"
 							>
-								City
+								{t('City')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -164,7 +166,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="region"
 								className="block text-sm font-medium text-gray-700"
 							>
-								State / Province
+								{t('City')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -183,7 +185,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="postal-code"
 								className="block text-sm font-medium text-gray-700"
 							>
-								ZIP / Postal code
+								{t('Postal')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -200,41 +202,47 @@ function ReviewForm(): JSX.Element {
 					</div>
 				</div>
 				<div>
-					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						Please rate the following on a scale from 1(worst) to 5(best)
+					<h3 className="text-lg leading-6 font-medium text-gray-900 mb-2">
+						{t('Rating')}
 					</h3>
-					<RatingsRadio title="Repair" rating={repair} setRating={setRepair} />
 					<RatingsRadio
-						title="Health and Safety"
+						title={t('Repair')}
+						body={t('Repair-Desc')}
+						rating={repair}
+						setRating={setRepair}
+					/>
+					<RatingsRadio
+						title={t('Health')}
+						body={t('Health-Desc')}
 						rating={health}
 						setRating={setHealth}
 					/>
 
 					<RatingsRadio
-						title="Rental Stability"
+						title={t('Stability')}
+						body={t('Stability-Desc')}
 						rating={stability}
 						setRating={setStability}
 					/>
 
 					<RatingsRadio
-						title="Tenant Privacy"
+						title={t('Privacy')}
+						body={t('Privacy-Desc')}
 						rating={privacy}
 						setRating={setPrivacy}
 					/>
 
 					<RatingsRadio
-						title="Respect"
+						title={t('Respect')}
+						body={t('Respect-Desc')}
 						rating={respect}
 						setRating={setRespect}
 					/>
 				</div>
 			</div>
 			<div>
-				<label
-					htmlFor="comment"
-					className="block text-sm font-medium text-gray-700"
-				>
-					Written Review
+				<label htmlFor="comment" className="block font-medium text-gray-700">
+					{t('Written')}
 				</label>
 				<div className="mt-1">
 					<textarea
@@ -250,12 +258,12 @@ function ReviewForm(): JSX.Element {
 
 			<div className="pt-5">
 				<div className="flex justify-center mb-2">
-					<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha}/>
+					<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
 				</div>
-				
+
 				<div className="flex justify-end">
-					<ButtonLight>Reset</ButtonLight>
-					<Button disabled={!token}>Submit</Button>
+					<ButtonLight>{t('Reset')}</ButtonLight>
+					<Button disabled={!token}>{t('Submit')}</Button>
 				</div>
 			</div>
 		</form>
