@@ -5,7 +5,7 @@ import '../styles/global.css'
 
 //State for Admin Login may be held here (Admin Status {Logged In? Username?})
 
-function MyApp({Component, pageProps}: AppProps): JSX.Element {
+export default function MyApp({Component, pageProps}: AppProps): JSX.Element {
 	//This gets the current Locale. This can be passed down to pages/components or we can update the _app.tsx to show different info based on locale
 	//Translation will need to be done for French, other languages as needed.
 	const router = useRouter()
@@ -16,5 +16,3 @@ function MyApp({Component, pageProps}: AppProps): JSX.Element {
 		</NextIntlProvider>
 	)
 }
-
-export default MyApp

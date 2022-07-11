@@ -7,7 +7,7 @@ import React from 'react'
 //This page should be statically generated at build. No need for data fetching here.
 
 export default function CreateReview(): JSX.Element {
-	const t = useTranslations('Enter')
+	const t = useTranslations('Submit-Review')
 	return (
 		<Layout>
 			<div className="flex justify-center">
