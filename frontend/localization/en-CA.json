@@ -4,5 +4,51 @@
 		"Reviews": "Reviews",
 		"Search": "Search",
 		"Submit": "Submit a Review"
+	},
+	"Footer": {
+		"Copy": "&copy; 2022 Rate The Landlord. All Rights Reserved."
+	},
+	"Hero": {
+		"Title": "Share information with tenants like you.",
+		"Body": "We are a community-driven platform that aims to elevate tenant voices and promote landlord accountability.",
+		"Submit": "Submit a Review",
+		"Reviews": "Reviews"
+	},
+	"Icon-Section": {
+		"Accountable": "Help Keep Landlords Accountable",
+		"Anonymity": "Anonymity",
+		"Anon-Body": "Share your rental experience with confidence.",
+		"Solidarity": "Solidarity",
+		"Sol-Body": "Join fellow Tenants by creating an informed community.",
+		"Transparency": "Transparency",
+		"Trans-Body": "Empower others to make decisions about housing."
+	},
+	"Submit-Review": {
+		"Enter": "Submit your review",
+		"Form-Heading": "Landlord / Property Management Information",
+		"Sub-Heading": "Please make sure all this information matches your Lease",
+		"Landlord-Info": "Landlord / Property Management Company",
+		"Country": "Country",
+		"City": "City",
+		"Province": "State / Province",
+		"Postal": "ZIP / Postal Code",
+		"Rating": "Please rate the following on a scale from 1 (worst) to 5 (best)",
+		"Written": "Written Review",
+		"Reset": "Reset",
+		"Submit": "Submit",
+		"Repair": "Repair",
+		"Repair-Desc": "Rate your landlord on the quality and timeliness of their repairs to your unit.",
+		"Health": "Health and Safety",
+		"Health-Desc": "Rate your landlord on how they address health and safety concerns (eg, pest control, mold removal, etc.).",
+		"Stability": "Rental Stability",
+		"Stability-Desc": "Rate your landlord on how they handle fees and rental increase law.",
+		"Privacy": "Tenant Privacy",
+		"Privacy-Desc": "Rate your landlord on the level of privacy they give you in your unit (e.g., giving the legal 24 hour notice before entering).",
+		"Respect": "Respect",
+		"Respect-Desc": "Rate your landlord on the level of respect and dignity you experience in your communication."
+	},
+	"Radio": {
+		"Rating": "Rating",
+		"Choose": "Choose"
 	}
 }
