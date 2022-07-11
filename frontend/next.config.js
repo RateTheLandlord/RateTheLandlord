@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
 
-module.exports = nextConfig
+module.exports = {
+	reactStrictMode: true,
+	i18n: {
+		locales: ['en-CA', 'en-US'],
+		defaultLocale: 'en-CA',
+		localeDetection: true,
+		domains: [
+			{
+				domain: 'ratethelandlord.org',
+				defaultLocale: 'en-CA',
+			},
+		],
+	},
+}
