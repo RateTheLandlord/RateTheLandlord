@@ -3,10 +3,12 @@ import {SearchIcon} from '@heroicons/react/solid'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import Logo from '../svg/logo/logo'
 import Link from 'next/link'
+import {useTranslations} from 'next-intl'
 
 //TODO Apply "Current" styling to Navbar as necessary
 
 export default function Navbar(): JSX.Element {
+	const t = useTranslations('Navbar')
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({open}) => (
@@ -17,14 +19,14 @@ export default function Navbar(): JSX.Element {
 								<div className="flex-shrink-0 flex items-center gap-4">
 									<Logo styling="h-8 w-auto" />
 									<Link href="/">
-										<a>Rate The Landlord</a>
+										<a>{t('Title')}</a>
 									</Link>
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<Link href="/reviews">
 										<a className="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-											Reviews
+											{t('Reviews')}
 										</a>
 									</Link>
 								</div>
@@ -32,7 +34,7 @@ export default function Navbar(): JSX.Element {
 							<div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
 								<div className="max-w-lg w-full lg:max-w-xs">
 									<label htmlFor="search" className="sr-only">
-										Search
+										{t('Search')}
 									</label>
 									<div className="relative">
 										<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -54,7 +56,7 @@ export default function Navbar(): JSX.Element {
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<Link href="/create-review">
 										<a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-											Submit a Review
+											{t('Submit')}
 										</a>
 									</Link>
 								</div>
@@ -82,7 +84,7 @@ export default function Navbar(): JSX.Element {
 									as="a"
 									className="bg-teal-50 border-teal-500 text-teal-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
 								>
-									Reviews
+									{t('Reviews')}
 								</Disclosure.Button>
 							</Link>
 							<Link href="/create-review">
@@ -90,7 +92,7 @@ export default function Navbar(): JSX.Element {
 									as="a"
 									className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
 								>
-									Submit a Review
+									{t('Submit')}
 								</Disclosure.Button>
 							</Link>
 						</div>
