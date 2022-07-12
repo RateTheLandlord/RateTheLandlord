@@ -6,7 +6,7 @@ A simple website for Renter's to rate their Landlord
 
 1. [Download](https://www.docker.com/products/docker-desktop/) Docker desktop.
 
-2. Created `.env` file based on `.env.example`
+2. Create `.env` file based on `.env.example`
 
 3. Run docker compose to start the required services:
 ```bash
