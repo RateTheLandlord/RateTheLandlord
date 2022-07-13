@@ -52,7 +52,9 @@ function Footer(): JSX.Element {
 					))}
 				</div>
 				<div className="mt-8 md:mt-0 md:order-1">
-					<p className="text-center text-base text-gray-400">{t('Copy')}</p>
+					<p className="text-center text-base text-gray-400">
+						&copy; {t('copy')}
+					</p>
 				</div>
 			</div>
 		</footer>
