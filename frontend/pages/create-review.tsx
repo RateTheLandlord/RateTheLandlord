@@ -25,11 +25,10 @@ export default function CreateReview(): JSX.Element {
 	)
 }
 
-export const getStaticProps = async ({locale}: {locale: string}) => {
-	const messages = (await import(`../localization/${locale}.json`)) as string
+export const getStaticProps = ({locale}: {locale: string}) => {
 	return {
 		props: {
-			messages: messages,
+			messages: require(`../localization/${locale}.json`),
 		},
 	}
 }

@@ -6,7 +6,7 @@ import React from 'react'
 //Once the page is loaded, though, SWR should be used to get up-to-date reviews
 //Data passed to Review Filters and Review Table
 
-function Reviews(): JSX.Element {
+export default function Reviews(): JSX.Element {
 	return (
 		<div>
 			Reviews
@@ -16,4 +16,10 @@ function Reviews(): JSX.Element {
 	)
 }
 
-export default Reviews
+export const getStaticProps = ({locale}: {locale: string}) => {
+	return {
+		props: {
+			messages: require(`../localization/${locale}.json`),
+		},
+	}
+}

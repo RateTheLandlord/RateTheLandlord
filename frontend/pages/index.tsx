@@ -12,10 +12,10 @@ export default function Home(): JSX.Element {
 	)
 }
 
-export const getStaticProps = async ({locale}: {locale: string}) => {
+export const getStaticProps = ({locale}: {locale: string}) => {
 	return {
 		props: {
-			messages: (await import(`../localization/${locale}.json`)) as Messages,
+			messages: require(`../localization/${locale}.json`),
 		},
 	}
 }
