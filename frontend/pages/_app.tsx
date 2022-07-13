@@ -1,5 +1,5 @@
 import {NextIntlProvider} from 'next-intl'
-import {AppProps} from 'next/app'
+import type {AppProps} from 'next/app'
 import {useRouter} from 'next/router'
 import '../styles/global.css'
 
