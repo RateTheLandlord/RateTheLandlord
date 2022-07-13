@@ -1,6 +1,5 @@
 import ReviewForm from '@/components/create-review/review-form'
 import Layout from '@/components/layout/layout'
-import {GetStaticPropsContext} from 'next'
 import {useTranslations} from 'next-intl'
 import React from 'react'
 
@@ -26,10 +25,11 @@ export default function CreateReview(): JSX.Element {
 	)
 }
 
-export async function getStaticProps({locale}: GetStaticPropsContext) {
+export const getStaticProps = async ({locale}: {locale: string}) => {
+	const messages = (await import(`../localization/${locale}.json`)) as string
 	return {
 		props: {
-			messages: (await import(`../localization/${locale}.json`)).default,
+			messages: messages,
 		},
 	}
 }

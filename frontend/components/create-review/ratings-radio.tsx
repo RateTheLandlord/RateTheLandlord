@@ -18,13 +18,13 @@ function RatingsRadio({title, rating, setRating, body}: Props) {
 		<div>
 			<div className="">
 				<h2 className="font-medium text-gray-900">
-					{title} {t('Rating')}
+					{title} {t('rating')}
 				</h2>
 				<p className="mt-1 text-sm text-gray-500">{body}</p>
 			</div>
 
 			<RadioGroup value={rating} onChange={setRating} className="mt-2">
-				<RadioGroup.Label className="sr-only">{t('Choose')}</RadioGroup.Label>
+				<RadioGroup.Label className="sr-only">{t('choose')}</RadioGroup.Label>
 				<div className="grid gap-2 sm:gap-3 grid-cols-5">
 					{ratings.map((option) => (
 						<RadioGroup.Option

@@ -11,7 +11,7 @@ export default function IconSection() {
 					<div className="max-w-xl mx-auto lg:max-w-none">
 						<div className="text-center">
 							<h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-								{t('Accountable')}
+								{t('accountable')}
 							</h2>
 						</div>
 						<div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
@@ -23,9 +23,9 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										{t('Anonymity')}
+										{t('anonymity')}
 									</h3>
-									<p className="mt-2 text-sm text-gray-900">{t('Anon-Body')}</p>
+									<p className="mt-2 text-sm text-gray-900">{t('anon-body')}</p>
 								</div>
 							</div>
 							<div className="text-center sm:flex sm:text-left lg:block lg:text-center">
@@ -36,9 +36,9 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										{t('Solidarity')}
+										{t('solidarity')}
 									</h3>
-									<p className="mt-2 text-sm text-gray-900">{t('Sol-Body')}</p>
+									<p className="mt-2 text-sm text-gray-900">{t('sol-body')}</p>
 								</div>
 							</div>
 							<div className="text-center sm:flex sm:text-left lg:block lg:text-center">
@@ -49,10 +49,10 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										{t('Transparency')}
+										{t('transparency')}
 									</h3>
 									<p className="mt-2 text-sm text-gray-900">
-										{t('Trans-Body')}
+										{t('trans-body')}
 									</p>
 								</div>
 							</div>

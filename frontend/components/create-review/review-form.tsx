@@ -90,9 +90,9 @@ function ReviewForm(): JSX.Element {
 				<div className="pt-8">
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							{t('Form-Heading')}
+							{t('form-heading')}
 						</h3>
-						<p className="mt-1 text-sm text-gray-500">{t('Sub-Heading')}</p>
+						<p className="mt-1 text-sm text-gray-500">{t('sub-heading')}</p>
 					</div>
 					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 						<div className="sm:col-span-3">
@@ -100,7 +100,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="landlord"
 								className="block text-sm font-medium text-gray-700"
 							>
-								{t('Landlord-Info')}
+								{t('landlord-info')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -120,7 +120,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="country"
 								className="block text-sm font-medium text-gray-700"
 							>
-								{t('Country')}
+								{t('country')}
 							</label>
 							<div className="mt-1">
 								<select
@@ -146,7 +146,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="city"
 								className="block text-sm font-medium text-gray-700"
 							>
-								{t('City')}
+								{t('city')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -166,7 +166,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="region"
 								className="block text-sm font-medium text-gray-700"
 							>
-								{t('City')}
+								{t('province')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -185,7 +185,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="postal-code"
 								className="block text-sm font-medium text-gray-700"
 							>
-								{t('Postal')}
+								{t('postal')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -203,38 +203,38 @@ function ReviewForm(): JSX.Element {
 				</div>
 				<div>
 					<h3 className="text-lg leading-6 font-medium text-gray-900 mb-2">
-						{t('Rating')}
+						{t('rating')}
 					</h3>
 					<RatingsRadio
-						title={t('Repair')}
-						body={t('Repair-Desc')}
+						title={t('repair')}
+						body={t('repair-desc')}
 						rating={repair}
 						setRating={setRepair}
 					/>
 					<RatingsRadio
-						title={t('Health')}
-						body={t('Health-Desc')}
+						title={t('health')}
+						body={t('health-desc')}
 						rating={health}
 						setRating={setHealth}
 					/>
 
 					<RatingsRadio
-						title={t('Stability')}
-						body={t('Stability-Desc')}
+						title={t('stability')}
+						body={t('stability-desc')}
 						rating={stability}
 						setRating={setStability}
 					/>
 
 					<RatingsRadio
-						title={t('Privacy')}
-						body={t('Privacy-Desc')}
+						title={t('privacy')}
+						body={t('privacy-desc')}
 						rating={privacy}
 						setRating={setPrivacy}
 					/>
 
 					<RatingsRadio
-						title={t('Respect')}
-						body={t('Respect-Desc')}
+						title={t('respect')}
+						body={t('respect-desc')}
 						rating={respect}
 						setRating={setRespect}
 					/>
@@ -242,7 +242,7 @@ function ReviewForm(): JSX.Element {
 			</div>
 			<div>
 				<label htmlFor="comment" className="block font-medium text-gray-700">
-					{t('Written')}
+					{t('written')}
 				</label>
 				<div className="mt-1">
 					<textarea
@@ -262,8 +262,8 @@ function ReviewForm(): JSX.Element {
 				</div>
 
 				<div className="flex justify-end">
-					<ButtonLight>{t('Reset')}</ButtonLight>
-					<Button disabled={!token}>{t('Submit')}</Button>
+					<ButtonLight>{t('reset')}</ButtonLight>
+					<Button disabled={!token}>{t('submit')}</Button>
 				</div>
 			</div>
 		</form>

@@ -10,15 +10,15 @@ function Hero(): JSX.Element {
 				<main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
 					<div className="text-center">
 						<h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl block text-teal-600">
-							{t('Title')}
+							{t('title')}
 						</h1>
 						<p className="mt-3 max-w-md mx-auto text-base  sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-							{t('Body')}
+							{t('body')}
 						</p>
 						<div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-							<LinkButtonLG href="/create-review">{t('Submit')}</LinkButtonLG>
+							<LinkButtonLG href="/create-review">{t('submit')}</LinkButtonLG>
 							<LinkButtonLightLG href="/reviews">
-								{t('Reviews')}
+								{t('reviews')}
 							</LinkButtonLightLG>
 						</div>
 					</div>
