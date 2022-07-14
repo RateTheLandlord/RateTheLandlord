@@ -11,12 +11,16 @@
 		},
 		"import/resolver": {
 			"typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+		},
+		"next": {
+			"rootdir": "/frontend"
 		}
 	},
 
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"project": "./tsconfig.json", // tells parser relative path of tsconfig.json
+		"rootdir": "/frontend",
 		"ecmaFeatures": {
 			"jsx": true
 		},
