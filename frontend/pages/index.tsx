@@ -1,14 +1,21 @@
 import Hero from '@/components/home/hero'
 import IconSection from '@/components/home/icon-section'
+import Layout from '@/components/layout/layout'
 import React from 'react'
-
-//This page should be statically generated at build. No need for Data fetching here
 
 export default function Home(): JSX.Element {
 	return (
-		<div>
+		<Layout>
 			<Hero />
 			<IconSection />
-		</div>
+		</Layout>
 	)
+}
+
+export const getStaticProps = async ({locale}: {locale: string}) => {
+	return {
+		props: {
+			messages: (await import(`../localization/${locale}.json`)) as string,
+		},
+	}
 }
