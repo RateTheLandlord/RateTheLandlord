@@ -4,25 +4,25 @@ import {Data} from '@/util/interfaces'
 import React from 'react'
 import useSWR, {SWRConfig} from 'swr'
 
-//This page should be statically generated for better SEO performance with getStaticProps through NextJS with a short regeneration period (30 minute?)
-//Once the page is loaded, though, SWR should be used to get up-to-date reviews
-//Data passed to Review Filters and Review Table
+//fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function Reviews({fallback}: {fallback: [Data]}): JSX.Element {
+	const initialData = fallback['/api/get-reviews']
 	const {data} = useSWR<[Data]>('/api/get-reviews', fetcher)
+	console.log('fallback: ')
 	return (
 		<SWRConfig value={{fallback}}>
-			Reviews
 			<ReviewFilters />
-			<ReviewTable data={data} />
+			<ReviewTable data={data || initialData} />
 		</SWRConfig>
 	)
 }
 
+//Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	// `getStaticProps` is executed on the server side.
+	//URL will need to be updated to match site URL
 	const article = await fetch('http://localhost:3000/api/get-reviews')
 	const data = (await article.json()) as [Data]
 	return {
@@ -31,5 +31,6 @@ export async function getStaticProps() {
 				'/api/get-reviews': data,
 			},
 		},
+		revalidate: 1800,
 	}
 }
