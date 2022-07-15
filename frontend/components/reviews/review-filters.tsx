@@ -3,10 +3,21 @@ import {Dialog, Disclosure, Menu, Popover, Transition} from '@headlessui/react'
 import {XIcon} from '@heroicons/react/outline'
 import {classNames} from '@/util/classnames'
 import {ChevronDownIcon} from '@heroicons/react/solid'
+import {ActiveFilters, Filters, SortOptions} from '@/util/interfaces'
 
 //Review filters and Logic
 
-function ReviewFilters({filters, sortOptions, activeFilters}): JSX.Element {
+interface Props {
+	filters: [Filters]
+	sortOptions: [SortOptions]
+	activeFilters: [ActiveFilters]
+}
+
+function ReviewFilters({
+	filters,
+	sortOptions,
+	activeFilters,
+}: Props): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 	return (
 		<div>
@@ -122,7 +133,7 @@ function ReviewFilters({filters, sortOptions, activeFilters}): JSX.Element {
 						</h1>
 						<p className="mt-4 max-w-xl text-sm text-gray-700">
 							Search our database to find information about your landlord. If
-							you don't see a result, be the first to add a review!
+							you don&apos;t see a result, be the first to add a review!
 						</p>
 					</div>
 				</div>

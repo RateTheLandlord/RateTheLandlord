@@ -16,3 +16,26 @@ export interface Review {
 	state: string
 	zip: string
 }
+
+export interface Options {
+	value: string
+	label: string
+	checked: boolean
+}
+
+export interface Filters {
+	id: string
+	name: string
+	options: [Options]
+}
+
+export interface SortOptions {
+	name: string
+	href: string
+	current: boolean
+}
+
+export interface ActiveFilters {
+	value: string
+	label: string
+}
