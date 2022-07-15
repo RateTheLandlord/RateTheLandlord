@@ -9,7 +9,7 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 	const date = new Date()
 	console.log(data)
 	return (
-		<div className="bg-white">
+		<div>
 			<div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 				<h2 className="text-lg font-medium text-gray-900">Recent reviews</h2>
 				<div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
@@ -53,7 +53,7 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 
 									<div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
 										<h3 className="text-sm font-medium text-gray-900">
-											{review.landlord}
+											Review
 										</h3>
 
 										<div
@@ -64,8 +64,30 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 								</div>
 
 								<div className="mt-6 flex items-center text-sm lg:mt-0 lg:col-start-1 lg:col-span-4 lg:row-start-1 lg:flex-col lg:items-start xl:col-span-3">
+									<p className="font-medium text-gray-900">{review.landlord}</p>
+									<div className="flex items-center">
+										{[0, 1, 2, 3, 4].map((star) => {
+											let totalReview = 0
+											for (let i = 0; i < ratings.length; i++) {
+												totalReview += parseInt(ratings[i].rating)
+											}
+											const avgRating = totalReview / ratings.length
+											return (
+												<StarIcon
+													key={star}
+													className={classNames(
+														avgRating > star
+															? 'text-yellow-400'
+															: 'text-gray-200',
+														'h-5 w-5 flex-shrink-0',
+													)}
+													aria-hidden="true"
+												/>
+											)
+										})}
+									</div>
 									<div className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
-										{date.getFullYear()}
+										{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
 									</div>
 								</div>
 							</div>
