@@ -1,11 +1,11 @@
 import {classNames} from '@/util/classnames'
-import {Data} from '@/util/interfaces'
+import {Review} from '@/util/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
 import React from 'react'
 
 //Review table. Data will need to be shared with Review Filters. Data received from Review Page
 
-function ReviewTable({data}: {data: [Data]}): JSX.Element {
+function ReviewTable({data}: {data: [Review]}): JSX.Element {
 	const date = new Date()
 	console.log(data)
 	return (
