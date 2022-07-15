@@ -1,32 +1,13 @@
-import Cors from 'cors'
+import {Data} from '@/util/interfaces'
 import {NextApiRequest, NextApiResponse} from 'next'
 
-const cors = Cors({
-	methods: ['GET', 'HEAD'],
-})
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(req, res, fn) {
-	return new Promise((resolve, reject) => {
-		fn(req, res, (result) => {
-			if (result instanceof Error) {
-				return reject(result)
-			}
-
-			return resolve(result)
-		})
-	})
-}
-
-const getScores = async (req: NextApiRequest, res: NextApiResponse) => {
-	await runMiddleware(req, res, cors)
-	const url = 'http://138.197.146.214:5000/review'
+const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
+	const url = process.env.NEXT_PUBLIC_API_URL as string
 
 	try {
 		const request = await fetch(url)
 
-		const response = await request.json()
+		const response = (await request.json()) as [Data]
 
 		res.status(200).json(response)
 	} catch (error) {
@@ -35,4 +16,4 @@ const getScores = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 }
 
-export default getScores
+export default getReviews
