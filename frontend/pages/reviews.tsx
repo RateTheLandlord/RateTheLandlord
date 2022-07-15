@@ -1,7 +1,6 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {Data} from '@/util/interfaces'
-import {useState} from 'react'
+import {AllReviews, Review} from '@/util/interfaces'
 
 import React from 'react'
 import useSWR, {SWRConfig} from 'swr'
@@ -10,10 +9,14 @@ import useSWR, {SWRConfig} from 'swr'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-export default function Reviews({fallback}: {fallback: [Data]}): JSX.Element {
-	const initialData = fallback['/api/get-reviews']
-	const {data} = useSWR<[Data]>('/api/get-reviews', fetcher)
-	console.log('fallback: ')
+export default function Reviews({
+	fallback,
+}: {
+	fallback: [AllReviews]
+}): JSX.Element {
+	const initialData = fallback['/api/get-reviews'] as [Review]
+	const {data} = useSWR<[Review]>('/api/get-reviews', fetcher)
+	console.log('fallback: ', fallback)
 
 	const filters = [
 		{

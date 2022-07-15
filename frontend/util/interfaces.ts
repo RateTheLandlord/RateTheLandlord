@@ -1,4 +1,8 @@
-export interface Data {
+export interface AllReviews {
+	'/api/get-reviews': [Review]
+}
+
+export interface Review {
 	city: string
 	countrycode: string
 	health: string
