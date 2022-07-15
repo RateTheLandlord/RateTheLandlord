@@ -51,9 +51,7 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 									</div>
 
 									<div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
-										<h3 className="text-sm font-medium text-gray-900">
-											Review
-										</h3>
+										<p>Review</p>
 
 										<div
 											className="mt-3 space-y-6 text-sm text-gray-500"
@@ -85,7 +83,7 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 											)
 										})}
 									</div>
-									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city},${review.countrycode},${review.zip}`}</p>
+									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city}, ${review.countrycode}, ${review.zip}`}</p>
 									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 										{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
 									</p>
