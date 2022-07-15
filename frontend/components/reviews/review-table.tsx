@@ -63,7 +63,7 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 								</div>
 
 								<div className="mt-6 flex items-center text-sm lg:mt-0 lg:col-start-1 lg:col-span-4 lg:row-start-1 lg:flex-col lg:items-start xl:col-span-3">
-									<p className="font-medium text-gray-900">{review.landlord}</p>
+									<p className="font-medium text-lg">{review.landlord}</p>
 									<div className="flex items-center">
 										{[0, 1, 2, 3, 4].map((star) => {
 											let totalReview = 0
@@ -85,9 +85,10 @@ function ReviewTable({data}: {data: [Data]}): JSX.Element {
 											)
 										})}
 									</div>
-									<div className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
+									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city},${review.countrycode},${review.zip}`}</p>
+									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 										{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
-									</div>
+									</p>
 								</div>
 							</div>
 						)
