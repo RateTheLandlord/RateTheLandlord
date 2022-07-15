@@ -1,6 +1,8 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
 import {Data} from '@/util/interfaces'
+import {useState} from 'react'
+
 import React from 'react'
 import useSWR, {SWRConfig} from 'swr'
 
@@ -12,10 +14,48 @@ export default function Reviews({fallback}: {fallback: [Data]}): JSX.Element {
 	const initialData = fallback['/api/get-reviews']
 	const {data} = useSWR<[Data]>('/api/get-reviews', fetcher)
 	console.log('fallback: ')
+
+	const filters = [
+		{
+			id: 'country',
+			name: 'Country',
+			options: [
+				{value: 'canada', label: 'Canada', checked: false},
+				{value: 'usa', label: 'USA', checked: false},
+			],
+		},
+		{
+			id: 'province/state',
+			name: 'Province / State',
+			options: [
+				//Will need to load in available province/state info
+				{value: 'ontario', label: 'Ontario', checked: false},
+			],
+		},
+		{
+			id: 'city',
+			name: 'City',
+			options: [
+				//Will need to load in available city info
+				{value: 'toronto', label: 'Toronto', checked: false},
+			],
+		},
+	]
+	const sortOptions = [
+		{name: 'Name A-Z', href: '#', current: true},
+		{name: 'Name Z-A', href: '#', current: false},
+	]
+	const activeFilters = [{value: 'canada', label: 'Canada'}]
 	return (
 		<SWRConfig value={{fallback}}>
-			<ReviewFilters />
-			<ReviewTable data={data || initialData} />
+			<div>
+				<ReviewFilters
+					filters={filters}
+					sortOptions={sortOptions}
+					activeFilters={activeFilters}
+				/>
+				<ReviewTable data={data || initialData} />
+			</div>
 		</SWRConfig>
 	)
 }
