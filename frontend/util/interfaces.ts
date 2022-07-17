@@ -30,9 +30,8 @@ export interface Filters {
 }
 
 export interface SortOptions {
+	id: number
 	name: string
-	href: string
-	current: boolean
 }
 
 export interface ActiveFilters {
