@@ -14,13 +14,13 @@ import {ActiveFilters, Filters, SortOptions} from '@/util/interfaces'
 //Review filters and Logic
 
 interface FiltersProps {
-	filters: [Filters]
-	setFilters: (filters: [Filters]) => void
+	filters: Filters[]
+	setFilters: (filters: Filters[]) => void
 	selectedSort: SortOptions
 	setSelectedSort: (selectedSort: SortOptions) => void
-	sortOptions: [SortOptions]
-	activeFilters: [ActiveFilters]
-	setActiveFilters: (activeFilters: [ActiveFilters]) => void
+	sortOptions: SortOptions[]
+	activeFilters: ActiveFilters[]
+	setActiveFilters: (activeFilters: ActiveFilters[]) => void
 }
 
 function ReviewFilters({

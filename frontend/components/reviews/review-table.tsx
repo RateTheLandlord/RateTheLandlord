@@ -5,7 +5,7 @@ import React from 'react'
 
 //Review table. Data will need to be shared with Review Filters. Data received from Review Page
 
-function ReviewTable({data}: {data: [Review]}): JSX.Element {
+function ReviewTable({data}: {data: Review[]}): JSX.Element {
 	const date = new Date()
 	console.log(data)
 	return (

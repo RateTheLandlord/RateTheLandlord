@@ -27,7 +27,7 @@ export interface Options {
 export interface Filters {
 	id: string
 	name: string
-	options: [Options]
+	options: Options[]
 }
 
 export interface SortOptions {

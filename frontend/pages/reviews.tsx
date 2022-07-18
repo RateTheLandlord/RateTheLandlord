@@ -23,25 +23,29 @@ export default function Reviews({
 	fallback: [AllReviews]
 }): JSX.Element {
 	const [selectedSort, setSelectedSort] = useState<SortOptions>(sortOptions[0])
-	const initialData = fallback['/api/get-reviews'] as [Review]
-	const {data} = useSWR<[Review]>('/api/get-reviews', fetcher)
+	const initialData = fallback['/api/get-reviews'] as Review[]
+	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
 
-	const [reviews, setReviews] = useState<[Review]>(initialData)
+	const [reviews, setReviews] = useState<Review[]>(initialData)
 
-	const [activeFilters, setActiveFilters] = useState<[ActiveFilters] | []>([])
-	const [filters, setFilters] = useState<[Filters]>(initialFilters)
+	const [activeFilters, setActiveFilters] = useState<ActiveFilters[]>([])
+	const [filters, setFilters] = useState<Filters[]>(initialFilters)
 
 	useEffect(() => {
 		let updatedReviews = reviews
 		if (selectedSort.name === 'Name A-Z') {
 			const result = sortAZ(updatedReviews)
+			updatedReviews = result
 			setReviews(result)
 		} else {
 			const result = sortZA(updatedReviews)
+			updatedReviews = result
 			setReviews(result)
 		}
 		if (activeFilters.length) {
 			const result = checkAgainstFilters(updatedReviews, activeFilters)
+			updatedReviews = result
+			setReviews(result)
 		}
 	}, [reviews, selectedSort, activeFilters])
 

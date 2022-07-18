@@ -1,6 +1,6 @@
 import {ActiveFilters, AllReviews, Review} from './interfaces'
 
-export const sortAZ = (data: [Review]): [Review] => {
+export const sortAZ = (data: Review[]): Review[] => {
 	const result = data.sort((a: Review, b: Review) =>
 		b.landlord.localeCompare(a.landlord),
 	)
@@ -8,7 +8,7 @@ export const sortAZ = (data: [Review]): [Review] => {
 	return result
 }
 
-export const sortZA = (data: [Review]): [Review] => {
+export const sortZA = (data: Review[]): Review[] => {
 	const result = data.sort((a: Review, b: Review) =>
 		a.landlord.localeCompare(b.landlord),
 	)
@@ -17,9 +17,9 @@ export const sortZA = (data: [Review]): [Review] => {
 }
 
 export const checkAgainstFilters = (
-	data: [Review],
-	activeFilters: [ActiveFilters],
-): [Review] => {
+	data: Review[],
+	activeFilters: ActiveFilters[],
+): Review[] => {
 	const result = data.filter((item) => {
 		for (let obj of activeFilters) {
 			console.log('OBJ: ', obj)

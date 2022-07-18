@@ -17,7 +17,7 @@ export const initialFilters = [
 		name: 'Province / State',
 		options: [
 			//Will need to load in available province/state info
-			{value: 'ontario', label: 'Ontario', checked: false},
+			{value: 'ontario', label: 'Ontario', type: 'state', checked: false},
 		],
 	},
 	{
@@ -25,7 +25,7 @@ export const initialFilters = [
 		name: 'City',
 		options: [
 			//Will need to load in available city info
-			{value: 'toronto', label: 'Toronto', checked: false},
+			{value: 'toronto', label: 'Toronto', type: 'city', checked: false},
 		],
 	},
 ]
