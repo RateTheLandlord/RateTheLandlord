@@ -8,8 +8,8 @@ export const initialFilters = [
 		id: 'country',
 		name: 'Country',
 		options: [
-			{value: 'canada', label: 'Canada', checked: false},
-			{value: 'usa', label: 'USA', checked: false},
+			{value: 'CA', label: 'Canada', type: 'countrycode', checked: false},
+			{value: 'US', label: 'USA', type: 'countrycode', checked: false},
 		],
 	},
 	{
