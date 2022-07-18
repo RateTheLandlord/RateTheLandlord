@@ -261,7 +261,7 @@ function ReviewFilters({
 							<div className="hidden sm:block">
 								<div className="flow-root">
 									<Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
-										{filters.map((section, sectionIdx) => (
+										{filters.map((section) => (
 											<Popover
 												key={section.name}
 												className="px-4 relative inline-block text-left"
