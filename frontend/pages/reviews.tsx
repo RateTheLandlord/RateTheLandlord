@@ -28,26 +28,31 @@ export default function Reviews({
 
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
-	const [activeFilters, setActiveFilters] = useState<ActiveFilters[]>([])
+	const [activeFilters, setActiveFilters] = useState<ActiveFilters>({})
+
 	const [filters, setFilters] = useState<Filters[]>(initialFilters)
+
+	console.log('Active Filters: ', activeFilters)
 
 	useEffect(() => {
 		let updatedReviews = reviews
-		if (selectedSort.name === 'Name A-Z') {
-			const result = sortAZ(updatedReviews)
-			updatedReviews = result
-			setReviews(result)
-		} else {
-			const result = sortZA(updatedReviews)
-			updatedReviews = result
-			setReviews(result)
-		}
-		if (activeFilters.length) {
+		if (Object.entries(activeFilters).length) {
 			const result = checkAgainstFilters(updatedReviews, activeFilters)
 			updatedReviews = result
 			setReviews(result)
+		} else {
+			updatedReviews = initialData
 		}
-	}, [reviews, selectedSort, activeFilters])
+		// if (selectedSort.name === 'Name A-Z') {
+		// 	const result = sortAZ(updatedReviews)
+		// 	updatedReviews = result
+		// 	setReviews(result)
+		// } else {
+		// 	const result = sortZA(updatedReviews)
+		// 	updatedReviews = result
+		// 	setReviews(result)
+		// }
+	}, [selectedSort, activeFilters])
 
 	useEffect(() => {
 		if (data) {
@@ -67,7 +72,7 @@ export default function Reviews({
 					activeFilters={activeFilters}
 					setActiveFilters={setActiveFilters}
 				/>
-				<ReviewTable data={data || initialData} />
+				<ReviewTable data={reviews || initialData} />
 			</div>
 		</SWRConfig>
 	)

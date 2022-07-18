@@ -9,7 +9,13 @@ import {
 import {XIcon} from '@heroicons/react/outline'
 import {classNames} from '@/util/classnames'
 import {CheckIcon, ChevronDownIcon, SelectorIcon} from '@heroicons/react/solid'
-import {ActiveFilters, Filters, SortOptions} from '@/util/interfaces'
+import {
+	ActiveFilters,
+	Filters,
+	NewFilter,
+	SortOptions,
+	DisplayFilters,
+} from '@/util/interfaces'
 
 //Review filters and Logic
 
@@ -19,8 +25,8 @@ interface FiltersProps {
 	selectedSort: SortOptions
 	setSelectedSort: (selectedSort: SortOptions) => void
 	sortOptions: SortOptions[]
-	activeFilters: ActiveFilters[]
-	setActiveFilters: (activeFilters: ActiveFilters[]) => void
+	activeFilters: ActiveFilters
+	setActiveFilters: (activeFilters: ActiveFilters) => void
 }
 
 function ReviewFilters({
@@ -33,33 +39,54 @@ function ReviewFilters({
 	setFilters,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
+	const [displayFilters, setDisplayFilters] = useState<DisplayFilters[]>([])
 
-	const updateFilters = (newFilter: ActiveFilters) => {
-		if (!activeFilters.some((e) => e.value === newFilter.value)) {
-			const updated = [newFilter, ...activeFilters]
-			setActiveFilters([...updated])
+	//TODO Update this to remove item from Active Arrays when 'unchecked'
+	const updateFilters = (newFilter: NewFilter) => {
+		if (
+			activeFilters[newFilter.key] &&
+			!activeFilters[newFilter.key].includes(newFilter.value)
+		) {
+			const updated = {
+				[newFilter.key]: [...activeFilters[newFilter.key], newFilter.value],
+				...activeFilters,
+			}
+			setActiveFilters({...updated})
 		} else {
-			const removeItem = activeFilters.filter(
-				(item) => item.value !== newFilter.value,
-			)
-			setActiveFilters([...removeItem])
+			const updated = {[newFilter.key]: [newFilter.value], ...activeFilters}
+			setActiveFilters({...updated})
 		}
 	}
 
 	const handleChange = (e: {target: {name: string; value: string}}) => {
 		if (e.target.name === 'country') {
-			console.log(e.target)
 			const filterIndex = filters[0].options.findIndex(
 				(option) => option.value === e.target.value,
 			)
 			const newFilter = {
+				key: 'countrycode',
 				value: filters[0].options[filterIndex].value,
-				label: filters[0].options[filterIndex].label,
-				type: 'countrycode',
 			}
 			updateFilters(newFilter)
 			const updatedFilters = filters.map((item) => {
 				if (item.id === 'country') {
+					item.options[filterIndex].checked = !item.options[filterIndex].checked
+				}
+				return item
+			})
+			setFilters([...updatedFilters])
+		} else if (e.target.name === 'city') {
+			console.log(e.target.value)
+			const filterIndex = filters[2].options.findIndex(
+				(option) => option.value === e.target.value,
+			)
+			const newFilter = {
+				value: filters[2].options[filterIndex].value,
+				key: 'city',
+			}
+			updateFilters(newFilter)
+			const updatedFilters = filters.map((item) => {
+				if (item.id === 'city') {
 					item.options[filterIndex].checked = !item.options[filterIndex].checked
 				}
 				return item
@@ -336,7 +363,7 @@ function ReviewFilters({
 
 							<div className="mt-2 sm:mt-0 sm:ml-4">
 								<div className="-m-1 flex flex-wrap items-center">
-									{activeFilters.map((activeFilter) => (
+									{displayFilters.map((activeFilter) => (
 										<span
 											key={activeFilter.value}
 											className="m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900"
