@@ -7,7 +7,6 @@ import React from 'react'
 
 function ReviewTable({data}: {data: Review[]}): JSX.Element {
 	const date = new Date()
-	console.log(data)
 	return (
 		<div>
 			<div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
