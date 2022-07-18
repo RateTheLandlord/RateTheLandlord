@@ -35,8 +35,15 @@ export interface SortOptions {
 	name: string
 }
 
+export interface DisplayFilters {
+	[key: string]: string
+}
+
 export interface ActiveFilters {
+	[key: string]: string[]
+}
+
+export interface NewFilter {
+	key: string
 	value: string
-	label: string
-	type: string
 }
