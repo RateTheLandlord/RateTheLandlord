@@ -18,16 +18,17 @@ export const sortZA = (data: Review[]): Review[] => {
 
 export const checkAgainstFilters = (
 	data: Review[],
-	activeFilters: ActiveFilters[],
+	activeFilters: ActiveFilters,
 ): Review[] => {
-	const result = data.filter((item) => {
-		for (let obj of activeFilters) {
-			console.log('OBJ: ', obj)
-			if (item[obj.type] === obj.value) {
-				console.log('ITEM FOUND')
-				return item
-			}
-		}
-	})
-	return result
+	console.log('CHECK FILTERS')
+	const filterKeys = Object.keys(activeFilters)
+	if (filterKeys.length) {
+		const result = data.filter((item) => {
+			return filterKeys.every(
+				(key) => !!~String(item[key]).toLowerCase().indexOf(activeFilters[key]),
+			)
+		})
+		console.log('Result: ', result)
+		return result
+	}
 }
