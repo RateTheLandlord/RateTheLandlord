@@ -8,8 +8,8 @@ export const initialFilters = [
 		id: 'country',
 		name: 'Country',
 		options: [
-			{value: 'CA', label: 'Canada', type: 'countrycode', checked: false},
-			{value: 'US', label: 'USA', type: 'countrycode', checked: false},
+			{value: 'ca', label: 'Canada', type: 'countrycode', checked: false},
+			{value: 'us', label: 'USA', type: 'countrycode', checked: false},
 		],
 	},
 	{
@@ -26,6 +26,12 @@ export const initialFilters = [
 		options: [
 			//Will need to load in available city info
 			{value: 'toronto', label: 'Toronto', type: 'city', checked: false},
+			{
+				value: 'mississauga',
+				label: 'Mississauga',
+				type: 'city',
+				checked: false,
+			},
 		],
 	},
 ]
