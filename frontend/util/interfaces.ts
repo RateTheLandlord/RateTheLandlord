@@ -20,6 +20,7 @@ export interface Review {
 export interface Options {
 	value: string
 	label: string
+	type: string
 	checked: boolean
 }
 
@@ -37,4 +38,5 @@ export interface SortOptions {
 export interface ActiveFilters {
 	value: string
 	label: string
+	type: string
 }
