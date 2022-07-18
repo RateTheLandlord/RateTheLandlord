@@ -8,7 +8,7 @@ import {
 	Review,
 	SortOptions,
 } from '@/util/interfaces'
-import {sortAZ, sortZA} from '@/util/sort-filters'
+import {checkAgainstFilters, sortAZ, sortZA} from '@/util/sort-filters'
 
 import React, {useEffect, useState} from 'react'
 import useSWR, {SWRConfig} from 'swr'
@@ -32,14 +32,18 @@ export default function Reviews({
 	const [filters, setFilters] = useState<[Filters]>(initialFilters)
 
 	useEffect(() => {
+		let updatedReviews = reviews
 		if (selectedSort.name === 'Name A-Z') {
-			const result = sortAZ(reviews)
+			const result = sortAZ(updatedReviews)
 			setReviews(result)
 		} else {
-			const result = sortZA(reviews)
+			const result = sortZA(updatedReviews)
 			setReviews(result)
 		}
-	}, [reviews, selectedSort])
+		if (activeFilters.length) {
+			const result = checkAgainstFilters(updatedReviews, activeFilters)
+		}
+	}, [reviews, selectedSort, activeFilters])
 
 	useEffect(() => {
 		if (data) {

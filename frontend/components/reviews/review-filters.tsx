@@ -48,12 +48,14 @@ function ReviewFilters({
 
 	const handleChange = (e: {target: {name: string; value: string}}) => {
 		if (e.target.name === 'country') {
+			console.log(e.target)
 			const filterIndex = filters[0].options.findIndex(
 				(option) => option.value === e.target.value,
 			)
 			const newFilter = {
 				value: filters[0].options[filterIndex].value,
 				label: filters[0].options[filterIndex].label,
+				type: 'countrycode',
 			}
 			updateFilters(newFilter)
 			const updatedFilters = filters.map((item) => {

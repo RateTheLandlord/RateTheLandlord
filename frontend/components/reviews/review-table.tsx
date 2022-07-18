@@ -83,7 +83,7 @@ function ReviewTable({data}: {data: [Review]}): JSX.Element {
 											)
 										})}
 									</div>
-									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city}, ${review.countrycode}, ${review.zip}`}</p>
+									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city}, ${review.state}, ${review.countrycode}, ${review.zip}`}</p>
 									<p className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 										{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
 									</p>
