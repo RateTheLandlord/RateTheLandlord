@@ -1,6 +1,13 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {AllReviews, Review, SortOptions} from '@/util/interfaces'
+import {initialFilters, sortOptions} from '@/util/filter-options'
+import {
+	ActiveFilters,
+	AllReviews,
+	Filters,
+	Review,
+	SortOptions,
+} from '@/util/interfaces'
 import {sortAZ, sortZA} from '@/util/sort-filters'
 
 import React, {useEffect, useState} from 'react'
@@ -9,11 +16,6 @@ import useSWR, {SWRConfig} from 'swr'
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
-
-const sortOptions = [
-	{id: 1, name: 'Name A-Z'},
-	{id: 2, name: 'Name Z-A'},
-]
 
 export default function Reviews({
 	fallback,
@@ -25,6 +27,9 @@ export default function Reviews({
 	const {data} = useSWR<[Review]>('/api/get-reviews', fetcher)
 
 	const [reviews, setReviews] = useState<[Review]>(initialData)
+
+	const [activeFilters, setActiveFilters] = useState<[ActiveFilters] | []>([])
+	const [filters, setFilters] = useState<[Filters]>(initialFilters)
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
@@ -42,43 +47,17 @@ export default function Reviews({
 		}
 	}, [data])
 
-	const filters = [
-		{
-			id: 'country',
-			name: 'Country',
-			options: [
-				{value: 'canada', label: 'Canada', checked: false},
-				{value: 'usa', label: 'USA', checked: false},
-			],
-		},
-		{
-			id: 'province/state',
-			name: 'Province / State',
-			options: [
-				//Will need to load in available province/state info
-				{value: 'ontario', label: 'Ontario', checked: false},
-			],
-		},
-		{
-			id: 'city',
-			name: 'City',
-			options: [
-				//Will need to load in available city info
-				{value: 'toronto', label: 'Toronto', checked: false},
-			],
-		},
-	]
-
-	const activeFilters = [{value: 'canada', label: 'Canada'}]
 	return (
 		<SWRConfig value={{fallback}}>
 			<div>
 				<ReviewFilters
 					filters={filters}
+					setFilters={setFilters}
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
 					sortOptions={sortOptions}
 					activeFilters={activeFilters}
+					setActiveFilters={setActiveFilters}
 				/>
 				<ReviewTable data={data || initialData} />
 			</div>
