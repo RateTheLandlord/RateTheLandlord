@@ -8,94 +8,36 @@ import {
 } from '@headlessui/react'
 import {XIcon} from '@heroicons/react/outline'
 import {classNames} from '@/util/classnames'
-import {CheckIcon, ChevronDownIcon, SelectorIcon} from '@heroicons/react/solid'
+import {ChevronDownIcon} from '@heroicons/react/solid'
+import {NewFilter, Options} from '@/util/interfaces'
+import SelectList from './ui/select-list'
+
 import {
-	ActiveFilters,
-	Filters,
-	NewFilter,
-	SortOptions,
-	DisplayFilters,
-} from '@/util/interfaces'
+	countryOptions,
+	sortOptions,
+	stateOptions,
+	cityOptions,
+} from '@/util/filter-options'
 
 //Review filters and Logic
 
 interface FiltersProps {
-	filters: Filters[]
-	setFilters: (filters: Filters[]) => void
-	selectedSort: SortOptions
-	setSelectedSort: (selectedSort: SortOptions) => void
-	sortOptions: SortOptions[]
-	activeFilters: ActiveFilters
-	setActiveFilters: (activeFilters: ActiveFilters) => void
+	selectedSort: Options
+	setSelectedSort: (selectedSort: Options) => void
+	sortOptions: Options[]
+	activeFilters: NewFilter[]
+	setActiveFilters: (activeFilters: NewFilter) => void
 }
 
 function ReviewFilters({
-	filters,
 	activeFilters,
 	selectedSort,
 	setSelectedSort,
 	sortOptions,
 	setActiveFilters,
-	setFilters,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
-	const [displayFilters, setDisplayFilters] = useState<DisplayFilters[]>([])
-
-	//TODO Update this to remove item from Active Arrays when 'unchecked'
-	const updateFilters = (newFilter: NewFilter) => {
-		if (
-			activeFilters[newFilter.key] &&
-			!activeFilters[newFilter.key].includes(newFilter.value)
-		) {
-			const updated = {
-				[newFilter.key]: [...activeFilters[newFilter.key], newFilter.value],
-				...activeFilters,
-			}
-			setActiveFilters({...updated})
-		} else {
-			const updated = {[newFilter.key]: [newFilter.value], ...activeFilters}
-			setActiveFilters({...updated})
-		}
-	}
-
-	const handleChange = (e: {target: {name: string; value: string}}) => {
-		if (e.target.name === 'country') {
-			const filterIndex = filters[0].options.findIndex(
-				(option) => option.value === e.target.value,
-			)
-			const newFilter = {
-				key: 'countrycode',
-				value: filters[0].options[filterIndex].value,
-			}
-			updateFilters(newFilter)
-			const updatedFilters = filters.map((item) => {
-				if (item.id === 'country') {
-					item.options[filterIndex].checked = !item.options[filterIndex].checked
-				}
-				return item
-			})
-			setFilters([...updatedFilters])
-		} else if (e.target.name === 'city') {
-			console.log(e.target.value)
-			const filterIndex = filters[2].options.findIndex(
-				(option) => option.value === e.target.value,
-			)
-			const newFilter = {
-				value: filters[2].options[filterIndex].value,
-				key: 'city',
-			}
-			updateFilters(newFilter)
-			const updatedFilters = filters.map((item) => {
-				if (item.id === 'city') {
-					item.options[filterIndex].checked = !item.options[filterIndex].checked
-				}
-				return item
-			})
-			setFilters([...updatedFilters])
-		}
-	}
-
-	console.log(activeFilters)
+	const [displayFilters, setDisplayFilters] = useState<NewFilter[]>([])
 
 	return (
 		<div>
@@ -224,61 +166,12 @@ function ReviewFilters({
 
 					<div className="relative z-10 bg-white border-b border-gray-200 pb-4">
 						<div className="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
-							<Listbox value={selectedSort} onChange={setSelectedSort}>
-								<div className="relative mt-1">
-									<Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-										<span className="block truncate w-20">
-											{selectedSort.name}
-										</span>
-										<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-											<SelectorIcon
-												className="h-5 w-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</span>
-									</Listbox.Button>
-									<Transition
-										as={Fragment}
-										leave="transition ease-in duration-100"
-										leaveFrom="opacity-100"
-										leaveTo="opacity-0"
-									>
-										<Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-											{sortOptions.map((option) => (
-												<Listbox.Option
-													key={option.id}
-													className={({active}) =>
-														`relative cursor-default select-none py-2 pl-10 pr-4 ${
-															active
-																? 'bg-amber-100 text-amber-900'
-																: 'text-gray-900'
-														}`
-													}
-													value={option}
-												>
-													<span
-														className={`block truncate ${
-															option.name === selectedSort.name
-																? 'font-medium'
-																: 'font-normal'
-														}`}
-													>
-														{option.name}
-													</span>
-													{option.name === selectedSort.name ? (
-														<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-															<CheckIcon
-																className="h-5 w-5"
-																aria-hidden="true"
-															/>
-														</span>
-													) : null}
-												</Listbox.Option>
-											))}
-										</Listbox.Options>
-									</Transition>
-								</div>
-							</Listbox>
+							<SelectList
+								state={selectedSort}
+								setState={setSelectedSort}
+								options={sortOptions}
+								name="Sort By"
+							/>
 							<button
 								type="button"
 								className="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"

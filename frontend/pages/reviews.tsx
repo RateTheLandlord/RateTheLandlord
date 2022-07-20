@@ -1,10 +1,16 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {initialFilters, sortOptions} from '@/util/filter-options'
+import {
+	countryOptions,
+	sortOptions,
+	stateOptions,
+	cityOptions,
+} from '@/util/filter-options'
 import {
 	ActiveFilters,
 	AllReviews,
 	Filters,
+	Options,
 	Review,
 	SortOptions,
 } from '@/util/interfaces'
@@ -23,16 +29,15 @@ export default function Reviews({
 	fallback: [AllReviews]
 }): JSX.Element {
 	const [selectedSort, setSelectedSort] = useState<SortOptions>(sortOptions[0])
+	const [country, setCountry] = useState<Options | null>()
+	const [stateOptions, setStateOptions] = useState<Options | null>()
+	const [cityOptions, setCityOptions] = useState<Options | null>()
 	const initialData = fallback['/api/get-reviews'] as Review[]
 	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
 
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
 	const [activeFilters, setActiveFilters] = useState<ActiveFilters>({})
-
-	const [filters, setFilters] = useState<Filters[]>(initialFilters)
-
-	console.log('Active Filters: ', activeFilters)
 
 	useEffect(() => {
 		let updatedReviews = reviews
@@ -64,8 +69,6 @@ export default function Reviews({
 		<SWRConfig value={{fallback}}>
 			<div>
 				<ReviewFilters
-					filters={filters}
-					setFilters={setFilters}
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
 					sortOptions={sortOptions}

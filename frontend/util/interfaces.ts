@@ -18,29 +18,9 @@ export interface Review {
 }
 
 export interface Options {
-	value: string
-	label: string
-	type: string
-	checked: boolean
-}
-
-export interface Filters {
-	id: string
-	name: string
-	options: Options[]
-}
-
-export interface SortOptions {
 	id: number
 	name: string
-}
-
-export interface DisplayFilters {
-	[key: string]: string
-}
-
-export interface ActiveFilters {
-	[key: string]: string[]
+	value: string
 }
 
 export interface NewFilter {

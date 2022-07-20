@@ -1,37 +1,17 @@
+import countries from '@/util/countries.json'
+
 export const sortOptions = [
-	{id: 1, name: 'Name A-Z'},
-	{id: 2, name: 'Name Z-A'},
+	{id: 1, name: 'Name A-Z', value: 'az'},
+	{id: 2, name: 'Name Z-A', value: 'za'},
 ]
 
-export const initialFilters = [
-	{
-		id: 'country',
-		name: 'Country',
-		options: [
-			{value: 'ca', label: 'Canada', type: 'countrycode', checked: false},
-			{value: 'us', label: 'USA', type: 'countrycode', checked: false},
-		],
-	},
-	{
-		id: 'province/state',
-		name: 'Province / State',
-		options: [
-			//Will need to load in available province/state info
-			{value: 'ontario', label: 'Ontario', type: 'state', checked: false},
-		],
-	},
-	{
-		id: 'city',
-		name: 'City',
-		options: [
-			//Will need to load in available city info
-			{value: 'toronto', label: 'Toronto', type: 'city', checked: false},
-			{
-				value: 'mississauga',
-				label: 'Mississauga',
-				type: 'city',
-				checked: false,
-			},
-		],
-	},
+export const countryOptions = Object.keys(countries)
+	.filter((c) => c === 'CA' || c === 'US')
+	.forEach((obj, ind) => (obj.id = ind + 1))
+
+export const stateOptions = [{id: 1, name: 'Ontario', value: 'ON'}]
+
+export const cityOptions = [
+	{id: 1, name: 'Mississauga', value: 'MISS'},
+	{id: 2, Name: 'Toronto', value: 'TOR'},
 ]
