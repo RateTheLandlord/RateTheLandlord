@@ -11,13 +11,9 @@ import {classNames} from '@/util/classnames'
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import {NewFilter, Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
+import countries from '@/util/countries.json'
 
-import {
-	countryOptions,
-	sortOptions,
-	stateOptions,
-	cityOptions,
-} from '@/util/filter-options'
+import {sortOptions, stateOptions, cityOptions} from '@/util/filter-options'
 
 //Review filters and Logic
 
@@ -29,15 +25,26 @@ interface FiltersProps {
 	setActiveFilters: (activeFilters: NewFilter) => void
 }
 
+const countryCodes = Object.keys(countries).filter(
+	(c) => c === 'CA' || c === 'US',
+)
+
 function ReviewFilters({
-	activeFilters,
 	selectedSort,
 	setSelectedSort,
 	sortOptions,
-	setActiveFilters,
+	countryFilter,
+	setCountryFilter,
+	stateFilter,
+	setStateFilter,
+	cityFilter,
+	setCityFilter,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 	const [displayFilters, setDisplayFilters] = useState<NewFilter[]>([])
+	const countryOptions = countryCodes.map((item, ind) => {
+		return {id: ind + 1, name: countries[item], value: item}
+	})
 
 	return (
 		<div>
@@ -85,7 +92,7 @@ function ReviewFilters({
 
 								{/* Filters */}
 								<form className="mt-4">
-									{filters.map((section) => (
+									{/* {filters.map((section) => (
 										<Disclosure
 											as="div"
 											key={section.name}
@@ -137,7 +144,7 @@ function ReviewFilters({
 												</>
 											)}
 										</Disclosure>
-									))}
+									))} */}
 								</form>
 							</Dialog.Panel>
 						</Transition.Child>
@@ -182,8 +189,26 @@ function ReviewFilters({
 
 							<div className="hidden sm:block">
 								<div className="flow-root">
-									<Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
-										{filters.map((section) => (
+									<Popover.Group className="-mx-4 flex items-center divide-x gap-2 divide-gray-200">
+										<SelectList
+											state={countryFilter}
+											setState={setCountryFilter}
+											options={countryOptions}
+											name="Country"
+										/>
+										<SelectList
+											state={stateFilter}
+											setState={setStateFilter}
+											options={stateOptions}
+											name="State / Province"
+										/>
+										<SelectList
+											state={cityFilter}
+											setState={setCityFilter}
+											options={cityOptions}
+											name="City"
+										/>
+										{/* {filters.map((section) => (
 											<Popover
 												key={section.name}
 												className="px-4 relative inline-block text-left"
@@ -234,7 +259,7 @@ function ReviewFilters({
 													</Popover.Panel>
 												</Transition>
 											</Popover>
-										))}
+										))} */}
 									</Popover.Group>
 								</div>
 							</div>
@@ -256,7 +281,7 @@ function ReviewFilters({
 
 							<div className="mt-2 sm:mt-0 sm:ml-4">
 								<div className="-m-1 flex flex-wrap items-center">
-									{displayFilters.map((activeFilter) => (
+									{/* {displayFilters.map((activeFilter) => (
 										<span
 											key={activeFilter.value}
 											className="m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900"
@@ -283,7 +308,7 @@ function ReviewFilters({
 												</svg>
 											</button>
 										</span>
-									))}
+									))} */}
 								</div>
 							</div>
 						</div>

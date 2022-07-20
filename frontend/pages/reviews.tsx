@@ -1,19 +1,7 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {
-	countryOptions,
-	sortOptions,
-	stateOptions,
-	cityOptions,
-} from '@/util/filter-options'
-import {
-	ActiveFilters,
-	AllReviews,
-	Filters,
-	Options,
-	Review,
-	SortOptions,
-} from '@/util/interfaces'
+import {sortOptions} from '@/util/filter-options'
+import {AllReviews, Options, Review, NewFilter} from '@/util/interfaces'
 import {checkAgainstFilters, sortAZ, sortZA} from '@/util/sort-filters'
 
 import React, {useEffect, useState} from 'react'
@@ -28,35 +16,25 @@ export default function Reviews({
 }: {
 	fallback: [AllReviews]
 }): JSX.Element {
-	const [selectedSort, setSelectedSort] = useState<SortOptions>(sortOptions[0])
-	const [country, setCountry] = useState<Options | null>()
-	const [stateOptions, setStateOptions] = useState<Options | null>()
-	const [cityOptions, setCityOptions] = useState<Options | null>()
+	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[0])
+	const [countryFilter, setCountryFilter] = useState<Options | null>()
+	const [stateFilter, setStateFilter] = useState<Options | null>()
+	const [cityFilter, setCityFilter] = useState<Options | null>()
 	const initialData = fallback['/api/get-reviews'] as Review[]
 	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
 
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
-	const [activeFilters, setActiveFilters] = useState<ActiveFilters>({})
+	const [activeFilters, setActiveFilters] = useState<NewFilter[]>([])
 
 	useEffect(() => {
-		let updatedReviews = reviews
-		if (Object.entries(activeFilters).length) {
-			const result = checkAgainstFilters(updatedReviews, activeFilters)
-			updatedReviews = result
+		if (selectedSort.name === 'Name A-Z') {
+			const result = sortAZ(reviews)
 			setReviews(result)
 		} else {
-			updatedReviews = initialData
+			const result = sortZA(reviews)
+			setReviews(result)
 		}
-		// if (selectedSort.name === 'Name A-Z') {
-		// 	const result = sortAZ(updatedReviews)
-		// 	updatedReviews = result
-		// 	setReviews(result)
-		// } else {
-		// 	const result = sortZA(updatedReviews)
-		// 	updatedReviews = result
-		// 	setReviews(result)
-		// }
 	}, [selectedSort, activeFilters])
 
 	useEffect(() => {
@@ -74,6 +52,12 @@ export default function Reviews({
 					sortOptions={sortOptions}
 					activeFilters={activeFilters}
 					setActiveFilters={setActiveFilters}
+					countryFilter={countryFilter}
+					setCountryFilter={setCountryFilter}
+					stateFilter={stateFilter}
+					setStateFilter={setStateFilter}
+					cityFilter={cityFilter}
+					setCityFilter={setCityFilter}
 				/>
 				<ReviewTable data={reviews || initialData} />
 			</div>
