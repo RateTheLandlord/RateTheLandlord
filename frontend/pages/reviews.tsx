@@ -25,7 +25,64 @@ export default function Reviews({
 
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
-	const [activeFilters, setActiveFilters] = useState<NewFilter[]>([])
+	const [activeFilters, setActiveFilters] = useState<Options[] | null>()
+
+	console.log('Active: ', activeFilters)
+
+	const updateActiveFilters = () => {
+		const filters: Options[] = []
+		if (countryFilter) {
+			filters.push(countryFilter)
+		}
+		if (stateFilter) {
+			filters.push(stateFilter)
+		}
+		if (cityFilter) {
+			filters.push(cityFilter)
+		}
+		setActiveFilters(filters)
+	}
+
+	const updateReviews = () => {
+		let newReviews: Review[] = []
+		if (countryFilter) {
+			const temp = reviews.filter((review) => {
+				review.countrycode === countryFilter.value
+			})
+			newReviews = temp
+		}
+		if (stateFilter) {
+			if (newReviews.length) {
+				const temp = newReviews.filter((review) => {
+					review.state.toLowerCase() === stateFilter.name.toLowerCase()
+				})
+				newReviews = temp
+			} else {
+				const temp = reviews.filter((review) => {
+					review.state.toLowerCase() === stateFilter.name.toLowerCase()
+				})
+				newReviews = temp
+			}
+		}
+		if (cityFilter) {
+			if (newReviews.length) {
+				newReviews = newReviews.filter((review) => {
+					review.city.toLowerCase() === cityFilter.name.toLowerCase()
+				})
+			} else {
+				newReviews = reviews.filter((review) => {
+					review.city.toLowerCase() === cityFilter.name.toLowerCase()
+				})
+			}
+		}
+		console.log(newReviews)
+		setReviews(newReviews)
+	}
+
+	useEffect(() => {
+		updateActiveFilters()
+		updateReviews()
+	}, [cityFilter, stateFilter, countryFilter])
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
@@ -35,7 +92,7 @@ export default function Reviews({
 			const result = sortZA(reviews)
 			setReviews(result)
 		}
-	}, [selectedSort, activeFilters])
+	}, [selectedSort])
 
 	useEffect(() => {
 		if (data) {
@@ -51,7 +108,6 @@ export default function Reviews({
 					setSelectedSort={setSelectedSort}
 					sortOptions={sortOptions}
 					activeFilters={activeFilters}
-					setActiveFilters={setActiveFilters}
 					countryFilter={countryFilter}
 					setCountryFilter={setCountryFilter}
 					stateFilter={stateFilter}
