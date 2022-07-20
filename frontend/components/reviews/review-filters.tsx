@@ -5,7 +5,7 @@ import {NewFilter, Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
 import countries from '@/util/countries.json'
 
-import {sortOptions, stateOptions, cityOptions} from '@/util/filter-options'
+import {sortOptions, stateOptions} from '@/util/filter-options'
 
 //Review filters and Logic
 
@@ -30,6 +30,7 @@ function ReviewFilters({
 	cityFilter,
 	setCityFilter,
 	activeFilters,
+	cityOptions,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 	const countryOptions = countryCodes.map((item, ind) => {

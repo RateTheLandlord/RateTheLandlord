@@ -27,7 +27,15 @@ export default function Reviews({
 
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>()
 
-	console.log('Active: ', activeFilters)
+	const cityOptions = reviews.map((review, id) => {
+		return {
+			id: id + 1,
+			name:
+				review.city.toLowerCase().charAt(0).toUpperCase() +
+				review.city.slice(1).toLowerCase(),
+			value: review.city.toLowerCase(),
+		}
+	})
 
 	const updateActiveFilters = () => {
 		const filters: Options[] = []
@@ -114,6 +122,7 @@ export default function Reviews({
 					setStateFilter={setStateFilter}
 					cityFilter={cityFilter}
 					setCityFilter={setCityFilter}
+					cityOptions={cityOptions}
 				/>
 				<ReviewTable data={reviews || initialData} />
 			</div>
