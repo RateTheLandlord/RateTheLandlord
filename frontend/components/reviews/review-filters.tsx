@@ -1,11 +1,8 @@
 import React, {useState, Fragment} from 'react'
 import {Dialog, Popover, Transition} from '@headlessui/react'
 import {XIcon} from '@heroicons/react/outline'
-import {NewFilter, Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
-import countries from '@/util/countries.json'
-
-import {sortOptions, stateOptions} from '@/util/filter-options'
 
 //Review filters and Logic
 
@@ -14,10 +11,6 @@ interface FiltersProps {
 	setSelectedSort: (selectedSort: Options) => void
 	sortOptions: Options[]
 }
-
-const countryCodes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US',
-)
 
 function ReviewFilters({
 	selectedSort,
@@ -31,11 +24,11 @@ function ReviewFilters({
 	setCityFilter,
 	activeFilters,
 	cityOptions,
+	countryOptions,
+	stateOptions,
+	removeFilter,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
-	const countryOptions = countryCodes.map((item, ind) => {
-		return {id: ind + 1, name: countries[item], value: item}
-	})
 
 	return (
 		<div>
@@ -188,13 +181,14 @@ function ReviewFilters({
 							<div className="mt-2 sm:mt-0 sm:ml-4">
 								<div className="-m-1 flex flex-wrap items-center">
 									{activeFilters?.length
-										? activeFilters.map((activeFilter) => (
+										? activeFilters.map((activeFilter, index) => (
 												<span
 													key={activeFilter.name}
 													className="m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900"
 												>
 													<span>{activeFilter.name}</span>
 													<button
+														onClick={() => removeFilter(index)}
 														type="button"
 														className="flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500"
 													>
