@@ -10,6 +10,17 @@ interface FiltersProps {
 	selectedSort: Options
 	setSelectedSort: (selectedSort: Options) => void
 	sortOptions: Options[]
+	countryFilter: Options | null
+	setCountryFilter: (option: Options) => void
+	stateFilter: Options | null
+	setStateFilter: (option: Options) => void
+	cityFilter: Options | null
+	setCityFilter: (option: Options) => void
+	activeFilters: Options[] | null
+	cityOptions: Options[]
+	countryOptions: Options[]
+	stateOptions: Options[]
+	removeFilter: (index: number) => void
 }
 
 function ReviewFilters({

@@ -1,4 +1,4 @@
-import {classNames} from '@/util/classnames'
+import {classNames} from '@/util/helper-functions'
 import {Review} from '@/util/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
 import React from 'react'
