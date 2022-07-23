@@ -18,7 +18,6 @@ export const sortZA = (data: Review[]): Review[] => {
 	return result
 }
 
-
 export const updateReviews = (
 	stateFilter: Options | null,
 	countryFilter: Options | null,

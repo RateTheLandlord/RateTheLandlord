@@ -7,7 +7,11 @@ interface Props {
 	index: number
 }
 
-export default function ActiveFilters({activeFilter, removeFilter, index}) {
+export default function ActiveFilters({
+	activeFilter,
+	removeFilter,
+	index,
+}: Props): JSX.Element {
 	return (
 		<span
 			key={activeFilter.name}

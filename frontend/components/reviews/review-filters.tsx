@@ -195,10 +195,12 @@ function ReviewFilters({
 									{activeFilters?.length
 										? activeFilters.map((activeFilter, index) => (
 												<ActiveFilters
+													key={activeFilter.value}
 													activeFilter={activeFilter}
 													index={index}
 													removeFilter={removeFilter}
 												/>
+												// eslint-disable-next-line no-mixed-spaces-and-tabs
 										  ))
 										: null}
 								</div>
