@@ -18,20 +18,18 @@ import useSWR, {SWRConfig} from 'swr'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-const countryCodes = Object.keys(countries).filter(
+const countryCodes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
 
 export default function Reviews({
 	fallback,
 }: {
-	fallback: AllReviews[]
+	fallback: AllReviews
 }): JSX.Element {
 	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
 
-	const [initialData, setInitialData] = useState<Review[]>(
-		fallback['/api/get-reviews'],
-	)
+	const initialData = fallback['/api/get-reviews']
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[0])
@@ -42,29 +40,19 @@ export default function Reviews({
 
 	const countryOptions: Options[] = countryCodes.map(
 		(item: string, ind: number): Options => {
-			return {id: ind + 1, name: countries[item], value: item}
+			return {id: ind + 1, name: countries[item] as string, value: item}
 		},
 	)
 
-	const cityOptions = getCityOptions(initialData)
+	const cityOptions = getCityOptions(reviews)
 
-	const stateOptions = getStateOptions(initialData)
+	const stateOptions = getStateOptions(reviews)
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
 			if (cityFilter === activeFilters[index]) setCityFilter(null)
 			if (stateFilter === activeFilters[index]) setStateFilter(null)
 			if (countryFilter === activeFilters[index]) setCountryFilter(null)
-		}
-	}
-
-	const updateSort = (name: string) => {
-		if (name === 'Name A-Z') {
-			const result = sortAZ(reviews)
-			setReviews(result)
-		} else {
-			const result = sortZA(reviews)
-			setReviews(result)
 		}
 	}
 
@@ -75,23 +63,20 @@ export default function Reviews({
 			cityFilter,
 			setActiveFilters,
 		)
-		updateReviews(
-			stateFilter,
-			countryFilter,
-			cityFilter,
-			setReviews,
-			initialData,
-		)
-	}, [cityFilter, stateFilter, countryFilter, initialData])
+		updateReviews(stateFilter, countryFilter, cityFilter, setReviews, reviews)
+	}, [cityFilter, stateFilter, countryFilter, reviews])
 
 	useEffect(() => {
-		updateSort(selectedSort.name)
+		if (selectedSort.name === 'Name A-Z') {
+			setReviews((reviews) => sortAZ(reviews))
+		} else if (selectedSort.name === 'Name Z-A') {
+			setReviews((reviews) => sortZA(reviews))
+		}
 	}, [selectedSort])
 
 	useEffect(() => {
 		if (data) {
 			setReviews(data)
-			setInitialData(data)
 		}
 	}, [data])
 

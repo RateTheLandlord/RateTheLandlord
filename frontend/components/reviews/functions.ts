@@ -1,6 +1,6 @@
 import {capitalize, removeDuplicates} from '@/util/helper-functions'
 import {Options} from '@/util/interfaces'
-import {Review} from './interfaces'
+import {Review} from '@/util/interfaces'
 
 export const sortAZ = (data: Review[]): Review[] => {
 	const result = data.sort((a: Review, b: Review): number =>
@@ -17,6 +17,7 @@ export const sortZA = (data: Review[]): Review[] => {
 
 	return result
 }
+
 
 export const updateReviews = (
 	stateFilter: Options | null,
