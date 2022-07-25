@@ -1,11 +1,9 @@
-import React, {useState, Fragment} from 'react'
-import {Dialog, Popover, Transition} from '@headlessui/react'
-import {XIcon} from '@heroicons/react/outline'
+import React, {useState} from 'react'
 import {Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
 import ActiveFilters from './ui/active-filters'
-import MobileSelectList from './ui/mobile-select-list'
 import SearchBar from './ui/searchbar'
+import MobileReviewFilters from './mobile-review-filters'
 
 //Review filters and Logic
 
@@ -24,6 +22,7 @@ interface FiltersProps {
 	countryOptions: Options[]
 	stateOptions: Options[]
 	removeFilter: (index: number) => void
+	setSearchState: (str: string) => void
 }
 
 function ReviewFilters({
@@ -41,85 +40,30 @@ function ReviewFilters({
 	countryOptions,
 	stateOptions,
 	removeFilter,
+	setSearchState,
 }: FiltersProps): JSX.Element {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 
 	return (
 		<div>
-			{/* Mobile filter dialog */}
-			<Transition.Root show={mobileFiltersOpen} as={Fragment}>
-				<Dialog
-					as="div"
-					className="relative z-40 lg:hidden"
-					onClose={setMobileFiltersOpen}
-				>
-					<Transition.Child
-						as={Fragment}
-						enter="transition-opacity ease-linear duration-300"
-						enterFrom="opacity-0"
-						enterTo="opacity-100"
-						leave="transition-opacity ease-linear duration-300"
-						leaveFrom="opacity-100"
-						leaveTo="opacity-0"
-					>
-						<div className="fixed inset-0 bg-black bg-opacity-25" />
-					</Transition.Child>
-
-					<div className="fixed inset-0 flex z-40">
-						<Transition.Child
-							as={Fragment}
-							enter="transition ease-in-out duration-300 transform"
-							enterFrom="translate-x-full"
-							enterTo="translate-x-0"
-							leave="transition ease-in-out duration-300 transform"
-							leaveFrom="translate-x-0"
-							leaveTo="translate-x-full"
-						>
-							<Dialog.Panel className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
-								<div className="px-4 flex items-center justify-between">
-									<h2 className="text-lg font-medium text-gray-900">Filters</h2>
-									<button
-										type="button"
-										className="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400"
-										onClick={() => setMobileFiltersOpen(false)}
-									>
-										<span className="sr-only">Close menu</span>
-										<XIcon className="h-6 w-6" aria-hidden="true" />
-									</button>
-								</div>
-
-								{/* Filters */}
-								<div className="mt-4">
-									<Popover.Group className="mx-2 flex flex-col items-center divide-y gap-2 ">
-										<SearchBar />
-
-										<MobileSelectList
-											state={countryFilter}
-											setState={setCountryFilter}
-											options={countryOptions}
-											name="Country"
-										/>
-										<MobileSelectList
-											state={stateFilter}
-											setState={setStateFilter}
-											options={stateOptions}
-											name="State / Province"
-										/>
-										<MobileSelectList
-											state={cityFilter}
-											setState={setCityFilter}
-											options={cityOptions}
-											name="City"
-										/>
-									</Popover.Group>
-								</div>
-							</Dialog.Panel>
-						</Transition.Child>
-					</div>
-				</Dialog>
-			</Transition.Root>
+			{/* Mobile Filters */}
+			<MobileReviewFilters
+				mobileFiltersOpen={mobileFiltersOpen}
+				setMobileFiltersOpen={setMobileFiltersOpen}
+				countryFilter={countryFilter}
+				setCountryFilter={setCountryFilter}
+				countryOptions={countryOptions}
+				stateFilter={stateFilter}
+				setStateFilter={setStateFilter}
+				stateOptions={stateOptions}
+				cityFilter={cityFilter}
+				setCityFilter={setCityFilter}
+				cityOptions={cityOptions}
+				setSearchState={setSearchState}
+			/>
 
 			<main>
+				{/* TITLE AND DESCRIPTION */}
 				<div>
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
 						<h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
@@ -139,7 +83,7 @@ function ReviewFilters({
 					</h2>
 
 					<div className="relative z-10 bg-white border-b border-gray-200 pb-4">
-						<div className="max-w-7xl mx-auto px-4 flex items-center justify-between lg:px-8">
+						<div className="max-w-7xl mx-auto px-4 flex items-center lg:justify-between lg:px-8">
 							<SelectList
 								state={selectedSort}
 								setState={setSelectedSort}
@@ -156,8 +100,8 @@ function ReviewFilters({
 
 							<div className="hidden lg:block">
 								<div className="flow-root">
-									<Popover.Group className="-mx-4 flex items-center divide-x gap-2 divide-gray-200">
-										<SearchBar />
+									<div className="-mx-4 flex items-center divide-x gap-2 divide-gray-200">
+										<SearchBar setSearchState={setSearchState} />
 
 										<SelectList
 											state={countryFilter}
@@ -177,7 +121,7 @@ function ReviewFilters({
 											options={cityOptions}
 											name="City"
 										/>
-									</Popover.Group>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -9,6 +9,7 @@ import {
 	updateReviews,
 	getStateOptions,
 	getCityOptions,
+	searchReviews,
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
@@ -38,6 +39,9 @@ export default function Reviews({
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
+	const [searchState, setSearchState] = useState<string>('')
+
+	console.log('Search: ', searchState)
 
 	const countryOptions: Options[] = countryCodes.map(
 		(item: string, ind: number): Options => {
@@ -70,8 +74,9 @@ export default function Reviews({
 			cityFilter,
 			setReviews,
 			allReviews,
+			searchState,
 		)
-	}, [cityFilter, stateFilter, countryFilter, reviews, allReviews])
+	}, [cityFilter, stateFilter, countryFilter, reviews, allReviews, searchState])
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
@@ -106,6 +111,7 @@ export default function Reviews({
 					stateOptions={stateOptions}
 					countryOptions={countryOptions}
 					removeFilter={removeFilter}
+					setSearchState={setSearchState}
 				/>
 				<ReviewTable data={reviews || initialData} />
 			</div>

@@ -24,8 +24,9 @@ export const updateReviews = (
 	cityFilter: Options | null,
 	setReviews: (reviews: Review[]) => void,
 	initialData: Review[],
+	search: string,
 ) => {
-	let newReviews: Review[] = initialData
+	let newReviews: Review[] = searchReviews(initialData, search)
 	if (countryFilter) {
 		const temp: Review[] = newReviews.filter(
 			(review: Review): boolean => review.countrycode === countryFilter.value,
@@ -61,6 +62,7 @@ export const updateReviews = (
 			)
 		}
 	}
+
 	setReviews(newReviews)
 }
 
@@ -109,4 +111,11 @@ export const getCityOptions = (data: Review[]): Options[] => {
 	})
 
 	return cityOptions
+}
+
+export const searchReviews = (data: Review[], search: string) => {
+	if (!search) return data
+	return data.filter((review) => {
+		return review.landlord.toLowerCase().includes(search.toLowerCase())
+	})
 }
