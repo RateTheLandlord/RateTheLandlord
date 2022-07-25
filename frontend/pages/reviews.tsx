@@ -30,6 +30,7 @@ export default function Reviews({
 	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
 
 	const initialData = fallback['/api/get-reviews']
+	const [allReviews, setAllReviews] = useState<Review[]>(initialData)
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[0])
@@ -63,8 +64,14 @@ export default function Reviews({
 			cityFilter,
 			setActiveFilters,
 		)
-		updateReviews(stateFilter, countryFilter, cityFilter, setReviews, reviews)
-	}, [cityFilter, stateFilter, countryFilter, reviews])
+		updateReviews(
+			stateFilter,
+			countryFilter,
+			cityFilter,
+			setReviews,
+			allReviews,
+		)
+	}, [cityFilter, stateFilter, countryFilter, reviews, allReviews])
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
@@ -77,6 +84,7 @@ export default function Reviews({
 	useEffect(() => {
 		if (data) {
 			setReviews(data)
+			setAllReviews(data)
 		}
 	}, [data])
 
