@@ -5,6 +5,7 @@ import {Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
 import ActiveFilters from './ui/active-filters'
 import MobileSelectList from './ui/mobile-select-list'
+import SearchBar from './ui/searchbar'
 
 //Review filters and Logic
 
@@ -49,7 +50,7 @@ function ReviewFilters({
 			<Transition.Root show={mobileFiltersOpen} as={Fragment}>
 				<Dialog
 					as="div"
-					className="relative z-40 sm:hidden"
+					className="relative z-40 lg:hidden"
 					onClose={setMobileFiltersOpen}
 				>
 					<Transition.Child
@@ -89,7 +90,9 @@ function ReviewFilters({
 
 								{/* Filters */}
 								<div className="mt-4">
-									<Popover.Group className="mx-2 flex flex-col items-center divide-x gap-2 divide-gray-200">
+									<Popover.Group className="mx-2 flex flex-col items-center divide-y gap-2 ">
+										<SearchBar />
+
 										<MobileSelectList
 											state={countryFilter}
 											setState={setCountryFilter}
@@ -151,9 +154,11 @@ function ReviewFilters({
 								Filters
 							</button>
 
-							<div className="hidden sm:block">
+							<div className="hidden lg:block">
 								<div className="flow-root">
 									<Popover.Group className="-mx-4 flex items-center divide-x gap-2 divide-gray-200">
+										<SearchBar />
+
 										<SelectList
 											state={countryFilter}
 											setState={setCountryFilter}
