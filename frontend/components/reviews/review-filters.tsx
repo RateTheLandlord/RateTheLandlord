@@ -4,6 +4,7 @@ import {XIcon} from '@heroicons/react/outline'
 import {Options} from '@/util/interfaces'
 import SelectList from './ui/select-list'
 import ActiveFilters from './ui/active-filters'
+import MobileSelectList from './ui/mobile-select-list'
 
 //Review filters and Logic
 
@@ -87,21 +88,21 @@ function ReviewFilters({
 								</div>
 
 								{/* Filters */}
-								<div className="flow-root">
-									<Popover.Group className="-mx-4 flex flex-col items-center divide-x gap-2 divide-gray-200">
-										<SelectList
+								<div className="mt-4">
+									<Popover.Group className="mx-2 flex flex-col items-center divide-x gap-2 divide-gray-200">
+										<MobileSelectList
 											state={countryFilter}
 											setState={setCountryFilter}
 											options={countryOptions}
 											name="Country"
 										/>
-										<SelectList
+										<MobileSelectList
 											state={stateFilter}
 											setState={setStateFilter}
 											options={stateOptions}
 											name="State / Province"
 										/>
-										<SelectList
+										<MobileSelectList
 											state={cityFilter}
 											setState={setCityFilter}
 											options={cityOptions}
