@@ -51,5 +51,7 @@
 			"submit": "Submit a Review",
 			"open": "Open main menu"
 		}
-	}
+	},
+	"reviews": {},
+	"login": {}
 }
