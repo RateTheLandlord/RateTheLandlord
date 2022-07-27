@@ -1,4 +1,5 @@
 import React from 'react'
+import {useTranslation} from 'react-i18next'
 import Facebook from '../svg/social/facebook'
 import Github from '../svg/social/github'
 import Instagram from '../svg/social/instagram'
@@ -34,6 +35,9 @@ const navigation = [
 ]
 
 function Footer(): JSX.Element {
+	const date = new Date()
+	const year = date.getFullYear()
+	const {t} = useTranslation()
 	return (
 		<footer className="bg-white">
 			<div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
@@ -51,7 +55,7 @@ function Footer(): JSX.Element {
 				</div>
 				<div className="mt-8 md:mt-0 md:order-1">
 					<p className="text-center text-base text-gray-400">
-						&copy; 2022 Rate The Landlord. All Rights Reserved.
+						&copy; {year} {t('layout.footer.copy')}
 					</p>
 				</div>
 			</div>
