@@ -39,5 +39,17 @@
 			"submit": "Submit",
 			"reset": "Reset"
 		}
+	},
+	"layout": {
+		"footer": {
+			"copy": "Rate The Landlord. All Rights Reserved."
+		},
+		"nav": {
+			"title": "Rate The Landlord",
+			"reviews": "Reviews",
+			"search": "Search",
+			"submit": "Submit a Review",
+			"open": "Open main menu"
+		}
 	}
 }
