@@ -1,6 +1,7 @@
 import React from 'react'
 import {RadioGroup} from '@headlessui/react'
 import {classNames} from '@/util/classnames'
+import {useTranslation} from 'react-i18next'
 
 const ratings = [1, 2, 3, 4, 5]
 
@@ -11,14 +12,20 @@ interface Props {
 }
 
 function RatingsRadio({title, rating, setRating}: Props) {
+	const {t} = useTranslation()
+
 	return (
 		<div>
 			<div className="flex items-center justify-between">
-				<h2 className="text-sm font-medium text-gray-900">{title} Rating</h2>
+				<h2 className="text-sm font-medium text-gray-900">
+					{title} {t('create-review.review-radio.rating')}
+				</h2>
 			</div>
 
 			<RadioGroup value={rating} onChange={setRating} className="mt-2">
-				<RadioGroup.Label className="sr-only">Choose a rating</RadioGroup.Label>
+				<RadioGroup.Label className="sr-only">
+					{t('create-review.review-radio.choose')}
+				</RadioGroup.Label>
 				<div className="grid gap-2 sm:gap-3 grid-cols-5">
 					{ratings.map((option) => (
 						<RadioGroup.Option
