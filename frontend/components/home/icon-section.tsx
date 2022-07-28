@@ -1,7 +1,9 @@
 import React from 'react'
+import {useTranslation} from 'react-i18next'
 import Privacy from '../svg/icons/privacy'
 
 export default function IconSection() {
+	const {t} = useTranslation()
 	return (
 		<div className="bg-white min-w-full">
 			<div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
@@ -9,7 +11,7 @@ export default function IconSection() {
 					<div className="max-w-xl mx-auto lg:max-w-none">
 						<div className="text-center">
 							<h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-								Help Keep Landlords Accountable
+								{t('home.icon.title')}
 							</h2>
 						</div>
 						<div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
@@ -21,10 +23,10 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Anonymity
+										{t('home.icon.anonymity')}
 									</h3>
 									<p className="mt-2 text-sm text-gray-900">
-										Share your rental experience with confidence.
+										{t('home.icon.anon-sub')}
 									</p>
 								</div>
 							</div>
@@ -36,10 +38,10 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Solidarity
+										{t('home.icon.solidarity')}
 									</h3>
 									<p className="mt-2 text-sm text-gray-900">
-										Join fellow Tenants by creating an informed community.
+										{t('home.icon.sol-sub')}
 									</p>
 								</div>
 							</div>
@@ -51,10 +53,10 @@ export default function IconSection() {
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
 									<h3 className="text-2xl font-extrabold text-gray-900">
-										Transparency
+										{t('home.icon.transparency')}
 									</h3>
 									<p className="mt-2 text-sm text-gray-900">
-										Empower others to make decisions about housing.
+										{t('home.icon.trans-sub')}
 									</p>
 								</div>
 							</div>

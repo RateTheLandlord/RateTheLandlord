@@ -13,10 +13,14 @@
 		"@hcaptcha/react-hcaptcha": "^1.4.3",
 		"@headlessui/react": "^1.6.5",
 		"@heroicons/react": "^1.0.6",
+		"i18next": "^21.8.14",
+		"i18next-browser-languagedetector": "^6.1.4",
+		"i18next-http-backend": "^1.4.1",
 		"next": "12.1.6",
 		"postal-codes-js": "^2.5.2",
 		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react-i18next": "^11.18.2"
 	},
 	"devDependencies": {
 		"@next/eslint-plugin-next": "^12.1.6",
