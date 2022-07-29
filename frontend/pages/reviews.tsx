@@ -27,7 +27,10 @@ export default function Reviews({
 }: {
 	fallback: AllReviews
 }): JSX.Element {
-	const {data} = useSWR<Review[]>('/api/get-reviews', fetcher)
+	const {data} = useSWR<Review[]>(
+		'http://138.197.146.214/api/get-reviews',
+		fetcher,
+	)
 
 	const initialData = fallback['/api/get-reviews']
 	const [allReviews, setAllReviews] = useState<Review[]>(initialData)
