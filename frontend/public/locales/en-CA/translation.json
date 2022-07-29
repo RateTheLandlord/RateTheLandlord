@@ -1,0 +1,57 @@
+{
+	"home": {
+		"hero": {
+			"title": "Share information with tenants like you.",
+			"body": "We are a community-driven platform that aims to elevate tenant voices and promote landlord accountability.",
+			"submit": "Submit a Review",
+			"read": "Read Reviews"
+		},
+		"icon": {
+			"title": "Help Keep Landlords Accountable",
+			"anonymity": "Anonymity",
+			"anon-sub": "Share your rental experience with confidence.",
+			"solidarity": "Solidarity",
+			"sol-sub": "Join fellow Tenants by creating an informed community.",
+			"transparency": "Transparency",
+			"trans-sub": "Empower others to make decisions about housing."
+		}
+	},
+	"create-review": {
+		"review-radio": {
+			"rating": "Rating",
+			"choose": "Choose a rating"
+		},
+		"review-form": {
+			"title": "Landlord / Property Management Information",
+			"sub": "Please make sure all this information matches your Lease",
+			"landlord": "Landlord / Property Management Company",
+			"country": "Country",
+			"city": "City",
+			"state": "State / Province",
+			"zip": "ZIP / Postal Code",
+			"rate-title": "Please rate the following on a scale from 1(worst) to 5(best)",
+			"health": "Health and Safety",
+			"stability": "Rental Stability",
+			"privacy": "Tenant Privacy",
+			"respect": "Respect",
+			"repair": "Repair",
+			"review": "Written Review",
+			"submit": "Submit",
+			"reset": "Reset"
+		}
+	},
+	"layout": {
+		"footer": {
+			"copy": "Rate The Landlord. All Rights Reserved."
+		},
+		"nav": {
+			"title": "Rate The Landlord",
+			"reviews": "Reviews",
+			"search": "Search",
+			"submit": "Submit a Review",
+			"open": "Open main menu"
+		}
+	},
+	"reviews": {},
+	"login": {}
+}

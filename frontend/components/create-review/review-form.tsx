@@ -4,7 +4,8 @@ import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import postalCodes from 'postal-codes-js'
 import countries from '@/util/countries.json'
-import HCaptcha  from '@hcaptcha/react-hcaptcha'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import {useTranslation} from 'react-i18next'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -21,6 +22,8 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL as string
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {
+	const {t} = useTranslation()
+
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
 	const [city, setCity] = useState<string>('')
@@ -37,7 +40,6 @@ function ReviewForm(): JSX.Element {
 
 	const [token, setToken] = useState<string>('')
 
-
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
 
@@ -48,7 +50,7 @@ function ReviewForm(): JSX.Element {
 		fetch(`${apiUrl}/review`, {
 			method: 'POST',
 			headers: {
-				"Content-Type": "application/json"
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				captchaToken: token,
@@ -63,14 +65,16 @@ function ReviewForm(): JSX.Element {
 					health: health,
 					stability: stability,
 					privacy: privacy,
-					respect: respect
-				}
-			})
-		}).then((result: Response) => {
-			console.log(result)
-		}).catch(() => {
-			console.log('error')
+					respect: respect,
+				},
+			}),
 		})
+			.then((result: Response) => {
+				console.log(result)
+			})
+			.catch(() => {
+				console.log('error')
+			})
 	}
 
 	const onVerifyCaptcha = (token: string) => {
@@ -86,10 +90,10 @@ function ReviewForm(): JSX.Element {
 				<div className="pt-8">
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							Landlord / Property Management Information
+							{t('create-review.review-form.title')}
 						</h3>
 						<p className="mt-1 text-sm text-gray-500">
-							Please make sure all this information matches your Lease
+							{t('create-review.review-form.sub')}
 						</p>
 					</div>
 					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -98,7 +102,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="landlord"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Landlord / Property Management Company
+								{t('create-review.review-form.landlord')}
 							</label>
 							<div className="mt-1">
 								<input
@@ -106,7 +110,7 @@ function ReviewForm(): JSX.Element {
 									name="landlord"
 									id="landlord"
 									required
-									placeholder="Landlord / Property Management"
+									placeholder={t('create-review.review-form.landlord')}
 									onChange={(e) => setLandlord(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
@@ -118,7 +122,7 @@ function ReviewForm(): JSX.Element {
 								htmlFor="country"
 								className="block text-sm font-medium text-gray-700"
 							>
-								Country
+								{t('create-review.review-form.country')}
 							</label>
 							<div className="mt-1">
 								<select
@@ -144,14 +148,14 @@ function ReviewForm(): JSX.Element {
 								htmlFor="city"
 								className="block text-sm font-medium text-gray-700"
 							>
-								City
+								{t('create-review.review-form.city')}
 							</label>
 							<div className="mt-1">
 								<input
 									type="text"
 									name="city"
 									id="city"
-									placeholder="City"
+									placeholder={t('create-review.review-form.city')}
 									required
 									onChange={(e) => setCity(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -164,14 +168,14 @@ function ReviewForm(): JSX.Element {
 								htmlFor="region"
 								className="block text-sm font-medium text-gray-700"
 							>
-								State / Province
+								{t('create-review.review-form.state')}
 							</label>
 							<div className="mt-1">
 								<input
 									type="text"
 									name="region"
 									id="region"
-									placeholder="State / Province"
+									placeholder={t('create-review.review-form.state')}
 									onChange={(e) => setProvince(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
@@ -183,14 +187,14 @@ function ReviewForm(): JSX.Element {
 								htmlFor="postal-code"
 								className="block text-sm font-medium text-gray-700"
 							>
-								ZIP / Postal code
+								{t('create-review.review-form.zip')}
 							</label>
 							<div className="mt-1">
 								<input
 									type="text"
 									name="postal-code"
 									id="postal-code"
-									placeholder="Postal Code / ZIP"
+									placeholder={t('create-review.review-form.zip')}
 									required
 									onChange={(e) => setPostal(e.target.value)}
 									className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -201,29 +205,33 @@ function ReviewForm(): JSX.Element {
 				</div>
 				<div>
 					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						Please rate the following on a scale from 1(worst) to 5(best)
+						{t('create-review.review-form.rate-title')}
 					</h3>
-					<RatingsRadio title="Repair" rating={repair} setRating={setRepair} />
 					<RatingsRadio
-						title="Health and Safety"
+						title={t('create-review.review-form.repair')}
+						rating={repair}
+						setRating={setRepair}
+					/>
+					<RatingsRadio
+						title={t('create-review.review-form.health')}
 						rating={health}
 						setRating={setHealth}
 					/>
 
 					<RatingsRadio
-						title="Rental Stability"
+						title={t('create-review.review-form.stability')}
 						rating={stability}
 						setRating={setStability}
 					/>
 
 					<RatingsRadio
-						title="Tenant Privacy"
+						title={t('create-review.review-form.privacy')}
 						rating={privacy}
 						setRating={setPrivacy}
 					/>
 
 					<RatingsRadio
-						title="Respect"
+						title={t('create-review.review-form.respect')}
 						rating={respect}
 						setRating={setRespect}
 					/>
@@ -234,7 +242,7 @@ function ReviewForm(): JSX.Element {
 					htmlFor="comment"
 					className="block text-sm font-medium text-gray-700"
 				>
-					Written Review
+					{t('create-review.review-form.review')}
 				</label>
 				<div className="mt-1">
 					<textarea
@@ -250,12 +258,14 @@ function ReviewForm(): JSX.Element {
 
 			<div className="pt-5">
 				<div className="flex justify-center mb-2">
-					<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha}/>
+					<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
 				</div>
-				
+
 				<div className="flex justify-end">
-					<ButtonLight>Reset</ButtonLight>
-					<Button disabled={!token}>Submit</Button>
+					<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
+					<Button disabled={!token}>
+						{t('create-review.review-form.submit')}
+					</Button>
 				</div>
 			</div>
 		</form>
