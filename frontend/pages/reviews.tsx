@@ -123,7 +123,7 @@ export default function Reviews({
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	const url = process.env.NEXT_PUBLIC_API_URL as string
+	const url = 'http://138.197.146.214:5000/review'
 	const article = await fetch(url)
 	const data = (await article.json()) as Review[]
 	return {
