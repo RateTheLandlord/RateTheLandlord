@@ -12,15 +12,11 @@ import {
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
-import useSWR, {Fetcher, SWRConfig} from 'swr'
+import useSWR, {SWRConfig} from 'swr'
 
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
-const fetcher: Fetcher = async (url: string): Promise<Review[]> => {
-	const req = await fetch(url)
-	const res = (await req.json()) as Review[]
-	return res
-}
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const countryCodes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
