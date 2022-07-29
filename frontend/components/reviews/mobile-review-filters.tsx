@@ -4,6 +4,7 @@ import {XIcon} from '@heroicons/react/outline'
 import MobileSelectList from './ui/mobile-select-list'
 import SearchBar from './ui/searchbar'
 import {Options} from '@/util/interfaces'
+import {useTranslation} from 'react-i18next'
 
 interface FiltersProps {
 	mobileFiltersOpen: boolean
@@ -34,6 +35,7 @@ export default function MobileReviewFilters({
 	stateOptions,
 	setSearchState,
 }: FiltersProps) {
+	const {t} = useTranslation()
 	return (
 		<Transition.Root show={mobileFiltersOpen} as={Fragment}>
 			<Dialog
@@ -65,7 +67,9 @@ export default function MobileReviewFilters({
 					>
 						<Dialog.Panel className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
 							<div className="px-4 flex items-center justify-between">
-								<h2 className="text-lg font-medium text-gray-900">Filters</h2>
+								<h2 className="text-lg font-medium text-gray-900">
+									{t('reviews.filters')}
+								</h2>
 								<button
 									type="button"
 									className="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400"
@@ -85,19 +89,19 @@ export default function MobileReviewFilters({
 										state={countryFilter}
 										setState={setCountryFilter}
 										options={countryOptions}
-										name="Country"
+										name={t('reviews.country')}
 									/>
 									<MobileSelectList
 										state={stateFilter}
 										setState={setStateFilter}
 										options={stateOptions}
-										name="State / Province"
+										name={t('reviews.state')}
 									/>
 									<MobileSelectList
 										state={cityFilter}
 										setState={setCityFilter}
 										options={cityOptions}
-										name="City"
+										name={t('reviews.city')}
 									/>
 								</Popover.Group>
 							</div>

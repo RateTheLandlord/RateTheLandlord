@@ -52,6 +52,21 @@
 			"open": "Open main menu"
 		}
 	},
-	"reviews": {},
+	"reviews": {
+		"title": "Find your landlord",
+		"body": "Search our database to find information about your landlord. If you don't see a result, be the first to add a review!",
+		"filters": "Filters",
+		"sort": "Sort By",
+		"country": "Country",
+		"state": "State / Province",
+		"city": "City",
+		"health": "Health and Safety",
+		"respect": "Respect",
+		"privacy": "Tenant Privacy",
+		"repair": "Repair",
+		"stability": "Rental Stability",
+		"review": "Written Review",
+		"search": "Search Landlords"
+	},
 	"login": {}
 }

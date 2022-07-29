@@ -2,10 +2,12 @@ import {classNames} from '@/util/helper-functions'
 import {Review} from '@/util/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
 import React from 'react'
+import {useTranslation} from 'react-i18next'
 
 //Review table. Data will need to be shared with Review Filters. Data received from Review Page
 
 function ReviewTable({data}: {data: Review[]}): JSX.Element {
+	const {t} = useTranslation()
 	const date = new Date()
 	return (
 		<div>
@@ -13,11 +15,11 @@ function ReviewTable({data}: {data: Review[]}): JSX.Element {
 				<div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
 					{data.map((review) => {
 						const ratings = [
-							{title: 'Health', rating: review.health},
-							{title: 'Respect', rating: review.respect},
-							{title: 'Privacy', rating: review.privacy},
-							{title: 'Repair', rating: review.repair},
-							{title: 'Stability', rating: review.stability},
+							{title: t('reviews.health'), rating: review.health},
+							{title: t('reviews.respect'), rating: review.respect},
+							{title: t('reviews.privacy'), rating: review.privacy},
+							{title: t('reviews.repair'), rating: review.repair},
+							{title: t('reviews.stability'), rating: review.stability},
 						]
 						return (
 							<div
@@ -80,7 +82,7 @@ function ReviewTable({data}: {data: Review[]}): JSX.Element {
 									</div>
 
 									<div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
-										<p>Review</p>
+										<p>{t('reviews.review')}</p>
 
 										<div
 											className="mt-3 space-y-6 text-sm text-gray-500"

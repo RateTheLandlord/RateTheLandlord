@@ -4,6 +4,7 @@ import SelectList from './ui/select-list'
 import ActiveFilters from './ui/active-filters'
 import SearchBar from './ui/searchbar'
 import MobileReviewFilters from './mobile-review-filters'
+import {useTranslation} from 'react-i18next'
 
 //Review filters and Logic
 
@@ -42,6 +43,8 @@ function ReviewFilters({
 	removeFilter,
 	setSearchState,
 }: FiltersProps): JSX.Element {
+	const {t} = useTranslation()
+
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 
 	return (
@@ -67,11 +70,10 @@ function ReviewFilters({
 				<div>
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
 						<h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-							Find your landlord
+							{t('reviews.title')}
 						</h1>
 						<p className="mt-4 max-w-xl text-sm text-gray-700">
-							Search our database to find information about your landlord. If
-							you don&apos;t see a result, be the first to add a review!
+							{t('reviews.body')}
 						</p>
 					</div>
 				</div>
@@ -79,7 +81,7 @@ function ReviewFilters({
 				{/* Filters */}
 				<section aria-labelledby="filter-heading">
 					<h2 id="filter-heading" className="sr-only">
-						Filters
+						{t('reviews.filters')}
 					</h2>
 
 					<div className="relative z-10 bg-white border-b border-gray-200 pb-4">
@@ -88,14 +90,14 @@ function ReviewFilters({
 								state={selectedSort}
 								setState={setSelectedSort}
 								options={sortOptions}
-								name="Sort By"
+								name={t('reviews.sort')}
 							/>
 							<button
 								type="button"
 								className="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 lg:hidden"
 								onClick={() => setMobileFiltersOpen(true)}
 							>
-								Filters
+								{t('reviews.filters')}
 							</button>
 
 							<div className="hidden lg:block">
@@ -107,19 +109,19 @@ function ReviewFilters({
 											state={countryFilter}
 											setState={setCountryFilter}
 											options={countryOptions}
-											name="Country"
+											name={t('reviews.country')}
 										/>
 										<SelectList
 											state={stateFilter}
 											setState={setStateFilter}
 											options={stateOptions}
-											name="State / Province"
+											name={t('reviews.state')}
 										/>
 										<SelectList
 											state={cityFilter}
 											setState={setCityFilter}
 											options={cityOptions}
-											name="City"
+											name={t('reviews.city')}
 										/>
 									</div>
 								</div>
@@ -131,7 +133,7 @@ function ReviewFilters({
 					<div className="bg-gray-100">
 						<div className="max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8">
 							<h3 className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-								Filters
+								{t('reviews.filters')}
 								<span className="sr-only">, active</span>
 							</h3>
 
