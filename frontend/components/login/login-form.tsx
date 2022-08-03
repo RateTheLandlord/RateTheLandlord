@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import {LockClosedIcon} from '@heroicons/react/solid'
 import Logo from '../svg/logo/logo'
 
-export default function LoginForm() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+export default function LoginForm(): JSX.Element {
+	const [email, setEmail] = useState<string>('')
+	const [password, setPassword] = useState<string>('')
 
 	const handleSubmit = () => {
 		if (email === '' || password === '') {
