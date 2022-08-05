@@ -1,6 +1,6 @@
 import React from 'react'
 import {RadioGroup} from '@headlessui/react'
-import {classNames} from '@/util/classnames'
+import {classNames} from '@/util/helper-functions'
 import {useTranslation} from 'react-i18next'
 
 const ratings = [1, 2, 3, 4, 5]
