@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile
     restart: unless-stopped
+    ports:
+      - ${FEPORT}:${FEPORT}
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -20,12 +22,14 @@ services:
       context: .
       dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile
     restart: unless-stopped
+    ports:
+      - ${BEPORT}:${BEPORT}
     volumes:
       - ./backend:/app
       - /app/node_modules
       - ./.env:/app/.env
     depends_on:
-      - postgres
+      - db
     env_file: .env
 
   db:

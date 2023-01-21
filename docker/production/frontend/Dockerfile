@@ -17,5 +17,8 @@ RUN npm install
 # Copy the rest of our Next.js folder into /app
 COPY ./frontend /app
 
+# Build app
+RUN npm build
+
 # Run npm dev, as we would via the command line 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "start" ]
