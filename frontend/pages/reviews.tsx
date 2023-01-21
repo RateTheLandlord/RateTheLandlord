@@ -14,6 +14,8 @@ import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import useSWR, {SWRConfig} from 'swr'
 
+const url = process.env.NEXT_PUBLIC_API_URL
+
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -27,10 +29,7 @@ export default function Reviews({
 }: {
 	fallback: AllReviews
 }): JSX.Element {
-	const {data} = useSWR<Review[]>(
-		'http://localhost:3005/api/get-reviews',
-		fetcher,
-	)
+	const {data} = useSWR<Array<Review>>(`/api/get-reviews`, fetcher)
 
 	const initialData = fallback['/api/get-reviews']
 	const [allReviews, setAllReviews] = useState<Review[]>(initialData)
@@ -97,7 +96,7 @@ export default function Reviews({
 
 	return (
 		<SWRConfig value={{fallback}}>
-			<div>
+			<div className="w-full">
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
@@ -123,9 +122,18 @@ export default function Reviews({
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	const url = 'http://localhost:5000/review'
-	const article = await fetch(url)
-	const data = (await article.json()) as Review[]
+	const req = await fetch(`http://localhost:3000/api/get-reviews`)
+	if (!req.ok) {
+		return {
+			props: {
+				fallback: {
+					'/api/get-reviews': [],
+				},
+			},
+			revalidate: 1800,
+		}
+	}
+	const data = (await req.json()) as Array<Review>
 	return {
 		props: {
 			fallback: {

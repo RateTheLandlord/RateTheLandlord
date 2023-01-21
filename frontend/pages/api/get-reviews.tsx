@@ -2,12 +2,12 @@ import {Review} from '@/util/interfaces'
 import {NextApiRequest, NextApiResponse} from 'next'
 
 const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
-	const url = 'http://138.197.146.214:5000/review'
+	const url = process.env.NEXT_PUBLIC_API_URL as string
 
 	try {
-		const request = await fetch(url)
+		const request = await fetch(`${url}/review`)
 
-		const response = (await request.json()) as Review[]
+		const response = (await request.json()) as Array<Review>
 
 		res.status(200).json(response)
 	} catch (error) {

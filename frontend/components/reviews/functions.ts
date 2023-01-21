@@ -2,15 +2,19 @@ import {capitalize, removeDuplicates} from '@/util/helper-functions'
 import {Options} from '@/util/interfaces'
 import {Review} from '@/util/interfaces'
 
-export const sortAZ = (data: Review[]): Review[] => {
-	const result = data.sort((a: Review, b: Review): number =>
-		b.landlord.localeCompare(a.landlord),
-	)
+export const sortAZ = (data: Array<Review>) => {
+	if (data.length) {
+		const result = data.sort((a: Review, b: Review): number =>
+			b.landlord.localeCompare(a.landlord),
+		)
 
-	return result
+		return result
+	}
+
+	return data
 }
 
-export const sortZA = (data: Review[]): Review[] => {
+export const sortZA = (data: Array<Review>): Array<Review> => {
 	const result = data.sort((a: Review, b: Review): number =>
 		a.landlord.localeCompare(b.landlord),
 	)
@@ -22,26 +26,26 @@ export const updateReviews = (
 	stateFilter: Options | null,
 	countryFilter: Options | null,
 	cityFilter: Options | null,
-	setReviews: (reviews: Review[]) => void,
-	initialData: Review[],
+	setReviews: (reviews: Array<Review>) => void,
+	initialData: Array<Review>,
 	search: string,
 ) => {
-	let newReviews: Review[] = searchReviews(initialData, search)
+	let newReviews: Array<Review> = searchReviews(initialData, search)
 	if (countryFilter) {
-		const temp: Review[] = newReviews.filter(
+		const temp: Array<Review> = newReviews.filter(
 			(review: Review): boolean => review.countrycode === countryFilter.value,
 		)
 		newReviews = temp
 	}
 	if (stateFilter) {
 		if (newReviews.length) {
-			const temp: Review[] = newReviews.filter(
+			const temp: Array<Review> = newReviews.filter(
 				(review: Review): boolean =>
 					review.state.toLowerCase() === stateFilter.name.toLowerCase(),
 			)
 			newReviews = temp
 		} else {
-			const temp: Review[] = newReviews.filter(
+			const temp: Array<Review> = newReviews.filter(
 				(review: Review): boolean =>
 					review.state.toLowerCase() === stateFilter.name.toLowerCase(),
 			)
@@ -50,7 +54,7 @@ export const updateReviews = (
 	}
 	if (cityFilter) {
 		if (newReviews.length) {
-			const temp: Review[] = newReviews.filter(
+			const temp: Array<Review> = newReviews.filter(
 				(review: Review): boolean =>
 					review.city.toLowerCase() === cityFilter.name.toLowerCase(),
 			)
@@ -70,9 +74,9 @@ export const updateActiveFilters = (
 	countryFilter: Options | null,
 	stateFilter: Options | null,
 	cityFilter: Options | null,
-	setActiveFilters: (options: Options[]) => void,
+	setActiveFilters: (options: Array<Options>) => void,
 ) => {
-	const filters: Options[] = []
+	const filters: Array<Options> = []
 	if (countryFilter) {
 		filters.push(countryFilter)
 	}
@@ -85,35 +89,42 @@ export const updateActiveFilters = (
 	setActiveFilters(filters)
 }
 
-export const getStateOptions = (data: Review[]): Options[] => {
-	const allStateOptions = data.map((review, id) => {
-		const state = review.state.toLowerCase()
-		return {
-			id: id + 1,
-			name: state.split(' ').map(capitalize).join(' '),
-			value: review.state,
-		}
-	})
+export const getStateOptions = (data: Array<Review>): Array<Options> => {
+	if (data.length) {
+		const allStateOptions = data.map((review, id) => {
+			const state = review.state.toLowerCase()
+			return {
+				id: id + 1,
+				name: state.split(' ').map(capitalize).join(' '),
+				value: review.state,
+			}
+		})
 
-	const stateOptions = removeDuplicates(allStateOptions, 'name')
+		const stateOptions = removeDuplicates(allStateOptions, 'name')
 
-	return stateOptions
+		return stateOptions
+	}
+
+	return []
 }
 
-export const getCityOptions = (data: Review[]): Options[] => {
-	const cityOptions = data.map((review, id) => {
-		const city = review.city.toLowerCase()
-		return {
-			id: id + 1,
-			name: city.split(' ').map(capitalize).join(' '),
-			value: review.city.toLowerCase(),
-		}
-	})
+export const getCityOptions = (data: Array<Review>): Array<Options> => {
+	if (data.length) {
+		const cityOptions = data.map((review, id) => {
+			const city = review.city.toLowerCase()
+			return {
+				id: id + 1,
+				name: city.split(' ').map(capitalize).join(' '),
+				value: review.city.toLowerCase(),
+			}
+		})
 
-	return cityOptions
+		return cityOptions
+	}
+	return []
 }
 
-export const searchReviews = (data: Review[], search: string) => {
+export const searchReviews = (data: Array<Review>, search: string) => {
 	if (!search) return data
 	return data.filter((review) => {
 		return review.landlord.toLowerCase().includes(search.toLowerCase())

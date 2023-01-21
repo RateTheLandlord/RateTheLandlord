@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {LockClosedIcon} from '@heroicons/react/solid'
 import Logo from '../svg/logo/logo'
 
+const url = process.env.NEXT_PUBLIC_API_URL
+
 export default function LoginForm(): JSX.Element {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')

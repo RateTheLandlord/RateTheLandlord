@@ -65,7 +65,7 @@ function ReviewFilters({
 				setSearchState={setSearchState}
 			/>
 
-			<main>
+			<main className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 				{/* TITLE AND DESCRIPTION */}
 				<div>
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
