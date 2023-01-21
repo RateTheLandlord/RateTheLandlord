@@ -18,7 +18,7 @@ RUN npm install
 COPY ./frontend /app
 
 # Build app
-RUN npm build
+RUN npm run build
 
 # Run npm dev, as we would via the command line 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start" ]
