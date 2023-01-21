@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
 } from '@nestjs/common';
 import { CaptchaService } from 'src/captcha/captcha-service';
@@ -22,6 +23,15 @@ export class ReviewController {
   get(): Promise<Review[]> {
     return this.reviewService.get();
   }
+
+  @Get('review/:id')
+  findOne(@Param('id') id: string): Promise<Review[]> {
+    return this.reviewService.findOne(Number(id));
+  }
+
+  //@Put() needed for updating reviews
+
+  //@Delete needed for deleting reviews
 
   @Post()
   async create(

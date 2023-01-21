@@ -10,18 +10,25 @@ export class ReviewService {
     return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
   }
 
+  findOne(id: number): Promise<Review[]> {
+    return this.databaseService.sql<
+      Review[]
+    >`Select * FROM review WHERE ID IN(${id});`;
+  }
+
   async create(review: Review): Promise<Review> {
     review.landlord = review.landlord.toLocaleUpperCase();
     review.countryCode = review.countryCode.toLocaleUpperCase();
     review.city = review.city.toLocaleUpperCase();
     review.state = review.state.toLocaleUpperCase();
     review.zip = review.zip.toLocaleUpperCase();
+    review.adminApproved = null;
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
         INSERT INTO review 
-          (landlord, countryCode, city, state, zip, review, repair, health, stability, privacy, respect) 
-        VALUES (${review.landlord}, ${review.countryCode}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}) 
+          (landlord, countryCode, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flaggedReason, adminApproved) 
+        VALUES (${review.landlord}, ${review.countryCode}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}, ${review.flagged}, ${review.flaggedReason}, ${review.adminApproved}) 
         RETURNING id;`
     )[0].id;
 
