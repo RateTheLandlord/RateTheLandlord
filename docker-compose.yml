@@ -1,0 +1,44 @@
+version: '3'
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+      - ./logs/frontend:/root/.npm/_logs
+    env_file:
+      - ./.env
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./.env:/app/.env
+    depends_on:
+      - postgres
+    env_file: .env
+
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - '5433:${PGPORT}'
+    volumes:
+      - data:/data/db
+    environment:
+      - POSTGRES_USER=${PGUSERNAME}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
+
+volumes:
+  data: {}
