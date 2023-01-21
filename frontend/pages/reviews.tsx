@@ -28,7 +28,7 @@ export default function Reviews({
 	fallback: AllReviews
 }): JSX.Element {
 	const {data} = useSWR<Review[]>(
-		'http://138.197.146.214/api/get-reviews',
+		'http://localhost:3005/api/get-reviews',
 		fetcher,
 	)
 
@@ -123,7 +123,7 @@ export default function Reviews({
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	const url = 'http://138.197.146.214:5000/review'
+	const url = 'http://localhost:5000/review'
 	const article = await fetch(url)
 	const data = (await article.json()) as Review[]
 	return {
