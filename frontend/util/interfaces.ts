@@ -15,6 +15,9 @@ export interface Review {
 	stability: string
 	state: string
 	zip: string
+	flagged: boolean
+	flageedReason: string
+	adminApproved: boolean | null
 }
 
 export interface Options {
