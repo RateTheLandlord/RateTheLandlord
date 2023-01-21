@@ -2,13 +2,12 @@ name: RateTheLandlord CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -39,11 +38,11 @@ jobs:
         run: |
           cd frontend
           npm run lint
-      - name: Deploy
-        if: github.ref == 'refs/heads/main'
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: sh deploy.sh
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
+      # - name: Deploy
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: garygrossgarten/github-action-ssh@release
+      #   with:
+      #     command: sh deploy.sh
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USER }}
+      #     password: ${{ secrets.PASS }}
