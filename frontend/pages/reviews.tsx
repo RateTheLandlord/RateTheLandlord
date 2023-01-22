@@ -13,8 +13,7 @@ import {
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import useSWR, {SWRConfig} from 'swr'
-
-const url = process.env.NEXT_PUBLIC_API_URL
+import ReportModal from '@/components/reviews/report-modal'
 
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
@@ -42,7 +41,7 @@ export default function Reviews({
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
 	const [searchState, setSearchState] = useState<string>('')
 
-	console.log('Search: ', searchState)
+	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const countryOptions: Options[] = countryCodes.map(
 		(item: string, ind: number): Options => {
@@ -96,6 +95,7 @@ export default function Reviews({
 
 	return (
 		<SWRConfig value={{fallback}}>
+			<ReportModal isOpen={reportOpen} setIsOpen={setReportOpen} />
 			<div className="w-full">
 				<ReviewFilters
 					selectedSort={selectedSort}
@@ -114,7 +114,10 @@ export default function Reviews({
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}
 				/>
-				<ReviewTable data={reviews || initialData} />
+				<ReviewTable
+					data={reviews || initialData}
+					setReportOpen={setReportOpen}
+				/>
 			</div>
 		</SWRConfig>
 	)

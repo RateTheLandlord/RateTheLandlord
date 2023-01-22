@@ -1,14 +1,26 @@
 import {classNames} from '@/util/helper-functions'
 import {Review} from '@/util/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
-import React from 'react'
+import React, {Dispatch, SetStateAction} from 'react'
 import {useTranslation} from 'react-i18next'
+import ButtonLight from '../ui/button-light'
 
 //Review table. Data will need to be shared with Review Filters. Data received from Review Page
 
-function ReviewTable({data}: {data: Review[]}): JSX.Element {
+function ReviewTable({
+	data,
+	setReportOpen,
+}: {
+	data: Review[]
+	setReportOpen: Dispatch<SetStateAction<boolean>>
+}): JSX.Element {
 	const {t} = useTranslation()
 	const date = new Date()
+
+	const handleReport = (id: number) => {
+		console.log(id)
+		setReportOpen(true)
+	}
 
 	if (data.length) {
 		return (
@@ -55,8 +67,15 @@ function ReviewTable({data}: {data: Review[]}): JSX.Element {
 										</div>
 										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.countrycode}, ${review.zip}`}</p>
 										<p className="mb-4 lg:mb-0 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
-											{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}
+											{`${date.getDate()}-${
+												date.getMonth() + 1
+											}-${date.getFullYear()}`}
 										</p>
+										<div className="mt-4">
+											<ButtonLight onClick={() => handleReport(review.id)}>
+												REPORT
+											</ButtonLight>
+										</div>
 									</div>
 									<div className="lg:col-start-5 lg:col-span-8 xl:col-start-4 xl:col-span-9 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:items-start">
 										<div className="flex flex-wrap flex-row items-center xl:col-span-1">

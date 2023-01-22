@@ -95,7 +95,7 @@ function ReviewForm({
 			}),
 		})
 			.then((result: Response) => {
-				console.log(result)
+				console.log(result.json())
 			})
 			.catch(() => {
 				console.log('error')
