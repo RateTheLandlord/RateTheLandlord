@@ -7,6 +7,7 @@ export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   get(): Promise<Review[]> {
+    console.log('Get All Reviews');
     return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
   }
 
@@ -33,6 +34,7 @@ export class ReviewService {
     )[0].id;
 
     review.id = id;
+    console.log(id);
     return review;
   }
 

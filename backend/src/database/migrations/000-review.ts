@@ -12,7 +12,11 @@ exports.up = async function (DB) {
       health numeric CHECK (health >= 1 AND health <= 5),
       stability numeric CHECK (stability >= 1 AND stability <= 5),
       privacy numeric CHECK (privacy >= 1 AND privacy <= 5),
-      respect numeric CHECK (respect >= 1 AND respect <= 5)
+      respect numeric CHECK (respect >= 1 AND respect <= 5),
+      dataAdded TIMESTAMP DEFAULT now(),
+      flagged BOOLEAN,
+      flaggedReason TEXT,
+      adminApproved BOOLEAN
     );
   `;
 };
