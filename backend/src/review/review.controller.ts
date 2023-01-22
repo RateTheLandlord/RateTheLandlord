@@ -2,9 +2,11 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
@@ -19,20 +21,35 @@ export class ReviewController {
     private captchaService: CaptchaService,
   ) {}
 
+  // Get All Reviews
   @Get()
   get(): Promise<Review[]> {
     return this.reviewService.get();
   }
 
+  //Get Specific Review
   @Get('review/:id')
   findOne(@Param('id') id: string): Promise<Review[]> {
     return this.reviewService.findOne(Number(id));
   }
 
-  //@Put() needed for updating reviews
+  //Update Review
+  @Put('review/:id')
+  async update(
+    @Param('id') id: number,
+    @Body() review: Review,
+  ): Promise<Review> {
+    console.log(review);
+    return this.reviewService.update(id, review);
+  }
 
-  //@Delete needed for deleting reviews
+  //Delete Review
+  @Delete('review/:id')
+  async delete(@Param('id') id: number): Promise<boolean> {
+    return this.reviewService.delete(id);
+  }
 
+  //Create Review
   @Post()
   async create(
     @Body() review: CreateReview,
@@ -49,5 +66,11 @@ export class ReviewController {
     }
 
     return this.reviewService.create(review.review);
+  }
+
+  //Get Flagged Reviews
+  @Get('review/flagged')
+  getFlagged(): Promise<Review[]> {
+    return this.reviewService.getFlagged();
   }
 }

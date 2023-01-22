@@ -13,7 +13,7 @@ export class ReviewService {
   findOne(id: number): Promise<Review[]> {
     return this.databaseService.sql<
       Review[]
-    >`Select * FROM review WHERE ID IN(${id});`;
+    >`Select * FROM review WHERE id IN(${id});`;
   }
 
   async create(review: Review): Promise<Review> {
@@ -34,5 +34,26 @@ export class ReviewService {
 
     review.id = id;
     return review;
+  }
+
+  async update(id: number, review: Review): Promise<Review> {
+    await this.databaseService
+      .sql`UPDATE review SET (landlord, countryCode, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flaggedReason, adminApproved) 
+      VALUES (${review.landlord}, ${review.countryCode}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}, ${review.flagged}, ${review.flaggedReason}, ${review.adminApproved}) 
+      WHERE id = ${id};`;
+
+    return review;
+  }
+
+  async delete(id: number): Promise<boolean> {
+    await this.databaseService.sql`DELETE FROM review WHERE ID = ${id};`;
+
+    return true;
+  }
+
+  getFlagged(): Promise<Review[]> {
+    return this.databaseService.sql<
+      Review[]
+    >`SELECT * FROM review WHERE flagged = true;`;
   }
 }
