@@ -2,17 +2,42 @@
 
 A simple website for Renter's to rate their Landlord
 
-## Running the app
+## MVP API Routes
 
-1. [Download](https://www.docker.com/products/docker-desktop/) Docker desktop.
+Get all Reviews (Later to be changed to get first set of reviews for pagination)
+`GET /api/review`
 
-2. Create `.env` file based on `.env.example`
+Change a Review (This is done after Admin Review)
+`PUT /api/review/:id`
 
-3. Run docker compose to start the required services:
-```bash
-# development
-$ docker compose up api-dev
-```
+Delete a Review (Done after Admin Review)
+`DELETE /api/review/:id`
+
+Create new review in the DB
+`POST /api/create-review`
+
+Get all reviews that have been flagged for Admin Review
+`GET /api/flagged`
+
+Log in to Admin Panel _Need to decide how to implement, possible NextAuth_
+`POST /api/auth`
+
+## Run
+
+Copy the `.env.example` in a new `.env` file.
+
+Set the environment to `development`
+
+Then run the following commands:
+
+- Pull the latest Images
+  `docker-compose pull`
+
+- Build
+  `docker-compose build`
+
+- Start
+  `docker-compose up -d`
 
 ## Test
 

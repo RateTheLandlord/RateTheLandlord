@@ -6,27 +6,24 @@ A simple website for Renter's to rate their Landlord
 
 To develop locally:
 
-1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your
-   own GitHub account and then
-   [clone](https://help.github.com/articles/cloning-a-repository/) it to your
-   local device.
-2. Create a new branch:
-   ```
-   git checkout -b MY_BRANCH_NAME
-   ```
-3. Switch to the Frontend Folder
-   ```
-   cd RateTheLandlord/frontend
-   ```
-4. Install dependencies:
-   ```
-   npm install
-   ```
-5. Created `.env` file based on `.env.example`
-6. Start developing and watch for code changes:
-   ```
-   npm run dev
-   ```
+[clone](https://help.github.com/articles/cloning-a-repository/) it to your local
+device. Create a new branch:
+
+```
+git checkout -b MY_BRANCH_NAME
+```
+
+Copy the `.env.example` in a new `.env` file.
+
+Set the environment to `development`
+
+Then run the following commands:
+
+- Pull the latest Images `docker-compose pull`
+
+- Build `docker-compose build`
+
+- Start `docker-compose up -d`
 
 ## Styling
 
