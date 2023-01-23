@@ -6,6 +6,7 @@ exports.up = async function (DB) {
         email TEXT,
         password TEXT
         blocked BOOLEAN
+        admin BOOLEAN
       );
     `;
 };
