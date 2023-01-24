@@ -10,13 +10,13 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    return this.authService.validateUser(req.email, req.password);
   }
 
   //Needs to be updated to return reviews that have been flagged
   @UseGuards(JwtAuthGuard)
   @Get('review/flagged')
-  getProfile(@Request() req) {
+  getFlagged(@Request() req) {
     return req.review;
   }
 
