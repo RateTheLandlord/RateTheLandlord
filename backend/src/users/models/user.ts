@@ -4,5 +4,5 @@ export interface IUser {
   email: string;
   password: string;
   blocked: boolean;
-  role: string;
+  role: 'USER' | 'ADMIN';
 }

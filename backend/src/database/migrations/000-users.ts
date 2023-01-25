@@ -4,9 +4,9 @@ exports.up = async function (DB) {
         id SERIAL PRIMARY KEY, 
         name TEXT,
         email TEXT NOT NULL,
-        password TEXT
-        blocked BOOLEAN
-        role TEXT
+        password TEXT,
+        blocked BOOLEAN,
+        role TEXT,
         UNIQUE (email)
       );
     `;
