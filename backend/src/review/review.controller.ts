@@ -34,7 +34,7 @@ export class ReviewController {
   }
 
   //Update Review
-  @Put('review/:id')
+  @Put('/:id')
   async update(
     @Param('id') id: number,
     @Body() review: Review,
@@ -44,7 +44,7 @@ export class ReviewController {
   }
 
   //Delete Review
-  @Delete('review/:id')
+  @Delete('/:id')
   async delete(@Param('id') id: number): Promise<boolean> {
     return this.reviewService.delete(id);
   }
@@ -69,7 +69,7 @@ export class ReviewController {
   }
 
   //Get Flagged Reviews
-  @Get('review/flagged')
+  @Get('/flagged')
   getFlagged(): Promise<Review[]> {
     return this.reviewService.getFlagged();
   }

@@ -22,6 +22,7 @@ export class UsersService {
   }
 
   async create(user: IUser): Promise<IUser> {
+    console.log(user);
     user.email = user.email.toLocaleUpperCase();
     user.name = user.name.toLocaleUpperCase();
     const salt = bcrypt.genSaltSync(saltOrRounds);
