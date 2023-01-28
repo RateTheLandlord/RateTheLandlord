@@ -21,8 +21,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Lint backend
         run: |
-        cd backend
-        npm run lint
+          cd backend
+          npm run lint
   build-be:
     runs-on: ubuntu-latest
     needs: lint-be
