@@ -56,7 +56,26 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Docker-Compose build
+      - name: Create env file
+        run: |
+          touch .env
+          echo BEPORT=${{secrets.BEPORT}} >> .env
+          echo ENVIRONMENT=${{secrets.ENVIRONMENT}} >> .env
+          echo FEPORT=${{secrets.FEPORT}} >> .env
+          echo HCPATCHA_SECRET_KEY=${{secrets.HCPATCHA_SECRET_KEY}} >> .env
+          echo HCPATCHA_SITE_KEY=${{secrets.API_TOKEN_SALT}} >> .env
+          echo JWT_KEY=${{secrets.JWT_KEY}} >> .env
+          echo NEXT_PUBLIC_API_URL=${{secrets.NEXT_PUBLIC_API_URL}} >> .env
+          echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
+          echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
+          echo PGHOST=${{secrets.PGHOST}} >> .env
+          echo PGPASSWORD=${{secrets.PGPASSWORD}} >> .env
+          echo PGPORT=${{secrets.PGPORT}} >> .env
+          echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
+          cat .env
+      - name: Pull Docker
+        run: docker-compose pull
+      - name: Build Docker
         run: docker-compose build
 
   # deploy:
