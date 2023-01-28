@@ -22,6 +22,7 @@ jobs:
       - name: Lint backend
         run: |
           cd backend
+          npm install
           npm run lint
   build-be:
     runs-on: ubuntu-latest
@@ -56,6 +57,7 @@ jobs:
       - name: Lint frontend
         run: |
           cd frontend
+          npm install
           npm run lint
   build-fe:
     runs-on: ubuntu-latest
