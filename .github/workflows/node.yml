@@ -24,24 +24,7 @@ jobs:
           cd backend
           npm install
           npm run lint
-  build-be:
-    runs-on: ubuntu-latest
-    needs: lint-be
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install and build backend
-        run: |
-          cd backend
-          npm ci
-          npm run build
   lint-fe:
     runs-on: ubuntu-latest
 
@@ -59,38 +42,36 @@ jobs:
           cd frontend
           npm install
           npm run lint
-  build-fe:
+
+  docker-build:
     runs-on: ubuntu-latest
-    needs: lint-fe
+    needs: [lint-be, lint-fe]
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install and build frontend
-        run: |
-          cd frontend
-          npm ci
-          npm run build
+      strategy:
+        matrix:
+          node-version: [16.x]
+      steps:
+        - uses: actions/checkout@v3
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Docker-Compose build
+          run: docker-compose build
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [lint-be, build-be, lint-fe, build-fe]
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: [lint-be, build-be, lint-fe, build-fe]
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
 
     # - name: Deploy
     #   if: github.ref == 'refs/heads/main'

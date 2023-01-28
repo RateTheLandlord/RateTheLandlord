@@ -125,7 +125,7 @@ export default function Reviews({
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	const req = await fetch(`http://localhost:3000/api/get-reviews`)
+	const req = await fetch(`/api/get-reviews`)
 	if (!req.ok) {
 		return {
 			props: {
