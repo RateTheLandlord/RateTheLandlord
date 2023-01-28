@@ -1,19 +1,28 @@
-// TODO Add Submit Function
-// TODO Hook up to BE
-// TODO Add Success/Failure Notification
+import {classNames} from '@/util/helper-functions'
+import {Switch} from '@headlessui/react'
+import {Dispatch, SetStateAction} from 'react'
 
-const MyInfo = () => {
+interface IProps {
+	setName: Dispatch<SetStateAction<string>>
+	setEmail: Dispatch<SetStateAction<string>>
+	setPassword: Dispatch<SetStateAction<string>>
+	setAdmin: Dispatch<SetStateAction<boolean>>
+	isAdmin: boolean
+}
+
+const AddUserModal = ({
+	setName,
+	setEmail,
+	setPassword,
+	setAdmin,
+	isAdmin,
+}: IProps) => {
 	return (
 		<form className="space-y-8 divide-y divide-gray-200 w-full container">
 			<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 				<div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
-					<div>
-						<h3 className="text-lg font-medium leading-6 text-gray-900">
-							My Information
-						</h3>
-					</div>
 					<div className="space-y-6 sm:space-y-5">
-						<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+						<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-5">
 							<label
 								htmlFor="name"
 								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
@@ -22,6 +31,7 @@ const MyInfo = () => {
 							</label>
 							<div className="mt-1 sm:col-span-2 sm:mt-0">
 								<input
+									onChange={(e) => setName(e.target.value)}
 									type="text"
 									name="name"
 									id="name"
@@ -40,6 +50,7 @@ const MyInfo = () => {
 							</label>
 							<div className="mt-1 sm:col-span-2 sm:mt-0">
 								<input
+									onChange={(e) => setEmail(e.target.value)}
 									id="email"
 									name="email"
 									type="email"
@@ -54,10 +65,11 @@ const MyInfo = () => {
 								htmlFor="password"
 								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
 							>
-								New Password
+								Temporary Password
 							</label>
 							<div className="mt-1 sm:col-span-2 sm:mt-0">
 								<input
+									onChange={(e) => setPassword(e.target.value)}
 									type="text"
 									name="password"
 									id="password"
@@ -65,22 +77,41 @@ const MyInfo = () => {
 								/>
 							</div>
 						</div>
+						<Switch.Group
+							as="div"
+							className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
+						>
+							<Switch.Label
+								as="span"
+								className="text-sm font-medium text-gray-900 w-full"
+								passive
+							>
+								Admin?
+							</Switch.Label>
+							<div className="mt-1 sm:col-span-2 sm:mt-0">
+								<Switch
+									checked={isAdmin}
+									onChange={setAdmin}
+									className={classNames(
+										isAdmin ? 'bg-indigo-600' : 'bg-gray-200',
+										'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+									)}
+								>
+									<span
+										aria-hidden="true"
+										className={classNames(
+											isAdmin ? 'translate-x-5' : 'translate-x-0',
+											'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+										)}
+									/>
+								</Switch>
+							</div>
+						</Switch.Group>
 					</div>
-				</div>
-			</div>
-
-			<div className="pt-5">
-				<div className="flex justify-end">
-					<button
-						type="submit"
-						className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-					>
-						Save
-					</button>
 				</div>
 			</div>
 		</form>
 	)
 }
 
-export default MyInfo
+export default AddUserModal
