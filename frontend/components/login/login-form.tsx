@@ -1,20 +1,59 @@
 import React, {useState} from 'react'
 import {LockClosedIcon} from '@heroicons/react/solid'
 import Logo from '../svg/logo/logo'
+import {setCookie} from 'nookies'
+import {useRouter} from 'next/router'
 
-const url = process.env.NEXT_PUBLIC_API_URL
+interface ILogin {
+	jwt: {
+		access_token: string
+	}
+	result: {
+		name: string
+		email: string
+		id: number
+	}
+}
 
 export default function LoginForm(): JSX.Element {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 
-	const handleSubmit = () => {
+	const [error, setError] = useState(false)
+
+	const router = useRouter()
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		if (email === '' || password === '') {
-			//SET ERROR MESSAGE
+			setError(true)
 			return
 		}
 
-		//POST INFO TO BACKEND TO VALIDATE
+		fetch('/api/submit-login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({email: email, password: password}),
+		})
+			.then((result: Response) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+				return result.json()
+			})
+			.then((data: ILogin) => {
+				console.log('Successful Login: ', data)
+				setCookie(null, 'ratethelandlord', data.jwt.access_token, {
+					maxAge: 30 * 24,
+					path: '/',
+				})
+				router.push(`/admin/${data.result.id}`).catch((err) => console.log(err))
+			})
+			.catch(() => {
+				setError(true)
+			})
 	}
 	return (
 		<>
@@ -25,9 +64,11 @@ export default function LoginForm(): JSX.Element {
 						<h2 className="w-full mt-6 text-center text-3xl font-extrabold text-gray-900">
 							Sign in to your account
 						</h2>
+						{error ? (
+							<p className="text-red-400">Error: Invalid Email or Password</p>
+						) : null}
 					</div>
-					<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-						<input type="hidden" name="remember" defaultValue="true" />
+					<form className="mt-8 space-y-6" onSubmit={(e) => handleSubmit(e)}>
 						<div className="rounded-md shadow-sm -space-y-px">
 							<div>
 								<label htmlFor="email-address" className="sr-only">

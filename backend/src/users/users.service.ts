@@ -10,7 +10,7 @@ export class UsersService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findOne(email: string): Promise<IUser[]> {
-    console.log('fineOne User');
+    console.log('fineOne User: ', email);
     return this.databaseService.sql<
       IUser[]
     >`SELECT * FROM users WHERE email = ${email}`;
@@ -22,15 +22,12 @@ export class UsersService {
   }
 
   async create(user: IUser): Promise<IUser> {
-    console.log(user);
-    user.email = user.email.toLocaleUpperCase();
-    user.name = user.name.toLocaleUpperCase();
     const salt = bcrypt.genSaltSync(saltOrRounds);
     user.password = await bcrypt.hash(user.password, salt);
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
-        INSERT INTO users (name, email, password, blocked, role) VALUES (${user.email}, ${user.name}, ${user.password}, ${user.blocked}, ${user.role}) RETURNING id
+        INSERT INTO users (name, email, password, blocked, role) VALUES ( ${user.name}, ${user.email}, ${user.password}, ${user.blocked}, ${user.role}) RETURNING id
         ;`
     )[0].id;
     user.id = id;

@@ -18,6 +18,7 @@ export interface Review {
 	flagged: boolean
 	flagged_reason: string
 	admin_approved: boolean | null
+	admin_edited: boolean
 }
 
 export interface Options {

@@ -96,6 +96,7 @@ function ReviewForm({
 					flagged: flagged,
 					flagged_reason: flagged_reason,
 					admin_approved: null,
+					admin_edited: false,
 				},
 			}),
 		})

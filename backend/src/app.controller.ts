@@ -15,7 +15,7 @@ export class AppController {
   //   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return this.authService.validateUser(req.email, req.password);
+    return this.authService.validateUser(req.body.email, req.body.password);
   }
 
   //Protected Route to return all flagged reviews

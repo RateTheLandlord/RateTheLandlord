@@ -17,6 +17,7 @@ interface IBody {
 		flagged: boolean
 		flagged_reason: string
 		admin_approved: boolean
+		admin_edited: boolean
 	}
 }
 

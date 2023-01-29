@@ -107,6 +107,11 @@ function ReviewTable({
 
 										<div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
 											<p>{t('reviews.review')}</p>
+											{review.admin_edited ? (
+												<p className="text-red-400 text-xs">
+													*Edited by Admin after review
+												</p>
+											) : null}
 
 											<div
 												className="mt-3 space-y-6 text-sm text-gray-500"

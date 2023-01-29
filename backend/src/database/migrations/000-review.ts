@@ -16,7 +16,8 @@ exports.up = async function (DB) {
       dataAdded TIMESTAMP DEFAULT now(),
       flagged BOOLEAN,
       flagged_reason TEXT,
-      admin_approved BOOLEAN
+      admin_approved BOOLEAN,
+      admin_edited BOOLEAN
     );
   `;
 };
