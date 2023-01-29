@@ -3,7 +3,7 @@ exports.up = async function (DB) {
     CREATE TABLE review (
       id SERIAL PRIMARY KEY, 
       landlord TEXT, 
-      countryCode VARCHAR(2),
+      country_code VARCHAR(2),
       city TEXT,
       state TEXT,
       zip TEXT,
@@ -15,8 +15,8 @@ exports.up = async function (DB) {
       respect numeric CHECK (respect >= 1 AND respect <= 5),
       dataAdded TIMESTAMP DEFAULT now(),
       flagged BOOLEAN,
-      flaggedReason TEXT,
-      adminApproved BOOLEAN
+      flagged_reason TEXT,
+      admin_approved BOOLEAN
     );
   `;
 };

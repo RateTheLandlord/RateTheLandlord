@@ -10,18 +10,21 @@ import ButtonLight from '../ui/button-light'
 function ReviewTable({
 	data,
 	setReportOpen,
+	setSelectedReview,
 }: {
 	data: Review[]
 	setReportOpen: Dispatch<SetStateAction<boolean>>
+	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }): JSX.Element {
 	const {t} = useTranslation()
 	const date = new Date()
 
-	const handleReport = (id: number) => {
-		console.log(id)
+	const handleReport = (review: Review) => {
+		console.log(review)
+		setSelectedReview(review)
 		setReportOpen(true)
 	}
-
+	console.log('data: ', data)
 	if (data.length) {
 		return (
 			<div>
@@ -65,14 +68,14 @@ function ReviewTable({
 												)
 											})}
 										</div>
-										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.countrycode}, ${review.zip}`}</p>
+										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.country_code}, ${review.zip}`}</p>
 										<p className="mb-4 lg:mb-0 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 											{`${date.getDate()}-${
 												date.getMonth() + 1
 											}-${date.getFullYear()}`}
 										</p>
 										<div className="mt-4">
-											<ButtonLight onClick={() => handleReport(review.id)}>
+											<ButtonLight onClick={() => handleReport(review)}>
 												REPORT
 											</ButtonLight>
 										</div>

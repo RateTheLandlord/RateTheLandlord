@@ -4,7 +4,7 @@ export interface AllReviews {
 
 export interface Review {
 	city: string
-	countrycode: string
+	country_code: string
 	health: string
 	id: number
 	landlord: string
@@ -16,8 +16,8 @@ export interface Review {
 	state: string
 	zip: string
 	flagged: boolean
-	flageedReason: string
-	adminApproved: boolean | null
+	flagged_reason: string
+	admin_approved: boolean | null
 }
 
 export interface Options {

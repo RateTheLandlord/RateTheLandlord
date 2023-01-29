@@ -15,17 +15,22 @@ import profanity from '@/util/profanity.json'
 //TODO hook up with backend
 //TODO create error handling for regex tests
 
-const countryCodes = Object.keys(countries).filter(
+const country_codes = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL as string
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm({
 	setProfanityModalOpen,
+	setAlertOpen,
+	setSuccess,
+	setSuccessModalOpen,
 }: {
 	setProfanityModalOpen: React.Dispatch<SetStateAction<boolean>>
+	setAlertOpen: React.Dispatch<SetStateAction<boolean>>
+	setSuccess: React.Dispatch<SetStateAction<boolean>>
+	setSuccessModalOpen: React.Dispatch<SetStateAction<boolean>>
 }): JSX.Element {
 	const {t} = useTranslation()
 
@@ -43,7 +48,7 @@ function ReviewForm({
 	const [review, setReview] = useState<string>('')
 
 	const [flagged, setFlagged] = useState<boolean>(false)
-	const [flaggedReason, setFlaggedReason] = useState<string>('')
+	const [flagged_reason, setflagged_reason] = useState<string>('')
 
 	const [token, setToken] = useState<string>('')
 
@@ -55,11 +60,11 @@ function ReviewForm({
 		)
 		if (foundSwears.length) {
 			setFlagged(true)
-			setFlaggedReason('Profanity')
+			setflagged_reason('Profanity')
 			setProfanityModalOpen(true)
 		} else {
 			setFlagged(false)
-			setFlaggedReason('')
+			setflagged_reason('')
 			handleSubmit()
 		}
 	}
@@ -69,7 +74,7 @@ function ReviewForm({
 			//Postal error message
 		}
 
-		fetch(`${apiUrl}/review`, {
+		fetch(`/api/submit-review`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -78,7 +83,7 @@ function ReviewForm({
 				captchaToken: token,
 				review: {
 					landlord: landlord,
-					countryCode: country,
+					country_code: country,
 					city: city,
 					state: province,
 					zip: postal,
@@ -89,16 +94,24 @@ function ReviewForm({
 					privacy: privacy,
 					respect: respect,
 					flagged: flagged,
-					flaggedReason: flaggedReason,
-					adminApproved: null,
+					flagged_reason: flagged_reason,
+					admin_approved: null,
 				},
 			}),
 		})
 			.then((result: Response) => {
-				console.log(result.json())
+				if (!result.ok) {
+					throw new Error()
+				} else {
+					return result.json()
+				}
+			})
+			.then(() => {
+				setSuccessModalOpen(true)
 			})
 			.catch(() => {
-				console.log('error')
+				setSuccess(false)
+				setAlertOpen(true)
 			})
 	}
 
@@ -158,7 +171,7 @@ function ReviewForm({
 										onChange={(e) => setCountry(e.target.value)}
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 									>
-										{countryCodes.map((country) => {
+										{country_codes.map((country) => {
 											return (
 												<option key={country} value={country}>
 													{countries[country]}

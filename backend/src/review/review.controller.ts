@@ -39,7 +39,6 @@ export class ReviewController {
     @Param('id') id: number,
     @Body() review: Review,
   ): Promise<Review> {
-    console.log(review);
     return this.reviewService.update(id, review);
   }
 

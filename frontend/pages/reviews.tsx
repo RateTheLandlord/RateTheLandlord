@@ -19,7 +19,7 @@ import ReportModal from '@/components/reviews/report-modal'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-const countryCodes: string[] = Object.keys(countries).filter(
+const country_codes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
 
@@ -29,6 +29,8 @@ export default function Reviews({
 	fallback: AllReviews
 }): JSX.Element {
 	const {data} = useSWR<Array<Review>>(`/api/get-reviews`, fetcher)
+
+	console.log(data)
 
 	const initialData = fallback['/api/get-reviews']
 	const [allReviews, setAllReviews] = useState<Review[]>(initialData)
@@ -43,7 +45,9 @@ export default function Reviews({
 
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
-	const countryOptions: Options[] = countryCodes.map(
+	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
+
+	const countryOptions: Options[] = country_codes.map(
 		(item: string, ind: number): Options => {
 			return {id: ind + 1, name: countries[item] as string, value: item}
 		},
@@ -76,7 +80,7 @@ export default function Reviews({
 			allReviews,
 			searchState,
 		)
-	}, [cityFilter, stateFilter, countryFilter, reviews, allReviews, searchState])
+	}, [cityFilter, stateFilter, countryFilter, allReviews, searchState])
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
@@ -95,7 +99,11 @@ export default function Reviews({
 
 	return (
 		<SWRConfig value={{fallback}}>
-			<ReportModal isOpen={reportOpen} setIsOpen={setReportOpen} />
+			<ReportModal
+				isOpen={reportOpen}
+				setIsOpen={setReportOpen}
+				selectedReview={selectedReview}
+			/>
 			<div className="w-full">
 				<ReviewFilters
 					selectedSort={selectedSort}
@@ -117,6 +125,7 @@ export default function Reviews({
 				<ReviewTable
 					data={reviews || initialData}
 					setReportOpen={setReportOpen}
+					setSelectedReview={setSelectedReview}
 				/>
 			</div>
 		</SWRConfig>
@@ -125,7 +134,8 @@ export default function Reviews({
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
-	const req = await fetch(`/api/get-reviews`)
+	const URL = process.env.API_URL as string
+	const req = await fetch(`${URL}/review`)
 	if (!req.ok) {
 		return {
 			props: {

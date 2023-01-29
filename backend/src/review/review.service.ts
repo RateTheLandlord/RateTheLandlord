@@ -19,17 +19,17 @@ export class ReviewService {
 
   async create(review: Review): Promise<Review> {
     review.landlord = review.landlord.toLocaleUpperCase();
-    review.countryCode = review.countryCode.toLocaleUpperCase();
+    review.country_code = review.country_code.toLocaleUpperCase();
     review.city = review.city.toLocaleUpperCase();
     review.state = review.state.toLocaleUpperCase();
     review.zip = review.zip.toLocaleUpperCase();
-    review.adminApproved = null;
+    review.admin_approved = null;
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
         INSERT INTO review 
-          (landlord, countryCode, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flaggedReason, adminApproved) 
-        VALUES (${review.landlord}, ${review.countryCode}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}, ${review.flagged}, ${review.flaggedReason}, ${review.adminApproved}) 
+          (landlord, country_code, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flagged_reason, admin_approved) 
+        VALUES (${review.landlord}, ${review.country_code}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}, ${review.flagged}, ${review.flagged_reason}, ${review.admin_approved}) 
         RETURNING id;`
     )[0].id;
 
@@ -39,9 +39,9 @@ export class ReviewService {
   }
 
   async update(id: number, review: Review): Promise<Review> {
+    console.log('Review: ', review);
     await this.databaseService
-      .sql`UPDATE review SET (landlord, countryCode, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flaggedReason, adminApproved) 
-      VALUES (${review.landlord}, ${review.countryCode}, ${review.city}, ${review.state}, ${review.zip}, ${review.review}, ${review.repair}, ${review.health}, ${review.stability}, ${review.privacy}, ${review.respect}, ${review.flagged}, ${review.flaggedReason}, ${review.adminApproved}) 
+      .sql`UPDATE review SET landlord = ${review.landlord}, country_code = ${review.country_code}, city = ${review.city}, state = ${review.state}, zip = ${review.zip}, review = ${review.review}, repair = ${review.repair}, health = ${review.health}, stability = ${review.stability}, privacy = ${review.privacy}, respect = ${review.respect}, flagged = ${review.flagged}, flagged_reason = ${review.flagged_reason}, admin_approved = ${review.admin_approved} 
       WHERE id = ${id};`;
 
     return review;

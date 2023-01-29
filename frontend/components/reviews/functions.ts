@@ -33,7 +33,7 @@ export const updateReviews = (
 	let newReviews: Array<Review> = searchReviews(initialData, search)
 	if (countryFilter) {
 		const temp: Array<Review> = newReviews.filter(
-			(review: Review): boolean => review.countrycode === countryFilter.value,
+			(review: Review): boolean => review.country_code === countryFilter.value,
 		)
 		newReviews = temp
 	}
