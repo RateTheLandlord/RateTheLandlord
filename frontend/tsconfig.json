@@ -5,7 +5,7 @@
 			// use @/ to access path related to root of project
 			"@/*": ["./*"]
 		},
-		"target": "es5",
+		"target": "ES2022",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,

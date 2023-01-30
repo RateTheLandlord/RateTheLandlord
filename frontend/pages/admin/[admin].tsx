@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Tabs from '@/components/admin/tabs/Tabs'
 import {ITabs} from '@/components/admin/types/types'
 import FlaggedReviews from '@/components/admin/sections/FlaggedReviews'
@@ -24,6 +24,24 @@ function Admin(): JSX.Element {
 	const [currentSection, setCurrentSection] = useState<JSX.Element>(
 		currentTab.component,
 	)
+	const [data, setData] = useState(null)
+	const [isLoading, setLoading] = useState(false)
+
+	useEffect(() => {
+		setLoading(true)
+		fetch('/api/get-flagged')
+			.then((res) => res.json())
+			.then((data) => {
+				setData(data)
+				setLoading(false)
+			})
+			.catch((err) => console.log(err))
+	}, [])
+
+	console.log(data)
+
+	if (isLoading) return <p>Loading...</p>
+	if (!data) return <p>No profile data</p>
 	if (!cookies.ratethelandlord) {
 		return (
 			<div className="w-full flex flex-col items-center gap-4">
