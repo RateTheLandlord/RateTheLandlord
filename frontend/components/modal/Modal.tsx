@@ -8,8 +8,9 @@ interface IProps {
 	title: string
 	description?: string
 	element: JSX.Element
-	onSubmit: () => void
+	onSubmit: (id: number) => void
 	buttonColour: 'blue' | 'red'
+	selectedReviewId?: number
 }
 
 const Modal = ({
@@ -20,6 +21,7 @@ const Modal = ({
 	element,
 	onSubmit,
 	buttonColour,
+	selectedReviewId,
 }: IProps) => {
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -80,7 +82,9 @@ const Modal = ({
 												? 'bg-red-500 hover:bg-red:700'
 												: 'bg-blue-500 hover:bg-blue-700'
 										}`}
-										onClick={() => onSubmit()}
+										onClick={() => {
+											selectedReviewId ? onSubmit(selectedReviewId) : onSubmit
+										}}
 									>
 										Submit
 									</button>

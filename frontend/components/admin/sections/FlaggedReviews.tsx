@@ -1,5 +1,7 @@
 import Modal from '@/components/modal/Modal'
-import {useState} from 'react'
+import {Review} from '@/util/interfaces'
+import {useEffect, useState} from 'react'
+import useSWR from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
 
@@ -7,35 +9,61 @@ import RemoveReviewModal from '../components/RemoveReviewModal'
 // TODO Hook up to BE
 // TODO Add Success/Failure Notification
 
-interface IReview {
-	landlord: string
-	review: string
-	reason: string
-}
-
-const reviews = [
-	{
-		landlord: 'Lindsay Walton',
-		review: 'Test Review',
-		reason: 'Profanity',
-	},
-]
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const FlaggedReviews = () => {
 	const [editReviewOpen, setEditReviewOpen] = useState(false)
-	const [selectedReview, setSelectedReview] = useState<IReview | undefined>()
+	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 	const [newReview, setNewReview] = useState('')
+
+	const [flaggedReviews, setFlaggedReviews] = useState<Array<Review>>([])
 
 	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
 
-	const onSubmitRemoveReview = () => {
-		console.log('Remove Review Submitted')
+	const {
+		data: reviews,
+		error,
+		isLoading,
+	} = useSWR<Array<Review>>('/api/get-flagged', fetcher)
+
+	useEffect(() => {
+		if (reviews) {
+			setFlaggedReviews([...reviews])
+		}
+	}, [reviews])
+
+	if (error) return <div>failed to load</div>
+	if (isLoading) return <div>loading...</div>
+
+	const onSubmitRemoveReview = (id: number) => {
+		fetch('/delete-review', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({id: id}),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+				return result.json()
+			})
+			.then((data) => {
+				// Show Success Notification and Mutate SWR
+				console.log(data)
+			})
+			.catch((err) => {
+				// Show Fail Notification
+				console.log(err)
+			})
 	}
 
 	const onSubmitEditReview = () => {
 		console.log('Edit Review Submit')
 		console.log(newReview)
 	}
+
 	return (
 		<div className="w-full flex justify-center px-4 sm:px-6 lg:px-8">
 			<Modal
@@ -58,6 +86,7 @@ const FlaggedReviews = () => {
 				element={<RemoveReviewModal />}
 				onSubmit={onSubmitRemoveReview}
 				buttonColour="red"
+				selectedReviewId={selectedReview?.id}
 			/>
 			<div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg container">
 				<table className="min-w-full divide-y divide-gray-300">
@@ -93,14 +122,14 @@ const FlaggedReviews = () => {
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
-						{reviews.map((review) => (
+						{flaggedReviews.map((review) => (
 							<tr key={review.landlord}>
 								<td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
 									{review.landlord}
 									<dl className="font-normal lg:hidden">
 										<dt className="sr-only">Reason</dt>
 										<dd className="mt-1 truncate text-gray-500">
-											{review.reason}
+											{review.flagged_reason}
 										</dd>
 										<dt className="sr-only sm:hidden">Review</dt>
 										<dd className="mt-1 truncate text-gray-700 sm:hidden">
@@ -109,7 +138,7 @@ const FlaggedReviews = () => {
 									</dl>
 								</td>
 								<td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-									{review.reason}
+									{review.flagged_reason}
 								</td>
 								<td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
 									{review.review}

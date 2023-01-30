@@ -1,13 +1,23 @@
 import {NextApiRequest, NextApiResponse} from 'next'
 import {parseCookies} from 'nookies'
 
+interface IBody {
+	id: number
+}
+
 const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = parseCookies()
 	const jwt = cookies.ratethelandlord
 
-	fetch(`${url}/review/flagged`, {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const {body}: {body: IBody} = req
+
+	const id = body.id
+
+	fetch(`${url}/review/${id}`, {
+		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
@@ -24,7 +34,7 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.catch((err: Response) => {
 			console.log(err)
-			res.status(500).json({error: 'Failed to get Reviews', response: err})
+			res.status(500).json({error: 'Failed to delete Review', response: err})
 		})
 }
 
