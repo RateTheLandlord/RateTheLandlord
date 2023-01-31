@@ -1,17 +1,18 @@
+import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
 import {Review} from '@/util/interfaces'
 import {useEffect, useState} from 'react'
-import useSWR from 'swr'
+import useSWR, {useSWRConfig} from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
 
 // TODO Add Approve Function
 // TODO Hook up to BE
-// TODO Add Success/Failure Notification
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const FlaggedReviews = () => {
+	const {mutate} = useSWRConfig()
 	const [editReviewOpen, setEditReviewOpen] = useState(false)
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 	const [newReview, setNewReview] = useState('')
@@ -19,6 +20,8 @@ const FlaggedReviews = () => {
 	const [flaggedReviews, setFlaggedReviews] = useState<Array<Review>>([])
 
 	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
+	const [success, setSuccess] = useState(false)
+	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
 
 	const {
 		data: reviews,
@@ -36,7 +39,7 @@ const FlaggedReviews = () => {
 	if (isLoading) return <div>loading...</div>
 
 	const onSubmitRemoveReview = (id: number) => {
-		fetch('/delete-review', {
+		fetch('/api/delete-review', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -50,22 +53,59 @@ const FlaggedReviews = () => {
 				return result.json()
 			})
 			.then((data) => {
-				// Show Success Notification and Mutate SWR
-				console.log(data)
+				mutate('/api/get-flagged').catch((err) => console.log(err))
+				setRemoveReviewOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
 			})
 			.catch((err) => {
-				// Show Fail Notification
 				console.log(err)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
 			})
 	}
 
-	const onSubmitEditReview = () => {
-		console.log('Edit Review Submit')
-		console.log(newReview)
+	const onSubmitEditReview = (id?: number) => {
+		const editedReview = {
+			...selectedReview,
+			review: newReview,
+			admin_edited: true,
+			admin_approved: true,
+		}
+		console.log(editedReview)
+		fetch('/api/edit-review', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(editedReview),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+				return result.json()
+			})
+			.then((data) => {
+				mutate('/api/get-flagged').catch((err) => console.log(err))
+				setRemoveReviewOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
 	}
 
 	return (
-		<div className="w-full flex justify-center px-4 sm:px-6 lg:px-8">
+		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8">
+			{removeAlertOpen ? (
+				<div className="w-full">
+					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
+				</div>
+			) : null}
 			<Modal
 				title="Edit Review"
 				open={editReviewOpen}
@@ -162,8 +202,8 @@ const FlaggedReviews = () => {
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
 									<button
 										onClick={() => {
-											setRemoveReviewOpen((p) => !p)
 											setSelectedReview(review)
+											setRemoveReviewOpen((p) => !p)
 										}}
 										className="text-indigo-600 hover:text-indigo-900"
 									>

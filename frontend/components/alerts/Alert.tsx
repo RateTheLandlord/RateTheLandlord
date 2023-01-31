@@ -7,7 +7,6 @@ interface IProps {
 }
 
 const Alert = ({success, setAlertOpen}: IProps) => {
-	console.log('Success: ', success)
 	return (
 		<div className="rounded-md bg-green-50 p-4">
 			<div className="flex">
