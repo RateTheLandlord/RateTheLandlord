@@ -133,26 +133,34 @@ export default function Reviews({
 }
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
-export async function getStaticProps() {
+export function getStaticProps() {
 	const URL = process.env.API_URL as string
-	const req = await fetch(`${URL}/review`)
-	if (!req.ok) {
-		return {
-			props: {
-				fallback: {
-					'/api/get-reviews': [],
+	fetch(`${URL}/review`)
+		.then((res) => {
+			if (!res.ok) {
+				throw new Error()
+			}
+			return res.json()
+		})
+		.then((data: Array<Review>) => {
+			return {
+				props: {
+					fallback: {
+						'/api/get-reviews': data,
+					},
 				},
-			},
-			revalidate: 1800,
-		}
-	}
-	const data = (await req.json()) as Array<Review>
-	return {
-		props: {
-			fallback: {
-				'/api/get-reviews': data,
-			},
-		},
-		revalidate: 1800,
-	}
+				revalidate: 1800,
+			}
+		})
+		.catch((err) => {
+			console.log(err)
+			return {
+				props: {
+					fallback: {
+						'/api/get-reviews': [],
+					},
+				},
+				revalidate: 1800,
+			}
+		})
 }
