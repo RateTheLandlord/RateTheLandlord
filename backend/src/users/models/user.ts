@@ -6,3 +6,11 @@ export interface IUser {
   blocked: boolean;
   role: 'USER' | 'ADMIN';
 }
+
+export interface IGetUsers {
+  id: number;
+  name: string;
+  email: string;
+  blocked: boolean;
+  role: 'USER' | 'ADMIN';
+}

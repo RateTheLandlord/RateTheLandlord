@@ -1,17 +1,22 @@
+import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import useSWR, {mutate} from 'swr'
 import AddUserModal from '../components/AddUserModal'
+import RemoveUserModal from '../components/RemoveUserModal'
 
 // TODO Hook up to BE
 // TODO Add Success/Failure Notification
 
-const people = [
-	{
-		name: 'Lindsay Walton',
-		email: 'LindsayWalton@gmail.com',
-		permissions: 'Admin',
-	},
-]
+interface IUsers {
+	id: number
+	name: string
+	email: string
+	blocked: boolean
+	role: string
+}
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const TeamMembers = () => {
 	const [addUserOpen, setAddUserOpen] = useState(false)
@@ -21,7 +26,32 @@ const TeamMembers = () => {
 	const [newUserPassword, setNewUserPassword] = useState('')
 	const [newUserAdmin, setNewUserAdmin] = useState(false)
 
-	const onSubmit = () => {
+	const [removeUserOpen, setRemoveUserOpen] = useState(false)
+	const [selectedUser, setSelectedUser] = useState<IUsers>()
+
+	const [users, setUsers] = useState<Array<IUsers>>([])
+
+	const [success, setSuccess] = useState(false)
+	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
+
+	console.log(selectedUser)
+
+	const {
+		data: allUsers,
+		error,
+		isLoading,
+	} = useSWR<Array<IUsers>>('/api/get-users', fetcher)
+
+	useEffect(() => {
+		if (allUsers) {
+			setUsers([...allUsers])
+		}
+	}, [allUsers])
+
+	if (error) return <div>failed to load</div>
+	if (isLoading) return <div>loading...</div>
+
+	const onSubmitNewUser = () => {
 		const newUser = {
 			name: newUserName,
 			email: newUserEmail,
@@ -30,10 +60,64 @@ const TeamMembers = () => {
 			blocked: false,
 		}
 
-		//Post to DB
+		fetch('/api/add-user', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newUser),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+			})
+			.then(() => {
+				mutate('/api/get-users').catch((err) => console.log(err))
+				setAddUserOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
+	}
+
+	const onSubmitDeleteUser = () => {
+		fetch('/api/remove-user', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(selectedUser?.id),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+			})
+			.then(() => {
+				mutate('/api/get-users').catch((err) => console.log(err))
+				setRemoveUserOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setRemoveUserOpen(false)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
 	}
 	return (
 		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8">
+			{removeAlertOpen ? (
+				<div className="w-full">
+					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
+				</div>
+			) : null}
 			<Modal
 				title="Add User"
 				open={addUserOpen}
@@ -47,8 +131,17 @@ const TeamMembers = () => {
 						setPassword={setNewUserPassword}
 					/>
 				}
-				onSubmit={onSubmit}
+				onSubmit={onSubmitNewUser}
 				buttonColour="blue"
+			/>
+			<Modal
+				title="Remove User"
+				open={removeUserOpen}
+				setOpen={setRemoveUserOpen}
+				element={<RemoveUserModal />}
+				onSubmit={onSubmitDeleteUser}
+				buttonColour="red"
+				selectedReviewId={selectedUser?.id}
 			/>
 			<div className="sm:flex sm:items-center w-full container mt-3">
 				<div className="sm:flex-auto">
@@ -93,32 +186,41 @@ const TeamMembers = () => {
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
-						{people.map((person) => (
-							<tr key={person.name}>
+						{users.map((user) => (
+							<tr key={user.name}>
 								<td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-									{person.name}
+									{user.name}
 									<dl className="font-normal lg:hidden">
 										<dt className="sr-only">Email</dt>
 										<dd className="mt-1 truncate text-gray-500">
-											{person.email}
+											{user.email}
 										</dd>
-										<dt className="sr-only sm:hidden">Permissions</dt>
+										<dt className="sr-only sm:hidden">Role</dt>
 										<dd className="mt-1 truncate text-gray-700 sm:hidden">
-											{person.permissions}
+											{user.role}
 										</dd>
 									</dl>
 								</td>
 								<td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-									{person.email}
+									{user.email}
 								</td>
 								<td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-									{person.permissions}
+									{user.role}
 								</td>
 
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									<a href="#" className="text-indigo-600 hover:text-indigo-900">
-										Remove
-									</a>
+									{user.email ===
+									'webdevelopment@kellenwiltshire.com' ? null : (
+										<button
+											onClick={() => {
+												setSelectedUser(user)
+												setRemoveUserOpen(true)
+											}}
+											className="text-indigo-600 hover:text-indigo-900"
+										>
+											Remove
+										</button>
+									)}
 								</td>
 							</tr>
 						))}

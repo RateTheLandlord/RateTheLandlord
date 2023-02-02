@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IUser } from './models/user';
+import { IUser, IGetUsers } from './models/user';
 import { DatabaseService } from 'src/database/database.service';
 import * as bcrypt from 'bcrypt';
 
@@ -16,9 +16,20 @@ export class UsersService {
     >`SELECT * FROM users WHERE email = ${email}`;
   }
 
-  async getAll(): Promise<IUser[]> {
+  async deleteUser(id: number): Promise<boolean> {
+    await this.databaseService.sql`DELETE FROM users WHERE ID = ${id}`;
+
+    return true;
+  }
+
+  async getAll(): Promise<IGetUsers[]> {
     console.log('Get all users');
-    return this.databaseService.sql<IUser[]>`Select * FROM users`;
+    const fullUsers = this.databaseService.sql<IUser[]>`Select * FROM users`;
+    const users = (await fullUsers).map((user) => {
+      const { password, ...result } = user;
+      return result;
+    });
+    return users;
   }
 
   async create(user: IUser): Promise<IUser> {

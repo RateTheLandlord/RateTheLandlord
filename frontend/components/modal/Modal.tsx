@@ -8,7 +8,7 @@ interface IProps {
 	title: string
 	description?: string
 	element: JSX.Element
-	onSubmit: (id: number) => void
+	onSubmit: ((id: number) => void) | (() => void)
 	buttonColour: 'blue' | 'red'
 	selectedReviewId?: number
 }
@@ -83,7 +83,7 @@ const Modal = ({
 												: 'bg-blue-500 hover:bg-blue-700'
 										}`}
 										onClick={() => {
-											selectedReviewId ? onSubmit(selectedReviewId) : onSubmit
+											selectedReviewId ? onSubmit(selectedReviewId) : onSubmit()
 										}}
 									>
 										Submit

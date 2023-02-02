@@ -65,6 +65,7 @@ const FlaggedReviews = () => {
 			})
 			.catch((err) => {
 				console.log(err)
+				setRemoveAlertOpen(false)
 				setSuccess(false)
 				setRemoveAlertOpen(true)
 			})
