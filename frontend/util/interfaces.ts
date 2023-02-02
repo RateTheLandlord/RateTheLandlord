@@ -1,5 +1,5 @@
 export interface AllReviews {
-	['/api/get-reviews']: [Review]
+	['/api/get-reviews']: Array<Review>
 }
 
 export interface Review {
