@@ -25,15 +25,15 @@ function Admin(): JSX.Element {
 		currentTab.component,
 	)
 
+	const handleRouteToLogin = () => {
+		router.push('/login').catch((err) => console.log(err))
+	}
+
 	if (!cookies.ratethelandlord) {
 		return (
 			<div className="w-full flex flex-col items-center gap-4">
 				<h1 className="text-center">Not Logged In</h1>
-				<Button
-					onClick={() => router.push('/login').catch((err) => console.log(err))}
-				>
-					Go To Login
-				</Button>
+				<Button onClick={() => handleRouteToLogin}>Go To Login</Button>
 			</div>
 		)
 	}

@@ -24,6 +24,7 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
 		},
+		body: JSON.stringify(body),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {

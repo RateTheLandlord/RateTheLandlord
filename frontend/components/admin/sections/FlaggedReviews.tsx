@@ -1,13 +1,11 @@
 import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
+import ToggleSwitch from '@/components/ui/toggleswitch'
 import {Review} from '@/util/interfaces'
 import {useEffect, useState} from 'react'
 import useSWR, {useSWRConfig} from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
-
-// TODO Add Approve Function
-// TODO Hook up to BE
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -23,6 +21,8 @@ const FlaggedReviews = () => {
 	const [success, setSuccess] = useState(false)
 	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
 
+	const [showApproved, setShowApproved] = useState(false)
+
 	const {
 		data: reviews,
 		error,
@@ -31,9 +31,15 @@ const FlaggedReviews = () => {
 
 	useEffect(() => {
 		if (reviews) {
-			setFlaggedReviews([...reviews])
+			if (showApproved) {
+				setFlaggedReviews([...reviews])
+			} else {
+				setFlaggedReviews(() => {
+					return reviews.filter((review) => review.admin_approved === false)
+				})
+			}
 		}
-	}, [reviews])
+	}, [reviews, showApproved])
 
 	if (error) return <div>failed to load</div>
 	if (isLoading) return <div>loading...</div>
@@ -50,9 +56,8 @@ const FlaggedReviews = () => {
 				if (!result.ok) {
 					throw new Error()
 				}
-				return result.json()
 			})
-			.then((data) => {
+			.then(() => {
 				mutate('/api/get-flagged').catch((err) => console.log(err))
 				setRemoveReviewOpen(false)
 				setSuccess(true)
@@ -66,6 +71,7 @@ const FlaggedReviews = () => {
 	}
 
 	const onSubmitEditReview = (id?: number) => {
+		console.log(id)
 		const editedReview = {
 			...selectedReview,
 			review: newReview,
@@ -84,11 +90,41 @@ const FlaggedReviews = () => {
 				if (!result.ok) {
 					throw new Error()
 				}
-				return result.json()
 			})
-			.then((data) => {
+			.then(() => {
 				mutate('/api/get-flagged').catch((err) => console.log(err))
-				setRemoveReviewOpen(false)
+				setEditReviewOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
+	}
+
+	const onSubmitApproveReview = (id?: number) => {
+		console.log(id)
+		const editedReview = {
+			...selectedReview,
+			admin_approved: true,
+		}
+		console.log(editedReview)
+		fetch('/api/edit-review', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(editedReview),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+			})
+			.then(() => {
+				mutate('/api/get-flagged').catch((err) => console.log(err))
 				setSuccess(true)
 				setRemoveAlertOpen(true)
 			})
@@ -117,6 +153,7 @@ const FlaggedReviews = () => {
 					/>
 				}
 				onSubmit={onSubmitEditReview}
+				selectedReviewId={selectedReview?.id}
 				buttonColour="blue"
 			/>
 			<Modal
@@ -128,7 +165,11 @@ const FlaggedReviews = () => {
 				buttonColour="red"
 				selectedReviewId={selectedReview?.id}
 			/>
-			<div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg container">
+			<div className="w-full flex justify-end container py-4">
+				<h5 className="px-2">Show Approved: </h5>
+				<ToggleSwitch enabled={showApproved} setEnabled={setShowApproved} />
+			</div>
+			<div className="-mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg container">
 				<table className="min-w-full divide-y divide-gray-300">
 					<thead className="bg-gray-50">
 						<tr>
@@ -163,7 +204,10 @@ const FlaggedReviews = () => {
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
 						{flaggedReviews.map((review) => (
-							<tr key={review.landlord}>
+							<tr
+								key={review.landlord}
+								className={`${review.admin_approved ? 'bg-green-100' : ''}`}
+							>
 								<td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
 									{review.landlord}
 									<dl className="font-normal lg:hidden">
@@ -184,9 +228,17 @@ const FlaggedReviews = () => {
 									{review.review}
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									<a href="#" className="text-indigo-600 hover:text-indigo-900">
-										Approve
-									</a>
+									{review.admin_approved ? null : (
+										<button
+											onClick={() => {
+												setSelectedReview(review)
+												onSubmitApproveReview(review.id)
+											}}
+											className="text-indigo-600 hover:text-indigo-900"
+										>
+											Approve
+										</button>
+									)}
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
 									<button
