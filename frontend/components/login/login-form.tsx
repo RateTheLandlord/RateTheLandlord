@@ -46,9 +46,10 @@ export default function LoginForm(): JSX.Element {
 			.then((data: ILogin) => {
 				console.log('Successful Login: ', data)
 				setCookie(null, 'ratethelandlord', data.jwt.access_token, {
-					maxAge: 30 * 24,
+					maxAge: 30 * 24 * 60,
 					path: '/',
 				})
+				localStorage.setItem('rtl', `${data.result.id}`)
 				router.push(`/admin/${data.result.id}`).catch((err) => console.log(err))
 			})
 			.catch(() => {

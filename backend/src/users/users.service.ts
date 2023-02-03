@@ -22,6 +22,13 @@ export class UsersService {
     return true;
   }
 
+  async getUser(id: number): Promise<IGetUsers> {
+    const fullUser = this.databaseService
+      .sql<IUser>`SELECT 1 FROM users WHERE id = ${id}`;
+    const { password, ...foundUser } = fullUser;
+    return foundUser;
+  }
+
   async getAll(): Promise<IGetUsers[]> {
     console.log('Get all users');
     const fullUsers = this.databaseService.sql<IUser[]>`Select * FROM users`;
