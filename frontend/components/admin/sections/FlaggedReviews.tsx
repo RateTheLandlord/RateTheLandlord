@@ -23,11 +23,11 @@ const FlaggedReviews = () => {
 
 	const [showApproved, setShowApproved] = useState(false)
 
-	const {
-		data: reviews,
-		error,
-		isLoading,
-	} = useSWR<Array<Review>>('/api/get-flagged', fetcher)
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const {data: reviews, error} = useSWR<Array<Review>>(
+		'/api/get-flagged',
+		fetcher,
+	)
 
 	useEffect(() => {
 		if (reviews) {
@@ -42,7 +42,7 @@ const FlaggedReviews = () => {
 	}, [reviews, showApproved])
 
 	if (error) return <div>failed to load</div>
-	if (isLoading) return <div>loading...</div>
+	if (!reviews) return <div>loading...</div>
 
 	const onSubmitRemoveReview = (id: number) => {
 		fetch('/api/delete-review', {
