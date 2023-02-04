@@ -51,7 +51,7 @@ const TeamMembers = () => {
 	if (error) return <div>failed to load</div>
 	if (!allUsers) return <div>loading...</div>
 
-	const onSubmitNewUser = () => {
+	const onSubmitNewUser = (num: number) => {
 		const newUser = {
 			name: newUserName,
 			email: newUserEmail,
@@ -85,7 +85,7 @@ const TeamMembers = () => {
 			})
 	}
 
-	const onSubmitDeleteUser = () => {
+	const onSubmitDeleteUser = (num: number) => {
 		fetch('/api/remove-user', {
 			method: 'POST',
 			headers: {
@@ -118,6 +118,17 @@ const TeamMembers = () => {
 					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
 				</div>
 			) : null}
+			{selectedUser ? (
+				<Modal
+					title="Remove User"
+					open={removeUserOpen}
+					setOpen={setRemoveUserOpen}
+					element={<RemoveUserModal />}
+					onSubmit={onSubmitDeleteUser}
+					buttonColour="red"
+					selectedId={selectedUser.id}
+				/>
+			) : null}
 			<Modal
 				title="Add User"
 				open={addUserOpen}
@@ -133,16 +144,9 @@ const TeamMembers = () => {
 				}
 				onSubmit={onSubmitNewUser}
 				buttonColour="blue"
+				selectedId={1}
 			/>
-			<Modal
-				title="Remove User"
-				open={removeUserOpen}
-				setOpen={setRemoveUserOpen}
-				element={<RemoveUserModal />}
-				onSubmit={onSubmitDeleteUser}
-				buttonColour="red"
-				selectedReviewId={selectedUser?.id}
-			/>
+
 			<div className="sm:flex sm:items-center w-full container mt-3">
 				<div className="sm:flex-auto">
 					<h1 className="text-xl font-semibold text-gray-900">Users</h1>

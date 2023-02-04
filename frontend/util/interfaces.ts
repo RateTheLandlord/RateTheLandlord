@@ -1,7 +1,3 @@
-export interface AllReviews {
-	['/api/get-reviews']: Array<Review>
-}
-
 export interface Review {
 	city: string
 	country_code: string

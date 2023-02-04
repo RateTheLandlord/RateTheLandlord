@@ -143,29 +143,33 @@ const FlaggedReviews = () => {
 					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
 				</div>
 			) : null}
-			<Modal
-				title="Edit Review"
-				open={editReviewOpen}
-				setOpen={setEditReviewOpen}
-				element={
-					<EditReviewModal
-						review={selectedReview?.review}
-						setReview={setNewReview}
+			{selectedReview ? (
+				<>
+					<Modal
+						title="Edit Review"
+						open={editReviewOpen}
+						setOpen={setEditReviewOpen}
+						element={
+							<EditReviewModal
+								review={selectedReview?.review}
+								setReview={setNewReview}
+							/>
+						}
+						onSubmit={onSubmitEditReview}
+						selectedId={selectedReview?.id}
+						buttonColour="blue"
 					/>
-				}
-				onSubmit={onSubmitEditReview}
-				selectedReviewId={selectedReview?.id}
-				buttonColour="blue"
-			/>
-			<Modal
-				title="Remove Review"
-				open={removeReviewOpen}
-				setOpen={setRemoveReviewOpen}
-				element={<RemoveReviewModal />}
-				onSubmit={onSubmitRemoveReview}
-				buttonColour="red"
-				selectedReviewId={selectedReview?.id}
-			/>
+					<Modal
+						title="Remove Review"
+						open={removeReviewOpen}
+						setOpen={setRemoveReviewOpen}
+						element={<RemoveReviewModal />}
+						onSubmit={onSubmitRemoveReview}
+						buttonColour="red"
+						selectedId={selectedReview?.id}
+					/>
+				</>
+			) : null}
 			<div className="w-full flex justify-end container py-4">
 				<h5 className="px-2">Show Approved: </h5>
 				<ToggleSwitch enabled={showApproved} setEnabled={setShowApproved} />

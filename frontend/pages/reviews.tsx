@@ -1,7 +1,7 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
 import {sortOptions} from '@/util/filter-options'
-import {AllReviews, Options, Review} from '@/util/interfaces'
+import {Options, Review} from '@/util/interfaces'
 import {
 	sortAZ,
 	sortZA,
@@ -12,27 +12,16 @@ import {
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
-import useSWR, {SWRConfig} from 'swr'
 import ReportModal from '@/components/reviews/report-modal'
 
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const country_codes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
 
-export default function Reviews({
-	fallback,
-}: {
-	fallback: AllReviews
-}): JSX.Element {
-	const {data} = useSWR<Array<Review>>(`/api/get-reviews`, fetcher)
-
-	console.log(data)
-
-	const initialData = fallback['/api/get-reviews']
+export default function Reviews({data}: {data: Review[]}): JSX.Element {
+	const initialData = data
 	const [allReviews, setAllReviews] = useState<Review[]>(initialData)
 	const [reviews, setReviews] = useState<Review[]>(initialData)
 
@@ -98,7 +87,7 @@ export default function Reviews({
 	}, [data])
 
 	return (
-		<SWRConfig value={{fallback}}>
+		<>
 			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}
@@ -128,39 +117,27 @@ export default function Reviews({
 					setSelectedReview={setSelectedReview}
 				/>
 			</div>
-		</SWRConfig>
+		</>
 	)
 }
 
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
-export function getStaticProps() {
-	const URL = process.env.API_URL as string
-	fetch(`${URL}/review`)
-		.then((res) => {
-			if (!res.ok) {
-				throw new Error()
-			}
-			return res.json()
-		})
-		.then((data: Array<Review>) => {
-			return {
-				props: {
-					fallback: {
-						'/api/get-reviews': data,
-					},
-				},
-				revalidate: 1800,
-			}
-		})
-		.catch((err) => {
-			console.log(err)
-			return {
-				props: {
-					fallback: {
-						'/api/get-reviews': [],
-					},
-				},
-				revalidate: 1800,
-			}
-		})
+export async function getStaticProps() {
+	const req = await fetch(`http:localhost:3000/api/get-reviews`)
+
+	if (req.ok) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const res: Review[] = await req.json()
+		return {
+			props: {
+				data: res,
+			},
+			revalidate: 1800,
+		}
+	} else {
+		return {
+			props: {data: []},
+			revalidate: 1800,
+		}
+	}
 }
