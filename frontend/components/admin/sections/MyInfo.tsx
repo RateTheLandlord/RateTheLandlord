@@ -1,58 +1,45 @@
-// TODO Add Submit Function
 // TODO Hook up to BE
-// TODO Add Success/Failure Notification
 
+import Alert from '@/components/alerts/Alert'
+import {useAppSelector} from '@/redux/hooks'
 import {useEffect, useState} from 'react'
-import useSWR, {useSWRConfig} from 'swr'
-
-interface IUsers {
-	id: number
-	name: string
-	email: string
-	blocked: boolean
-	role: string
-}
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const MyInfo = () => {
-	const {mutate} = useSWRConfig()
-
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('')
-	const [newPassword, setNewPassword] = useState('')
+	const [name, setName] = useState<string | undefined>('')
+	const [email, setEmail] = useState<string | undefined>('')
+	const [newPassword, setNewPassword] = useState<string | undefined>('')
 	const [confirmPass, setConfirmPassword] = useState('')
 	const [passwordCheck, setPasswordCheck] = useState(false)
 
 	const [alertOpen, setAlertOpen] = useState(false)
 	const [success, setSuccess] = useState(false)
 
-	const {
-		data: user,
-		error,
-		isLoading,
-	} = useSWR<IUsers>('/api/get-user', fetcher)
+	const user = useAppSelector((state) => state.user)
+
+	console.log(user)
 
 	useEffect(() => {
 		if (user) {
-			setEmail(user.email)
-			setName(user.name)
+			setEmail(user?.result.email)
+			setName(user?.result.name)
 		}
 	}, [user])
-
-	useEffect(() => {
-		setPasswordCheck(() => checkPasswords())
-	}, [newPassword])
 
 	const checkPasswords = () => {
 		return newPassword === confirmPass
 	}
 
-	const onSubmit = () => {
+	useEffect(() => {
+		setPasswordCheck(() => checkPasswords())
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [newPassword])
+
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		console.log('Submitted!')
 		if (passwordCheck) {
 			const updateUser = {
-				...user,
-				id: user?.id,
+				...user.result,
 				name: name,
 				email: email,
 				password: newPassword,
@@ -70,25 +57,27 @@ const MyInfo = () => {
 					}
 				})
 				.then(() => {
-					mutate('/api/get-user').catch((err) => console.log(err))
-					setRemoveReviewOpen(false)
 					setSuccess(true)
-					setRemoveAlertOpen(true)
+					setAlertOpen(true)
 				})
 				.catch((err) => {
 					console.log(err)
-					setRemoveAlertOpen(false)
 					setSuccess(false)
-					setRemoveAlertOpen(true)
+					setAlertOpen(true)
 				})
 		}
 	}
 
-	if (error) return <div>failed to load</div>
-	if (isLoading) return <div>loading...</div>
-
 	return (
-		<form className="space-y-8 divide-y divide-gray-200 w-full container">
+		<form
+			className="space-y-8 divide-y divide-gray-200 w-full container"
+			onSubmit={(e) => onSubmit(e)}
+		>
+			{alertOpen ? (
+				<div className="w-full">
+					<Alert success={success} setAlertOpen={setAlertOpen} />
+				</div>
+			) : null}
 			<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 				<div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
 					<div>

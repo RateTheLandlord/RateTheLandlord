@@ -5,10 +5,6 @@ import FlaggedReviews from '@/components/admin/sections/FlaggedReviews'
 import TeamMembers from '@/components/admin/sections/TeamMembers'
 import MyInfo from '@/components/admin/sections/MyInfo'
 import {parseCookies} from 'nookies'
-import {useRouter} from 'next/router'
-import Button from '@/components/ui/button'
-
-//Items to display on this page should be reported comments for review
 
 const startingTabs = [
 	{name: 'Flagged Reviews', component: <FlaggedReviews />, current: true},
@@ -18,7 +14,6 @@ const startingTabs = [
 
 function Admin(): JSX.Element {
 	const cookies = parseCookies()
-	const router = useRouter()
 	const [tabs, setTabs] = useState<Array<ITabs>>(startingTabs)
 	const [currentTab, setCurrentTab] = useState<ITabs>(tabs[0])
 	const [currentSection, setCurrentSection] = useState<JSX.Element>(
@@ -29,11 +24,12 @@ function Admin(): JSX.Element {
 		return (
 			<div className="w-full flex flex-col items-center gap-4">
 				<h1 className="text-center">Not Logged In</h1>
-				<Button
-					onClick={() => router.push('/login').catch((err) => console.log(err))}
+				<a
+					href="/login"
+					className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
 				>
 					Go To Login
-				</Button>
+				</a>
 			</div>
 		)
 	}

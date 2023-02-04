@@ -22,11 +22,14 @@ export class UsersService {
     return true;
   }
 
-  async getUser(id: number): Promise<IGetUsers> {
-    const fullUser = this.databaseService
-      .sql<IUser>`SELECT 1 FROM users WHERE id = ${id}`;
-    const { password, ...foundUser } = fullUser;
-    return foundUser;
+  async update(id: number, user: IUser): Promise<boolean> {
+    console.log(user);
+    const salt = bcrypt.genSaltSync(saltOrRounds);
+    user.password = await bcrypt.hash(user.password, salt);
+    await this.databaseService
+      .sql`UPDATE users SET name = ${user.name}, password = ${user.password}, email= ${user.email} WHERE id = ${id}`;
+
+    return true;
   }
 
   async getAll(): Promise<IGetUsers[]> {

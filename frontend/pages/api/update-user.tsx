@@ -1,18 +1,30 @@
 import {NextApiRequest, NextApiResponse} from 'next'
 import {parseCookies} from 'nookies'
 
-const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
+interface IBody {
+	id: number
+}
+
+const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = parseCookies()
 	const jwt = cookies.ratethelandlord
-	const id = localStorage.getItem('rtl')
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const {body}: {body: IBody} = req
+
+	console.log('Body: ', body)
+
+	const id = body.id
 
 	fetch(`${url}/users/${id}`, {
+		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
 		},
+		body: JSON.stringify(body),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
@@ -25,8 +37,8 @@ const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.catch((err: Response) => {
 			console.log(err)
-			res.status(500).json({error: 'Failed to get User', response: err})
+			res.status(500).json({error: 'Failed to edit User', response: err})
 		})
 }
 
-export default GetUser
+export default getReviews

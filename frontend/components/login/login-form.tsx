@@ -3,21 +3,27 @@ import {LockClosedIcon} from '@heroicons/react/solid'
 import Logo from '../svg/logo/logo'
 import {setCookie} from 'nookies'
 import {useRouter} from 'next/router'
+import {useAppDispatch} from '@/redux/hooks'
+import {updateUser} from '@/redux/user/userSlice'
 
 interface ILogin {
 	jwt: {
 		access_token: string
 	}
 	result: {
+		id: number
 		name: string
 		email: string
-		id: number
+		blocked: boolean
+		role: string
 	}
 }
 
 export default function LoginForm(): JSX.Element {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
+
+	const dispatch = useAppDispatch()
 
 	const [error, setError] = useState(false)
 
@@ -49,7 +55,8 @@ export default function LoginForm(): JSX.Element {
 					maxAge: 30 * 24 * 60,
 					path: '/',
 				})
-				localStorage.setItem('rtl', `${data.result.id}`)
+				console.log(data)
+				dispatch(updateUser(data))
 				router.push(`/admin/${data.result.id}`).catch((err) => console.log(err))
 			})
 			.catch(() => {

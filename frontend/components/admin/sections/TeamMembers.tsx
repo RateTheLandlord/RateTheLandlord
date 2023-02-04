@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
 import {useEffect, useState} from 'react'
@@ -36,11 +37,10 @@ const TeamMembers = () => {
 
 	console.log(selectedUser)
 
-	const {
-		data: allUsers,
-		error,
-		isLoading,
-	} = useSWR<Array<IUsers>>('/api/get-users', fetcher)
+	const {data: allUsers, error} = useSWR<Array<IUsers>>(
+		'/api/get-users',
+		fetcher,
+	)
 
 	useEffect(() => {
 		if (allUsers) {
@@ -49,7 +49,7 @@ const TeamMembers = () => {
 	}, [allUsers])
 
 	if (error) return <div>failed to load</div>
-	if (isLoading) return <div>loading...</div>
+	if (!allUsers) return <div>loading...</div>
 
 	const onSubmitNewUser = () => {
 		const newUser = {
@@ -209,8 +209,7 @@ const TeamMembers = () => {
 								</td>
 
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									{user.email ===
-									'webdevelopment@kellenwiltshire.com' ? null : (
+									{user.role === 'ADMIN' ? null : (
 										<button
 											onClick={() => {
 												setSelectedUser(user)

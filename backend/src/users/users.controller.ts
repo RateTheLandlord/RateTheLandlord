@@ -1,5 +1,14 @@
-import { Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
-import { IGetUsers, IUser } from './models/user';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Request,
+} from '@nestjs/common';
+import { IUser } from './models/user';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -13,18 +22,19 @@ export class UserController {
     return this.userService.getAll();
   }
 
-  //   @UseGuards(JwtAuthGuard)
-  @Get('/:id')
-  async getUser(@Param('id') id: number): Promise<IGetUsers> {
-    return this.userService.getUser(id);
-  }
-
   //Protected Route to Create new users
   //   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Request() req) {
     console.log('New User: ', req.body);
     return this.userService.create(req.body);
+  }
+
+  //   @UseGuards(JwtAuthGuard)
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() user: IUser): Promise<boolean> {
+    console.log(id);
+    return this.userService.update(id, user);
   }
 
   //   @UseGuards(JwtAuthGuard)
