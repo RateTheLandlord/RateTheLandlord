@@ -1,5 +1,7 @@
 FROM node:alpine
 
+ENV PORT 5000
+
 RUN mkdir -p /app
 
 # Set /app as the working directory
@@ -14,6 +16,8 @@ RUN npm install
 
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
+
+EXPOSE 5000
 
 # Run npm dev, as we would via the command line 
 CMD ["npm", "run", "start:dev"]

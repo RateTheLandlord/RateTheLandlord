@@ -65,7 +65,7 @@ jobs:
           echo HCPATCHA_SECRET_KEY=${{secrets.HCPATCHA_SECRET_KEY}} >> .env
           echo HCPATCHA_SITE_KEY=${{secrets.API_TOKEN_SALT}} >> .env
           echo JWT_KEY="${{secrets.JWT_KEY}}" >> .env
-          echo NEXT_PUBLIC_API_URL=${{secrets.NEXT_PUBLIC_API_URL}} >> .env
+          echo API_URL=${{secrets.API_URL}} >> .env
           echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
           echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
           echo PGHOST=${{secrets.PGHOST}} >> .env
