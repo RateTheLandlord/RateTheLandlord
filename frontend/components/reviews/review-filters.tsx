@@ -102,7 +102,7 @@ function ReviewFilters({
 
 							<div className="hidden lg:block">
 								<div className="flow-root">
-									<div className="-mx-4 flex items-center divide-x gap-2 divide-gray-200">
+									<div className="-mx-4 flex items-center divide-x divide-gray-200">
 										<SearchBar setSearchState={setSearchState} />
 
 										<SelectList

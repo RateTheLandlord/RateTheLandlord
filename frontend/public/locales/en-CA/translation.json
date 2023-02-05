@@ -22,6 +22,7 @@
 			"choose": "Choose a rating"
 		},
 		"review-form": {
+			"header": "Enter your Review",
 			"title": "Landlord / Property Management Information",
 			"sub": "Please make sure all this information matches your Lease",
 			"landlord": "Landlord / Property Management Company",
@@ -37,7 +38,8 @@
 			"repair": "Repair",
 			"review": "Written Review",
 			"submit": "Submit",
-			"reset": "Reset"
+			"reset": "Reset",
+			"postal-error": "Error. Postal Code / ZIP Invalid"
 		}
 	},
 	"layout": {
@@ -49,7 +51,8 @@
 			"reviews": "Reviews",
 			"search": "Search",
 			"submit": "Submit a Review",
-			"open": "Open main menu"
+			"open": "Open main menu",
+			"about": "About"
 		}
 	},
 	"reviews": {

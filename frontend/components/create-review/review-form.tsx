@@ -1,19 +1,22 @@
-import React, {SetStateAction, useState} from 'react'
+/* eslint-disable no-mixed-spaces-and-tabs */
+import React, {useState} from 'react'
 import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import postalCodes from 'postal-codes-js'
 import countries from '@/util/countries.json'
+import provinces from '@/util/provinces.json'
+import states from '@/util/states.json'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {useTranslation} from 'react-i18next'
 import profanity from '@/util/profanity.json'
+import Alert from '../alerts/Alert'
+import SuccessModal from './success-modal'
+import ProfanityModal from './profanity-modal'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
-
-//TODO hook up with backend
-//TODO create error handling for regex tests
 
 const country_codes = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
@@ -21,18 +24,13 @@ const country_codes = Object.keys(countries).filter(
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
-function ReviewForm({
-	setProfanityModalOpen,
-	setAlertOpen,
-	setSuccess,
-	setSuccessModalOpen,
-}: {
-	setProfanityModalOpen: React.Dispatch<SetStateAction<boolean>>
-	setAlertOpen: React.Dispatch<SetStateAction<boolean>>
-	setSuccess: React.Dispatch<SetStateAction<boolean>>
-	setSuccessModalOpen: React.Dispatch<SetStateAction<boolean>>
-}): JSX.Element {
+function ReviewForm(): JSX.Element {
 	const {t} = useTranslation()
+
+	const [profanityModalOpen, setProfanityModalOpen] = useState<boolean>(false)
+	const [success, setSuccess] = useState(false)
+	const [alertOpen, setAlertOpen] = useState(false)
+	const [successModalOpen, setSuccessModalOpen] = useState(false)
 
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
@@ -51,6 +49,8 @@ function ReviewForm({
 	const [flagged_reason, setflagged_reason] = useState<string>('')
 
 	const [token, setToken] = useState<string>('')
+
+	const [postalError, setPostalError] = useState(false)
 
 	const profanityCheck = (e: React.FormEvent): void => {
 		e.preventDefault()
@@ -71,7 +71,7 @@ function ReviewForm({
 
 	const handleSubmit = (): void => {
 		if (!postalCodes.validate(country, postal)) {
-			//Postal error message
+			setPostalError(true)
 		}
 
 		fetch(`/api/submit-review`, {
@@ -95,7 +95,7 @@ function ReviewForm({
 					respect: respect,
 					flagged: flagged,
 					flagged_reason: flagged_reason,
-					admin_approved: null,
+					admin_approved: false,
 					admin_edited: false,
 				},
 			}),
@@ -121,10 +121,24 @@ function ReviewForm({
 	}
 
 	return (
-		<>
+		<div className="w-full flex flex-col container items-center">
+			{alertOpen ? (
+				<Alert success={success} setAlertOpen={setAlertOpen} />
+			) : null}
+			<SuccessModal isOpen={successModalOpen} setIsOpen={setSuccessModalOpen} />
+			<ProfanityModal
+				isOpen={profanityModalOpen}
+				setIsOpen={setProfanityModalOpen}
+				onSubmit={handleSubmit}
+			/>
+			<div className="w-full my-3">
+				<h1 className="text-4xl font-extrabold border-b-teal-600 border-b-2">
+					{t('create-review.review-form.header')}
+				</h1>
+			</div>
 			<form
 				onSubmit={profanityCheck}
-				className="space-y-8 divide-y divide-gray-200"
+				className="space-y-8 divide-y divide-gray-200 w-full"
 			>
 				<div className="space-y-8 divide-y divide-gray-200">
 					<div className="pt-8">
@@ -211,14 +225,29 @@ function ReviewForm({
 									{t('create-review.review-form.state')}
 								</label>
 								<div className="mt-1">
-									<input
-										type="text"
-										name="region"
+									<select
 										id="region"
-										placeholder={t('create-review.review-form.state')}
+										name="region"
+										required
 										onChange={(e) => setProvince(e.target.value)}
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-									/>
+									>
+										{country === 'CA'
+											? provinces.map((province) => {
+													return (
+														<option key={province.short} value={province.name}>
+															{province.name}
+														</option>
+													)
+											  })
+											: states.map((state) => {
+													return (
+														<option key={state.short} value={state.name}>
+															{state.name}
+														</option>
+													)
+											  })}
+									</select>
 								</div>
 							</div>
 
@@ -240,6 +269,11 @@ function ReviewForm({
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 									/>
 								</div>
+								{postalError ? (
+									<p className="text-red-400 text-xs">
+										{t('create-review.review-form.postal-error')}
+									</p>
+								) : null}
 							</div>
 						</div>
 					</div>
@@ -308,7 +342,7 @@ function ReviewForm({
 					</div>
 				</div>
 			</form>
-		</>
+		</div>
 	)
 }
 

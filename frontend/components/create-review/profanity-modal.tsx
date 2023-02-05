@@ -8,9 +8,11 @@ import Button from '../ui/button'
 function ProfanityModal({
 	isOpen,
 	setIsOpen,
+	onSubmit,
 }: {
 	isOpen: boolean
 	setIsOpen: React.Dispatch<SetStateAction<boolean>>
+	onSubmit: () => void
 }) {
 	return (
 		<Dialog
@@ -21,18 +23,26 @@ function ProfanityModal({
 			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 			<div className="fixed inset-0 flex items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10">
-					<Dialog.Title>Profanity Alert</Dialog.Title>
-					<Dialog.Description>Profanity Detected</Dialog.Description>
+					<Dialog.Title className="text-xl font-bold mb-2 text-center">
+						Profanity Alert
+					</Dialog.Title>
 
-					<p>
+					<p className="mb-2 text-center">
 						Are you sure you want to submit your review with profanity? If it is
 						found to be vulgar your review may be edited or removed
 					</p>
 
-					<ButtonLight onClick={() => setIsOpen(false)}>
-						Submit Anyways
-					</ButtonLight>
-					<Button onClick={() => setIsOpen(false)}>Edit</Button>
+					<div className="flex w-full justify-between">
+						<ButtonLight
+							onClick={() => {
+								setIsOpen(false)
+								onSubmit()
+							}}
+						>
+							Submit Anyways
+						</ButtonLight>
+						<Button onClick={() => setIsOpen(false)}>Edit</Button>
+					</div>
 				</Dialog.Panel>
 			</div>
 		</Dialog>

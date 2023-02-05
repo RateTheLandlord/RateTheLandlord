@@ -1,14 +1,29 @@
 import {Disclosure} from '@headlessui/react'
-import {SearchIcon} from '@heroicons/react/solid'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import Logo from '../svg/logo/logo'
 import Link from 'next/link'
 import {useTranslation} from 'react-i18next'
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
 
 //TODO Apply "Current" styling to Navbar as necessary
 
 export default function Navbar(): JSX.Element {
 	const {t} = useTranslation()
+
+	const [activeTab, setActiveTab] = useState<number>(1)
+	const router = useRouter()
+
+	useEffect(() => {
+		const urlString = router.pathname
+		if (urlString.includes('reviews')) {
+			setActiveTab(2)
+		} else if (urlString.includes('about')) {
+			setActiveTab(3)
+		} else {
+			setActiveTab(1)
+		}
+	}, [router])
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({open}) => (
@@ -25,14 +40,27 @@ export default function Navbar(): JSX.Element {
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<Link href="/reviews">
-										<a className="border-teal-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+										<a
+											className={`${
+												activeTab === 2 ? 'border-b-2 border-teal-500' : ''
+											} text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium`}
+										>
 											{t('layout.nav.reviews')}
+										</a>
+									</Link>
+									<Link href="/about">
+										<a
+											className={`${
+												activeTab === 3 ? 'border-b-2 border-teal-500' : ''
+											} text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium`}
+										>
+											{t('layout.nav.about')}
 										</a>
 									</Link>
 								</div>
 							</div>
 							<div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
-								<div className="max-w-lg w-full lg:max-w-xs">
+								{/* <div className="max-w-lg w-full lg:max-w-xs">
 									<label htmlFor="search" className="sr-only">
 										{t('layout.nav.search')}
 									</label>
@@ -51,7 +79,7 @@ export default function Navbar(): JSX.Element {
 											type="search"
 										/>
 									</div>
-								</div>
+								</div> */}
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<Link href="/create-review">
