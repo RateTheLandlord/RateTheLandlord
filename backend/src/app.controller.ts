@@ -1,9 +1,7 @@
 import { Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { ReviewService } from './review/review.service';
-import { UsersService } from './users/users.service';
 
 @Controller()
 export class AppController {
@@ -12,16 +10,10 @@ export class AppController {
     private reviewService: ReviewService,
   ) {}
 
-  //   @UseGuards(LocalAuthGuard)
+  // @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
+    console.log('login request');
     return this.authService.validateUser(req.body.email, req.body.password);
-  }
-
-  //Protected Route to return all flagged reviews
-  //   @UseGuards(JwtAuthGuard)
-  @Get('review/flagged')
-  getFlagged() {
-    return this.reviewService.getFlagged();
   }
 }

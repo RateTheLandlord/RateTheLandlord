@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Tabs from '@/components/admin/tabs/Tabs'
 import {ITabs} from '@/components/admin/types/types'
 import FlaggedReviews from '@/components/admin/sections/FlaggedReviews'
@@ -16,12 +16,20 @@ const startingTabs = [
 function Admin(): JSX.Element {
 	const cookies = parseCookies()
 	const [tabs, setTabs] = useState<Array<ITabs>>(startingTabs)
-	const [currentTab, setCurrentTab] = useState<ITabs>(tabs[0])
+	const [currentTab, setCurrentTab] = useState<ITabs>(startingTabs[0])
 	const [currentSection, setCurrentSection] = useState<JSX.Element>(
-		currentTab.component,
+		startingTabs[0].component,
 	)
 
-	if (!cookies.ratethelandlord) {
+	const [noCookie, setNoCookies] = useState(false)
+
+	useEffect(() => {
+		if (!cookies.ratethelandlord) {
+			setNoCookies(true)
+		}
+	}, [cookies.ratethelandlord])
+
+	if (noCookie) {
 		return (
 			<div className="w-full flex flex-col items-center gap-4">
 				<h1 className="text-center">Not Logged In</h1>

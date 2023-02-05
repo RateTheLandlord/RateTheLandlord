@@ -1,10 +1,9 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {parseCookies} from 'nookies'
 
 const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
-	const cookies = parseCookies()
+	const cookies = req.cookies
 	const jwt = cookies.ratethelandlord
 
 	fetch(`${url}/review/flagged`, {

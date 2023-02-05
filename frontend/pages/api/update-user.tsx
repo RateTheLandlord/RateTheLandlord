@@ -1,5 +1,4 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {parseCookies} from 'nookies'
 
 interface IBody {
 	id: number
@@ -8,7 +7,7 @@ interface IBody {
 const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
-	const cookies = parseCookies()
+	const cookies = req.cookies
 	const jwt = cookies.ratethelandlord
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

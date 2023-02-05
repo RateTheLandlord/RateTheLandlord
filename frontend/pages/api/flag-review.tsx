@@ -11,8 +11,6 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	console.log('Body: ', body)
-
 	fetch(`${url}/review/${body.newReview.id}`, {
 		method: 'PUT',
 		headers: {

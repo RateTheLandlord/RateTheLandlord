@@ -7,7 +7,9 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
@@ -68,6 +70,7 @@ export class ReviewController {
   }
 
   //Get Flagged Reviews
+  @UseGuards(JwtAuthGuard)
   @Get('/flagged')
   getFlagged(): Promise<Review[]> {
     return this.reviewService.getFlagged();
