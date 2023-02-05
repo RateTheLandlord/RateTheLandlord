@@ -15,6 +15,8 @@ RUN npm install
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
 
+EXPOSE 5000
+
 # Build Nest
 RUN npm run build
 

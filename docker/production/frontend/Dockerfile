@@ -20,5 +20,7 @@ COPY ./frontend /app
 # Build app
 RUN npm run build
 
+EXPOSE 3000
+
 # Run npm dev, as we would via the command line 
 CMD [ "npm", "run", "start" ]
