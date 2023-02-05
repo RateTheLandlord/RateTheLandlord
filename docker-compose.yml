@@ -34,7 +34,7 @@ services:
       - /app/node_modules
       - ./.env:/app/.env
     depends_on:
-      - db
+      - postgres
     env_file: .env
 
   frontend:
@@ -57,37 +57,23 @@ services:
     depends_on:
       - backend
 
-  db:
-    image: postgres:12.0-alpine
+  postgres:
+    image: postgres
     container_name: postgres
     platform: linux/amd64
     restart: unless-stopped
     env_file: .env
     environment:
-      - POSTGRES_USER=${PGUSERNAME}
-      - POSTGRES_PASSWORD=${PGPASSWORD}
-      - POSTGRES_DB=${PGDATABASE}
+      POSTGRES_USER: ${PGUSERNAME}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
     volumes:
-      - data:/var/lib/postgresql/data/
+      - postgres-data:/var/lib/postgresql/data/
     networks:
       - internal
 
-  # db:
-  #   container_name: postgres
-  #   image: postgres
-  #   ports:
-  #     - '5433:${PGPORT}'
-  #   volumes:
-  #     - data:/data/db
-  #   environment:
-  #     - POSTGRES_USER=${PGUSERNAME}
-  #     - POSTGRES_PASSWORD=${PGPASSWORD}
-  #     - POSTGRES_DB=${PGDATABASE}
-  #   networks:
-  #     - internal
-
 volumes:
-  data:
+  postgres-data:
 
 networks:
   internal:
