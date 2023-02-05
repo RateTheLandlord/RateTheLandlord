@@ -35,7 +35,10 @@ const FlaggedReviews = () => {
 				setFlaggedReviews([...reviews])
 			} else {
 				setFlaggedReviews(() => {
-					return reviews.filter((review) => review.admin_approved === false)
+					return reviews.filter(
+						(review) =>
+							review.admin_approved === false || review.admin_approved === null,
+					)
 				})
 			}
 		}
@@ -137,7 +140,7 @@ const FlaggedReviews = () => {
 	}
 
 	return (
-		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8">
+		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8 container">
 			{removeAlertOpen ? (
 				<div className="w-full">
 					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
