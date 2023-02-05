@@ -1,5 +1,3 @@
-// TODO Hook up to BE
-
 import Alert from '@/components/alerts/Alert'
 import {useAppSelector} from '@/redux/hooks'
 import {useEffect, useState} from 'react'
