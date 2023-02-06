@@ -1,6 +1,6 @@
 exports.up = async function (DB) {
   await DB`
-      CREATE TABLE users (
+      CREATE TABLE user (
         id SERIAL PRIMARY KEY, 
         name TEXT,
         email TEXT NOT NULL,
