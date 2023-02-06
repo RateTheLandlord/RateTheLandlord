@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 const saltOrRounds = 10;
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findOne(email: string): Promise<IUser[]> {
@@ -36,6 +36,7 @@ export class UsersService {
     console.log('Get all users');
     const fullUsers = this.databaseService.sql<IUser[]>`Select * FROM users`;
     const users = (await fullUsers).map((user) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     });

@@ -11,11 +11,11 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { IUser } from './models/user';
-import { UsersService } from './user.service';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UserService) {}
 
   //Protected Route to return all users if user is admin
   @UseGuards(JwtAuthGuard)

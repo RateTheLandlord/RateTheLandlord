@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CaptchaModule } from './captcha/captcha.module';
 import { ReviewModule } from './review/review.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './user/user.module';
+import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -12,7 +12,7 @@ import { AppController } from './app.controller';
     ReviewModule,
     CaptchaModule,
     AuthModule,
-    UsersModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [],

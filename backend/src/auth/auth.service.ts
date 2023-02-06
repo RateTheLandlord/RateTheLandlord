@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UsersService } from '../user/user.service';
+import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { IUser } from 'src/user/models/user';
 import * as bcrypt from 'bcrypt';
@@ -7,13 +7,13 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
     console.log(email);
-    const findUsers = await this.usersService.findOne(email);
+    const findUsers = await this.userService.findOne(email);
     console.log('Found: ', findUsers);
     if (findUsers.length) {
       const user = findUsers[0];
