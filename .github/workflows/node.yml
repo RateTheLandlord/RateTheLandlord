@@ -74,8 +74,8 @@ jobs:
           echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
           cat .env
       - name: Pull Docker
-        run: sudo docker-compose pull
+        run: docker-compose pull
       - name: Build Docker
-        run: sudo docker-compose build
+        run: docker-compose build
       - name: Run
-        run: sudo docker-compose up -d
+        run: docker-compose up -d
