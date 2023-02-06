@@ -45,13 +45,18 @@ jobs:
 
   docker-build:
     runs-on: self-hosted
-    container-user-id: 1000
     needs: [lint-be, lint-fe]
 
     strategy:
       matrix:
         node-version: [16.x]
     steps:
+      - name: 'Cleanup build folder'
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
