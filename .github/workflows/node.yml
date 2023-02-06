@@ -77,3 +77,56 @@ jobs:
         run: docker-compose pull
       - name: Build Docker
         run: docker-compose build
+
+    publish:
+      runs-on: ubuntu-latest
+      needs: [docker-build]
+
+      strategy:
+        matrix:
+          node-version: [16.x]
+      steps:
+        - uses: actions/checkout@v3
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Publish to Github Packages Registry
+          uses: elgohr/Publish-Docker-Github-Action@master
+          with:
+            name: RateTheLandlord/RateTheLandlord/rtl
+            registry: docker.pkg.github.com
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+            dockerfile: Dockerfile-prod
+            tags: latest
+
+    # deploy:
+    #   runs-on: ubuntu-latest
+    #   needs: [docker-build]
+
+    # strategy:
+    #   matrix:
+    #     node-version: [16.x]
+    # steps:
+    #   - uses: actions/checkout@v3
+    #   - name: Use Node.js ${{ matrix.node-version }}
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
+    #   - name: Deploy package to digitalocean
+    #     uses: appleboy/ssh-action@master
+    #     env:
+    #       GITHUB_USERNAME: ${{ secrets.USERNAME }}
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     with:
+    #       host: ${{ secrets.HOST }}
+    #       username: ${{ secrets.USERNAME }}
+    #       password: ${{ secrets.PASSWORD }}
+    #       port: ${{ secrets.PORT }}
+    #       envs: USERNAME, GITHUB_TOKEN
+    #       script: |
+    #         docker stop $(docker ps -a -q)
+    #         docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+    #         docker pull docker.pkg.github.com/RateTheLandlord/RateTheLandlord/rtl:latest
+    #         docker run -dit -p 80:80 docker.pkg.github.com/RateTheLandlord/RateTheLandlord/rtl:latest
