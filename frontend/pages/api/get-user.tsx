@@ -1,14 +1,14 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {parseCookies} from 'nookies'
 
 const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
-	const cookies = parseCookies()
+	const cookies = req.cookies
 	const jwt = cookies.ratethelandlord
-	const id = localStorage.getItem('rtl')
 
-	fetch(`${url}/users/${id}`, {
+	const id = localStorage.getItem('rtl') || ''
+
+	fetch(`${url}/user/${id}`, {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
