@@ -78,28 +78,28 @@ jobs:
       - name: Build Docker
         run: docker-compose build
 
-    publish:
-      runs-on: ubuntu-latest
-      needs: [docker-build]
+  publish:
+    runs-on: ubuntu-latest
+    needs: [docker-build]
 
-      strategy:
-        matrix:
-          node-version: [16.x]
-      steps:
-        - uses: actions/checkout@v3
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{ matrix.node-version }}
-        - name: Publish to Github Packages Registry
-          uses: elgohr/Publish-Docker-Github-Action@master
-          with:
-            name: RateTheLandlord/RateTheLandlord/rtl
-            registry: docker.pkg.github.com
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-            dockerfile: Dockerfile-prod
-            tags: latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Publish to Github Packages Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: RateTheLandlord/RateTheLandlord/rtl
+          registry: docker.pkg.github.com
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: Dockerfile-prod
+          tags: latest
 
     # deploy:
     #   runs-on: ubuntu-latest
