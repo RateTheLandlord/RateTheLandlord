@@ -77,3 +77,5 @@ jobs:
         run: docker-compose pull
       - name: Build Docker
         run: docker-compose build
+      - name: Run
+        run: docker-compose up -d
