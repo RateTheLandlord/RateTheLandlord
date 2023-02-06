@@ -45,6 +45,7 @@ jobs:
 
   docker-build:
     runs-on: self-hosted
+    container-user-id: 1000
     needs: [lint-be, lint-fe]
 
     strategy:
