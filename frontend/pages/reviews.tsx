@@ -13,6 +13,7 @@ import {
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
+import Head from 'next/head'
 
 //fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
@@ -88,6 +89,9 @@ export default function Reviews({data}: {data: Review[]}): JSX.Element {
 
 	return (
 		<>
+			<Head>
+				<title>Reviews | Rate The Landlord</title>
+			</Head>
 			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}

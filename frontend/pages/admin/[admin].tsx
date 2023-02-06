@@ -6,6 +6,7 @@ import TeamMembers from '@/components/admin/sections/TeamMembers'
 import MyInfo from '@/components/admin/sections/MyInfo'
 import {parseCookies} from 'nookies'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const startingTabs = [
 	{name: 'Flagged Reviews', component: <FlaggedReviews />, current: true},
@@ -44,6 +45,9 @@ function Admin(): JSX.Element {
 	}
 	return (
 		<div className="w-full flex flex-col items-center">
+			<Head>
+				<title>Rate The Landlord</title>
+			</Head>
 			<Tabs
 				currentTab={currentTab}
 				setCurrentTab={setCurrentTab}
