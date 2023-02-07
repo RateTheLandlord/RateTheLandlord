@@ -118,6 +118,5 @@ jobs:
             echo PGPORT=${{secrets.PGPORT}} >> .env
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
-            cd ..
             docker-compose build --force-rm --no-cache --compress
             docker-compose up -d
