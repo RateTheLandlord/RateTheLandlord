@@ -98,7 +98,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
           passphrase: ${{secrets.SSH_PASSPHRASE}}
-          command_timeout: 200
+          command_timeout: 200m
           script_stop: true
           script: |
             cd /home/RateTheLandlord
