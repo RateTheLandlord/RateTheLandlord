@@ -98,8 +98,6 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
           passphrase: ${{secrets.SSH_PASSPHRASE}}
-          script_stop: true
-          command_timeout: 200m
           script: |
             cd /home/RateTheLandlord
             git pull
@@ -118,5 +116,5 @@ jobs:
             echo PGPORT=${{secrets.PGPORT}} >> .env
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
-            docker-compose build --force-rm --no-cache --compress
+            docker-compose build
             docker-compose up -d
