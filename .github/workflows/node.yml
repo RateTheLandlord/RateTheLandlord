@@ -112,9 +112,10 @@ jobs:
             echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
             echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
             echo PGHOST=${{secrets.PGHOST}} >> .env
-            echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .env
+            echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .envdocker-
             echo PGPORT=${{secrets.PGPORT}} >> .env
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
+            docker-compose pull
             docker-compose build
             docker-compose up -d

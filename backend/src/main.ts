@@ -14,7 +14,7 @@ async function bootstrap() {
 
   app.use(requestIp.mw());
   app.enableCors({
-    origin: ['http://localhost/'],
+    origin: ['http://localhost/', 'http://159.203.4.57/'],
   });
   await app.listen(5000);
 }
