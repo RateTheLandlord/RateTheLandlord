@@ -1,5 +1,7 @@
 FROM node:alpine
 
+ENV PORT 5000
+
 RUN mkdir -p /app
 
 # Set /app as the working directory
@@ -10,15 +12,17 @@ WORKDIR /app
 COPY ./backend/package*.json /app/
 COPY ./.env /app/
 
-RUN npm install
+RUN yarn
 
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
 
-EXPOSE 5000
+ENV NODE_ENV=production
 
 # Build Nest
-RUN npm run build
+RUN yarn build
+
+EXPOSE 5000
 
 # Run npm dev, as we would via the command line 
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "start:prod"]
