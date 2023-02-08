@@ -98,6 +98,8 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
           passphrase: ${{secrets.SSH_PASSPHRASE}}
+          command-timeout: 200
+          script-stop: true
           script: |
             cd /home/RateTheLandlord
             git pull
