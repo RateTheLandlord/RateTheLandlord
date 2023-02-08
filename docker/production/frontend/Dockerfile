@@ -14,7 +14,7 @@ COPY ./frontend/package*.json  /app/
 COPY ./.env /app/
 
 # Install dependencies in /app
-RUN yarn
+RUN npm install
 
 # Copy the rest of our Next.js folder into /app
 COPY ./frontend /app
@@ -22,9 +22,9 @@ COPY ./frontend /app
 ENV NODE_ENV=production
 
 # Build app
-RUN yarn build
+RUN npm run build
 
 EXPOSE 3000
 
 # Run npm dev, as we would via the command line 
-CMD [ "yarn", "start" ]
+CMD [ "npm", "run", "start" ]

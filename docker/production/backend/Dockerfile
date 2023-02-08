@@ -12,7 +12,7 @@ WORKDIR /app
 COPY ./backend/package*.json /app/
 COPY ./.env /app/
 
-RUN yarn
+RUN npm install
 
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
@@ -20,9 +20,9 @@ COPY ./backend /app
 ENV NODE_ENV=production
 
 # Build Nest
-RUN yarn build
+RUN npm run build
 
 EXPOSE 5000
 
 # Run npm dev, as we would via the command line 
-CMD ["yarn", "start:prod"]
+CMD ["nom", "run", "start:prod"]
