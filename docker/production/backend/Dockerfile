@@ -25,4 +25,4 @@ RUN npm run build
 EXPOSE 5000
 
 # Run npm dev, as we would via the command line 
-CMD ["nom", "run", "start:prod"]
+CMD ["npm", "run", "start:prod"]
