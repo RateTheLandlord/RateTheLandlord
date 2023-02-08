@@ -25,7 +25,7 @@ export class UserController {
   }
 
   //Protected Route to Create new users
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post()
   create(@Request() req) {
     console.log('New User: ', req.body);

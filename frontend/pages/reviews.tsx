@@ -137,12 +137,12 @@ export async function getStaticProps() {
 			props: {
 				data: res,
 			},
-			revalidate: 1800,
+			revalidate: 100,
 		}
 	} catch (error) {
 		return {
 			props: {data: []},
-			revalidate: 1800,
+			revalidate: 100,
 		}
 	}
 }

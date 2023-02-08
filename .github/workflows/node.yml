@@ -103,6 +103,7 @@ jobs:
           script: |
             cd /home/RateTheLandlord
             git pull
+            rm -rf .env
             touch .env
             echo BEPORT=${{secrets.BEPORT}} >> .env
             echo ENVIRONMENT=${{secrets.ENVIRONMENT}} >> .env
