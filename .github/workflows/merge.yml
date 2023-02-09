@@ -1,0 +1,77 @@
+name: Merge Actions
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-be:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Lint backend
+        run: |
+          cd backend
+          npm install
+          npm run lint
+
+  lint-fe:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Lint frontend
+        run: |
+          cd frontend
+          npm install
+          npm run lint
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [lint-be, lint-fe]
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Create env file
+        run: |
+          touch .env
+          echo BEPORT=${{secrets.BEPORT}} >> .env
+          echo ENVIRONMENT=${{secrets.ENVIRONMENT}} >> .env
+          echo FEPORT=${{secrets.FEPORT}} >> .env
+          echo HCPATCHA_SECRET_KEY=${{secrets.HCPATCHA_SECRET_KEY}} >> .env
+          echo HCPATCHA_SITE_KEY=${{secrets.API_TOKEN_SALT}} >> .env
+          echo JWT_KEY="${{secrets.JWT_KEY}}" >> .env
+          echo API_URL=${{secrets.API_URL}} >> .env
+          echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
+          echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
+          echo PGHOST=${{secrets.PGHOST}} >> .env
+          echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .env
+          echo PGPORT=${{secrets.PGPORT}} >> .env
+          echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
+          cat .env
+      - name: Pull Docker
+        run: docker-compose pull
+      - name: Build Docker
+        run: docker-compose build
