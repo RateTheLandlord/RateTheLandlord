@@ -337,8 +337,9 @@ function ReviewForm(): JSX.Element {
 
 					<div className="flex justify-end">
 						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
-						{/* disabled={!token} */}
-						<Button>{t('create-review.review-form.submit')}</Button>
+						<Button disabled={!token}>
+							{t('create-review.review-form.submit')}
+						</Button>
 					</div>
 				</div>
 			</form>
