@@ -62,9 +62,9 @@ export class ReviewController {
       ip,
     );
 
-    // if (!validRequest) {
-    //   throw new BadRequestException('Invalid captcha');
-    // }
+    if (!validRequest) {
+      throw new BadRequestException('Invalid captcha');
+    }
 
     return this.reviewService.create(review.review);
   }

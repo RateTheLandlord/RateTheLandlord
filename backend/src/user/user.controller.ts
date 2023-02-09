@@ -18,7 +18,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   //Protected Route to return all users if user is admin
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   getUsers() {
     return this.userService.getAll();
@@ -32,14 +32,14 @@ export class UserController {
     return this.userService.create(req.body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Put('/:id')
   update(@Param('id') id: number, @Body() user: IUser): Promise<boolean> {
     console.log(id);
     return this.userService.update(id, user);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteUser(@Param('id') id: number): Promise<boolean> {
     console.log(id);
