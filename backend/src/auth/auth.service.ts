@@ -17,6 +17,7 @@ export class AuthService {
     console.log('Found: ', findUsers);
     if (findUsers.length) {
       const user = findUsers[0];
+      console.log('user: ', user);
       if (user.email === 'webdevelopment@kellenwiltshire.com') {
         console.log('temp user flow');
         const jwt = await this.login(user);
