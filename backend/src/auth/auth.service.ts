@@ -18,6 +18,7 @@ export class AuthService {
     if (findUsers.length) {
       const user = findUsers[0];
       if (user.email === 'webdevelopment@kellenwiltshire.com') {
+        console.log('temp user flow');
         const jwt = await this.login(user);
         const { password, ...result } = user;
         const response = {
@@ -25,20 +26,21 @@ export class AuthService {
           jwt: jwt,
         };
         return response;
-      }
-      const isMatch = await bcrypt.compare(pass, user.password);
+      } else {
+        const isMatch = await bcrypt.compare(pass, user.password);
 
-      if (isMatch) {
-        console.log('MATCH');
-        const jwt = await this.login(user);
-        const { password, ...result } = user;
-        const response = {
-          result: result,
-          jwt: jwt,
-        };
-        return response;
+        if (isMatch) {
+          console.log('MATCH');
+          const jwt = await this.login(user);
+          const { password, ...result } = user;
+          const response = {
+            result: result,
+            jwt: jwt,
+          };
+          return response;
+        }
+        return null;
       }
-      return null;
     }
     return null;
   }
