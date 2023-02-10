@@ -10,7 +10,7 @@ export class UserService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findOne(email: string): Promise<IUser[]> {
-    console.log('fineOne User: ', email);
+    console.log('find One User: ', email);
     return this.databaseService.sql<
       IUser[]
     >`SELECT * FROM users WHERE email = ${email}`;
