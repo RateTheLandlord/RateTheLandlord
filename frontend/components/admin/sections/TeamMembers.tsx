@@ -51,6 +51,8 @@ const TeamMembers = () => {
 	if (error) return <div>failed to load</div>
 	if (!allUsers) return <div>loading...</div>
 
+	console.log(users)
+
 	const onSubmitNewUser = (num: number) => {
 		const newUser = {
 			name: newUserName,
@@ -190,7 +192,7 @@ const TeamMembers = () => {
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
-						{users.map((user) => (
+						{users?.map((user) => (
 							<tr key={user.name}>
 								<td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
 									{user.name}
@@ -213,17 +215,17 @@ const TeamMembers = () => {
 								</td>
 
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									{user.role === 'ADMIN' ? null : (
-										<button
-											onClick={() => {
-												setSelectedUser(user)
-												setRemoveUserOpen(true)
-											}}
-											className="text-indigo-600 hover:text-indigo-900"
-										>
-											Remove
-										</button>
-									)}
+									{/* {user.role === 'ADMIN' ? null : ( */}
+									<button
+										onClick={() => {
+											setSelectedUser(user)
+											setRemoveUserOpen(true)
+										}}
+										className="text-indigo-600 hover:text-indigo-900"
+									>
+										Remove
+									</button>
+									{/* )} */}
 								</td>
 							</tr>
 						))}
