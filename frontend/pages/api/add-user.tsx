@@ -19,7 +19,7 @@ const AddUser = (req: NextApiRequest, res: NextApiResponse) => {
 
 	console.log(body)
 
-	fetch(`${url}/users`, {
+	fetch(`${url}/user`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

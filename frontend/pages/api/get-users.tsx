@@ -6,7 +6,7 @@ const getUsers = (req: NextApiRequest, res: NextApiResponse) => {
 	const cookies = req.cookies
 	const jwt = cookies.ratethelandlord
 
-	fetch(`${url}/users`, {
+	fetch(`${url}/user`, {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
