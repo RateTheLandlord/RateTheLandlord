@@ -2,12 +2,9 @@
 import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
 import {useEffect, useState} from 'react'
-import useSWR, {mutate} from 'swr'
+import useSWR, {useSWRConfig} from 'swr'
 import AddUserModal from '../components/AddUserModal'
 import RemoveUserModal from '../components/RemoveUserModal'
-
-// TODO Hook up to BE
-// TODO Add Success/Failure Notification
 
 interface IUsers {
 	id: number
@@ -20,6 +17,7 @@ interface IUsers {
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const TeamMembers = () => {
+	const {mutate} = useSWRConfig()
 	const [addUserOpen, setAddUserOpen] = useState(false)
 
 	const [newUserName, setNewUserName] = useState('')
@@ -190,7 +188,7 @@ const TeamMembers = () => {
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
-						{users?.map((user) => (
+						{users.map((user) => (
 							<tr key={user.name}>
 								<td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
 									{user.name}
