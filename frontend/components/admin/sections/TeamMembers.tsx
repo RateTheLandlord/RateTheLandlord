@@ -35,12 +35,12 @@ const TeamMembers = () => {
 	const [success, setSuccess] = useState(false)
 	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
 
-	console.log(selectedUser)
-
 	const {data: allUsers, error} = useSWR<Array<IUsers>>(
 		'/api/get-users',
 		fetcher,
 	)
+
+	console.log('All Users: ', allUsers)
 
 	useEffect(() => {
 		if (allUsers) {
@@ -50,8 +50,6 @@ const TeamMembers = () => {
 
 	if (error) return <div>failed to load</div>
 	if (!allUsers) return <div>loading...</div>
-
-	console.log(allUsers)
 
 	const onSubmitNewUser = (num: number) => {
 		const newUser = {
