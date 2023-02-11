@@ -8,4 +8,4 @@ import { InitController } from './init.controller';
   controllers: [InitController],
   exports: [UserService],
 })
-export class UserModule {}
+export class InitModule {}
