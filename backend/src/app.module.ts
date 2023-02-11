@@ -5,7 +5,6 @@ import { ReviewModule } from './review/review.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
-import { InitModule } from './init/init.module';
 
 @Module({
   imports: [
@@ -14,7 +13,6 @@ import { InitModule } from './init/init.module';
     CaptchaModule,
     AuthModule,
     UserModule,
-    InitModule,
   ],
   controllers: [AppController],
   providers: [],
