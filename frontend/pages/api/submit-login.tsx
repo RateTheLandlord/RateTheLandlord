@@ -19,7 +19,7 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 		body: JSON.stringify(body),
 	})
 		.then((result: Response) => {
-			console.log(result)
+			console.log('Result: ', result)
 			if (!result.ok) {
 				throw new Error()
 			}
