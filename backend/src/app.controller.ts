@@ -10,7 +10,7 @@ export class AppController {
   ) {}
 
   @Post('admincontroller')
-  create(@Request() req) {
+  async create(@Request() req) {
     return this.userService.create(req.body);
   }
 
