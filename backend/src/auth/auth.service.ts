@@ -14,18 +14,16 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     console.log(email);
     const findUsers = await this.userService.findOne(email);
-    console.log('Found: ', findUsers);
-    const user = findUsers[0];
-    console.log('user: ', user);
+    console.log('Found: ', findUsers[0]);
 
-    const jwt = await this.login(user);
+    const jwt = await this.login(findUsers[0]);
     console.log('jwt: ', jwt);
-    const { password, ...result } = user;
+    const { password, ...result } = findUsers[0];
     const response = {
       result: result,
       jwt: jwt,
     };
-    console.log(response);
+    console.log('Nest Response: ', response);
     return response;
     // if (findUsers.length) {
     //   const user = findUsers[0];
