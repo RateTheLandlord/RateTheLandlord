@@ -12,48 +12,24 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    console.log(email);
     const findUsers = await this.userService.findOne(email);
-    console.log('Found: ', findUsers[0]);
+    if (findUsers.length) {
+      const user = findUsers[0];
+      const isMatch = await bcrypt.compare(pass, user.password);
+      if (isMatch) {
+        const jwt = await this.login(user);
 
-    const jwt = await this.login(findUsers[0]);
-    console.log('jwt: ', jwt);
-    const { password, ...result } = findUsers[0];
-    const response = {
-      result: result,
-      jwt: jwt,
-    };
-    console.log('Nest Response: ', response);
-    return response;
-    // if (findUsers.length) {
-    //   const user = findUsers[0];
-    //   console.log('user: ', user);
-    //   if (user.email === 'webdevelopment@kellenwiltshire.com') {
-    //     console.log('temp user flow');
-    //     const jwt = await this.login(user);
-    //     const { password, ...result } = user;
-    //     const response = {
-    //       result: result,
-    //       jwt: jwt,
-    //     };
-    //     return response;
-    //   } else {
-    //     const isMatch = await bcrypt.compare(pass, user.password);
+        const { password, ...result } = user;
+        const response = {
+          result: result,
+          jwt: jwt,
+        };
+        return response;
+      }
+      return null;
+    }
 
-    //     if (isMatch) {
-    //       console.log('MATCH');
-    //       const jwt = await this.login(user);
-    //       const { password, ...result } = user;
-    //       const response = {
-    //         result: result,
-    //         jwt: jwt,
-    //       };
-    //       return response;
-    //     }
-    //     return null;
-    //   }
-    // }
-    // return null;
+    return null;
   }
 
   async login(user: IUser) {
