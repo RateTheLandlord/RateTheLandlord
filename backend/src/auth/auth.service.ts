@@ -16,9 +16,10 @@ export class AuthService {
     const findUsers = await this.userService.findOne(email);
     console.log('Found: ', findUsers);
     const user = findUsers[0];
-    console.log(user);
+    console.log('user: ', user);
 
     const jwt = await this.login(user);
+    console.log('jwt: ', jwt);
     const { password, ...result } = user;
     const response = {
       result: result,
