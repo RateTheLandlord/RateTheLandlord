@@ -9,7 +9,7 @@ export class AppController {
     private userService: UserService,
   ) {}
 
-  @Post('/admincontroller')
+  @Post('admincontroller')
   create(@Request() req) {
     return this.userService.create(req.body);
   }
