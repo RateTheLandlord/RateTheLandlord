@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { IUser } from 'src/user/models/user';
@@ -26,10 +26,10 @@ export class AuthService {
         };
         return response;
       }
-      return null;
+      return BadRequestException;
     }
 
-    return null;
+    return BadRequestException;
   }
 
   async login(user: IUser) {
