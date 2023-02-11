@@ -44,14 +44,14 @@ const TeamMembers = () => {
 
 	useEffect(() => {
 		if (allUsers) {
-			setUsers([...allUsers])
+			setUsers(allUsers)
 		}
 	}, [allUsers])
 
 	if (error) return <div>failed to load</div>
 	if (!allUsers) return <div>loading...</div>
 
-	console.log(users)
+	console.log(allUsers)
 
 	const onSubmitNewUser = (num: number) => {
 		const newUser = {
