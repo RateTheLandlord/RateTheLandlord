@@ -11,7 +11,7 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	fetch(`${url}/users/${body}`, {
+	fetch(`${url}/user/${body}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',

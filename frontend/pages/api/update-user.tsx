@@ -17,7 +17,7 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 
 	const id = body.id
 
-	fetch(`${url}/users/${id}`, {
+	fetch(`${url}/user/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
