@@ -14,8 +14,6 @@ const MyInfo = () => {
 
 	const user = useAppSelector((state) => state.user)
 
-	console.log(user)
-
 	useEffect(() => {
 		if (user) {
 			setEmail(user?.result.email)
