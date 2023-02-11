@@ -5,6 +5,8 @@ import { ReviewModule } from './review/review.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
+import { InitService } from './init/init.service';
+import { InitModule } from './init/init.module';
 
 @Module({
   imports: [
@@ -13,8 +15,9 @@ import { AppController } from './app.controller';
     CaptchaModule,
     AuthModule,
     UserModule,
+    InitModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [InitService],
 })
 export class AppModule {}
