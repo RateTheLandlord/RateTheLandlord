@@ -27,13 +27,19 @@ jobs:
           command_timeout: 200m
           script_stop: true
           script: |
+            echo "[Changing Directory to RateTheLandlord]"
             cd /home/RateTheLandlord
+            echo "[Pulling Repo from Github]"
             git pull
+            echo "[Removing existing env file]"
             rm -rf .env
+            echo "[Changing Directory to frontend]"
             cd frontend
-            rm -rf node_modules
+            echo "[removing next folder]"
             rm -rf .next
+            echo "[Changing Directory back to RateTheLandlord]"
             cd ..
+            echo "[Creating new env file]"
             touch .env
             echo BEPORT=${{secrets.BEPORT}} >> .env
             echo ENVIRONMENT=${{secrets.ENVIRONMENT}} >> .env
@@ -49,5 +55,7 @@ jobs:
             echo PGPORT=${{secrets.PGPORT}} >> .env
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
+            echo "[Building Docker Containers]"
             docker-compose build
+            echo "[Starting Docker Containers]"
             docker-compose up -d
