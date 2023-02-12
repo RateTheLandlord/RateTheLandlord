@@ -110,7 +110,7 @@ export const getStateOptions = (data: Array<Review>): Array<Options> => {
 
 export const getCityOptions = (data: Array<Review>): Array<Options> => {
 	if (data.length) {
-		const cityOptions = data.map((review, id) => {
+		const allCityOptions = data.map((review, id) => {
 			const city = review.city.toLowerCase()
 			return {
 				id: id + 1,
@@ -118,6 +118,8 @@ export const getCityOptions = (data: Array<Review>): Array<Options> => {
 				value: review.city.toLowerCase(),
 			}
 		})
+
+		const cityOptions = removeDuplicates(allCityOptions, 'value')
 
 		return cityOptions
 	}
