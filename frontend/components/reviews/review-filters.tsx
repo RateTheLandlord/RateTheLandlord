@@ -5,6 +5,7 @@ import ActiveFilters from './ui/active-filters'
 import SearchBar from './ui/searchbar'
 import MobileReviewFilters from './mobile-review-filters'
 import {useTranslation} from 'react-i18next'
+import ButtonLight from '../ui/button-light'
 
 //Review filters and Logic
 
@@ -85,20 +86,16 @@ function ReviewFilters({
 					</h2>
 
 					<div className="relative z-10 bg-white border-b border-gray-200 pb-4">
-						<div className="max-w-7xl mx-auto px-4 flex items-center lg:justify-between lg:px-8">
+						<div className="max-w-7xl mx-auto px-4 flex justify-between lg:px-8">
 							<SelectList
 								state={selectedSort}
 								setState={setSelectedSort}
 								options={sortOptions}
 								name={t('reviews.sort')}
 							/>
-							<button
-								type="button"
-								className="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 lg:hidden"
-								onClick={() => setMobileFiltersOpen(true)}
-							>
+							<ButtonLight onClick={() => setMobileFiltersOpen(true)}>
 								{t('reviews.filters')}
-							</button>
+							</ButtonLight>
 
 							<div className="hidden lg:block">
 								<div className="flow-root">
