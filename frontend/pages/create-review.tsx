@@ -1,8 +1,7 @@
+import Faq from '@/components/about/faq'
 import ReviewForm from '@/components/create-review/review-form'
 import Head from 'next/head'
 import React from 'react'
-
-//This page should be statically generated at build. No need for data fetching here.
 
 function CreateReview(): JSX.Element {
 	return (
@@ -10,7 +9,10 @@ function CreateReview(): JSX.Element {
 			<Head>
 				<title>Create a Review | Rate The Landlord</title>
 			</Head>
-			<ReviewForm />
+			<div className="flex flex-col">
+				<ReviewForm />
+				<Faq />
+			</div>
 		</div>
 	)
 }
