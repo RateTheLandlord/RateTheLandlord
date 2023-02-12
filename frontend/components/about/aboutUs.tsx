@@ -1,6 +1,6 @@
 const AboutUs = () => {
 	return (
-		<div className="mx-auto max-w-prose text-lg">
+		<div className="mx-auto max-w-prose text-lg" data-testid="about-aboutus-1">
 			<h1>
 				<span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
 					About Us
