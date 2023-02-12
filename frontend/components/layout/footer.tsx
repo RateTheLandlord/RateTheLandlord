@@ -7,11 +7,11 @@ import TikTok from '../svg/social/tiktok'
 import Twitter from '../svg/social/twitter'
 
 const navigation = [
-	{
-		name: 'Facebook',
-		href: '#',
-		icon: () => <Facebook />,
-	},
+	// {
+	// 	name: 'Facebook',
+	// 	href: '#',
+	// 	icon: () => <Facebook />,
+	// },
 	{
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',

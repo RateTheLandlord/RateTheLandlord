@@ -20,6 +20,8 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(2)
 		} else if (urlString.includes('about')) {
 			setActiveTab(3)
+		} else if (urlString.includes('create')) {
+			setActiveTab(4)
 		} else {
 			setActiveTab(1)
 		}
@@ -110,7 +112,9 @@ export default function Navbar(): JSX.Element {
 							<Link href="/reviews">
 								<Disclosure.Button
 									as="a"
-									className="bg-teal-50 border-teal-500 text-teal-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
+									className={`bg-teal-50 text-teal-700 block pl-3 pr-4 py-2 text-base font-medium cursor-pointer ${
+										activeTab === 2 ? 'border-teal-500 border-l-4' : ''
+									}`}
 								>
 									{t('layout.nav.reviews')}
 								</Disclosure.Button>
@@ -118,9 +122,21 @@ export default function Navbar(): JSX.Element {
 							<Link href="/create-review">
 								<Disclosure.Button
 									as="a"
-									className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
+									className={`border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer ${
+										activeTab === 4 ? 'border-teal-500 border-l-4' : ''
+									}`}
 								>
 									{t('layout.nav.submit')}
+								</Disclosure.Button>
+							</Link>
+							<Link href="/about">
+								<Disclosure.Button
+									as="a"
+									className={`border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer ${
+										activeTab === 3 ? 'border-teal-500 border-l-4' : ''
+									}`}
+								>
+									{t('layout.nav.about')}
 								</Disclosure.Button>
 							</Link>
 						</div>

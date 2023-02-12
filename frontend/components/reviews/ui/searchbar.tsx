@@ -8,7 +8,7 @@ interface SearchProps {
 export default function SearchBar({setSearchState}: SearchProps) {
 	const {t} = useTranslation()
 	return (
-		<div className="mt-1 w-full px-2">
+		<div className="mt-1 w-full">
 			<label htmlFor="search" className="sr-only">
 				Search
 			</label>

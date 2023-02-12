@@ -82,7 +82,7 @@ export default function MobileReviewFilters({
 
 							{/* Filters */}
 							<div className="mt-4">
-								<Popover.Group className="mx-2 flex flex-col items-center divide-y gap-2 ">
+								<Popover.Group className="mx-2 flex flex-col items-center divide-y gap-2">
 									<SearchBar setSearchState={setSearchState} />
 
 									<MobileSelectList

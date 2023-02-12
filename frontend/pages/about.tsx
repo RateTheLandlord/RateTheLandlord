@@ -12,7 +12,7 @@ function About(): JSX.Element {
 			<Head>
 				<title>About | Rate The Landlord</title>
 			</Head>
-			<div className="flex flex-col container items-center gap-4 mt-5">
+			<div className="flex flex-col container items-center gap-4 mt-5 px-2">
 				<AboutUs />
 				<Privacy />
 				<Moderation />

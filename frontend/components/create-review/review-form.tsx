@@ -121,7 +121,7 @@ function ReviewForm(): JSX.Element {
 	}
 
 	return (
-		<div className="w-full flex flex-col container items-center">
+		<div className="w-full flex flex-col container items-center px-4 sm:px-0">
 			{alertOpen ? (
 				<Alert success={success} setAlertOpen={setAlertOpen} />
 			) : null}
@@ -335,7 +335,7 @@ function ReviewForm(): JSX.Element {
 						<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
 					</div>
 
-					<div className="flex justify-end">
+					<div className="flex justify-center sm:justify-end">
 						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
 						<Button disabled={!token}>
 							{t('create-review.review-form.submit')}
