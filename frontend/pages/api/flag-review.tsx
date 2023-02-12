@@ -20,7 +20,6 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				console.log('Result: ', result)
 				res
 					.status(result.status)
 					.json({error: 'Failed to Submit Review', response: result.statusText})

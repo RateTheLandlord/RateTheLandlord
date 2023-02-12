@@ -20,11 +20,9 @@ function ReviewTable({
 	const date = new Date()
 
 	const handleReport = (review: Review) => {
-		console.log(review)
 		setSelectedReview(review)
 		setReportOpen(true)
 	}
-	console.log('data: ', data)
 	if (data.length) {
 		return (
 			<div>

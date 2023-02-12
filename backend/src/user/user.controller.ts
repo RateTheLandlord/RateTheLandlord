@@ -22,7 +22,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get()
   getUsers() {
-    console.log('Get All Users');
     return this.userService.getAll();
   }
 
@@ -31,21 +30,18 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Request() req) {
-    console.log('New User: ', req.body);
     return this.userService.create(req.body);
   }
 
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
   update(@Param('id') id: number, @Body() user: IUser): Promise<boolean> {
-    console.log(id);
     return this.userService.update(id, user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteUser(@Param('id') id: number): Promise<boolean> {
-    console.log(id);
     return this.userService.deleteUser(id);
   }
 }

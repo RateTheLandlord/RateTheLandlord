@@ -128,7 +128,6 @@ export default function Reviews({data}: {data: Review[]}): JSX.Element {
 //Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
 export async function getStaticProps() {
 	try {
-		console.log('Get Static Props')
 		const req = await fetch(`http://backend:5000/review`)
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const res: Review[] = await req.json()

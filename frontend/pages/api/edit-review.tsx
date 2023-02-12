@@ -13,8 +13,6 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	console.log('Body: ', body)
-
 	const id = body.id
 
 	fetch(`${url}/review/${id}`, {

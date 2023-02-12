@@ -50,7 +50,6 @@ export default function LoginForm(): JSX.Element {
 				return result.json()
 			})
 			.then((data: ILogin) => {
-				console.log('Successful Login: ', data)
 				setCookie(null, 'ratethelandlord', data.jwt.access_token, {
 					maxAge: 30 * 24 * 60,
 				})

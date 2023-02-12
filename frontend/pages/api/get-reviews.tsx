@@ -15,7 +15,6 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 			return result.json()
 		})
 		.then((data) => {
-			console.log('Reviews: ', data)
 			res.status(200).json(data)
 		})
 		.catch((err: Response) => {

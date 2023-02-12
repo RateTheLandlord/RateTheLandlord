@@ -10,7 +10,6 @@ export class UserService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findOne(email: string): Promise<IUser[]> {
-    console.log('find One User: ', email);
     return this.databaseService.sql<
       IUser[]
     >`SELECT * FROM users WHERE email = ${email}`;
@@ -23,7 +22,6 @@ export class UserService {
   }
 
   async update(id: number, user: IUser): Promise<boolean> {
-    console.log(user);
     const salt = bcrypt.genSaltSync(saltOrRounds);
     user.password = await bcrypt.hash(user.password, salt);
     await this.databaseService
@@ -33,7 +31,6 @@ export class UserService {
   }
 
   async getAll(): Promise<IGetUsers[]> {
-    console.log('Get all users');
     const fullUsers = this.databaseService.sql<IUser[]>`Select * FROM users`;
     const users = (await fullUsers).map((user) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -53,7 +50,6 @@ export class UserService {
         ;`
     )[0].id;
     user.id = id;
-    console.log(id);
     return user;
   }
 }

@@ -7,7 +7,6 @@ export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   get(): Promise<Review[]> {
-    console.log('Get All Reviews');
     return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
   }
 
@@ -34,12 +33,10 @@ export class ReviewService {
     )[0].id;
 
     review.id = id;
-    console.log(id);
     return review;
   }
 
   async update(id: number, review: Review): Promise<Review> {
-    console.log('Review: ', review);
     await this.databaseService
       .sql`UPDATE review SET landlord = ${review.landlord}, country_code = ${review.country_code}, city = ${review.city}, state = ${review.state}, zip = ${review.zip}, review = ${review.review}, repair = ${review.repair}, health = ${review.health}, stability = ${review.stability}, privacy = ${review.privacy}, respect = ${review.respect}, flagged = ${review.flagged}, flagged_reason = ${review.flagged_reason}, admin_approved = ${review.admin_approved}, admin_edited = ${review.admin_edited} 
       WHERE id = ${id};`;

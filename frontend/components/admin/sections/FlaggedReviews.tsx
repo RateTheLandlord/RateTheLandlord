@@ -75,14 +75,12 @@ const FlaggedReviews = () => {
 	}
 
 	const onSubmitEditReview = (id?: number) => {
-		console.log(id)
 		const editedReview = {
 			...selectedReview,
 			review: newReview,
 			admin_edited: true,
 			admin_approved: true,
 		}
-		console.log(editedReview)
 		fetch('/api/edit-review', {
 			method: 'POST',
 			headers: {
@@ -109,12 +107,10 @@ const FlaggedReviews = () => {
 	}
 
 	const onSubmitApproveReview = (id?: number) => {
-		console.log(id)
 		const editedReview = {
 			...selectedReview,
 			admin_approved: true,
 		}
-		console.log(editedReview)
 		fetch('/api/edit-review', {
 			method: 'POST',
 			headers: {

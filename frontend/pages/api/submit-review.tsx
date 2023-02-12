@@ -27,8 +27,6 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	console.log(body)
-
 	fetch(`${url}/review`, {
 		method: 'POST',
 		headers: {

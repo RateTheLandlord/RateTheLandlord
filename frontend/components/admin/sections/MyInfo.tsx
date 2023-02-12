@@ -32,7 +32,6 @@ const MyInfo = () => {
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		console.log('Submitted!')
 		if (passwordCheck) {
 			const updateUser = {
 				...user.result,

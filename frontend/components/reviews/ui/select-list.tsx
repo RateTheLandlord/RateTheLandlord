@@ -16,7 +16,6 @@ export default function SelectList({
 	options,
 	name,
 }: ComponentProps) {
-	console.log(options)
 	return (
 		<Listbox value={state} onChange={setState}>
 			<div className="relative mt-1 px-2">

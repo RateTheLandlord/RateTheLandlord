@@ -56,7 +56,6 @@ export class ReviewController {
     @Body() review: CreateReview,
     @IpAddress() ip: string,
   ): Promise<Review> {
-    console.log(review);
     const validRequest = await this.captchaService.verifyToken(
       review.captchaToken,
       ip,
