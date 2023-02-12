@@ -14,7 +14,7 @@ COPY ./frontend/package*.json  /app/
 COPY ./.env /app/
 
 # Install dependencies in /app
-RUN npm install --production
+RUN npm install
 
 # Copy the rest of our Next.js folder into /app
 COPY ./frontend /app
