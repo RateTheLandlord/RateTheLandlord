@@ -37,6 +37,9 @@ jobs:
             cd frontend
             echo "[removing next folder]"
             rm -rf .next
+            echo "[build a new next folder]"
+            npm install
+            npm run build
             echo "[Changing Directory back to RateTheLandlord]"
             cd ..
             echo "[Creating new env file]"

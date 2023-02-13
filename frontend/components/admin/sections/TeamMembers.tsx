@@ -208,17 +208,17 @@ const TeamMembers = () => {
 								</td>
 
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									{/* {user.role === 'ADMIN' ? null : ( */}
-									<button
-										onClick={() => {
-											setSelectedUser(user)
-											setRemoveUserOpen(true)
-										}}
-										className="text-indigo-600 hover:text-indigo-900"
-									>
-										Remove
-									</button>
-									{/* )} */}
+									{user.role === 'ADMIN' ? null : (
+										<button
+											onClick={() => {
+												setSelectedUser(user)
+												setRemoveUserOpen(true)
+											}}
+											className="text-indigo-600 hover:text-indigo-900"
+										>
+											Remove
+										</button>
+									)}
 								</td>
 							</tr>
 						))}
