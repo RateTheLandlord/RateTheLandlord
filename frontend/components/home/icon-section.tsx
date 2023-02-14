@@ -7,7 +7,7 @@ import Transparency from '../svg/icons/transparency'
 export default function IconSection() {
 	const {t} = useTranslation()
 	return (
-		<div className="bg-white min-w-full">
+		<div className="bg-white min-w-full" data-testid="home-icon-section-1">
 			<div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
 				<div className="bg-gray-50 rounded-3xl px-6 py-16 sm:p-16">
 					<div className="max-w-xl mx-auto lg:max-w-none">
