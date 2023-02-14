@@ -5,6 +5,9 @@ export interface IUser {
   password: string;
   blocked: boolean;
   role: 'USER' | 'ADMIN';
+  login_attempts: number;
+  login_lockout: boolean;
+  last_login_attempt: string;
 }
 
 export interface IGetUsers {
