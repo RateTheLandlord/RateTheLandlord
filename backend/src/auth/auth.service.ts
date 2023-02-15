@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { IUser } from 'src/user/models/user';
@@ -11,23 +11,56 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  updateUserFailedLogin = (user: IUser) => {
+    console.log('Failed Login: ', user);
+    if (user.login_attempts >= 2 && !user.login_lockout) {
+      const failedLoginUser = {
+        ...user,
+        lockout_time: new Date(Date.now()).toString(),
+        login_lockout: true,
+      };
+      this.userService.update(user.id, failedLoginUser);
+    } else if (user.login_attempts >= 2 && user.login_lockout) {
+      console.log('User Locked Out Already');
+    } else {
+      const failedLoginUser = {
+        ...user,
+        login_attempts: user.login_attempts + 1,
+      };
+      this.userService.update(user.id, failedLoginUser);
+    }
+  };
+
+  resetUser = (user: IUser) => {
+    console.log('Failed Login: ', user);
+    const updatedUser = {
+      ...user,
+      login_attempts: 0,
+      login_lockout: false,
+    };
+    this.userService.update(user.id, updatedUser);
+  };
+
   async validateUser(email: string, pass: string): Promise<any> {
     const findUsers = await this.userService.findOne(email);
+
     if (findUsers.length) {
       const user = findUsers[0];
 
       if (user.login_lockout) {
         const currDate = new Date();
-        const lastLoginDate = new Date(user.last_login_attempt);
+        const lockoutTime = new Date(user.lockout_time);
         const milliseconds = Math.abs(
-          lastLoginDate.getTime() - currDate.getTime(),
+          lockoutTime.getTime() - currDate.getTime(),
         );
         const hours = milliseconds / 1000 / 3600;
 
         if (hours >= 1) {
           // Update login attempts on User to 0
           // Update lockout on User to false
+          this.resetUser(user);
           const isMatch = await bcrypt.compare(pass, user.password);
+
           if (isMatch) {
             const jwt = await this.login(user);
 
@@ -37,30 +70,36 @@ export class AuthService {
               jwt: jwt,
             };
             return response;
+          } else {
+            // Update Login Attempts + 1
+            this.updateUserFailedLogin(user);
+            // Return Failed Login
+            return UnauthorizedException;
           }
-          // Update Login Attempts + 1
-          // Return Failed Login
+        } else {
+          return UnauthorizedException;
         }
       } else {
-        // Return a lockout reply
-      }
-      const isMatch = await bcrypt.compare(pass, user.password);
-      if (isMatch) {
-        const jwt = await this.login(user);
+        const isMatch = await bcrypt.compare(pass, user.password);
+        if (isMatch) {
+          const jwt = await this.login(user);
 
-        const { password, ...result } = user;
-        const response = {
-          result: result,
-          jwt: jwt,
-        };
-        return response;
-      } else {
-        // Update Login Attempts + 1
-        // Return Failed Login
+          const { password, ...result } = user;
+          const response = {
+            result: result,
+            jwt: jwt,
+          };
+          return response;
+        } else {
+          // Update Login Attempts + 1
+          this.updateUserFailedLogin(user);
+          // Return Failed Login
+          return UnauthorizedException;
+        }
       }
+    } else {
+      return UnauthorizedException;
     }
-    // Return Failed Login
-    return BadRequestException;
   }
 
   async login(user: IUser) {

@@ -8,6 +8,7 @@ export interface IUser {
   login_attempts: number;
   login_lockout: boolean;
   last_login_attempt: string;
+  lockout_time: string;
 }
 
 export interface IGetUsers {
