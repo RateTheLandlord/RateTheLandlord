@@ -2,7 +2,7 @@ exports.up = async function (DB) {
   await DB`
         ALTER TABLE users 
         ADD login_attempts
-        integer DEFAULT 0;
+        numeric DEFAULT 0;
       `;
   await DB`
     ALTER TABLE users

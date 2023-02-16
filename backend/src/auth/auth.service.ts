@@ -16,7 +16,7 @@ export class AuthService {
     if (user.login_attempts >= 2 && !user.login_lockout) {
       const failedLoginUser = {
         ...user,
-        lockout_time: new Date(Date.now()).toString(),
+        last_login_attempt: new Date(Date.now()).toString(),
         login_lockout: true,
       };
       this.userService.update(user.id, failedLoginUser);
@@ -49,7 +49,7 @@ export class AuthService {
 
       if (user.login_lockout) {
         const currDate = new Date();
-        const lockoutTime = new Date(user.lockout_time);
+        const lockoutTime = new Date(user.last_login_attempt);
         const milliseconds = Math.abs(
           lockoutTime.getTime() - currDate.getTime(),
         );
@@ -77,6 +77,7 @@ export class AuthService {
             return UnauthorizedException;
           }
         } else {
+          console.log('User Locked Out');
           return UnauthorizedException;
         }
       } else {
