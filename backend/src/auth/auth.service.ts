@@ -32,7 +32,7 @@ export class AuthService {
   };
 
   resetUser = (user: IUser) => {
-    console.log('Failed Login: ', user);
+    console.log('Reset User: ', user);
     const updatedUser = {
       ...user,
       login_attempts: 0,
@@ -54,6 +54,8 @@ export class AuthService {
           lockoutTime.getTime() - currDate.getTime(),
         );
         const hours = milliseconds / 1000 / 3600;
+
+        console.log('Hours: ', hours);
 
         if (hours >= 1) {
           // Update login attempts on User to 0
@@ -81,8 +83,10 @@ export class AuthService {
           return UnauthorizedException;
         }
       } else {
+        console.log('User Not Locked Out');
         const isMatch = await bcrypt.compare(pass, user.password);
         if (isMatch) {
+          console.log('Match');
           const jwt = await this.login(user);
 
           const { password, ...result } = user;
