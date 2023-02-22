@@ -16,7 +16,7 @@ function RatingsRadio({title, rating, setRating}: Props) {
 
 	return (
 		<div>
-			<div className="flex items-center justify-between">
+			<div className="flex items-center justify-between" data-testid="ratings-radio-1">
 				<h2 className="text-sm font-medium text-gray-900">
 					{title} {t('create-review.review-radio.rating')}
 				</h2>

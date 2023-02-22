@@ -18,7 +18,7 @@ const AddUserModal = ({
 	isAdmin,
 }: IProps) => {
 	return (
-		<form className="space-y-8 divide-y divide-gray-200 w-full container">
+		<form className="space-y-8 divide-y divide-gray-200 w-full container" data-testid="add-user-modal-1">
 			<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 				<div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
 					<div className="space-y-6 sm:space-y-5">

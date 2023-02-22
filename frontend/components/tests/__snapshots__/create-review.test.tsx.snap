@@ -245,6 +245,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               <div>
                 <div
                   class="flex items-center justify-between"
+                  data-testid="ratings-radio-1"
                 >
                   <h2
                     class="text-sm font-medium text-gray-900"
@@ -352,6 +353,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               <div>
                 <div
                   class="flex items-center justify-between"
+                  data-testid="ratings-radio-1"
                 >
                   <h2
                     class="text-sm font-medium text-gray-900"
@@ -459,6 +461,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               <div>
                 <div
                   class="flex items-center justify-between"
+                  data-testid="ratings-radio-1"
                 >
                   <h2
                     class="text-sm font-medium text-gray-900"
@@ -566,6 +569,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               <div>
                 <div
                   class="flex items-center justify-between"
+                  data-testid="ratings-radio-1"
                 >
                   <h2
                     class="text-sm font-medium text-gray-900"
@@ -673,6 +677,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               <div>
                 <div
                   class="flex items-center justify-between"
+                  data-testid="ratings-radio-1"
                 >
                   <h2
                     class="text-sm font-medium text-gray-900"
@@ -816,6 +821,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             >
               <button
                 class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                data-testid="light-button"
                 type="reset"
               >
                 create-review.review-form.reset
@@ -1089,6 +1095,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             <div>
               <div
                 class="flex items-center justify-between"
+                data-testid="ratings-radio-1"
               >
                 <h2
                   class="text-sm font-medium text-gray-900"
@@ -1196,6 +1203,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             <div>
               <div
                 class="flex items-center justify-between"
+                data-testid="ratings-radio-1"
               >
                 <h2
                   class="text-sm font-medium text-gray-900"
@@ -1303,6 +1311,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             <div>
               <div
                 class="flex items-center justify-between"
+                data-testid="ratings-radio-1"
               >
                 <h2
                   class="text-sm font-medium text-gray-900"
@@ -1410,6 +1419,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             <div>
               <div
                 class="flex items-center justify-between"
+                data-testid="ratings-radio-1"
               >
                 <h2
                   class="text-sm font-medium text-gray-900"
@@ -1517,6 +1527,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             <div>
               <div
                 class="flex items-center justify-between"
+                data-testid="ratings-radio-1"
               >
                 <h2
                   class="text-sm font-medium text-gray-900"
@@ -1660,6 +1671,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
           >
             <button
               class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+              data-testid="light-button"
               type="reset"
             >
               create-review.review-form.reset

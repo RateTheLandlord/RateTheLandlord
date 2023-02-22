@@ -55,7 +55,7 @@ export default function MobileReviewFilters({
 					<div className="fixed inset-0 bg-black bg-opacity-25" />
 				</Transition.Child>
 
-				<div className="fixed inset-0 flex z-40">
+				<div className="fixed inset-0 flex z-40" data-testid="mobile-review-filters-1">
 					<Transition.Child
 						as={Fragment}
 						enter="transition ease-in-out duration-300 transform"

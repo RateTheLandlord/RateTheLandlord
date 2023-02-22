@@ -32,7 +32,7 @@ function ProfanityModal({
 						found to be vulgar your review may be edited or removed
 					</p>
 
-					<div className="flex w-full justify-between">
+					<div className="flex w-full justify-between" data-testid="profanity-modal-2">
 						<ButtonLight
 							onClick={() => {
 								setIsOpen(false)

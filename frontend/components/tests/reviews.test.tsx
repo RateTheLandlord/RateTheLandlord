@@ -2,8 +2,11 @@
  * @jest-environment jsdom
  */
 import { render, screen } from '@testing-library/react'
+import React from 'react';
 import ReviewTable from '@/components/reviews/review-table'
 import ReviewFilters from '@/components/reviews/review-filters'
+import ReportModal from '@/components/reviews/report-modal'
+import MobileReviewFilters from '@/components/reviews/mobile-review-filters'
 
 // Test review so the table renders
 const testReview = 	{
@@ -26,6 +29,15 @@ const testReview = 	{
 }
 
 describe("Reviews Page", () => {
+    beforeEach(() => {
+        const mockIntersectionObserver = jest.fn();
+        mockIntersectionObserver.mockReturnValue({
+            observe: jest.fn().mockReturnValue(null),
+            unobserve: jest.fn().mockReturnValue(null),
+            disconnect: jest.fn().mockReturnValue(null)
+        })
+        window.IntersectionObserver = mockIntersectionObserver
+    })
     test("Reviews Table component renders", () => {
         render(<ReviewTable data={[testReview]} setReportOpen={jest.fn()} setSelectedReview={jest.fn()} />) 
         expect(screen.queryByTestId("review-table-1")).toBeInTheDocument();
@@ -50,6 +62,25 @@ describe("Reviews Page", () => {
             stateOptions={[]} 
             removeFilter={jest.fn()} 
             setSearchState={jest.fn()}/>)
-            expect(screen.getByTestId("review-filters-1")).toBeInTheDocument();
+        expect(screen.getByTestId("review-filters-1")).toBeInTheDocument();
+    })
+    test("Report Modal renders", () => {
+        render(<ReportModal isOpen={true} setIsOpen={jest.fn()} selectedReview={undefined}/>);
+        expect(screen.queryByTestId("report-modal-1")).toBeInTheDocument();
+    })
+    test("Mobile Review Filters component renders", () => {
+        render(<MobileReviewFilters mobileFiltersOpen={true} 
+            setMobileFiltersOpen={jest.fn()} 
+            countryFilter={null} 
+            setCountryFilter={jest.fn()} 
+            stateFilter={null} 
+            setStateFilter={jest.fn()} 
+            cityFilter={null} 
+            setCityFilter={jest.fn()} 
+            cityOptions={[]} 
+            countryOptions={[]} 
+            stateOptions={[]} 
+            setSearchState={jest.fn()}/>);
+        expect(screen.queryByTestId("mobile-review-filters-1")).toBeInTheDocument();
     })
 })

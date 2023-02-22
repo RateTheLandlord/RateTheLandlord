@@ -25,7 +25,7 @@ function SuccessModal({
 						Review Submitted Successfully!
 					</Dialog.Title>
 
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-row gap-2" data-testid="success-modal-2">
 						<ButtonLight
 							onClick={() => {
 								setIsOpen(false)
