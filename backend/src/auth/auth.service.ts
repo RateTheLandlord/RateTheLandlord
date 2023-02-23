@@ -19,15 +19,16 @@ export class AuthService {
         last_login_attempt: new Date(Date.now()).toString(),
         login_lockout: true,
       };
-      this.userService.update(user.id, failedLoginUser);
+      this.userService.updateUserLockout(user.id, failedLoginUser);
     } else if (user.login_attempts >= 2 && user.login_lockout) {
       console.log('User Locked Out Already');
     } else {
+      const failed_logins = Number(user.login_attempts) + 1;
       const failedLoginUser = {
         ...user,
-        login_attempts: user.login_attempts + 1,
+        login_attempts: failed_logins,
       };
-      this.userService.update(user.id, failedLoginUser);
+      this.userService.updateUserLockout(user.id, failedLoginUser);
     }
   };
 
@@ -38,7 +39,7 @@ export class AuthService {
       login_attempts: 0,
       login_lockout: false,
     };
-    this.userService.update(user.id, updatedUser);
+    this.userService.updateUserLockout(user.id, updatedUser);
   };
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -55,13 +56,12 @@ export class AuthService {
         );
         const hours = milliseconds / 1000 / 3600;
 
-        console.log('Hours: ', hours);
-
         if (hours >= 1) {
           // Update login attempts on User to 0
           // Update lockout on User to false
           this.resetUser(user);
           const isMatch = await bcrypt.compare(pass, user.password);
+          console.log('Is Match: ', isMatch);
 
           if (isMatch) {
             const jwt = await this.login(user);
@@ -83,10 +83,18 @@ export class AuthService {
           return UnauthorizedException;
         }
       } else {
-        console.log('User Not Locked Out');
+        const currDate = new Date();
+        const lockoutTime = new Date(user.last_login_attempt);
+        const milliseconds = Math.abs(
+          lockoutTime.getTime() - currDate.getTime(),
+        );
+        const hours = milliseconds / 1000 / 3600;
+
+        if (hours > 1) {
+          this.resetUser(user);
+        }
         const isMatch = await bcrypt.compare(pass, user.password);
         if (isMatch) {
-          console.log('Match');
           const jwt = await this.login(user);
 
           const { password, ...result } = user;
