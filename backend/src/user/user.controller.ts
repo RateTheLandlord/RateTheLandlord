@@ -39,8 +39,8 @@ export class UserController {
     return this.userService.update(id, user);
   }
 
-  // @UseGuards(JwtAuthGuard)
-  @Put('/:id/password')
+  @UseGuards(JwtAuthGuard)
+  @Put('/password/:id')
   updatePassword(
     @Param('id') id: number,
     @Body() user: IUser,
