@@ -40,16 +40,6 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('/password/:id')
-  updatePassword(
-    @Param('id') id: number,
-    @Body() user: IUser,
-  ): Promise<boolean> {
-    console.log('Controller: id: ', id, ' user: ', user);
-    return this.userService.updatePassword(id, user);
-  }
-
-  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteUser(@Param('id') id: number): Promise<boolean> {
     return this.userService.deleteUser(id);

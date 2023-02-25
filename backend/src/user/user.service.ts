@@ -35,16 +35,6 @@ export class UserService {
     return true;
   }
 
-  async updatePassword(id: number, user: IUser): Promise<boolean> {
-    console.log('id: ', id, ' user: ', user);
-    const salt = bcrypt.genSaltSync(saltOrRounds);
-    user.password = await bcrypt.hash(user.password, salt);
-    await this.databaseService
-      .sql`UPDATE users SET password = ${user.password} WHERE id = ${user.id}`;
-
-    return true;
-  }
-
   async getAll(): Promise<IGetUsers[]> {
     const fullUsers = this.databaseService.sql<IUser[]>`Select * FROM users`;
     const users = (await fullUsers).map((user) => {
