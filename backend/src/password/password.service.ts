@@ -9,7 +9,6 @@ export class PasswordService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async updatePassword(id: number, password: string): Promise<boolean> {
-    console.log('id: ', id, ' password: ', password);
     const salt = bcrypt.genSaltSync(saltOrRounds);
     const newPassword = await bcrypt.hash(password, salt);
     await this.databaseService

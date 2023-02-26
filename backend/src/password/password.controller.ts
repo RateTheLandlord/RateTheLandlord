@@ -2,6 +2,10 @@ import { Body, Controller, Param, Put, UseGuards } from '@nestjs/common';
 import { PasswordService } from './password.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+interface IPassProps {
+  password: string;
+}
+
 @Controller('password')
 export class PasswordController {
   constructor(private readonly passwordService: PasswordService) {}
@@ -10,9 +14,8 @@ export class PasswordController {
   @Put('/:id')
   updatePassword(
     @Param('id') id: number,
-    @Body() password: string,
+    @Body() password: IPassProps,
   ): Promise<boolean> {
-    console.log('Controller: id: ', id, ' password: ', password);
-    return this.passwordService.updatePassword(id, password);
+    return this.passwordService.updatePassword(id, password.password);
   }
 }

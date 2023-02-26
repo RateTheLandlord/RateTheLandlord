@@ -23,7 +23,7 @@ const updatePassword = (req: NextApiRequest, res: NextApiResponse) => {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
 		},
-		body: JSON.stringify(password),
+		body: JSON.stringify({password: password}),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
