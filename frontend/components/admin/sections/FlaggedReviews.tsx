@@ -31,15 +31,18 @@ const FlaggedReviews = () => {
 
 	useEffect(() => {
 		if (reviews) {
-			if (showApproved) {
-				setFlaggedReviews([...reviews])
-			} else {
-				setFlaggedReviews(() => {
-					return reviews.filter(
-						(review) =>
-							review.admin_approved === false || review.admin_approved === null,
-					)
-				})
+			if (reviews.length) {
+				if (showApproved) {
+					setFlaggedReviews([...reviews])
+				} else {
+					setFlaggedReviews(() => {
+						return reviews.filter(
+							(review) =>
+								review.admin_approved === false ||
+								review.admin_approved === null,
+						)
+					})
+				}
 			}
 		}
 	}, [reviews, showApproved])

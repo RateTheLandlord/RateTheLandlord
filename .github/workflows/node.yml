@@ -59,6 +59,6 @@ jobs:
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
             echo "[Building Docker Containers]"
-            docker-compose build
+            docker-compose build --no-cache
             echo "[Starting Docker Containers]"
             docker-compose up -d

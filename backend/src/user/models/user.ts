@@ -5,6 +5,10 @@ export interface IUser {
   password: string;
   blocked: boolean;
   role: 'USER' | 'ADMIN';
+  login_attempts: number;
+  login_lockout: boolean;
+  last_login_attempt: string;
+  lockout_time: string;
 }
 
 export interface IGetUsers {
@@ -13,4 +17,8 @@ export interface IGetUsers {
   email: string;
   blocked: boolean;
   role: 'USER' | 'ADMIN';
+  login_attempts: number;
+  login_lockout: boolean;
+  last_login_attempt: string;
+  lockout_time: string;
 }

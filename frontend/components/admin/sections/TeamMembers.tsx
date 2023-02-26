@@ -40,7 +40,9 @@ const TeamMembers = () => {
 
 	useEffect(() => {
 		if (allUsers) {
-			setUsers(allUsers)
+			if (allUsers.length) {
+				setUsers(allUsers)
+			}
 		}
 	}, [allUsers])
 

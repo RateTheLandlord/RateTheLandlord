@@ -29,10 +29,6 @@ services:
       - ${BEPORT}:${BEPORT}
     networks:
       - internal
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-      - ./.env:/app/.env
     depends_on:
       - postgres
     env_file: .env
@@ -47,11 +43,6 @@ services:
       - ${FEPORT}:${FEPORT}
     networks:
       - internal
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
-      - ./logs/frontend:/root/.npm/_logs
     env_file:
       - ./.env
     depends_on:

@@ -1,17 +1,11 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
-import Facebook from '../svg/social/facebook'
 import Github from '../svg/social/github'
 import Instagram from '../svg/social/instagram'
 import TikTok from '../svg/social/tiktok'
 import Twitter from '../svg/social/twitter'
 
 const navigation = [
-	// {
-	// 	name: 'Facebook',
-	// 	href: '#',
-	// 	icon: () => <Facebook />,
-	// },
 	{
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',
