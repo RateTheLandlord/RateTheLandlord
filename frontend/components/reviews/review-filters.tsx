@@ -6,6 +6,7 @@ import SearchBar from './ui/searchbar'
 import MobileReviewFilters from './mobile-review-filters'
 import {useTranslation} from 'react-i18next'
 import ButtonLight from '../ui/button-light'
+import Link from 'next/link'
 
 //Review filters and Logic
 
@@ -76,6 +77,9 @@ function ReviewFilters({
 						<p className="mt-4 max-w-xl text-sm text-gray-700">
 							{t('reviews.body')}
 						</p>
+						<div className="mt-6 max-w-xl text-sm text-gray-700">
+							<Link href="/about#faq">What do these ratings mean?</Link>
+						</div>
 					</div>
 				</div>
 
@@ -93,9 +97,11 @@ function ReviewFilters({
 								options={sortOptions}
 								name={t('reviews.sort')}
 							/>
-							<ButtonLight onClick={() => setMobileFiltersOpen(true)}>
-								{t('reviews.filters')}
-							</ButtonLight>
+							<div className="block lg:hidden">
+								<ButtonLight onClick={() => setMobileFiltersOpen(true)}>
+									{t('reviews.filters')}
+								</ButtonLight>
+							</div>
 
 							<div className="hidden lg:block">
 								<div className="flow-root">

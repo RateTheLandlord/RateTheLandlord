@@ -13,6 +13,7 @@ import profanity from '@/util/profanity.json'
 import Alert from '../alerts/Alert'
 import SuccessModal from './success-modal'
 import ProfanityModal from './profanity-modal'
+import InfoIcon from '../svg/icons/info'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -277,44 +278,50 @@ function ReviewForm(): JSX.Element {
 							</div>
 						</div>
 					</div>
-					<div>
-						<h3 className="text-lg leading-6 font-medium text-gray-900">
+					<div className="flex flex-col gap-2">
+						<h3 className="text-lg leading-6 font-medium text-gray-900 mt-2">
 							{t('create-review.review-form.rate-title')}
 						</h3>
 						<RatingsRadio
 							title={t('create-review.review-form.repair')}
 							rating={repair}
 							setRating={setRepair}
+							tooltip="Landlords have a legal obligation to keep the rental property in a safe and habitable condition. Tenants should receive timely repairs by trained professionals to keep their vital systems like plumbing and heating in order."
 						/>
+
 						<RatingsRadio
 							title={t('create-review.review-form.health')}
 							rating={health}
 							setRating={setHealth}
+							tooltip="Landlords must ensure that the rental property complies with local health and safety standards, such as maintaining smoke detectors, removing mold, and employing pest control when necessary."
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.stability')}
 							rating={stability}
 							setRating={setStability}
+							tooltip="Landlords must abide by rental agreements and not engage in practices that would disrupt the tenant's rental stability, such as unjustified rent increases or arbitrary evictions."
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.privacy')}
 							rating={privacy}
 							setRating={setPrivacy}
+							tooltip="Landlords must respect their tenants' privacy, and may only enter the rental property with the tenant's consent or for specific reasons outlined in the rental agreement. Landlords should also refrain from probing into the personal lives of their tenants or asking for information that is not necessary to form a professional rental agreement."
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.respect')}
 							rating={respect}
 							setRating={setRespect}
+							tooltip="Landlords must treat their tenants with respect, and must not engage in behavior that would violate the tenant's rights, such as discrimination or harassment."
 						/>
 					</div>
 				</div>
 				<div>
 					<label
 						htmlFor="comment"
-						className="block text-sm font-medium text-gray-700"
+						className="block text-sm font-medium text-gray-700 mt-2"
 					>
 						{t('create-review.review-form.review')}
 					</label>
