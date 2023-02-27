@@ -72,7 +72,7 @@ function ReportModal({
 								Think this review should be removed or altered?
 							</Dialog.Description>
 
-							<div>
+							<div className="mb-3">
 								<label
 									htmlFor="report"
 									className="block text-sm font-medium text-gray-700"

@@ -31,6 +31,10 @@ function ProfanityModal({
 						Are you sure you want to submit your review with profanity? If it is
 						found to be vulgar your review may be edited or removed
 					</p>
+					<p className="mb-4 text-center">
+						It is possible our profanity sensor was triggered incorrectly. If
+						you think this is the case then feel free to submit your review!
+					</p>
 
 					<div className="flex w-full justify-between">
 						<ButtonLight
