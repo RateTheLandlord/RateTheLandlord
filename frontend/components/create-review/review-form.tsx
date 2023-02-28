@@ -13,7 +13,6 @@ import profanity from '@/util/profanity.json'
 import Alert from '../alerts/Alert'
 import SuccessModal from './success-modal'
 import ProfanityModal from './profanity-modal'
-import InfoIcon from '../svg/icons/info'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -59,9 +58,15 @@ function ReviewForm(): JSX.Element {
 		const foundSwears = profanity.filter((word) =>
 			review.toLowerCase().includes(word.toLowerCase()),
 		)
+		console.log(foundSwears)
 		if (foundSwears.length) {
+			let swears = ''
+			for (let i = 0; i < foundSwears.length; i++) {
+				swears += `${foundSwears[i]}, `
+			}
+			const reason = `Profanity: ${swears}`
 			setFlagged(true)
-			setflagged_reason('Profanity')
+			setflagged_reason('Profanity: ' + reason)
 			setProfanityModalOpen(true)
 		} else {
 			setFlagged(false)
@@ -131,6 +136,7 @@ function ReviewForm(): JSX.Element {
 				isOpen={profanityModalOpen}
 				setIsOpen={setProfanityModalOpen}
 				onSubmit={handleSubmit}
+				profanity={flagged_reason}
 			/>
 			<div className="w-full my-3">
 				<h1 className="text-4xl font-extrabold border-b-teal-600 border-b-2">
@@ -337,7 +343,7 @@ function ReviewForm(): JSX.Element {
 					</div>
 				</div>
 
-				<div className="pt-5">
+				<div className="py-5">
 					<div className="flex justify-center mb-2">
 						<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
 					</div>
