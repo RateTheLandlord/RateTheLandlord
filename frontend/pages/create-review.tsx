@@ -9,9 +9,8 @@ function CreateReview(): JSX.Element {
 			<Head>
 				<title>Create a Review | Rate The Landlord</title>
 			</Head>
-			<div className="flex flex-col">
+			<div className="container flex flex-col md:px-10">
 				<ReviewForm />
-				<Faq />
 			</div>
 		</div>
 	)

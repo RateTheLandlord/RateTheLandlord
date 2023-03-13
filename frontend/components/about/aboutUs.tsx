@@ -7,7 +7,7 @@ const AboutUs = () => {
 						About Us
 					</span>
 				</h1>
-				<p className="mt-8 text-xl leading-8 text-gray-500">
+				<p className="mt-8 text-xl leading-8 text-gray-500 text-center font-bold">
 					You can rate everything from laundromats to legal firms. It&apos;s
 					about time we rated landlords.
 				</p>

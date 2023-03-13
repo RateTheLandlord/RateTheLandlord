@@ -35,7 +35,7 @@ function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
 	const [city, setCity] = useState<string>('')
-	const [province, setProvince] = useState<string>('')
+	const [province, setProvince] = useState<string>('Ontario')
 	const [postal, setPostal] = useState<string>('')
 
 	const [repair, setRepair] = useState<number>(3)
@@ -52,28 +52,28 @@ function ReviewForm(): JSX.Element {
 
 	const [postalError, setPostalError] = useState(false)
 
-	const profanityCheck = (e: React.FormEvent): void => {
-		e.preventDefault()
+	// const profanityCheck = (e: React.FormEvent): void => {
+	// 	e.preventDefault()
 
-		const foundSwears = profanity.filter((word) =>
-			review.toLowerCase().includes(word.toLowerCase()),
-		)
-		console.log(foundSwears)
-		if (foundSwears.length) {
-			let swears = ''
-			for (let i = 0; i < foundSwears.length; i++) {
-				swears += `${foundSwears[i]}, `
-			}
-			const reason = `Profanity: ${swears}`
-			setFlagged(true)
-			setflagged_reason('Profanity: ' + reason)
-			setProfanityModalOpen(true)
-		} else {
-			setFlagged(false)
-			setflagged_reason('')
-			handleSubmit()
-		}
-	}
+	// 	const foundSwears = profanity.filter((word) =>
+	// 		review.toLowerCase().includes(word.toLowerCase()),
+	// 	)
+	// 	console.log(foundSwears)
+	// 	if (foundSwears.length) {
+	// 		let swears = ''
+	// 		for (let i = 0; i < foundSwears.length; i++) {
+	// 			swears += `${foundSwears[i]}, `
+	// 		}
+	// 		const reason = `Profanity: ${swears}`
+	// 		setFlagged(true)
+	// 		setflagged_reason('Profanity: ' + reason)
+	// 		setProfanityModalOpen(true)
+	// 	} else {
+	// 		setFlagged(false)
+	// 		setflagged_reason('')
+	// 		handleSubmit()
+	// 	}
+	// }
 
 	const handleSubmit = (): void => {
 		if (!postalCodes.validate(country, postal)) {
@@ -144,7 +144,7 @@ function ReviewForm(): JSX.Element {
 				</h1>
 			</div>
 			<form
-				onSubmit={profanityCheck}
+				onSubmit={handleSubmit}
 				className="space-y-8 divide-y divide-gray-200 w-full"
 			>
 				<div className="space-y-8 divide-y divide-gray-200">

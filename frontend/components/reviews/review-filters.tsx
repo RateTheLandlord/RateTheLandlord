@@ -77,7 +77,7 @@ function ReviewFilters({
 						<p className="mt-4 max-w-xl text-sm text-gray-700">
 							{t('reviews.body')}
 						</p>
-						<div className="mt-6 max-w-xl text-sm text-gray-700">
+						<div className="mt-6 max-w-xl text-sm text-blue-700 underline">
 							<Link href="/about#faq">What do these ratings mean?</Link>
 						</div>
 					</div>

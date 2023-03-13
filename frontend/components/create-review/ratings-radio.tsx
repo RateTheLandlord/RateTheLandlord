@@ -1,8 +1,8 @@
 import React from 'react'
-import {RadioGroup} from '@headlessui/react'
+import {Disclosure, RadioGroup} from '@headlessui/react'
 import {classNames} from '@/util/helper-functions'
 import {useTranslation} from 'react-i18next'
-import InfoIcon from '../svg/icons/info'
+import {MinusSmIcon, PlusSmIcon} from '@heroicons/react/solid'
 
 const ratings = [1, 2, 3, 4, 5]
 
@@ -17,22 +17,26 @@ function RatingsRadio({title, rating, setRating, tooltip}: Props) {
 	const {t} = useTranslation()
 
 	return (
-		<div>
-			<div className="flex items-center justify-between">
-				<h2 className="text-sm font-medium text-gray-900">
-					{title} {t('create-review.review-radio.rating')}
-				</h2>
-				<span
-					className="inline-block"
-					data-te-toggle="tooltip"
-					data-te-placement="left"
-					data-te-ripple-init
-					data-te-ripple-color="light"
-					title={tooltip}
-				>
-					<InfoIcon styling="w-6 h-6" />
-				</span>
-			</div>
+		<div className="container">
+			<Disclosure>
+				{({open}) => (
+					<>
+						<Disclosure.Button className="flex w-full items-start text-left text-gray-900">
+							<span className="ml-6 flex h-7 items-center">
+								{open ? (
+									<MinusSmIcon className="h-6 w-6" aria-hidden="true" />
+								) : (
+									<PlusSmIcon className="h-6 w-6" aria-hidden="true" />
+								)}
+							</span>
+							<span className="text-base font-semibold leading-7">{title}</span>
+						</Disclosure.Button>
+						<Disclosure.Panel as="dd" className="mt-2 pr-12">
+							<p className="text-base leading-7 text-gray-600">{tooltip}</p>
+						</Disclosure.Panel>
+					</>
+				)}
+			</Disclosure>
 
 			<RadioGroup value={rating} onChange={setRating} className="mt-2">
 				<RadioGroup.Label className="sr-only">
