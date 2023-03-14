@@ -1,4 +1,3 @@
-import Faq from '@/components/about/faq'
 import ReviewForm from '@/components/create-review/review-form'
 import Head from 'next/head'
 import React from 'react'
@@ -9,7 +8,7 @@ function CreateReview(): JSX.Element {
 			<Head>
 				<title>Create a Review | Rate The Landlord</title>
 			</Head>
-			<div className="container flex flex-col md:px-10">
+			<div className="flex flex-col">
 				<ReviewForm />
 			</div>
 		</div>

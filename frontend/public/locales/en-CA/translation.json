@@ -23,7 +23,7 @@
 		},
 		"review-form": {
 			"header": "Enter your Review",
-			"title": "Landlord / Property Management Information",
+			"title": "Landlord or Property Management Information",
 			"sub": "Please make sure all this information matches your Lease",
 			"landlord": "Landlord / Property Management Company",
 			"country": "Country",
