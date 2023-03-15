@@ -8,7 +8,7 @@ function Hero(): JSX.Element {
 	const {t} = useTranslation()
 	return (
 		<div className="relative min-w-full">
-			<div className="relative pt-6 pb-16 sm:pb-24">
+			<div className="relative pt-6">
 				<main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
 					<div className="text-center">
 						<h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl block text-teal-600">

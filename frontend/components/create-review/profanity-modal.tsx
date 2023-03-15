@@ -3,16 +3,16 @@ import {Dialog} from '@headlessui/react'
 import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
 
-// TODO Styling
-
 function ProfanityModal({
 	isOpen,
 	setIsOpen,
 	onSubmit,
+	profanity,
 }: {
 	isOpen: boolean
 	setIsOpen: React.Dispatch<SetStateAction<boolean>>
 	onSubmit: () => void
+	profanity: string
 }) {
 	return (
 		<Dialog
@@ -31,6 +31,11 @@ function ProfanityModal({
 						Are you sure you want to submit your review with profanity? If it is
 						found to be vulgar your review may be edited or removed
 					</p>
+					<p className="mb-4 text-center">
+						It is possible our profanity sensor was triggered incorrectly. If
+						you think this is the case then feel free to submit your review!
+					</p>
+					<p className="mb-4 text-center">{profanity}</p>
 
 					<div className="flex w-full justify-between">
 						<ButtonLight
