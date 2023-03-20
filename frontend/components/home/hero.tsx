@@ -5,7 +5,7 @@ import LinkButtonLG from '../ui/link-button-lg'
 import LinkButtonLightLG from '../ui/link-button-light-lg'
 
 function Hero(): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('home')
 	return (
 		<div className="relative min-w-full">
 			<div className="relative pt-6">

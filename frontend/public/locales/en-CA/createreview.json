@@ -1,0 +1,28 @@
+{
+	"create-review": {
+		"review-radio": {
+			"rating": "Rating",
+			"choose": "Choose a rating"
+		},
+		"review-form": {
+			"header": "Enter your Review",
+			"title": "Landlord or Property Management Information",
+			"sub": "Please make sure all this information matches your Lease",
+			"landlord": "Landlord or Property Management Company",
+			"country": "Country",
+			"city": "City",
+			"state": "State / Province",
+			"zip": "ZIP / Postal Code",
+			"rate-title": "Please rate the following on a scale from 1 (worst) to 5 (best)",
+			"health": "Health and Safety",
+			"stability": "Rental Stability",
+			"privacy": "Tenant Privacy",
+			"respect": "Respect",
+			"repair": "Repair",
+			"review": "Written Review",
+			"submit": "Submit",
+			"reset": "Reset",
+			"postal-error": "Error. Postal Code / ZIP Invalid"
+		}
+	}
+}
