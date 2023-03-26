@@ -313,7 +313,7 @@ function ReviewForm(): JSX.Element {
 							title={t('create-review.review-form.privacy')}
 							rating={privacy}
 							setRating={setPrivacy}
-							tooltip={t('create-review.review-form-privacy_description')}
+							tooltip={t('create-review.review-form.privacy_description')}
 						/>
 
 						<RatingsRadio

@@ -45,7 +45,7 @@ function ReviewFilters({
 	removeFilter,
 	setSearchState,
 }: FiltersProps): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('reviews')
 
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 
@@ -78,7 +78,7 @@ function ReviewFilters({
 							{t('reviews.body')}
 						</p>
 						<div className="mt-6 max-w-xl text-sm text-blue-700 underline">
-							<Link href="/about#faq">What do these ratings mean?</Link>
+							<Link href="/about#faq">{t('reviews.faq')}</Link>
 						</div>
 					</div>
 				</div>

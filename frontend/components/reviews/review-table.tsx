@@ -74,7 +74,7 @@ function ReviewTable({
 										</p>
 										<div className="mt-4 w-full sm:w-auto">
 											<ButtonLight onClick={() => handleReport(review)}>
-												REPORT
+												{t('reviews.report-review')}
 											</ButtonLight>
 										</div>
 									</div>
@@ -107,7 +107,7 @@ function ReviewTable({
 											<p>{t('reviews.review')}</p>
 											{review.admin_edited ? (
 												<p className="text-red-400 text-xs">
-													*Edited by Admin after review
+													{t('reviews.edited')}
 												</p>
 											) : null}
 

@@ -13,7 +13,7 @@ interface Props {
 }
 
 function RatingsRadio({title, rating, setRating, tooltip}: Props) {
-	const {t} = useTranslation()
+	const {t} = useTranslation('create')
 
 	return (
 		<div>

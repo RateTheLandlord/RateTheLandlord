@@ -13,6 +13,18 @@
 		"repair": "Repair",
 		"stability": "Rental Stability",
 		"review": "Written Review",
-		"search": "Search Landlords"
+		"search": "Search Landlords",
+		"faq": "What do these ratings mean?",
+		"report-review": "REPORT",
+		"edited": "*Edited by Admin after review",
+		"report": {
+			"error": "Error, please try again",
+			"success": "Report Received!",
+			"report": "Report Review",
+			"description": "Think this review should be removed or altered?",
+			"reason": "Reason",
+			"cancel": "Cancel",
+			"submit": "Submit"
+		}
 	}
 }

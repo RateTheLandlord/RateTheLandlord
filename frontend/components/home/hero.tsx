@@ -14,7 +14,7 @@ function Hero(): JSX.Element {
 						<h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl block text-teal-600">
 							{t('home.hero.title')}
 						</h1>
-						<p className="mt-3 max-w-md mx-auto text-base  sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+						<p className="mt-3 max-w-md mx-auto text-base  sm:text-lg md:mt-5 md:text-xl md:max-w-full">
 							{t('home.hero.body')}
 						</p>
 						<div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
