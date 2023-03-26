@@ -26,6 +26,9 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
+    depends_on:
+      - frontend
+      - backend
 
   backend:
     container_name: backend
