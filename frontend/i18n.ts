@@ -6,6 +6,7 @@ import layoutENCA from './public/locales/en-CA/layout.json'
 import homeENCA from './public/locales/en-CA/home.json'
 import createreviewENCA from './public/locales/en-CA/createreview.json'
 import reviewsENCA from './public/locales/en-CA/reviews.json'
+import aboutENCA from './public/locales/en-CA/about.json'
 
 const resources = {
 	en: {
@@ -13,6 +14,7 @@ const resources = {
 		translation: layoutENCA,
 		create: createreviewENCA,
 		reviews: reviewsENCA,
+		about: aboutENCA,
 	},
 }
 
