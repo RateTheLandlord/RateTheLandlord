@@ -25,7 +25,7 @@ const country_codes = Object.keys(countries).filter(
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('create')
 
 	const [profanityModalOpen, setProfanityModalOpen] = useState<boolean>(false)
 	const [success, setSuccess] = useState(false)
@@ -292,35 +292,35 @@ function ReviewForm(): JSX.Element {
 							title={t('create-review.review-form.repair')}
 							rating={repair}
 							setRating={setRepair}
-							tooltip="Landlords have a legal obligation to keep the rental property in a safe and habitable condition. Tenants should receive timely repairs by trained professionals to keep their vital systems like plumbing and heating in order."
+							tooltip={t('create-review.review-form.repair_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.health')}
 							rating={health}
 							setRating={setHealth}
-							tooltip="Landlords must ensure that the rental property complies with local health and safety standards, such as maintaining smoke detectors, removing mold, and employing pest control when necessary."
+							tooltip={t('create-review.review-form.health_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.stability')}
 							rating={stability}
 							setRating={setStability}
-							tooltip="Landlords must abide by rental agreements and not engage in practices that would disrupt the tenant's rental stability, such as unjustified rent increases or arbitrary evictions."
+							tooltip={t('create-review.review-form.stability_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.privacy')}
 							rating={privacy}
 							setRating={setPrivacy}
-							tooltip="Landlords must respect their tenants' privacy, and may only enter the rental property with the tenant's consent or for specific reasons outlined in the rental agreement. Landlords should also refrain from probing into the personal lives of their tenants or asking for information that is not necessary to form a professional rental agreement."
+							tooltip={t('create-review.review-form.privacy_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.respect')}
 							rating={respect}
 							setRating={setRespect}
-							tooltip="Landlords must treat their tenants with respect, and must not engage in behavior that would violate the tenant's rights, such as discrimination or harassment."
+							tooltip={t('create-review.review-form.respect_description')}
 						/>
 					</div>
 				</div>

@@ -3,9 +3,7 @@ import {Dialog} from '@headlessui/react'
 import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
 import {Review} from '@/util/interfaces'
-
-// TODO Styling
-// TODO handle Report Submit (PUT request to update review to include flagged_reason and set flagged = true)
+import {useTranslation} from 'react-i18next'
 
 function ReportModal({
 	isOpen,
@@ -16,6 +14,7 @@ function ReportModal({
 	setIsOpen: React.Dispatch<SetStateAction<boolean>>
 	selectedReview: Review | undefined
 }) {
+	const {t} = useTranslation('reviews')
 	const [reason, setReason] = useState<string>('')
 
 	const [submitSuccess, setSubmitSuccess] = useState(false)
@@ -62,14 +61,16 @@ function ReportModal({
 			<div className="fixed inset-0 flex items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10">
 					{submitError ? (
-						<p className="text-red-400">Error, please try again</p>
+						<p className="text-red-400">{t('reviews.report.error')}</p>
 					) : null}
-					{submitSuccess ? <Dialog.Title>Report Received!</Dialog.Title> : null}
+					{submitSuccess ? (
+						<Dialog.Title>{t('reviews.report.success')}</Dialog.Title>
+					) : null}
 					{!submitError && !submitSuccess ? (
 						<>
-							<Dialog.Title>Report Review</Dialog.Title>
+							<Dialog.Title>{t('reviews.report.report')}</Dialog.Title>
 							<Dialog.Description>
-								Think this review should be removed or altered?
+								{t('reviews.report.description')}
 							</Dialog.Description>
 
 							<div className="mb-3">
@@ -77,7 +78,7 @@ function ReportModal({
 									htmlFor="report"
 									className="block text-sm font-medium text-gray-700"
 								>
-									Reason
+									{t('reviews.report.reason')}
 								</label>
 								<div className="mt-1">
 									<textarea
@@ -91,8 +92,12 @@ function ReportModal({
 								</div>
 							</div>
 
-							<ButtonLight onClick={() => setIsOpen(false)}>Cancel</ButtonLight>
-							<Button onClick={() => handleSubmit()}>Submit</Button>
+							<ButtonLight onClick={() => setIsOpen(false)}>
+								{t('reviews.report.cancel')}
+							</ButtonLight>
+							<Button onClick={() => handleSubmit()}>
+								{t('reviews.report.submit')}
+							</Button>
 						</>
 					) : null}
 				</Dialog.Panel>

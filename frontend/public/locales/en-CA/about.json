@@ -1,0 +1,32 @@
+{
+	"about": {
+		"about-us": {
+			"about": "About Us",
+			"header": "You can rate everything from laundromats to legal firms. It&apos;s about time we rated landlords.",
+			"p-1": "We know that tenants are often in the dark when it comes to renting with a new landlord. Our mission is to create a platform where tenants can rate their landlords so others can access this information when making their housing decisions.",
+			"p-2": "We believe that landlords should be held accountable for their services, just like any other business. Tenants have the right to know what it&apos;s like to rent from a potential landlord. By sharing rental experiences, tenants can help others avoid situations of negligence or mistreatment.",
+			"p-3": "Share your experiences, read the reviews, and help us keep one another safe, informed, and empowered."
+		},
+		"privacy": {
+			"privacy": "Privacy Policy",
+			"p-1": "At Rate the Landlord, we are committed to protecting the privacy of those who submit reviews. All submissions made to our website are anonymous. We do not collect any personal data or information that could be used to identify you, such as your name, email address, or phone number."
+		},
+		"moderation": {
+			"moderation": "Moderation Policy",
+			"p-1": "We allow our users to share their opinions and experiences through reviews, but we will not tolerate excessive profanity or personal attacks. If a review contains excessive profanity or personal attacks, it may be censored to remove the offensive language. Additionally, we will remove any reviews that contain defamatory remarks ordiscrimination."
+		},
+		"faq": {
+			"faq": "Frequently asked questions",
+			"repairs": "What does Repairs mean for the reviews?",
+			"repairs_description": "Landlords have a legal obligation to keep the rental property in a safe and habitable condition. Tenants should receive timely repairs by trained professionals to keep their vital systems like plumbing and heating in order.",
+			"stability": "What does Rental Stability mean for the reviews?",
+			"stability_description": "Landlords must abide by rental agreements and not engage in practices that would disrupt the tenant's rental stability, such as unjustified rent increases or arbitrary evictions.",
+			"privacy": "What does Tenant Privacy mean for the reviews?",
+			"privacy_description": "Landlords must respect their tenants' privacy, and may only enter the rental property with the tenant's consent or for specific reasons outlined in the rental agreement. Landlords should also refrain from probing into the personal lives of their tenants or asking for information that is not necessary to form a professional rental agreement.",
+			"respect": "What does Respect mean for the reviews?",
+			"respect_description": "Landlords must treat their tenants with respect, and must not engage in behavior that would violate the tenant's rights, such as discrimination or harassment.",
+			"health": "What does Health and Safety mean for the reviews?",
+			"health_description": "Landlords must ensure that the rental property complies with local health and safety standards, such as maintaining smoke detectors, removing mold, and employing pest control when necessary."
+		}
+	}
+}
