@@ -15,9 +15,15 @@ services:
       - ./conf/nginx/:/etc/nginx:ro
       - ./logs/nginx/:/var/log/nginx
       - /etc/localtime:/etc/localtime:ro
+      - ./certbot/www:/var/www/certbot/:ro
     depends_on:
       - frontend
       - backend
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
 
   backend:
     container_name: backend
