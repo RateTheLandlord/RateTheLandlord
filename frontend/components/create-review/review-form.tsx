@@ -75,7 +75,8 @@ function ReviewForm(): JSX.Element {
 	// 	}
 	// }
 
-	const handleSubmit = (): void => {
+	const handleSubmit = (e: React.FormEvent): void => {
+		e.preventDefault()
 		if (!postalCodes.validate(country, postal)) {
 			setPostalError(true)
 		}
@@ -132,19 +133,19 @@ function ReviewForm(): JSX.Element {
 				<Alert success={success} setAlertOpen={setAlertOpen} />
 			) : null}
 			<SuccessModal isOpen={successModalOpen} setIsOpen={setSuccessModalOpen} />
-			<ProfanityModal
+			{/* <ProfanityModal
 				isOpen={profanityModalOpen}
 				setIsOpen={setProfanityModalOpen}
 				onSubmit={handleSubmit}
 				profanity={flagged_reason}
-			/>
+			/> */}
 			<div className="w-full my-3">
 				<h1 className="text-4xl font-extrabold border-b-teal-600 border-b-2">
 					{t('create-review.review-form.header')}
 				</h1>
 			</div>
 			<form
-				onSubmit={() => handleSubmit()}
+				onSubmit={handleSubmit}
 				className="space-y-8 divide-y divide-gray-200 w-full"
 			>
 				<div className="space-y-8 divide-y divide-gray-200">
