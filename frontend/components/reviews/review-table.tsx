@@ -16,7 +16,7 @@ function ReviewTable({
 	setReportOpen: Dispatch<SetStateAction<boolean>>
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('reviews')
 	const date = new Date()
 
 	const handleReport = (review: Review) => {

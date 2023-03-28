@@ -125,7 +125,7 @@ export default function Reviews({data}: {data: Review[]}): JSX.Element {
 	)
 }
 
-//Page is statically generated at build time and then revalidated at a minimum of every 30 minutes based on when the page is accessed
+//Page is statically generated at build time and then revalidated at a minimum of every 100 seconds based on when the page is accessed
 export async function getStaticProps() {
 	try {
 		const req = await fetch(`http://backend:5000/review`)
