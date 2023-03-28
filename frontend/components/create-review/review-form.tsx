@@ -144,7 +144,7 @@ function ReviewForm(): JSX.Element {
 				</h1>
 			</div>
 			<form
-				onSubmit={handleSubmit}
+				onSubmit={() => handleSubmit()}
 				className="space-y-8 divide-y divide-gray-200 w-full"
 			>
 				<div className="space-y-8 divide-y divide-gray-200">
