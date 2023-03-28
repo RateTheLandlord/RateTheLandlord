@@ -5,7 +5,7 @@ import Solidarity from '../svg/icons/Solidarity'
 import Transparency from '../svg/icons/transparency'
 
 export default function IconSection() {
-	const {t} = useTranslation()
+	const {t} = useTranslation('home')
 	return (
 		<div className="bg-white min-w-full" data-testid="home-icon-section-1">
 			<div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">

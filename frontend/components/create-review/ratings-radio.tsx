@@ -9,18 +9,18 @@ interface Props {
 	title: string
 	rating: number
 	setRating: React.Dispatch<React.SetStateAction<number>>
+	tooltip: string
 }
 
-function RatingsRadio({title, rating, setRating}: Props) {
-	const {t} = useTranslation()
+function RatingsRadio({title, rating, setRating, tooltip}: Props) {
+	const {t} = useTranslation('create')
 
 	return (
 		<div>
-			<div className="flex items-center justify-between" data-testid="ratings-radio-1">
-				<h2 className="text-sm font-medium text-gray-900">
-					{title} {t('create-review.review-radio.rating')}
-				</h2>
-			</div>
+			<h2 className="font-medium text-gray-900">
+				{title} {t('create-review.review-radio.rating')}
+			</h2>
+			<p className="text-xs text-gray-500">{tooltip}</p>
 
 			<RadioGroup value={rating} onChange={setRating} className="mt-2">
 				<RadioGroup.Label className="sr-only">

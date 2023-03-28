@@ -6,9 +6,9 @@ interface SearchProps {
 }
 
 export default function SearchBar({setSearchState}: SearchProps) {
-	const {t} = useTranslation()
+	const {t} = useTranslation('reviews')
 	return (
-		<div className="mt-1 w-full">
+		<div className="mt-1 px-2 w-full">
 			<label htmlFor="search" className="sr-only">
 				Search
 			</label>

@@ -2,9 +2,10 @@ import {NextApiRequest, NextApiResponse} from 'next'
 
 interface IBody {
 	id: number
+	password: string
 }
 
-const updateUser = (req: NextApiRequest, res: NextApiResponse) => {
+const updatePassword = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = req.cookies
@@ -14,14 +15,15 @@ const updateUser = (req: NextApiRequest, res: NextApiResponse) => {
 	const {body}: {body: IBody} = req
 
 	const id = body.id
+	const password = body.password
 
-	fetch(`${url}/user/${id}`, {
+	fetch(`${url}/password/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${jwt}`,
 		},
-		body: JSON.stringify(body),
+		body: JSON.stringify({password: password}),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
@@ -30,12 +32,14 @@ const updateUser = (req: NextApiRequest, res: NextApiResponse) => {
 			return result.json()
 		})
 		.then((data) => {
-			res.status(200).json(data)
+			return res.status(200).json(data)
 		})
 		.catch((err: Response) => {
-			console.log(err)
-			res.status(500).json({error: 'Failed to edit User', response: err})
+			console.log('Error: ', err)
+			return res
+				.status(500)
+				.json({error: 'Failed to edit password', response: err})
 		})
 }
 
-export default updateUser
+export default updatePassword

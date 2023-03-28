@@ -2,11 +2,19 @@ import i18n from 'i18next'
 import {initReactI18next} from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-import translationENCA from './public/locales/en-CA/translation.json'
+import layoutENCA from './public/locales/en-CA/layout.json'
+import homeENCA from './public/locales/en-CA/home.json'
+import createreviewENCA from './public/locales/en-CA/createreview.json'
+import reviewsENCA from './public/locales/en-CA/reviews.json'
+import aboutENCA from './public/locales/en-CA/about.json'
 
 const resources = {
 	en: {
-		translation: translationENCA,
+		home: homeENCA,
+		translation: layoutENCA,
+		create: createreviewENCA,
+		reviews: reviewsENCA,
+		about: aboutENCA,
 	},
 }
 

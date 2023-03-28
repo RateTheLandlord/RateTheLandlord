@@ -22,10 +22,15 @@ export class UserService {
   }
 
   async update(id: number, user: IUser): Promise<boolean> {
-    const salt = bcrypt.genSaltSync(saltOrRounds);
-    user.password = await bcrypt.hash(user.password, salt);
     await this.databaseService
-      .sql`UPDATE users SET name = ${user.name}, password = ${user.password}, email= ${user.email} WHERE id = ${id}`;
+      .sql`UPDATE users SET name = ${user.name}, email= ${user.email} WHERE id = ${id}`;
+
+    return true;
+  }
+
+  async updateUserLockout(id: number, user: IUser): Promise<boolean> {
+    await this.databaseService
+      .sql`UPDATE users SET login_attempts = ${user.login_attempts}, login_lockout = ${user.login_lockout}, last_login_attempt = ${user.last_login_attempt} WHERE id = ${id}`;
 
     return true;
   }

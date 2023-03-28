@@ -35,7 +35,7 @@ export default function MobileReviewFilters({
 	stateOptions,
 	setSearchState,
 }: FiltersProps) {
-	const {t} = useTranslation()
+	const {t} = useTranslation('reviews')
 	return (
 		<Transition.Root show={mobileFiltersOpen} as={Fragment}>
 			<Dialog

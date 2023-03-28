@@ -15,9 +15,19 @@ services:
       - ./conf/nginx/:/etc/nginx:ro
       - ./logs/nginx/:/var/log/nginx
       - /etc/localtime:/etc/localtime:ro
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     depends_on:
       - frontend
       - backend
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   backend:
     container_name: backend
@@ -29,10 +39,6 @@ services:
       - ${BEPORT}:${BEPORT}
     networks:
       - internal
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-      - ./.env:/app/.env
     depends_on:
       - postgres
     env_file: .env
@@ -47,11 +53,6 @@ services:
       - ${FEPORT}:${FEPORT}
     networks:
       - internal
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
-      - ./logs/frontend:/root/.npm/_logs
     env_file:
       - ./.env
     depends_on:

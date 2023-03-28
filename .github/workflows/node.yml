@@ -33,12 +33,6 @@ jobs:
             git pull
             echo "[Removing existing env file]"
             rm -rf .env
-            echo "[Changing Directory to frontend]"
-            cd frontend
-            echo "[removing next folder]"
-            rm -rf .next
-            echo "[Changing Directory back to RateTheLandlord]"
-            cd ..
             echo "[Creating new env file]"
             touch .env
             echo BEPORT=${{secrets.BEPORT}} >> .env
@@ -56,6 +50,6 @@ jobs:
             echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
             cat .env
             echo "[Building Docker Containers]"
-            docker-compose build
+            docker-compose build --no-cache
             echo "[Starting Docker Containers]"
             docker-compose up -d

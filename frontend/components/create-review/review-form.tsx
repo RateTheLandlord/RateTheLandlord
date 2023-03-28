@@ -25,7 +25,7 @@ const country_codes = Object.keys(countries).filter(
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('create')
 
 	const [profanityModalOpen, setProfanityModalOpen] = useState<boolean>(false)
 	const [success, setSuccess] = useState(false)
@@ -35,7 +35,7 @@ function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
 	const [city, setCity] = useState<string>('')
-	const [province, setProvince] = useState<string>('')
+	const [province, setProvince] = useState<string>('Ontario')
 	const [postal, setPostal] = useState<string>('')
 
 	const [repair, setRepair] = useState<number>(3)
@@ -52,24 +52,31 @@ function ReviewForm(): JSX.Element {
 
 	const [postalError, setPostalError] = useState(false)
 
-	const profanityCheck = (e: React.FormEvent): void => {
+	// const profanityCheck = (e: React.FormEvent): void => {
+	// 	e.preventDefault()
+
+	// 	const foundSwears = profanity.filter((word) =>
+	// 		review.toLowerCase().includes(word.toLowerCase()),
+	// 	)
+	// 	console.log(foundSwears)
+	// 	if (foundSwears.length) {
+	// 		let swears = ''
+	// 		for (let i = 0; i < foundSwears.length; i++) {
+	// 			swears += `${foundSwears[i]}, `
+	// 		}
+	// 		const reason = `Profanity: ${swears}`
+	// 		setFlagged(true)
+	// 		setflagged_reason('Profanity: ' + reason)
+	// 		setProfanityModalOpen(true)
+	// 	} else {
+	// 		setFlagged(false)
+	// 		setflagged_reason('')
+	// 		handleSubmit()
+	// 	}
+	// }
+
+	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
-
-		const foundSwears = profanity.filter((word) =>
-			review.toLowerCase().includes(word.toLowerCase()),
-		)
-		if (foundSwears.length) {
-			setFlagged(true)
-			setflagged_reason('Profanity')
-			setProfanityModalOpen(true)
-		} else {
-			setFlagged(false)
-			setflagged_reason('')
-			handleSubmit()
-		}
-	}
-
-	const handleSubmit = (): void => {
 		if (!postalCodes.validate(country, postal)) {
 			setPostalError(true)
 		}
@@ -126,18 +133,19 @@ function ReviewForm(): JSX.Element {
 				<Alert success={success} setAlertOpen={setAlertOpen} />
 			) : null}
 			<SuccessModal isOpen={successModalOpen} setIsOpen={setSuccessModalOpen} />
-			<ProfanityModal
+			{/* <ProfanityModal
 				isOpen={profanityModalOpen}
 				setIsOpen={setProfanityModalOpen}
 				onSubmit={handleSubmit}
-			/>
+				profanity={flagged_reason}
+			/> */}
 			<div className="w-full my-3">
 				<h1 className="text-4xl font-extrabold border-b-teal-600 border-b-2">
 					{t('create-review.review-form.header')}
 				</h1>
 			</div>
 			<form
-				onSubmit={profanityCheck}
+				onSubmit={handleSubmit}
 				className="space-y-8 divide-y divide-gray-200 w-full"
 			>
 				<div className="space-y-8 divide-y divide-gray-200">
@@ -280,44 +288,50 @@ function ReviewForm(): JSX.Element {
 							</div>
 						</div>
 					</div>
-					<div>
-						<h3 className="text-lg leading-6 font-medium text-gray-900">
+					<div className="flex flex-col gap-2">
+						<h3 className="text-lg leading-6 font-medium text-gray-900 mt-2">
 							{t('create-review.review-form.rate-title')}
 						</h3>
 						<RatingsRadio
 							title={t('create-review.review-form.repair')}
 							rating={repair}
 							setRating={setRepair}
+							tooltip={t('create-review.review-form.repair_description')}
 						/>
+
 						<RatingsRadio
 							title={t('create-review.review-form.health')}
 							rating={health}
 							setRating={setHealth}
+							tooltip={t('create-review.review-form.health_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.stability')}
 							rating={stability}
 							setRating={setStability}
+							tooltip={t('create-review.review-form.stability_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.privacy')}
 							rating={privacy}
 							setRating={setPrivacy}
+							tooltip={t('create-review.review-form.privacy_description')}
 						/>
 
 						<RatingsRadio
 							title={t('create-review.review-form.respect')}
 							rating={respect}
 							setRating={setRespect}
+							tooltip={t('create-review.review-form.respect_description')}
 						/>
 					</div>
 				</div>
 				<div>
 					<label
 						htmlFor="comment"
-						className="block text-sm font-medium text-gray-700"
+						className="block text-sm font-medium text-gray-700 mt-2"
 					>
 						{t('create-review.review-form.review')}
 					</label>
@@ -334,7 +348,7 @@ function ReviewForm(): JSX.Element {
 					</div>
 				</div>
 
-				<div className="pt-5">
+				<div className="py-5">
 					<div className="flex justify-center mb-2">
 						<div data-testid="create-review-form-captcha-1">
 							<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />	

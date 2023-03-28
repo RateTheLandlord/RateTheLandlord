@@ -1,18 +1,17 @@
+import {useTranslation} from 'react-i18next'
+
 const Privacy = () => {
+	const {t} = useTranslation('about')
 	return (
-		<div className="mx-auto max-w-prose text-lg" data-testid="about-privacy-1">
-			<h3>
-				<span className="mt-2 block text-center text-xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">
-					Privacy Policy
-				</span>
-			</h3>
-			<p className="mt-8 text-xl leading-8 text-gray-500">
-				At Rate the Landlord, we are committed to protecting the privacy of
-				those who submit reviews. All submissions made to our website are
-				anonymous. We do not collect any personal data or information that could
-				be used to identify you, such as your name, email address, or phone
-				number.
-			</p>
+		<div className="bg-white w-full">
+			<div className="mx-auto max-w-7xl px-6 lg:px-8 text-lg">
+				<h3 className="mt-2 block text-center text-xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">
+					{t('about.privacy.privacy')}
+				</h3>
+				<p className="mt-8 text-xl leading-8 text-gray-500">
+					{t('about.privacy.p-1')}
+				</p>
+			</div>
 		</div>
 	)
 }

@@ -1,41 +1,37 @@
 import {Disclosure} from '@headlessui/react'
 import {MinusSmIcon, PlusSmIcon} from '@heroicons/react/solid'
-
-const faqs = [
-	{
-		question: 'What does Repairs mean for the reviews?',
-		answer:
-			'Landlords have a legal obligation to keep the rental property in a safe and habitable condition. Tenants should receive timely repairs by trained professionals to keep their vital systems like plumbing and heating in order.',
-	},
-	{
-		question: 'What does Rental Stability mean for the reviews?',
-		answer:
-			"Landlords must abide by rental agreements and not engage in practices that would disrupt the tenant's rental stability, such as unjustified rent increases or arbitrary evictions.",
-	},
-	{
-		question: 'What does Tenant Privacy mean for the reviews?',
-		answer:
-			"Landlords must respect their tenants' privacy, and may only enter the rental property with the tenant's consent or for specific reasons outlined in the rental agreement. Landlords should also refrain from probing into the personal lives of their tenants or asking for information that is not necessary to form a professional rental agreement.",
-	},
-	{
-		question: 'What does Respect mean for the reviews?',
-		answer:
-			"Landlords must treat their tenants with respect, and must not engage in behavior that would violate the tenant's rights, such as discrimination or harassment.",
-	},
-	{
-		question: 'What does Health and Safety mean for the reviews?',
-		answer:
-			'Landlords must ensure that the rental property complies with local health and safety standards, such as maintaining smoke detectors, removing mold, and employing pest control when necessary.',
-	},
-]
+import {useTranslation} from 'react-i18next'
 
 const Faq = () => {
+	const {t} = useTranslation('about')
+	const faqs = [
+		{
+			question: t('about.faq.repairs'),
+			answer: t('about.faq.repairs_description'),
+		},
+		{
+			question: t('about.faq.stability'),
+			answer: t('about.faq.stability_description'),
+		},
+		{
+			question: t('about.faq.privacy'),
+			answer: t('about.faq.privacy_description'),
+		},
+		{
+			question: t('about.faq.respect'),
+			answer: t('about.faq.respect_description'),
+		},
+		{
+			question: t('about.faq.health'),
+			answer: t('about.faq.health_description'),
+		},
+	]
 	return (
 		<div className="bg-white w-full" data-testid="about-faq-1">
 			<div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:py-40 lg:px-8">
 				<div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
-					<h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
-						Frequently asked questions
+					<h2 className="mt-2 block text-center text-xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">
+						{t('about.faq.faq')}
 					</h2>
 					<dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
 						{faqs.map((faq) => (

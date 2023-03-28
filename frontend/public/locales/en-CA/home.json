@@ -1,0 +1,19 @@
+{
+	"home": {
+		"hero": {
+			"title": "Share information with tenants like you.",
+			"body": "We are a community platform that elevates tenant voices to promote landlord accountability.",
+			"submit": "Submit a Review",
+			"read": "Read Reviews"
+		},
+		"icon": {
+			"title": "Help Keep Landlords Accountable",
+			"anonymity": "Anonymity",
+			"anon-sub": "Share your rental experience with confidence.",
+			"solidarity": "Solidarity",
+			"sol-sub": "Join fellow Tenants by creating an informed community.",
+			"transparency": "Transparency",
+			"trans-sub": "Empower others to make decisions about housing."
+		}
+	}
+}

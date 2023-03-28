@@ -16,7 +16,7 @@ function ReviewTable({
 	setReportOpen: Dispatch<SetStateAction<boolean>>
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }): JSX.Element {
-	const {t} = useTranslation()
+	const {t} = useTranslation('reviews')
 	const date = new Date()
 
 	const handleReport = (review: Review) => {
@@ -74,7 +74,7 @@ function ReviewTable({
 										</p>
 										<div className="mt-4 w-full sm:w-auto">
 											<ButtonLight onClick={() => handleReport(review)}>
-												REPORT
+												{t('reviews.report-review')}
 											</ButtonLight>
 										</div>
 									</div>
@@ -107,7 +107,7 @@ function ReviewTable({
 											<p>{t('reviews.review')}</p>
 											{review.admin_edited ? (
 												<p className="text-red-400 text-xs">
-													*Edited by Admin after review
+													{t('reviews.edited')}
 												</p>
 											) : null}
 
