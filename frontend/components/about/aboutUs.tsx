@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 const AboutUs = () => {
 	const {t} = useTranslation('about')
 	return (
-		<div className="bg-white w-full">
+		<div data-testid="about-aboutus-1" className="bg-white w-full">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8 text-lg">
 				<h1>
 					<span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">

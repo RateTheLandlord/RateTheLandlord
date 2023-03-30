@@ -1,0 +1,8 @@
+// Next requires "jsx" : "preserve", but Jest requires a JSX transform
+// This config extension overrides the "jsx" key which seems to play nice
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "jsx": "react-jsx"
+    }
+}

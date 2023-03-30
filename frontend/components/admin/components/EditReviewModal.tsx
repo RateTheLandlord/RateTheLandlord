@@ -16,6 +16,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 					className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 					onChange={(e) => setReview(e.target.value)}
 					defaultValue={review}
+					data-testid="edit-review-modal-1"
 				/>
 			</div>
 		</div>

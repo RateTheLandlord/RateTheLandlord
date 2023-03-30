@@ -25,7 +25,7 @@ function ReviewTable({
 	}
 	if (data.length) {
 		return (
-			<div>
+			<div data-testid="review-table-1">
 				<div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 					<div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
 						{data.map((review) => {

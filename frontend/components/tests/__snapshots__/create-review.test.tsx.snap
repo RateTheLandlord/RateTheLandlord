@@ -1,0 +1,1757 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review Form Tests  Review Form is interactive 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="w-full flex flex-col container items-center px-4 sm:px-0"
+        data-testid="create-review-form-1"
+      >
+        <div
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+        />
+        <div
+          class="w-full my-3"
+        >
+          <h1
+            class="text-4xl font-extrabold border-b-teal-600 border-b-2"
+          >
+            create-review.review-form.header
+          </h1>
+        </div>
+        <form
+          class="space-y-8 divide-y divide-gray-200 w-full"
+        >
+          <div
+            class="space-y-8 divide-y divide-gray-200"
+          >
+            <div
+              class="pt-8"
+            >
+              <div>
+                <h3
+                  class="text-lg leading-6 font-medium text-gray-900"
+                >
+                  create-review.review-form.title
+                </h3>
+                <p
+                  class="mt-1 text-sm text-gray-500"
+                >
+                  create-review.review-form.sub
+                </p>
+              </div>
+              <div
+                class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+              >
+                <div
+                  class="sm:col-span-3"
+                >
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    for="landlord"
+                  >
+                    create-review.review-form.landlord
+                  </label>
+                  <div
+                    class="mt-1"
+                  >
+                    <input
+                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      data-testid="create-review-form-landlord-1"
+                      id="landlord"
+                      name="landlord"
+                      placeholder="create-review.review-form.landlord"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:col-span-3"
+                >
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    for="country"
+                  >
+                    create-review.review-form.country
+                  </label>
+                  <div
+                    class="mt-1"
+                  >
+                    <select
+                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      id="country"
+                      name="country"
+                      required=""
+                    >
+                      <option
+                        value="CA"
+                      >
+                        Canada
+                      </option>
+                      <option
+                        value="US"
+                      >
+                        United States
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div
+                  class="sm:col-span-2"
+                >
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    for="city"
+                  >
+                    create-review.review-form.city
+                  </label>
+                  <div
+                    class="mt-1"
+                  >
+                    <input
+                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      data-testid="create-review-form-city-1"
+                      id="city"
+                      name="city"
+                      placeholder="create-review.review-form.city"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:col-span-2"
+                >
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    for="region"
+                  >
+                    create-review.review-form.state
+                  </label>
+                  <div
+                    class="mt-1"
+                  >
+                    <select
+                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      id="region"
+                      name="region"
+                      required=""
+                    >
+                      <option
+                        value="Alberta"
+                      >
+                        Alberta
+                      </option>
+                      <option
+                        value="British Columbia"
+                      >
+                        British Columbia
+                      </option>
+                      <option
+                        value="Manitoba"
+                      >
+                        Manitoba
+                      </option>
+                      <option
+                        value="New Brunswick"
+                      >
+                        New Brunswick
+                      </option>
+                      <option
+                        value="Newfoundland and Labrador"
+                      >
+                        Newfoundland and Labrador
+                      </option>
+                      <option
+                        value="Nova Scotia"
+                      >
+                        Nova Scotia
+                      </option>
+                      <option
+                        value="Nunavut"
+                      >
+                        Nunavut
+                      </option>
+                      <option
+                        value="Northwest Territories"
+                      >
+                        Northwest Territories
+                      </option>
+                      <option
+                        value="Ontario"
+                      >
+                        Ontario
+                      </option>
+                      <option
+                        value="Prince Edward Island"
+                      >
+                        Prince Edward Island
+                      </option>
+                      <option
+                        value="Quebec"
+                      >
+                        Quebec
+                      </option>
+                      <option
+                        value="Saskatchewan"
+                      >
+                        Saskatchewan
+                      </option>
+                      <option
+                        value="Yukon"
+                      >
+                        Yukon
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div
+                  class="sm:col-span-2"
+                >
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    for="postal-code"
+                  >
+                    create-review.review-form.zip
+                  </label>
+                  <div
+                    class="mt-1"
+                  >
+                    <input
+                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      data-testid="create-review-form-postal-code-1"
+                      id="postal-code"
+                      name="postal-code"
+                      placeholder="create-review.review-form.zip"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-2"
+            >
+              <h3
+                class="text-lg leading-6 font-medium text-gray-900 mt-2"
+              >
+                create-review.review-form.rate-title
+              </h3>
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
+                >
+                  create-review.review-form.repair
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.repair_description
+                </p>
+                <div
+                  aria-labelledby="headlessui-label-:r1v:"
+                  class="mt-2"
+                  id="headlessui-radiogroup-:r1u:"
+                  role="radiogroup"
+                >
+                  <label
+                    class="sr-only"
+                    id="headlessui-label-:r1v:"
+                    role="none"
+                  >
+                    create-review.review-radio.choose
+                  </label>
+                  <div
+                    class="grid gap-2 sm:gap-3 grid-cols-5"
+                    role="none"
+                  >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r21:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r20:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r21:"
+                      >
+                        1
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r23:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r22:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r23:"
+                      >
+                        2
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="true"
+                      aria-labelledby="headlessui-label-:r25:"
+                      class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state="checked"
+                      id="headlessui-radiogroup-option-:r24:"
+                      role="radio"
+                      tabindex="0"
+                    >
+                      <span
+                        id="headlessui-label-:r25:"
+                      >
+                        3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r27:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r26:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r27:"
+                      >
+                        4
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r29:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r28:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r29:"
+                      >
+                        5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
+                >
+                  create-review.review-form.health
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.health_description
+                </p>
+                <div
+                  aria-labelledby="headlessui-label-:r2b:"
+                  class="mt-2"
+                  id="headlessui-radiogroup-:r2a:"
+                  role="radiogroup"
+                >
+                  <label
+                    class="sr-only"
+                    id="headlessui-label-:r2b:"
+                    role="none"
+                  >
+                    create-review.review-radio.choose
+                  </label>
+                  <div
+                    class="grid gap-2 sm:gap-3 grid-cols-5"
+                    role="none"
+                  >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2d:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2c:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2d:"
+                      >
+                        1
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2f:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2e:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2f:"
+                      >
+                        2
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="true"
+                      aria-labelledby="headlessui-label-:r2h:"
+                      class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state="checked"
+                      id="headlessui-radiogroup-option-:r2g:"
+                      role="radio"
+                      tabindex="0"
+                    >
+                      <span
+                        id="headlessui-label-:r2h:"
+                      >
+                        3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2j:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2i:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2j:"
+                      >
+                        4
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2l:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2k:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2l:"
+                      >
+                        5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
+                >
+                  create-review.review-form.stability
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.stability_description
+                </p>
+                <div
+                  aria-labelledby="headlessui-label-:r2n:"
+                  class="mt-2"
+                  id="headlessui-radiogroup-:r2m:"
+                  role="radiogroup"
+                >
+                  <label
+                    class="sr-only"
+                    id="headlessui-label-:r2n:"
+                    role="none"
+                  >
+                    create-review.review-radio.choose
+                  </label>
+                  <div
+                    class="grid gap-2 sm:gap-3 grid-cols-5"
+                    role="none"
+                  >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2p:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2o:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2p:"
+                      >
+                        1
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2r:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2q:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2r:"
+                      >
+                        2
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="true"
+                      aria-labelledby="headlessui-label-:r2t:"
+                      class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state="checked"
+                      id="headlessui-radiogroup-option-:r2s:"
+                      role="radio"
+                      tabindex="0"
+                    >
+                      <span
+                        id="headlessui-label-:r2t:"
+                      >
+                        3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2v:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2u:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2v:"
+                      >
+                        4
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r31:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r30:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r31:"
+                      >
+                        5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
+                >
+                  create-review.review-form.privacy
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.privacy_description
+                </p>
+                <div
+                  aria-labelledby="headlessui-label-:r33:"
+                  class="mt-2"
+                  id="headlessui-radiogroup-:r32:"
+                  role="radiogroup"
+                >
+                  <label
+                    class="sr-only"
+                    id="headlessui-label-:r33:"
+                    role="none"
+                  >
+                    create-review.review-radio.choose
+                  </label>
+                  <div
+                    class="grid gap-2 sm:gap-3 grid-cols-5"
+                    role="none"
+                  >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r35:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r34:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r35:"
+                      >
+                        1
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r37:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r36:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r37:"
+                      >
+                        2
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="true"
+                      aria-labelledby="headlessui-label-:r39:"
+                      class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state="checked"
+                      id="headlessui-radiogroup-option-:r38:"
+                      role="radio"
+                      tabindex="0"
+                    >
+                      <span
+                        id="headlessui-label-:r39:"
+                      >
+                        3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3b:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3a:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3b:"
+                      >
+                        4
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3d:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3c:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3d:"
+                      >
+                        5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
+                >
+                  create-review.review-form.respect
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.respect_description
+                </p>
+                <div
+                  aria-labelledby="headlessui-label-:r3f:"
+                  class="mt-2"
+                  id="headlessui-radiogroup-:r3e:"
+                  role="radiogroup"
+                >
+                  <label
+                    class="sr-only"
+                    id="headlessui-label-:r3f:"
+                    role="none"
+                  >
+                    create-review.review-radio.choose
+                  </label>
+                  <div
+                    class="grid gap-2 sm:gap-3 grid-cols-5"
+                    role="none"
+                  >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3h:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3g:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3h:"
+                      >
+                        1
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3j:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3i:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3j:"
+                      >
+                        2
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="true"
+                      aria-labelledby="headlessui-label-:r3l:"
+                      class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state="checked"
+                      id="headlessui-radiogroup-option-:r3k:"
+                      role="radio"
+                      tabindex="0"
+                    >
+                      <span
+                        id="headlessui-label-:r3l:"
+                      >
+                        3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3n:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3m:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3n:"
+                      >
+                        4
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3p:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3o:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3p:"
+                      >
+                        5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 mt-2"
+              for="comment"
+            >
+              create-review.review-form.review
+            </label>
+            <div
+              class="mt-1"
+            >
+              <textarea
+                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                data-testid="create-review-form-text-1"
+                id="comment"
+                name="comment"
+                rows="4"
+              />
+            </div>
+          </div>
+          <div
+            class="py-5"
+          >
+            <div
+              class="flex justify-center mb-2"
+            >
+              <div
+                data-testid="create-review-form-captcha-1"
+              >
+                <div />
+              </div>
+            </div>
+            <div
+              class="flex justify-center sm:justify-end"
+              data-testid="create-review-form-submit-button-1"
+            >
+              <button
+                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                data-testid="light-button"
+                type="reset"
+              >
+                create-review.review-form.reset
+              </button>
+              <button
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                data-testid="submit-button-1"
+                disabled=""
+                type="submit"
+              >
+                create-review.review-form.submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      id="headlessui-portal-root"
+    >
+      <div
+        data-headlessui-portal=""
+      >
+        <div />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="w-full flex flex-col container items-center px-4 sm:px-0"
+      data-testid="create-review-form-1"
+    >
+      <div
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+      />
+      <div
+        class="w-full my-3"
+      >
+        <h1
+          class="text-4xl font-extrabold border-b-teal-600 border-b-2"
+        >
+          create-review.review-form.header
+        </h1>
+      </div>
+      <form
+        class="space-y-8 divide-y divide-gray-200 w-full"
+      >
+        <div
+          class="space-y-8 divide-y divide-gray-200"
+        >
+          <div
+            class="pt-8"
+          >
+            <div>
+              <h3
+                class="text-lg leading-6 font-medium text-gray-900"
+              >
+                create-review.review-form.title
+              </h3>
+              <p
+                class="mt-1 text-sm text-gray-500"
+              >
+                create-review.review-form.sub
+              </p>
+            </div>
+            <div
+              class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+            >
+              <div
+                class="sm:col-span-3"
+              >
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  for="landlord"
+                >
+                  create-review.review-form.landlord
+                </label>
+                <div
+                  class="mt-1"
+                >
+                  <input
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    data-testid="create-review-form-landlord-1"
+                    id="landlord"
+                    name="landlord"
+                    placeholder="create-review.review-form.landlord"
+                    required=""
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                class="sm:col-span-3"
+              >
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  for="country"
+                >
+                  create-review.review-form.country
+                </label>
+                <div
+                  class="mt-1"
+                >
+                  <select
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    id="country"
+                    name="country"
+                    required=""
+                  >
+                    <option
+                      value="CA"
+                    >
+                      Canada
+                    </option>
+                    <option
+                      value="US"
+                    >
+                      United States
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div
+                class="sm:col-span-2"
+              >
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  for="city"
+                >
+                  create-review.review-form.city
+                </label>
+                <div
+                  class="mt-1"
+                >
+                  <input
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    data-testid="create-review-form-city-1"
+                    id="city"
+                    name="city"
+                    placeholder="create-review.review-form.city"
+                    required=""
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                class="sm:col-span-2"
+              >
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  for="region"
+                >
+                  create-review.review-form.state
+                </label>
+                <div
+                  class="mt-1"
+                >
+                  <select
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    id="region"
+                    name="region"
+                    required=""
+                  >
+                    <option
+                      value="Alberta"
+                    >
+                      Alberta
+                    </option>
+                    <option
+                      value="British Columbia"
+                    >
+                      British Columbia
+                    </option>
+                    <option
+                      value="Manitoba"
+                    >
+                      Manitoba
+                    </option>
+                    <option
+                      value="New Brunswick"
+                    >
+                      New Brunswick
+                    </option>
+                    <option
+                      value="Newfoundland and Labrador"
+                    >
+                      Newfoundland and Labrador
+                    </option>
+                    <option
+                      value="Nova Scotia"
+                    >
+                      Nova Scotia
+                    </option>
+                    <option
+                      value="Nunavut"
+                    >
+                      Nunavut
+                    </option>
+                    <option
+                      value="Northwest Territories"
+                    >
+                      Northwest Territories
+                    </option>
+                    <option
+                      value="Ontario"
+                    >
+                      Ontario
+                    </option>
+                    <option
+                      value="Prince Edward Island"
+                    >
+                      Prince Edward Island
+                    </option>
+                    <option
+                      value="Quebec"
+                    >
+                      Quebec
+                    </option>
+                    <option
+                      value="Saskatchewan"
+                    >
+                      Saskatchewan
+                    </option>
+                    <option
+                      value="Yukon"
+                    >
+                      Yukon
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div
+                class="sm:col-span-2"
+              >
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  for="postal-code"
+                >
+                  create-review.review-form.zip
+                </label>
+                <div
+                  class="mt-1"
+                >
+                  <input
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    data-testid="create-review-form-postal-code-1"
+                    id="postal-code"
+                    name="postal-code"
+                    placeholder="create-review.review-form.zip"
+                    required=""
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-2"
+          >
+            <h3
+              class="text-lg leading-6 font-medium text-gray-900 mt-2"
+            >
+              create-review.review-form.rate-title
+            </h3>
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
+              >
+                create-review.review-form.repair
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.repair_description
+              </p>
+              <div
+                aria-labelledby="headlessui-label-:r1v:"
+                class="mt-2"
+                id="headlessui-radiogroup-:r1u:"
+                role="radiogroup"
+              >
+                <label
+                  class="sr-only"
+                  id="headlessui-label-:r1v:"
+                  role="none"
+                >
+                  create-review.review-radio.choose
+                </label>
+                <div
+                  class="grid gap-2 sm:gap-3 grid-cols-5"
+                  role="none"
+                >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r21:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r20:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r21:"
+                    >
+                      1
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r23:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r22:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r23:"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="true"
+                    aria-labelledby="headlessui-label-:r25:"
+                    class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state="checked"
+                    id="headlessui-radiogroup-option-:r24:"
+                    role="radio"
+                    tabindex="0"
+                  >
+                    <span
+                      id="headlessui-label-:r25:"
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r27:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r26:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r27:"
+                    >
+                      4
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r29:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r28:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r29:"
+                    >
+                      5
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
+              >
+                create-review.review-form.health
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.health_description
+              </p>
+              <div
+                aria-labelledby="headlessui-label-:r2b:"
+                class="mt-2"
+                id="headlessui-radiogroup-:r2a:"
+                role="radiogroup"
+              >
+                <label
+                  class="sr-only"
+                  id="headlessui-label-:r2b:"
+                  role="none"
+                >
+                  create-review.review-radio.choose
+                </label>
+                <div
+                  class="grid gap-2 sm:gap-3 grid-cols-5"
+                  role="none"
+                >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2d:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2c:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2d:"
+                    >
+                      1
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2f:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2e:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2f:"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="true"
+                    aria-labelledby="headlessui-label-:r2h:"
+                    class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state="checked"
+                    id="headlessui-radiogroup-option-:r2g:"
+                    role="radio"
+                    tabindex="0"
+                  >
+                    <span
+                      id="headlessui-label-:r2h:"
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2j:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2i:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2j:"
+                    >
+                      4
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2l:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2k:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2l:"
+                    >
+                      5
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
+              >
+                create-review.review-form.stability
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.stability_description
+              </p>
+              <div
+                aria-labelledby="headlessui-label-:r2n:"
+                class="mt-2"
+                id="headlessui-radiogroup-:r2m:"
+                role="radiogroup"
+              >
+                <label
+                  class="sr-only"
+                  id="headlessui-label-:r2n:"
+                  role="none"
+                >
+                  create-review.review-radio.choose
+                </label>
+                <div
+                  class="grid gap-2 sm:gap-3 grid-cols-5"
+                  role="none"
+                >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2p:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2o:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2p:"
+                    >
+                      1
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2r:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2q:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2r:"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="true"
+                    aria-labelledby="headlessui-label-:r2t:"
+                    class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state="checked"
+                    id="headlessui-radiogroup-option-:r2s:"
+                    role="radio"
+                    tabindex="0"
+                  >
+                    <span
+                      id="headlessui-label-:r2t:"
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2v:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2u:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2v:"
+                    >
+                      4
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r31:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r30:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r31:"
+                    >
+                      5
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
+              >
+                create-review.review-form.privacy
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.privacy_description
+              </p>
+              <div
+                aria-labelledby="headlessui-label-:r33:"
+                class="mt-2"
+                id="headlessui-radiogroup-:r32:"
+                role="radiogroup"
+              >
+                <label
+                  class="sr-only"
+                  id="headlessui-label-:r33:"
+                  role="none"
+                >
+                  create-review.review-radio.choose
+                </label>
+                <div
+                  class="grid gap-2 sm:gap-3 grid-cols-5"
+                  role="none"
+                >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r35:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r34:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r35:"
+                    >
+                      1
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r37:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r36:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r37:"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="true"
+                    aria-labelledby="headlessui-label-:r39:"
+                    class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state="checked"
+                    id="headlessui-radiogroup-option-:r38:"
+                    role="radio"
+                    tabindex="0"
+                  >
+                    <span
+                      id="headlessui-label-:r39:"
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3b:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3a:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3b:"
+                    >
+                      4
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3d:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3c:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3d:"
+                    >
+                      5
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
+              >
+                create-review.review-form.respect
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.respect_description
+              </p>
+              <div
+                aria-labelledby="headlessui-label-:r3f:"
+                class="mt-2"
+                id="headlessui-radiogroup-:r3e:"
+                role="radiogroup"
+              >
+                <label
+                  class="sr-only"
+                  id="headlessui-label-:r3f:"
+                  role="none"
+                >
+                  create-review.review-radio.choose
+                </label>
+                <div
+                  class="grid gap-2 sm:gap-3 grid-cols-5"
+                  role="none"
+                >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3h:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3g:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3h:"
+                    >
+                      1
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3j:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3i:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3j:"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="true"
+                    aria-labelledby="headlessui-label-:r3l:"
+                    class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state="checked"
+                    id="headlessui-radiogroup-option-:r3k:"
+                    role="radio"
+                    tabindex="0"
+                  >
+                    <span
+                      id="headlessui-label-:r3l:"
+                    >
+                      3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3n:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3m:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3n:"
+                    >
+                      4
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3p:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3o:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3p:"
+                    >
+                      5
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 mt-2"
+            for="comment"
+          >
+            create-review.review-form.review
+          </label>
+          <div
+            class="mt-1"
+          >
+            <textarea
+              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              data-testid="create-review-form-text-1"
+              id="comment"
+              name="comment"
+              rows="4"
+            />
+          </div>
+        </div>
+        <div
+          class="py-5"
+        >
+          <div
+            class="flex justify-center mb-2"
+          >
+            <div
+              data-testid="create-review-form-captcha-1"
+            >
+              <div />
+            </div>
+          </div>
+          <div
+            class="flex justify-center sm:justify-end"
+            data-testid="create-review-form-submit-button-1"
+          >
+            <button
+              class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+              data-testid="light-button"
+              type="reset"
+            >
+              create-review.review-form.reset
+            </button>
+            <button
+              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+              data-testid="submit-button-1"
+              disabled=""
+              type="submit"
+            >
+              create-review.review-form.submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

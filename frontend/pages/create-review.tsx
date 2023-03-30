@@ -4,7 +4,7 @@ import React from 'react'
 
 function CreateReview(): JSX.Element {
 	return (
-		<div className="w-full flex justify-center">
+		<div className="w-full flex justify-center" data-testid="create-review-form-1">
 			<Head>
 				<title>Create a Review | Rate The Landlord</title>
 			</Head>
