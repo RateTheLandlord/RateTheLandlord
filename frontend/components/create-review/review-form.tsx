@@ -9,10 +9,8 @@ import provinces from '@/util/provinces.json'
 import states from '@/util/states.json'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {useTranslation} from 'react-i18next'
-import profanity from '@/util/profanity.json'
 import Alert from '../alerts/Alert'
 import SuccessModal from './success-modal'
-import ProfanityModal from './profanity-modal'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -27,7 +25,6 @@ const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 function ReviewForm(): JSX.Element {
 	const {t} = useTranslation('create')
 
-	const [profanityModalOpen, setProfanityModalOpen] = useState<boolean>(false)
 	const [success, setSuccess] = useState(false)
 	const [alertOpen, setAlertOpen] = useState(false)
 	const [successModalOpen, setSuccessModalOpen] = useState(false)
@@ -45,35 +42,9 @@ function ReviewForm(): JSX.Element {
 	const [respect, setRespect] = useState<number>(3)
 	const [review, setReview] = useState<string>('')
 
-	const [flagged, setFlagged] = useState<boolean>(false)
-	const [flagged_reason, setflagged_reason] = useState<string>('')
-
 	const [token, setToken] = useState<string>('')
 
 	const [postalError, setPostalError] = useState(false)
-
-	// const profanityCheck = (e: React.FormEvent): void => {
-	// 	e.preventDefault()
-
-	// 	const foundSwears = profanity.filter((word) =>
-	// 		review.toLowerCase().includes(word.toLowerCase()),
-	// 	)
-	// 	console.log(foundSwears)
-	// 	if (foundSwears.length) {
-	// 		let swears = ''
-	// 		for (let i = 0; i < foundSwears.length; i++) {
-	// 			swears += `${foundSwears[i]}, `
-	// 		}
-	// 		const reason = `Profanity: ${swears}`
-	// 		setFlagged(true)
-	// 		setflagged_reason('Profanity: ' + reason)
-	// 		setProfanityModalOpen(true)
-	// 	} else {
-	// 		setFlagged(false)
-	// 		setflagged_reason('')
-	// 		handleSubmit()
-	// 	}
-	// }
 
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
@@ -100,8 +71,8 @@ function ReviewForm(): JSX.Element {
 					stability: stability,
 					privacy: privacy,
 					respect: respect,
-					flagged: flagged,
-					flagged_reason: flagged_reason,
+					flagged: false,
+					flagged_reason: '',
 					admin_approved: false,
 					admin_edited: false,
 				},
@@ -133,12 +104,6 @@ function ReviewForm(): JSX.Element {
 				<Alert success={success} setAlertOpen={setAlertOpen} />
 			) : null}
 			<SuccessModal isOpen={successModalOpen} setIsOpen={setSuccessModalOpen} />
-			{/* <ProfanityModal
-				isOpen={profanityModalOpen}
-				setIsOpen={setProfanityModalOpen}
-				onSubmit={handleSubmit}
-				profanity={flagged_reason}
-			/> */}
 			<div className="w-full my-3">
 				<h1 className="text-4xl font-extrabold border-b-teal-600 border-b-2">
 					{t('create-review.review-form.header')}

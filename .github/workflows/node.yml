@@ -31,6 +31,9 @@ jobs:
             cd /home/RateTheLandlord
             echo "[Pulling Repo from Github]"
             git pull
+            cd /frontend
+            rm -rf .next
+            cd ..
             echo "[Removing existing env file]"
             rm -rf .env
             echo "[Creating new env file]"
