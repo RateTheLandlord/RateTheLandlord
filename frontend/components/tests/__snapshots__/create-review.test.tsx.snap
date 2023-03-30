@@ -13,9 +13,6 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
           style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
         />
         <div
-          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
-        />
-        <div
           class="w-full my-3"
         >
           <h1
@@ -236,34 +233,38 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                 </div>
               </div>
             </div>
-            <div>
+            <div
+              class="flex flex-col gap-2"
+            >
               <h3
-                class="text-lg leading-6 font-medium text-gray-900"
+                class="text-lg leading-6 font-medium text-gray-900 mt-2"
               >
                 create-review.review-form.rate-title
               </h3>
-              <div>
-                <div
-                  class="flex items-center justify-between"
-                  data-testid="ratings-radio-1"
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
                 >
-                  <h2
-                    class="text-sm font-medium text-gray-900"
-                  >
-                    create-review.review-form.repair
-                     
-                    create-review.review-radio.rating
-                  </h2>
-                </div>
+                  create-review.review-form.repair
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.repair_description
+                </p>
                 <div
-                  aria-labelledby="headlessui-label-:r21:"
+                  aria-labelledby="headlessui-label-:r1v:"
                   class="mt-2"
-                  id="headlessui-radiogroup-:r20:"
+                  id="headlessui-radiogroup-:r1u:"
                   role="radiogroup"
                 >
                   <label
                     class="sr-only"
-                    id="headlessui-label-:r21:"
+                    id="headlessui-label-:r1v:"
                     role="none"
                   >
                     create-review.review-radio.choose
@@ -272,6 +273,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     class="grid gap-2 sm:gap-3 grid-cols-5"
                     role="none"
                   >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r21:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r20:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r21:"
+                      >
+                        1
+                      </span>
+                    </div>
                     <div
                       aria-checked="false"
                       aria-labelledby="headlessui-label-:r23:"
@@ -284,37 +300,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r23:"
                       >
-                        1
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r25:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r24:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r25:"
-                      >
                         2
                       </span>
                     </div>
                     <div
                       aria-checked="true"
-                      aria-labelledby="headlessui-label-:r27:"
+                      aria-labelledby="headlessui-label-:r25:"
                       class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                       data-headlessui-state="checked"
-                      id="headlessui-radiogroup-option-:r26:"
+                      id="headlessui-radiogroup-option-:r24:"
                       role="radio"
                       tabindex="0"
                     >
                       <span
-                        id="headlessui-label-:r27:"
+                        id="headlessui-label-:r25:"
                       >
                         3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r27:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r26:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r27:"
+                      >
+                        4
                       </span>
                     </div>
                     <div
@@ -329,49 +345,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r29:"
                       >
-                        4
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r2b:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r2a:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r2b:"
-                      >
                         5
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div
-                  class="flex items-center justify-between"
-                  data-testid="ratings-radio-1"
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
                 >
-                  <h2
-                    class="text-sm font-medium text-gray-900"
-                  >
-                    create-review.review-form.health
-                     
-                    create-review.review-radio.rating
-                  </h2>
-                </div>
+                  create-review.review-form.health
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.health_description
+                </p>
                 <div
-                  aria-labelledby="headlessui-label-:r2d:"
+                  aria-labelledby="headlessui-label-:r2b:"
                   class="mt-2"
-                  id="headlessui-radiogroup-:r2c:"
+                  id="headlessui-radiogroup-:r2a:"
                   role="radiogroup"
                 >
                   <label
                     class="sr-only"
-                    id="headlessui-label-:r2d:"
+                    id="headlessui-label-:r2b:"
                     role="none"
                   >
                     create-review.review-radio.choose
@@ -380,6 +383,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     class="grid gap-2 sm:gap-3 grid-cols-5"
                     role="none"
                   >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2d:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2c:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2d:"
+                      >
+                        1
+                      </span>
+                    </div>
                     <div
                       aria-checked="false"
                       aria-labelledby="headlessui-label-:r2f:"
@@ -392,37 +410,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r2f:"
                       >
-                        1
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r2h:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r2g:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r2h:"
-                      >
                         2
                       </span>
                     </div>
                     <div
                       aria-checked="true"
-                      aria-labelledby="headlessui-label-:r2j:"
+                      aria-labelledby="headlessui-label-:r2h:"
                       class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                       data-headlessui-state="checked"
-                      id="headlessui-radiogroup-option-:r2i:"
+                      id="headlessui-radiogroup-option-:r2g:"
                       role="radio"
                       tabindex="0"
                     >
                       <span
-                        id="headlessui-label-:r2j:"
+                        id="headlessui-label-:r2h:"
                       >
                         3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2j:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2i:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2j:"
+                      >
+                        4
                       </span>
                     </div>
                     <div
@@ -437,49 +455,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r2l:"
                       >
-                        4
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r2n:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r2m:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r2n:"
-                      >
                         5
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div
-                  class="flex items-center justify-between"
-                  data-testid="ratings-radio-1"
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
                 >
-                  <h2
-                    class="text-sm font-medium text-gray-900"
-                  >
-                    create-review.review-form.stability
-                     
-                    create-review.review-radio.rating
-                  </h2>
-                </div>
+                  create-review.review-form.stability
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.stability_description
+                </p>
                 <div
-                  aria-labelledby="headlessui-label-:r2p:"
+                  aria-labelledby="headlessui-label-:r2n:"
                   class="mt-2"
-                  id="headlessui-radiogroup-:r2o:"
+                  id="headlessui-radiogroup-:r2m:"
                   role="radiogroup"
                 >
                   <label
                     class="sr-only"
-                    id="headlessui-label-:r2p:"
+                    id="headlessui-label-:r2n:"
                     role="none"
                   >
                     create-review.review-radio.choose
@@ -488,6 +493,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     class="grid gap-2 sm:gap-3 grid-cols-5"
                     role="none"
                   >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2p:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2o:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2p:"
+                      >
+                        1
+                      </span>
+                    </div>
                     <div
                       aria-checked="false"
                       aria-labelledby="headlessui-label-:r2r:"
@@ -500,37 +520,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r2r:"
                       >
-                        1
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r2t:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r2s:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r2t:"
-                      >
                         2
                       </span>
                     </div>
                     <div
                       aria-checked="true"
-                      aria-labelledby="headlessui-label-:r2v:"
+                      aria-labelledby="headlessui-label-:r2t:"
                       class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                       data-headlessui-state="checked"
-                      id="headlessui-radiogroup-option-:r2u:"
+                      id="headlessui-radiogroup-option-:r2s:"
                       role="radio"
                       tabindex="0"
                     >
                       <span
-                        id="headlessui-label-:r2v:"
+                        id="headlessui-label-:r2t:"
                       >
                         3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r2v:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r2u:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r2v:"
+                      >
+                        4
                       </span>
                     </div>
                     <div
@@ -545,49 +565,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r31:"
                       >
-                        4
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r33:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r32:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r33:"
-                      >
                         5
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div
-                  class="flex items-center justify-between"
-                  data-testid="ratings-radio-1"
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
                 >
-                  <h2
-                    class="text-sm font-medium text-gray-900"
-                  >
-                    create-review.review-form.privacy
-                     
-                    create-review.review-radio.rating
-                  </h2>
-                </div>
+                  create-review.review-form.privacy
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.privacy_description
+                </p>
                 <div
-                  aria-labelledby="headlessui-label-:r35:"
+                  aria-labelledby="headlessui-label-:r33:"
                   class="mt-2"
-                  id="headlessui-radiogroup-:r34:"
+                  id="headlessui-radiogroup-:r32:"
                   role="radiogroup"
                 >
                   <label
                     class="sr-only"
-                    id="headlessui-label-:r35:"
+                    id="headlessui-label-:r33:"
                     role="none"
                   >
                     create-review.review-radio.choose
@@ -596,6 +603,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     class="grid gap-2 sm:gap-3 grid-cols-5"
                     role="none"
                   >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r35:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r34:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r35:"
+                      >
+                        1
+                      </span>
+                    </div>
                     <div
                       aria-checked="false"
                       aria-labelledby="headlessui-label-:r37:"
@@ -608,37 +630,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r37:"
                       >
-                        1
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r39:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r38:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r39:"
-                      >
                         2
                       </span>
                     </div>
                     <div
                       aria-checked="true"
-                      aria-labelledby="headlessui-label-:r3b:"
+                      aria-labelledby="headlessui-label-:r39:"
                       class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                       data-headlessui-state="checked"
-                      id="headlessui-radiogroup-option-:r3a:"
+                      id="headlessui-radiogroup-option-:r38:"
                       role="radio"
                       tabindex="0"
                     >
                       <span
-                        id="headlessui-label-:r3b:"
+                        id="headlessui-label-:r39:"
                       >
                         3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3b:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3a:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3b:"
+                      >
+                        4
                       </span>
                     </div>
                     <div
@@ -653,49 +675,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r3d:"
                       >
-                        4
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r3f:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r3e:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r3f:"
-                      >
                         5
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <div
-                  class="flex items-center justify-between"
-                  data-testid="ratings-radio-1"
+              <div
+                data-testid="ratings-radio-1"
+              >
+                <h2
+                  class="font-medium text-gray-900"
                 >
-                  <h2
-                    class="text-sm font-medium text-gray-900"
-                  >
-                    create-review.review-form.respect
-                     
-                    create-review.review-radio.rating
-                  </h2>
-                </div>
+                  create-review.review-form.respect
+                   
+                  create-review.review-radio.rating
+                </h2>
+                <p
+                  class="text-xs text-gray-500"
+                >
+                  create-review.review-form.respect_description
+                </p>
                 <div
-                  aria-labelledby="headlessui-label-:r3h:"
+                  aria-labelledby="headlessui-label-:r3f:"
                   class="mt-2"
-                  id="headlessui-radiogroup-:r3g:"
+                  id="headlessui-radiogroup-:r3e:"
                   role="radiogroup"
                 >
                   <label
                     class="sr-only"
-                    id="headlessui-label-:r3h:"
+                    id="headlessui-label-:r3f:"
                     role="none"
                   >
                     create-review.review-radio.choose
@@ -704,6 +713,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     class="grid gap-2 sm:gap-3 grid-cols-5"
                     role="none"
                   >
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3h:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3g:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3h:"
+                      >
+                        1
+                      </span>
+                    </div>
                     <div
                       aria-checked="false"
                       aria-labelledby="headlessui-label-:r3j:"
@@ -716,37 +740,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r3j:"
                       >
-                        1
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r3l:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r3k:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r3l:"
-                      >
                         2
                       </span>
                     </div>
                     <div
                       aria-checked="true"
-                      aria-labelledby="headlessui-label-:r3n:"
+                      aria-labelledby="headlessui-label-:r3l:"
                       class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                       data-headlessui-state="checked"
-                      id="headlessui-radiogroup-option-:r3m:"
+                      id="headlessui-radiogroup-option-:r3k:"
                       role="radio"
                       tabindex="0"
                     >
                       <span
-                        id="headlessui-label-:r3n:"
+                        id="headlessui-label-:r3l:"
                       >
                         3
+                      </span>
+                    </div>
+                    <div
+                      aria-checked="false"
+                      aria-labelledby="headlessui-label-:r3n:"
+                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                      data-headlessui-state=""
+                      id="headlessui-radiogroup-option-:r3m:"
+                      role="radio"
+                      tabindex="-1"
+                    >
+                      <span
+                        id="headlessui-label-:r3n:"
+                      >
+                        4
                       </span>
                     </div>
                     <div
@@ -761,21 +785,6 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                       <span
                         id="headlessui-label-:r3p:"
                       >
-                        4
-                      </span>
-                    </div>
-                    <div
-                      aria-checked="false"
-                      aria-labelledby="headlessui-label-:r3r:"
-                      class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                      data-headlessui-state=""
-                      id="headlessui-radiogroup-option-:r3q:"
-                      role="radio"
-                      tabindex="-1"
-                    >
-                      <span
-                        id="headlessui-label-:r3r:"
-                      >
                         5
                       </span>
                     </div>
@@ -786,7 +795,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
           </div>
           <div>
             <label
-              class="block text-sm font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700 mt-2"
               for="comment"
             >
               create-review.review-form.review
@@ -804,7 +813,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
             </div>
           </div>
           <div
-            class="pt-5"
+            class="py-5"
           >
             <div
               class="flex justify-center mb-2"
@@ -847,11 +856,6 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
       >
         <div />
       </div>
-      <div
-        data-headlessui-portal=""
-      >
-        <div />
-      </div>
     </div>
   </body>,
   "container": <div>
@@ -859,9 +863,6 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
       class="w-full flex flex-col container items-center px-4 sm:px-0"
       data-testid="create-review-form-1"
     >
-      <div
-        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
-      />
       <div
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
       />
@@ -1086,34 +1087,38 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
               </div>
             </div>
           </div>
-          <div>
+          <div
+            class="flex flex-col gap-2"
+          >
             <h3
-              class="text-lg leading-6 font-medium text-gray-900"
+              class="text-lg leading-6 font-medium text-gray-900 mt-2"
             >
               create-review.review-form.rate-title
             </h3>
-            <div>
-              <div
-                class="flex items-center justify-between"
-                data-testid="ratings-radio-1"
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
               >
-                <h2
-                  class="text-sm font-medium text-gray-900"
-                >
-                  create-review.review-form.repair
-                   
-                  create-review.review-radio.rating
-                </h2>
-              </div>
+                create-review.review-form.repair
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.repair_description
+              </p>
               <div
-                aria-labelledby="headlessui-label-:r21:"
+                aria-labelledby="headlessui-label-:r1v:"
                 class="mt-2"
-                id="headlessui-radiogroup-:r20:"
+                id="headlessui-radiogroup-:r1u:"
                 role="radiogroup"
               >
                 <label
                   class="sr-only"
-                  id="headlessui-label-:r21:"
+                  id="headlessui-label-:r1v:"
                   role="none"
                 >
                   create-review.review-radio.choose
@@ -1122,6 +1127,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                   class="grid gap-2 sm:gap-3 grid-cols-5"
                   role="none"
                 >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r21:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r20:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r21:"
+                    >
+                      1
+                    </span>
+                  </div>
                   <div
                     aria-checked="false"
                     aria-labelledby="headlessui-label-:r23:"
@@ -1134,37 +1154,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r23:"
                     >
-                      1
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r25:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r24:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r25:"
-                    >
                       2
                     </span>
                   </div>
                   <div
                     aria-checked="true"
-                    aria-labelledby="headlessui-label-:r27:"
+                    aria-labelledby="headlessui-label-:r25:"
                     class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                     data-headlessui-state="checked"
-                    id="headlessui-radiogroup-option-:r26:"
+                    id="headlessui-radiogroup-option-:r24:"
                     role="radio"
                     tabindex="0"
                   >
                     <span
-                      id="headlessui-label-:r27:"
+                      id="headlessui-label-:r25:"
                     >
                       3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r27:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r26:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r27:"
+                    >
+                      4
                     </span>
                   </div>
                   <div
@@ -1179,49 +1199,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r29:"
                     >
-                      4
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r2b:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r2a:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r2b:"
-                    >
                       5
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <div
-                class="flex items-center justify-between"
-                data-testid="ratings-radio-1"
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
               >
-                <h2
-                  class="text-sm font-medium text-gray-900"
-                >
-                  create-review.review-form.health
-                   
-                  create-review.review-radio.rating
-                </h2>
-              </div>
+                create-review.review-form.health
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.health_description
+              </p>
               <div
-                aria-labelledby="headlessui-label-:r2d:"
+                aria-labelledby="headlessui-label-:r2b:"
                 class="mt-2"
-                id="headlessui-radiogroup-:r2c:"
+                id="headlessui-radiogroup-:r2a:"
                 role="radiogroup"
               >
                 <label
                   class="sr-only"
-                  id="headlessui-label-:r2d:"
+                  id="headlessui-label-:r2b:"
                   role="none"
                 >
                   create-review.review-radio.choose
@@ -1230,6 +1237,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                   class="grid gap-2 sm:gap-3 grid-cols-5"
                   role="none"
                 >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2d:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2c:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2d:"
+                    >
+                      1
+                    </span>
+                  </div>
                   <div
                     aria-checked="false"
                     aria-labelledby="headlessui-label-:r2f:"
@@ -1242,37 +1264,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r2f:"
                     >
-                      1
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r2h:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r2g:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r2h:"
-                    >
                       2
                     </span>
                   </div>
                   <div
                     aria-checked="true"
-                    aria-labelledby="headlessui-label-:r2j:"
+                    aria-labelledby="headlessui-label-:r2h:"
                     class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                     data-headlessui-state="checked"
-                    id="headlessui-radiogroup-option-:r2i:"
+                    id="headlessui-radiogroup-option-:r2g:"
                     role="radio"
                     tabindex="0"
                   >
                     <span
-                      id="headlessui-label-:r2j:"
+                      id="headlessui-label-:r2h:"
                     >
                       3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2j:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2i:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2j:"
+                    >
+                      4
                     </span>
                   </div>
                   <div
@@ -1287,49 +1309,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r2l:"
                     >
-                      4
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r2n:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r2m:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r2n:"
-                    >
                       5
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <div
-                class="flex items-center justify-between"
-                data-testid="ratings-radio-1"
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
               >
-                <h2
-                  class="text-sm font-medium text-gray-900"
-                >
-                  create-review.review-form.stability
-                   
-                  create-review.review-radio.rating
-                </h2>
-              </div>
+                create-review.review-form.stability
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.stability_description
+              </p>
               <div
-                aria-labelledby="headlessui-label-:r2p:"
+                aria-labelledby="headlessui-label-:r2n:"
                 class="mt-2"
-                id="headlessui-radiogroup-:r2o:"
+                id="headlessui-radiogroup-:r2m:"
                 role="radiogroup"
               >
                 <label
                   class="sr-only"
-                  id="headlessui-label-:r2p:"
+                  id="headlessui-label-:r2n:"
                   role="none"
                 >
                   create-review.review-radio.choose
@@ -1338,6 +1347,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                   class="grid gap-2 sm:gap-3 grid-cols-5"
                   role="none"
                 >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2p:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2o:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2p:"
+                    >
+                      1
+                    </span>
+                  </div>
                   <div
                     aria-checked="false"
                     aria-labelledby="headlessui-label-:r2r:"
@@ -1350,37 +1374,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r2r:"
                     >
-                      1
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r2t:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r2s:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r2t:"
-                    >
                       2
                     </span>
                   </div>
                   <div
                     aria-checked="true"
-                    aria-labelledby="headlessui-label-:r2v:"
+                    aria-labelledby="headlessui-label-:r2t:"
                     class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                     data-headlessui-state="checked"
-                    id="headlessui-radiogroup-option-:r2u:"
+                    id="headlessui-radiogroup-option-:r2s:"
                     role="radio"
                     tabindex="0"
                   >
                     <span
-                      id="headlessui-label-:r2v:"
+                      id="headlessui-label-:r2t:"
                     >
                       3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r2v:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r2u:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r2v:"
+                    >
+                      4
                     </span>
                   </div>
                   <div
@@ -1395,49 +1419,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r31:"
                     >
-                      4
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r33:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r32:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r33:"
-                    >
                       5
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <div
-                class="flex items-center justify-between"
-                data-testid="ratings-radio-1"
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
               >
-                <h2
-                  class="text-sm font-medium text-gray-900"
-                >
-                  create-review.review-form.privacy
-                   
-                  create-review.review-radio.rating
-                </h2>
-              </div>
+                create-review.review-form.privacy
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.privacy_description
+              </p>
               <div
-                aria-labelledby="headlessui-label-:r35:"
+                aria-labelledby="headlessui-label-:r33:"
                 class="mt-2"
-                id="headlessui-radiogroup-:r34:"
+                id="headlessui-radiogroup-:r32:"
                 role="radiogroup"
               >
                 <label
                   class="sr-only"
-                  id="headlessui-label-:r35:"
+                  id="headlessui-label-:r33:"
                   role="none"
                 >
                   create-review.review-radio.choose
@@ -1446,6 +1457,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                   class="grid gap-2 sm:gap-3 grid-cols-5"
                   role="none"
                 >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r35:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r34:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r35:"
+                    >
+                      1
+                    </span>
+                  </div>
                   <div
                     aria-checked="false"
                     aria-labelledby="headlessui-label-:r37:"
@@ -1458,37 +1484,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r37:"
                     >
-                      1
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r39:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r38:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r39:"
-                    >
                       2
                     </span>
                   </div>
                   <div
                     aria-checked="true"
-                    aria-labelledby="headlessui-label-:r3b:"
+                    aria-labelledby="headlessui-label-:r39:"
                     class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                     data-headlessui-state="checked"
-                    id="headlessui-radiogroup-option-:r3a:"
+                    id="headlessui-radiogroup-option-:r38:"
                     role="radio"
                     tabindex="0"
                   >
                     <span
-                      id="headlessui-label-:r3b:"
+                      id="headlessui-label-:r39:"
                     >
                       3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3b:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3a:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3b:"
+                    >
+                      4
                     </span>
                   </div>
                   <div
@@ -1503,49 +1529,36 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r3d:"
                     >
-                      4
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r3f:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r3e:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r3f:"
-                    >
                       5
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <div
-                class="flex items-center justify-between"
-                data-testid="ratings-radio-1"
+            <div
+              data-testid="ratings-radio-1"
+            >
+              <h2
+                class="font-medium text-gray-900"
               >
-                <h2
-                  class="text-sm font-medium text-gray-900"
-                >
-                  create-review.review-form.respect
-                   
-                  create-review.review-radio.rating
-                </h2>
-              </div>
+                create-review.review-form.respect
+                 
+                create-review.review-radio.rating
+              </h2>
+              <p
+                class="text-xs text-gray-500"
+              >
+                create-review.review-form.respect_description
+              </p>
               <div
-                aria-labelledby="headlessui-label-:r3h:"
+                aria-labelledby="headlessui-label-:r3f:"
                 class="mt-2"
-                id="headlessui-radiogroup-:r3g:"
+                id="headlessui-radiogroup-:r3e:"
                 role="radiogroup"
               >
                 <label
                   class="sr-only"
-                  id="headlessui-label-:r3h:"
+                  id="headlessui-label-:r3f:"
                   role="none"
                 >
                   create-review.review-radio.choose
@@ -1554,6 +1567,21 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                   class="grid gap-2 sm:gap-3 grid-cols-5"
                   role="none"
                 >
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3h:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3g:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3h:"
+                    >
+                      1
+                    </span>
+                  </div>
                   <div
                     aria-checked="false"
                     aria-labelledby="headlessui-label-:r3j:"
@@ -1566,37 +1594,37 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r3j:"
                     >
-                      1
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r3l:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r3k:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r3l:"
-                    >
                       2
                     </span>
                   </div>
                   <div
                     aria-checked="true"
-                    aria-labelledby="headlessui-label-:r3n:"
+                    aria-labelledby="headlessui-label-:r3l:"
                     class="bg-teal-600 border-transparent text-white hover:bg-teal-700 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
                     data-headlessui-state="checked"
-                    id="headlessui-radiogroup-option-:r3m:"
+                    id="headlessui-radiogroup-option-:r3k:"
                     role="radio"
                     tabindex="0"
                   >
                     <span
-                      id="headlessui-label-:r3n:"
+                      id="headlessui-label-:r3l:"
                     >
                       3
+                    </span>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    aria-labelledby="headlessui-label-:r3n:"
+                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                    data-headlessui-state=""
+                    id="headlessui-radiogroup-option-:r3m:"
+                    role="radio"
+                    tabindex="-1"
+                  >
+                    <span
+                      id="headlessui-label-:r3n:"
+                    >
+                      4
                     </span>
                   </div>
                   <div
@@ -1611,21 +1639,6 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
                     <span
                       id="headlessui-label-:r3p:"
                     >
-                      4
-                    </span>
-                  </div>
-                  <div
-                    aria-checked="false"
-                    aria-labelledby="headlessui-label-:r3r:"
-                    class="bg-white border-gray-200 text-gray-900 hover:bg-gray-50 border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    data-headlessui-state=""
-                    id="headlessui-radiogroup-option-:r3q:"
-                    role="radio"
-                    tabindex="-1"
-                  >
-                    <span
-                      id="headlessui-label-:r3r:"
-                    >
                       5
                     </span>
                   </div>
@@ -1636,7 +1649,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
         </div>
         <div>
           <label
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 mt-2"
             for="comment"
           >
             create-review.review-form.review
@@ -1654,7 +1667,7 @@ exports[`Review Form Tests  Review Form is interactive 1`] = `
           </div>
         </div>
         <div
-          class="pt-5"
+          class="py-5"
         >
           <div
             class="flex justify-center mb-2"
