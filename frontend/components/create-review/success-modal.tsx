@@ -3,14 +3,15 @@ import {Dialog} from '@headlessui/react'
 import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
 import {useRouter} from 'next/router'
+import {useTranslation} from 'react-i18next'
 
-function SuccessModal({
-	isOpen,
-	setIsOpen,
-}: {
+interface IProps {
 	isOpen: boolean
 	setIsOpen: React.Dispatch<SetStateAction<boolean>>
-}) {
+}
+
+function SuccessModal({isOpen, setIsOpen}: IProps) {
+	const {t} = useTranslation('create')
 	const router = useRouter()
 	return (
 		<Dialog
@@ -22,8 +23,11 @@ function SuccessModal({
 			<div className="fixed inset-0 flex flex-col items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10 flex flex-col">
 					<Dialog.Title className="mb-4 w-full flex justify-center">
-						Review Submitted Successfully!
+						{t('create-review.modal.success')}
 					</Dialog.Title>
+					<p className="text-center my-3">
+						{t('create-review.modal.description')}
+					</p>
 
 					<div className="flex flex-row gap-2" data-testid="success-modal-2">
 						<ButtonLight
@@ -32,7 +36,7 @@ function SuccessModal({
 								router.reload()
 							}}
 						>
-							Submit Another Review
+							{t('create-review.modal.submit-another')}
 						</ButtonLight>
 						<Button
 							onClick={() => {
@@ -40,7 +44,7 @@ function SuccessModal({
 								router.push('/reviews').catch((err) => console.log(err))
 							}}
 						>
-							Go To Reviews
+							{t('create-review.modal.go-to')}
 						</Button>
 					</div>
 				</Dialog.Panel>
