@@ -28,6 +28,12 @@
 			"submit": "Submit",
 			"reset": "Reset",
 			"postal-error": "Error. Postal Code / ZIP Invalid"
+		},
+		"modal": {
+			"success": "Review Submitted Successfully!",
+			"description": "Your review may take a few minutes to show up on the site, but don't worry we have received it!",
+			"submit-another": "Submit Another Review",
+			"go-to": "Go To Reviews"
 		}
 	}
 }
