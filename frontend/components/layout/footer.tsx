@@ -31,7 +31,7 @@ const navigation = [
 function Footer(): JSX.Element {
 	const date = new Date()
 	const year = date.getFullYear()
-	const {t} = useTranslation()
+	const {t} = useTranslation('layout')
 	return (
 		<footer className="bg-white" data-testid="footer-1">
 			<div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
