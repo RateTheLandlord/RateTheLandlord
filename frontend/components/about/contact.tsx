@@ -8,10 +8,10 @@ const Contact = () => {
 			</h3>
 			<div className="text-center">
 				<a
-					href="mailto:r8thelandlord@gmail.com"
+					href="mailto:contact@ratethelandlord.org"
 					className="mt-8 text-xl leading-8 text-gray-500"
 				>
-					Email us: r8thelandlord@gmail.com
+					Email us: contact@ratethelandlord.org
 				</a>
 			</div>
 		</div>
