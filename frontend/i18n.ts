@@ -11,7 +11,7 @@ import aboutENCA from './public/locales/en-CA/about.json'
 const resources = {
 	en: {
 		home: homeENCA,
-		translation: layoutENCA,
+		layout: layoutENCA,
 		create: createreviewENCA,
 		reviews: reviewsENCA,
 		about: aboutENCA,
