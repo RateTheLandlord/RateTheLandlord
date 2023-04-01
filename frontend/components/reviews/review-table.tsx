@@ -72,7 +72,7 @@ function ReviewTable({
 												date.getMonth() + 1
 											}-${date.getFullYear()}`}
 										</p>
-										<div className="mt-4 w-full sm:w-auto">
+										<div className="mt-4 w-full">
 											<ButtonLight onClick={() => handleReport(review)}>
 												{t('reviews.report-review')}
 											</ButtonLight>
