@@ -9,6 +9,7 @@ import {
 	updateReviews,
 	getStateOptions,
 	getCityOptions,
+	sortNewest,
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
@@ -79,6 +80,8 @@ const Review = () => {
 			setReviews((reviews) => sortAZ(reviews))
 		} else if (selectedSort.name === 'Name Z-A') {
 			setReviews((reviews) => sortZA(reviews))
+		} else if (selectedSort.name === 'Newest') {
+			setReviews((reviews) => sortNewest(reviews))
 		}
 	}, [selectedSort])
 
