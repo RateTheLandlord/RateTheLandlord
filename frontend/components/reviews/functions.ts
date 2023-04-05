@@ -32,6 +32,16 @@ export const sortNewest = (data: Array<Review>): Array<Review> => {
 	return result
 }
 
+export const sortOldest = (data: Array<Review>): Array<Review> => {
+	const result = data.sort((a: Review, b: Review): number => {
+		const dateA = new Date(a.dataadded)
+		const dateB = new Date(b.dataadded)
+		return dateB.valueOf() - dateA.valueOf()
+	})
+
+	return result
+}
+
 export const updateReviews = (
 	stateFilter: Options | null,
 	countryFilter: Options | null,
