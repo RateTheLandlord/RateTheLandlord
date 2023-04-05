@@ -17,7 +17,6 @@ function ReviewTable({
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }): JSX.Element {
 	const {t} = useTranslation('reviews')
-	const date = new Date()
 
 	const handleReport = (review: Review) => {
 		setSelectedReview(review)
@@ -36,6 +35,7 @@ function ReviewTable({
 								{title: t('reviews.repair'), rating: review.repair},
 								{title: t('reviews.stability'), rating: review.stability},
 							]
+							const date = new Date(review.dataadded).toLocaleDateString()
 							return (
 								<div
 									key={review.id}
@@ -68,9 +68,7 @@ function ReviewTable({
 										</div>
 										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.country_code}, ${review.zip}`}</p>
 										<p className="mb-4 lg:mb-0 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
-											{`${date.getDate()}-${
-												date.getMonth() + 1
-											}-${date.getFullYear()}`}
+											{date}
 										</p>
 										<div className="mt-4 w-full">
 											<ButtonLight onClick={() => handleReport(review)}>
