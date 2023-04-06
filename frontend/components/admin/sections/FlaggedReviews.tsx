@@ -153,7 +153,7 @@ const FlaggedReviews = () => {
 						setOpen={setEditReviewOpen}
 						element={
 							<EditReviewModal
-								review={selectedReview?.review}
+								review={selectedReview}
 								setReview={setNewReview}
 							/>
 						}
