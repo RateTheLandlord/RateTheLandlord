@@ -1,26 +1,45 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import {Review} from '@/util/interfaces'
-import {Dispatch, SetStateAction, useState} from 'react'
+import {Dispatch, SetStateAction} from 'react'
 import countries from '@/util/countries.json'
 import provinces from '@/util/provinces.json'
 import states from '@/util/states.json'
 
 interface IProps {
-	review: Review | undefined
+	selectedReview: Review | undefined
+	review: string
 	setReview: Dispatch<SetStateAction<string>>
+	landlord: string
+	setLandlord: Dispatch<SetStateAction<string>>
+	country: string
+	setCountry: Dispatch<SetStateAction<string>>
+	city: string
+	setCity: Dispatch<SetStateAction<string>>
+	province: string
+	setProvince: Dispatch<SetStateAction<string>>
+	postal: string
+	setPostal: Dispatch<SetStateAction<string>>
 }
 
 const country_codes = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US',
 )
 
-const EditReviewModal = ({review, setReview}: IProps) => {
-	console.log(review)
-	const [landlord, setLandlord] = useState<string>(review?.landlord || '')
-	const [country, setCountry] = useState<string>(review?.country_code || '')
-	const [city, setCity] = useState<string>(review?.city || '')
-	const [province, setProvince] = useState<string>(review?.state || '')
-	const [postal, setPostal] = useState<string>(review?.zip || '')
+const EditReviewModal = ({
+	selectedReview,
+	review,
+	setReview,
+	landlord,
+	setLandlord,
+	country,
+	setCountry,
+	city,
+	setCity,
+	province,
+	setProvince,
+	postal,
+	setPostal,
+}: IProps) => {
 	return (
 		<div>
 			<div className="mt-1">
@@ -38,7 +57,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 							id="landlord"
 							required
 							placeholder="Landlord"
-							value={landlord}
+							value={landlord ? landlord : selectedReview?.landlord}
 							onChange={(e) => setLandlord(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 							data-testid="create-review-form-landlord-1"
@@ -57,7 +76,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 							id="country"
 							name="country"
 							required
-							value={country}
+							value={country ? country : selectedReview?.country_code}
 							onChange={(e) => setCountry(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 						>
@@ -84,7 +103,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 							name="city"
 							id="city"
 							placeholder="city"
-							value={city}
+							value={city ? city : selectedReview?.city}
 							required
 							onChange={(e) => setCity(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -104,7 +123,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 							id="region"
 							name="region"
 							required
-							value={province}
+							value={province ? province : selectedReview?.state}
 							onChange={(e) => setProvince(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 						>
@@ -141,7 +160,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 							id="postal-code"
 							placeholder="Postal Code / ZIP"
 							required
-							value={postal}
+							value={postal ? postal : selectedReview?.zip}
 							onChange={(e) => setPostal(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 							data-testid="create-review-form-postal-code-1"
@@ -161,7 +180,7 @@ const EditReviewModal = ({review, setReview}: IProps) => {
 						id="review"
 						className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 						onChange={(e) => setReview(e.target.value)}
-						defaultValue={review?.review}
+						value={review ? review : selectedReview?.review}
 						data-testid="edit-review-modal-1"
 					/>
 				</div>

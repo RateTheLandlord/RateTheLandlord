@@ -23,6 +23,16 @@ const FlaggedReviews = () => {
 
 	const [showApproved, setShowApproved] = useState(false)
 
+	const [landlord, setLandlord] = useState<string>(
+		selectedReview?.landlord || '',
+	)
+	const [country, setCountry] = useState<string>(
+		selectedReview?.country_code || '',
+	)
+	const [city, setCity] = useState<string>(selectedReview?.city || '')
+	const [province, setProvince] = useState<string>(selectedReview?.state || '')
+	const [postal, setPostal] = useState<string>(selectedReview?.zip || '')
+
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {data: reviews, error} = useSWR<Array<Review>>(
 		'/api/get-flagged',
@@ -46,6 +56,17 @@ const FlaggedReviews = () => {
 			}
 		}
 	}, [reviews, showApproved])
+
+	useEffect(() => {
+		if (selectedReview) {
+			setLandlord(selectedReview.landlord)
+			setCountry(selectedReview.country_code)
+			setCity(selectedReview.city)
+			setProvince(selectedReview.state)
+			setPostal(selectedReview.zip)
+			setNewReview(selectedReview.review)
+		}
+	}, [selectedReview])
 
 	if (error) return <div>failed to load</div>
 	if (!reviews) return <div>loading...</div>
@@ -80,9 +101,44 @@ const FlaggedReviews = () => {
 	const onSubmitEditReview = (id?: number) => {
 		const editedReview = {
 			...selectedReview,
+			landlord: landlord,
+			country: country,
+			city: city,
+			state: province,
+			zip: postal,
 			review: newReview,
 			admin_edited: true,
 			admin_approved: true,
+		}
+		fetch('/api/edit-review', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(editedReview),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+			})
+			.then(() => {
+				mutate('/api/get-flagged').catch((err) => console.log(err))
+				setEditReviewOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
+	}
+
+	const removeFlag = (review: Review) => {
+		const editedReview = {
+			...review,
+			flagged: false,
 		}
 		fetch('/api/edit-review', {
 			method: 'POST',
@@ -153,7 +209,18 @@ const FlaggedReviews = () => {
 						setOpen={setEditReviewOpen}
 						element={
 							<EditReviewModal
-								review={selectedReview}
+								selectedReview={selectedReview}
+								landlord={landlord}
+								setLandlord={setLandlord}
+								country={country}
+								setCountry={setCountry}
+								city={city}
+								setCity={setCity}
+								province={province}
+								setProvince={setProvince}
+								postal={postal}
+								setPostal={setPostal}
+								review={newReview}
 								setReview={setNewReview}
 							/>
 						}
@@ -206,6 +273,9 @@ const FlaggedReviews = () => {
 							</th>
 							<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
 								<span className="sr-only">Remove</span>
+							</th>
+							<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+								<span className="sr-only">Remove Flag</span>
 							</th>
 						</tr>
 					</thead>
@@ -267,6 +337,16 @@ const FlaggedReviews = () => {
 										className="text-indigo-600 hover:text-indigo-900"
 									>
 										Remove
+									</button>
+								</td>
+								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+									<button
+										onClick={() => {
+											removeFlag(review)
+										}}
+										className="text-indigo-600 hover:text-indigo-900"
+									>
+										Remove Flag
 									</button>
 								</td>
 							</tr>
