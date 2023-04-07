@@ -1,6 +1,7 @@
 import {capitalize, removeDuplicates} from '@/util/helper-functions'
 import {Options} from '@/util/interfaces'
 import {Review} from '@/util/interfaces'
+import {Dispatch, SetStateAction} from 'react'
 
 export const sortAZ = (data: Array<Review>) => {
 	if (data.length) {
@@ -46,7 +47,6 @@ export const updateReviews = (
 	stateFilter: Options | null,
 	countryFilter: Options | null,
 	cityFilter: Options | null,
-	setReviews: (reviews: Array<Review>) => void,
 	initialData: Array<Review>,
 	search: string,
 ) => {
@@ -87,14 +87,13 @@ export const updateReviews = (
 		}
 	}
 
-	setReviews(newReviews)
+	return newReviews
 }
 
 export const updateActiveFilters = (
 	countryFilter: Options | null,
 	stateFilter: Options | null,
 	cityFilter: Options | null,
-	setActiveFilters: (options: Array<Options>) => void,
 ) => {
 	const filters: Array<Options> = []
 	if (countryFilter) {
@@ -106,10 +105,13 @@ export const updateActiveFilters = (
 	if (cityFilter) {
 		filters.push(cityFilter)
 	}
-	setActiveFilters(filters)
+	return filters
 }
 
-export const getStateOptions = (data: Array<Review>): Array<Options> => {
+export const getStateOptions = (
+	data: Array<Review> | undefined,
+): Array<Options> => {
+	if (!data) return []
 	if (data.length) {
 		const allStateOptions = data.map((review, id) => {
 			const state = review.state.toLowerCase()
@@ -128,7 +130,10 @@ export const getStateOptions = (data: Array<Review>): Array<Options> => {
 	return []
 }
 
-export const getCityOptions = (data: Array<Review>): Array<Options> => {
+export const getCityOptions = (
+	data: Array<Review> | undefined,
+): Array<Options> => {
+	if (!data) return []
 	if (data.length) {
 		const allCityOptions = data.map((review, id) => {
 			const city = review.city.toLowerCase()

@@ -26,11 +26,9 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const {data} = useSWR<Array<Review>>('/api/get-reviews', fetcher)
-	const initialData = data
-	const [allReviews, setAllReviews] = useState<Review[]>(initialData || [])
-	const [reviews, setReviews] = useState<Review[]>(initialData || [])
+	const [reviews, setReviews] = useState<Review[]>(data || [])
 
-	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[0])
+	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
@@ -47,9 +45,9 @@ const Review = () => {
 		},
 	)
 
-	const cityOptions = getCityOptions(reviews)
+	const cityOptions = getCityOptions(data)
 
-	const stateOptions = getStateOptions(reviews)
+	const stateOptions = getStateOptions(data)
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
@@ -60,42 +58,37 @@ const Review = () => {
 	}
 
 	useEffect(() => {
-		updateActiveFilters(
-			countryFilter,
-			stateFilter,
-			cityFilter,
-			setActiveFilters,
+		setActiveFilters(
+			updateActiveFilters(countryFilter, stateFilter, cityFilter),
 		)
-		updateReviews(
-			stateFilter,
-			countryFilter,
-			cityFilter,
-			setReviews,
-			allReviews,
-			searchState,
-		)
-	}, [cityFilter, stateFilter, countryFilter, allReviews, searchState])
+		if (data) {
+			setReviews(
+				updateReviews(
+					stateFilter,
+					countryFilter,
+					cityFilter,
+					data,
+					searchState,
+				),
+			)
+		}
+	}, [cityFilter, stateFilter, countryFilter, data, searchState])
 
 	useEffect(() => {
 		if (selectedSort.name === 'Name A-Z') {
-			const sort = sortAZ(reviews)
-			setReviews(sort)
+			setReviews(sortAZ(reviews))
 		} else if (selectedSort.name === 'Name Z-A') {
-			const sort = sortZA(reviews)
-			setReviews(sort)
+			setReviews(sortZA(reviews))
 		} else if (selectedSort.name === 'Newest') {
-			const sort = sortNewest(reviews)
-			setReviews(sort)
+			setReviews(sortNewest(reviews))
 		} else if (selectedSort.name === 'Oldest') {
-			const sort = sortOldest(reviews)
-			setReviews(sort)
+			setReviews(sortOldest(reviews))
 		}
 	}, [selectedSort, reviews])
 
 	useEffect(() => {
 		if (data) {
 			setReviews(data)
-			setAllReviews(data)
 		}
 	}, [data])
 
