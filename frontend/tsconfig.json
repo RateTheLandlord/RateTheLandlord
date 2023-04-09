@@ -15,7 +15,7 @@
 		"esModuleInterop": true,
 		"module": "esnext",
 		"moduleResolution": "node",
-		"noImplicitAny": false, // set 'true' to throw error for 'any'
+		"noImplicitAny": true, // set 'true' to throw error for 'any'
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
