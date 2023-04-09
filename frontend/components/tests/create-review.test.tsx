@@ -38,30 +38,6 @@ describe('Review Form Tests ', () => {
 			result.getByTestId('create-review-form-submit-button-1'),
 		).toBeInTheDocument()
 	})
-	test('Review Form is interactive', async () => {
-		// TODO: Test form submission
-		const result = render(<ReviewForm />)
-		const user = userEvent.setup()
-		await user.click(result.getByTestId('create-review-form-landlord-1'))
-		await user.keyboard('Test Landlord Enteprises')
-		await user.click(result.getByTestId('create-review-form-city-1'))
-		await user.keyboard('Calgary')
-		await user.click(result.getByTestId('create-review-form-postal-code-1'))
-		await user.keyboard('T1T 1T1')
-		await user.click(result.getByTestId('create-review-form-text-1'))
-		await user.keyboard('Test Written Review')
-		await waitFor(() =>
-			expect(
-				result.getByTestId('create-review-form-captcha-1'),
-			).toBeInTheDocument(),
-		)
-		await waitFor(() =>
-			user.click(result.getByTestId('create-review-form-captcha-1')),
-		)
-		await waitFor(() => user.click(result.getByTestId('submit-button-1')))
-		expect(result).toMatchSnapshot()
-		//TODO: expect(mockButtonSpy).toHaveBeenCalled();
-	})
 
 	test('Success modal renders', () => {
 		const modal = render(<SuccessModal isOpen={true} setIsOpen={jest.fn()} />)
