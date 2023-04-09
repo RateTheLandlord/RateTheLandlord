@@ -1,6 +1,6 @@
 import {Options} from './interfaces'
 
-export function classNames(...classes) {
+export function classNames(...classes: Array<string>) {
 	return classes.filter(Boolean).join(' ')
 }
 
@@ -9,5 +9,9 @@ export const capitalize = (str: string) => {
 }
 export const removeDuplicates = (arr: Options[], key: string): Options[] => {
 	const check = new Set()
-	return arr.filter((obj) => !check.has(obj[key]) && check.add(obj[key]))
+	return arr.filter(
+		(obj) =>
+			!check.has(obj[key as keyof Options]) &&
+			check.add(obj[key as keyof Options]),
+	)
 }
