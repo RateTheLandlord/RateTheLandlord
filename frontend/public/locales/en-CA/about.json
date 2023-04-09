@@ -15,6 +15,10 @@
 			"moderation": "Moderation Policy",
 			"p-1": "We allow our users to share their opinions and experiences through reviews, but we will not tolerate excessive profanity or personal attacks. If a review contains excessive profanity or personal attacks, it may be censored to remove the offensive language. Additionally, we will remove any reviews that contain defamatory remarks or discrimination."
 		},
+		"contributing": {
+			"contributing": "Want to Contribute?",
+			"p-1": "This project is open source and we would love help with its development! Send us an email or join us on Github to see how you can help grow this project and help Renters."
+		},
 		"faq": {
 			"faq": "Frequently asked questions",
 			"repairs": "What does Repairs mean for the reviews?",

@@ -1,5 +1,6 @@
 import AboutUs from '@/components/about/aboutUs'
 import Contact from '@/components/about/contact'
+import Contributing from '@/components/about/contributing'
 import Faq from '@/components/about/faq'
 import Moderation from '@/components/about/moderation'
 import Privacy from '@/components/about/privacy'
@@ -56,6 +57,7 @@ function About(): JSX.Element {
 				<Moderation />
 				<Faq />
 				<Contact />
+				<Contributing />
 			</div>
 		</div>
 	)
