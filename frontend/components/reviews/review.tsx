@@ -3,14 +3,10 @@ import ReviewTable from '@/components/reviews/review-table'
 import {sortOptions} from '@/util/filter-options'
 import {Options, Review} from '@/util/interfaces'
 import {
-	sortAZ,
-	sortZA,
 	updateActiveFilters,
 	updateReviews,
 	getStateOptions,
 	getCityOptions,
-	sortNewest,
-	sortOldest,
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
@@ -26,7 +22,6 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const {data} = useSWR<Array<Review>>('/api/get-reviews', fetcher)
-	const [reviews, setReviews] = useState<Review[]>(data || [])
 
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
@@ -38,6 +33,8 @@ const Review = () => {
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
+
+	const [reviews, setReviews] = useState<Review[]>(data || [])
 
 	const countryOptions: Options[] = country_codes.map(
 		(item: string, ind: number): Options => {
@@ -69,28 +66,11 @@ const Review = () => {
 					cityFilter,
 					data,
 					searchState,
+					selectedSort.name,
 				),
 			)
 		}
-	}, [cityFilter, stateFilter, countryFilter, data, searchState])
-
-	useEffect(() => {
-		if (selectedSort.name === 'Name A-Z') {
-			setReviews(sortAZ(reviews))
-		} else if (selectedSort.name === 'Name Z-A') {
-			setReviews(sortZA(reviews))
-		} else if (selectedSort.name === 'Newest') {
-			setReviews(sortNewest(reviews))
-		} else if (selectedSort.name === 'Oldest') {
-			setReviews(sortOldest(reviews))
-		}
-	}, [selectedSort, reviews])
-
-	useEffect(() => {
-		if (data) {
-			setReviews(data)
-		}
-	}, [data])
+	}, [cityFilter, stateFilter, countryFilter, data, searchState, selectedSort])
 
 	return (
 		<>
