@@ -140,7 +140,11 @@ export const getStateOptions = (
 
 		const stateOptions = removeDuplicates(allStateOptions, 'name')
 
-		return stateOptions
+		const alphaOptions = stateOptions.sort((a: Options, b: Options): number =>
+			a.name.localeCompare(b.name),
+		)
+
+		return alphaOptions
 	}
 
 	return []
@@ -162,7 +166,11 @@ export const getCityOptions = (
 
 		const cityOptions = removeDuplicates(allCityOptions, 'value')
 
-		return cityOptions
+		const alphaCity = cityOptions.sort((a: Options, b: Options): number =>
+			a.name.localeCompare(b.name),
+		)
+
+		return alphaCity
 	}
 	return []
 }
