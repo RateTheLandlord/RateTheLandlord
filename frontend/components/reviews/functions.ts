@@ -1,7 +1,6 @@
 import {capitalize, removeDuplicates} from '@/util/helper-functions'
 import {Options} from '@/util/interfaces'
 import {Review} from '@/util/interfaces'
-import {Dispatch, SetStateAction} from 'react'
 
 export const sortAZ = (data: Array<Review>) => {
 	if (data.length) {
@@ -27,7 +26,7 @@ export const sortNewest = (data: Array<Review>): Array<Review> => {
 	const result = data.sort((a: Review, b: Review): number => {
 		const dateA = new Date(a.dataadded)
 		const dateB = new Date(b.dataadded)
-		return dateA.valueOf() - dateB.valueOf()
+		return dateB.valueOf() - dateA.valueOf()
 	})
 
 	return result
@@ -37,10 +36,24 @@ export const sortOldest = (data: Array<Review>): Array<Review> => {
 	const result = data.sort((a: Review, b: Review): number => {
 		const dateA = new Date(a.dataadded)
 		const dateB = new Date(b.dataadded)
-		return dateB.valueOf() - dateA.valueOf()
+		return dateA.valueOf() - dateB.valueOf()
 	})
 
 	return result
+}
+
+const updateSort = (sortStr: string, reviews: Review[]): Review[] => {
+	if (sortStr === 'Name A-Z') {
+		return sortAZ(reviews)
+	} else if (sortStr === 'Name Z-A') {
+		return sortZA(reviews)
+	} else if (sortStr === 'Newest') {
+		return sortNewest(reviews)
+	} else if (sortStr === 'Oldest') {
+		return sortOldest(reviews)
+	} else {
+		return reviews
+	}
 }
 
 export const updateReviews = (
@@ -49,6 +62,7 @@ export const updateReviews = (
 	cityFilter: Options | null,
 	initialData: Array<Review>,
 	search: string,
+	sort: string,
 ) => {
 	let newReviews: Array<Review> = searchReviews(initialData, search)
 	if (countryFilter) {
@@ -86,6 +100,8 @@ export const updateReviews = (
 			)
 		}
 	}
+
+	newReviews = updateSort(sort, newReviews)
 
 	return newReviews
 }
