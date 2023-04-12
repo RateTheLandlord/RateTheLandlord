@@ -60,11 +60,11 @@ function ReviewForm(): JSX.Element {
 			body: JSON.stringify({
 				captchaToken: token,
 				review: {
-					landlord: landlord,
+					landlord: landlord.trim(),
 					country_code: country,
-					city: city,
+					city: city.trim(),
 					state: province,
-					zip: postal,
+					zip: postal.trim(),
 					review: review,
 					repair: repair,
 					health: health,
