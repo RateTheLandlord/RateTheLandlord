@@ -17,7 +17,6 @@ function ReviewTable({
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }): JSX.Element {
 	const {t} = useTranslation('reviews')
-	const date = new Date()
 
 	const handleReport = (review: Review) => {
 		setSelectedReview(review)
@@ -25,7 +24,7 @@ function ReviewTable({
 	}
 	if (data.length) {
 		return (
-			<div>
+			<div data-testid="review-table-1">
 				<div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 					<div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
 						{data.map((review) => {
@@ -36,6 +35,7 @@ function ReviewTable({
 								{title: t('reviews.repair'), rating: review.repair},
 								{title: t('reviews.stability'), rating: review.stability},
 							]
+							const date = new Date(review.dataadded).toLocaleDateString()
 							return (
 								<div
 									key={review.id}
@@ -68,11 +68,9 @@ function ReviewTable({
 										</div>
 										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.country_code}, ${review.zip}`}</p>
 										<p className="mb-4 lg:mb-0 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
-											{`${date.getDate()}-${
-												date.getMonth() + 1
-											}-${date.getFullYear()}`}
+											{date}
 										</p>
-										<div className="mt-4 w-full sm:w-auto">
+										<div className="mt-4 w-full">
 											<ButtonLight onClick={() => handleReport(review)}>
 												{t('reviews.report-review')}
 											</ButtonLight>

@@ -9,6 +9,7 @@ export interface Review {
 	respect: string
 	review: string
 	stability: string
+	dataadded: string
 	state: string
 	zip: string
 	flagged: boolean

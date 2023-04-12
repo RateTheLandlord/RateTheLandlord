@@ -16,7 +16,7 @@ function RatingsRadio({title, rating, setRating, tooltip}: Props) {
 	const {t} = useTranslation('create')
 
 	return (
-		<div>
+		<div data-testid="ratings-radio-1">
 			<h2 className="font-medium text-gray-900">
 				{title} {t('create-review.review-radio.rating')}
 			</h2>

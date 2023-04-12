@@ -11,7 +11,7 @@ import aboutENCA from './public/locales/en-CA/about.json'
 const resources = {
 	en: {
 		home: homeENCA,
-		translation: layoutENCA,
+		layout: layoutENCA,
 		create: createreviewENCA,
 		reviews: reviewsENCA,
 		about: aboutENCA,
@@ -23,7 +23,7 @@ void i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.init({
 		resources: resources,
-		fallbackLng: 'en-CA',
+		fallbackLng: 'en',
 		debug: false,
 		interpolation: {
 			escapeValue: false, // react already safes from xss

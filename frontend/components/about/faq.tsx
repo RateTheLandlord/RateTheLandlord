@@ -27,8 +27,8 @@ const Faq = () => {
 		},
 	]
 	return (
-		<div id="faq" className="bg-white w-full">
-			<div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:py-40 lg:px-8">
+		<div className="bg-white w-full" data-testid="about-faq-1">
+			<div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
 				<div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
 					<h2 className="mt-2 block text-center text-xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">
 						{t('about.faq.faq')}

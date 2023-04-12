@@ -60,11 +60,11 @@ function ReviewForm(): JSX.Element {
 			body: JSON.stringify({
 				captchaToken: token,
 				review: {
-					landlord: landlord,
+					landlord: landlord.trim(),
 					country_code: country,
-					city: city,
+					city: city.trim(),
 					state: province,
-					zip: postal,
+					zip: postal.trim(),
 					review: review,
 					repair: repair,
 					health: health,
@@ -99,7 +99,10 @@ function ReviewForm(): JSX.Element {
 	}
 
 	return (
-		<div className="w-full flex flex-col container items-center px-4 sm:px-0">
+		<div
+			className="w-full flex flex-col container items-center px-4 sm:px-0"
+			data-testid="create-review-form-1"
+		>
 			{alertOpen ? (
 				<Alert success={success} setAlertOpen={setAlertOpen} />
 			) : null}
@@ -140,6 +143,7 @@ function ReviewForm(): JSX.Element {
 										placeholder={t('create-review.review-form.landlord')}
 										onChange={(e) => setLandlord(e.target.value)}
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										data-testid="create-review-form-landlord-1"
 									/>
 								</div>
 							</div>
@@ -186,6 +190,7 @@ function ReviewForm(): JSX.Element {
 										required
 										onChange={(e) => setCity(e.target.value)}
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										data-testid="create-review-form-city-1"
 									/>
 								</div>
 							</div>
@@ -240,6 +245,7 @@ function ReviewForm(): JSX.Element {
 										required
 										onChange={(e) => setPostal(e.target.value)}
 										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										data-testid="create-review-form-postal-code-1"
 									/>
 								</div>
 								{postalError ? (
@@ -305,16 +311,22 @@ function ReviewForm(): JSX.Element {
 							onChange={(e) => setReview(e.target.value)}
 							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 							defaultValue={''}
+							data-testid="create-review-form-text-1"
 						/>
 					</div>
 				</div>
 
 				<div className="py-5">
 					<div className="flex justify-center mb-2">
-						<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
+						<div data-testid="create-review-form-captcha-1">
+							<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
+						</div>
 					</div>
 
-					<div className="flex justify-center sm:justify-end">
+					<div
+						className="flex justify-center sm:justify-end"
+						data-testid="create-review-form-submit-button-1"
+					>
 						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
 						<Button disabled={!token}>
 							{t('create-review.review-form.submit')}

@@ -55,9 +55,18 @@ function ReportModal({
 		<Dialog
 			className="relative z-50"
 			open={isOpen}
-			onClose={() => setIsOpen(false)}
+			onClose={() => {
+				setReason('')
+				setSubmitSuccess(false)
+				setSubmitError(false)
+				setIsOpen(false)
+			}}
 		>
-			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+			<div
+				className="fixed inset-0 bg-black/30"
+				aria-hidden="true"
+				data-testid="report-modal-1"
+			/>
 			<div className="fixed inset-0 flex items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10">
 					{submitError ? (

@@ -50,7 +50,7 @@ function ReviewFilters({
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false)
 
 	return (
-		<div>
+		<div data-testid="review-filters-1">
 			{/* Mobile Filters */}
 			<MobileReviewFilters
 				mobileFiltersOpen={mobileFiltersOpen}

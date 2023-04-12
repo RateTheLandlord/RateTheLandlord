@@ -19,7 +19,7 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 			open={isOpen}
 			onClose={() => setIsOpen(false)}
 		>
-			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+			<div className="fixed inset-0 bg-black/30" aria-hidden="true" data-testid="success-modal-1" />
 			<div className="fixed inset-0 flex flex-col items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10 flex flex-col">
 					<Dialog.Title className="mb-4 w-full flex justify-center">
@@ -29,7 +29,7 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 						{t('create-review.modal.description')}
 					</p>
 
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-row gap-2" data-testid="success-modal-2">
 						<ButtonLight
 							onClick={() => {
 								setIsOpen(false)

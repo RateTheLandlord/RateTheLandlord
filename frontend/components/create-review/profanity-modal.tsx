@@ -20,7 +20,7 @@ function ProfanityModal({
 			open={isOpen}
 			onClose={() => setIsOpen(false)}
 		>
-			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+			<div className="fixed inset-0 bg-black/30" data-testid="profanity-modal-1" aria-hidden="true" />
 			<div className="fixed inset-0 flex items-center justify-center p-4">
 				<Dialog.Panel className="w-full max-w-sm rounded-md bg-white p-10">
 					<Dialog.Title className="text-xl font-bold mb-2 text-center">
@@ -37,7 +37,7 @@ function ProfanityModal({
 					</p>
 					<p className="mb-4 text-center">{profanity}</p>
 
-					<div className="flex w-full justify-between">
+					<div className="flex w-full justify-between" data-testid="profanity-modal-2">
 						<ButtonLight
 							onClick={() => {
 								setIsOpen(false)

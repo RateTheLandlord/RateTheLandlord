@@ -8,7 +8,7 @@
 			"header": "Enter your Review",
 			"title": "Landlord or Property Management Information",
 			"sub": "Please make sure all this information matches your Lease",
-			"landlord": "Landlord or Property Management Company",
+			"landlord": "Landlord Name (or Property Management Company)",
 			"country": "Country",
 			"city": "City",
 			"state": "State / Province",
