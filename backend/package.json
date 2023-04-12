@@ -24,7 +24,7 @@
     "@nestjs/axios": "^0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
-    "@nestjs/core": "^9.0.5",
+    "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^10.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^9.0.0",
@@ -38,7 +38,7 @@
     "request-ip": "^3.3.0",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "@nestjs/cli": "^8.0.0",
+    "@nestjs/cli": "^9.3.0",
     "ley": "^0.7.1"
   },
   "devDependencies": {
