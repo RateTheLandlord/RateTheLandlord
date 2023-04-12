@@ -32,7 +32,7 @@ function ReviewForm(): JSX.Element {
 	const [landlord, setLandlord] = useState<string>('')
 	const [country, setCountry] = useState<string>('CA')
 	const [city, setCity] = useState<string>('')
-	const [province, setProvince] = useState<string>('Ontario')
+	const [province, setProvince] = useState<string>('Alberta')
 	const [postal, setPostal] = useState<string>('')
 
 	const [repair, setRepair] = useState<number>(3)
