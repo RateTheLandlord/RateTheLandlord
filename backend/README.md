@@ -19,25 +19,8 @@ Create new review in the DB
 Get all reviews that have been flagged for Admin Review
 `GET /api/flagged`
 
-Log in to Admin Panel _Need to decide how to implement, possible NextAuth_
+Log in to Admin Panel
 `POST /api/auth`
-
-## Run
-
-Copy the `.env.example` in a new `.env` file.
-
-Set the environment to `development`
-
-Then run the following commands:
-
-- Pull the latest Images
-  `docker-compose pull`
-
-- Build
-  `docker-compose build`
-
-- Start
-  `docker-compose up -d`
 
 ## Test
 
