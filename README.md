@@ -16,7 +16,7 @@ Then run the following commands:
   `docker-compose pull`
 
 - Build
-  `docker-compose -f docker-compose.dev.yml`
+  `docker-compose -f docker-compose.dev.yml build`
 
 - Start
   `docker-compose -f docker-compose.dev.yml up -d`
@@ -34,3 +34,7 @@ If you are trying to submit a review locally, you need to edit your hosts file t
 ## Contributing
 
 Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+Please adhere to this project's `code of conduct`.
