@@ -13,7 +13,7 @@
 		},
 		"moderation": {
 			"moderation": "Moderation Policy",
-			"p-1": "We allow our users to share their opinions and experiences through reviews, but we will not tolerate excessive profanity or personal attacks. If a review contains excessive profanity or personal attacks, it may be censored to remove the offensive language. Additionally, we will remove any reviews that contain defamatory remarks or discrimination."
+			"p-1": "We allow our users to share their opinions and experiences through reviews, but we will not tolerate excessive profanity or personal attacks. If a review contains excessive profanity or personal attacks, it may be censored to remove the offensive language. Additionally, we will remove any reviews that contain defamatory remarks or discrimination. Any reviews that contain an explicit address (123 Main St) will have the address removed from the review."
 		},
 		"contributing": {
 			"contributing": "Want to Contribute?",

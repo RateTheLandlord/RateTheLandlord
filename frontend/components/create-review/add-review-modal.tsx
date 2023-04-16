@@ -1,8 +1,6 @@
 import React, {SetStateAction, Fragment} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
-import {useRouter} from 'next/router'
 import {useTranslation} from 'react-i18next'
 
 interface IProps {
@@ -10,9 +8,8 @@ interface IProps {
 	setIsOpen: React.Dispatch<SetStateAction<boolean>>
 }
 
-function SuccessModal({isOpen, setIsOpen}: IProps) {
+function AddReviewModal({isOpen, setIsOpen}: IProps) {
 	const {t} = useTranslation('create')
-	const router = useRouter()
 	return (
 		<Transition.Root show={isOpen} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={setIsOpen}>
@@ -46,31 +43,22 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 											as="h3"
 											className="text-base font-semibold leading-6 text-gray-900"
 										>
-											{t('create-review.modal.success')}
+											{t('create-review.modal.add-review')}
 										</Dialog.Title>
 										<div className="mt-2">
 											<p className="text-sm text-gray-500">
-												{t('create-review.modal.description')}
+												{t('create-review.modal.add-review-desc')}
 											</p>
 										</div>
 									</div>
 								</div>
-								<div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-									<ButtonLight
-										onClick={() => {
-											setIsOpen(false)
-											router.reload()
-										}}
-									>
-										{t('create-review.modal.submit-another')}
-									</ButtonLight>
+								<div className="mt-5 flex w-full justify-end sm:mt-6">
 									<Button
 										onClick={() => {
 											setIsOpen(false)
-											router.push('/reviews').catch((err) => console.log(err))
 										}}
 									>
-										{t('create-review.modal.go-to')}
+										{t('create-review.modal.close')}
 									</Button>
 								</div>
 							</Dialog.Panel>
@@ -82,4 +70,4 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 	)
 }
 
-export default SuccessModal
+export default AddReviewModal
