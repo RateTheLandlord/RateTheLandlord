@@ -1,0 +1,72 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - internal
+    volumes:
+      - ./backend/public:/app/backend/public
+      - ./frontend/public:/app/frontend/public
+      - ./dev-conf/nginx/:/etc/nginx:ro
+      - ./logs/nginx/:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - frontend
+      - backend
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - ${BEPORT}:${BEPORT}
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    env_file: .env
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - ${FEPORT}:${FEPORT}
+    networks:
+      - internal
+    env_file:
+      - ./.env
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    platform: linux/amd64
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${PGUSERNAME}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    networks:
+      - internal
+
+volumes:
+  postgres-data:
+
+networks:
+  internal:
+    name: internal
+    driver: bridge

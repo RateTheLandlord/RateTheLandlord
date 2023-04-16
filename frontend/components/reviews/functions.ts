@@ -90,13 +90,15 @@ export const updateReviews = (
 		if (newReviews.length) {
 			const temp: Array<Review> = newReviews.filter(
 				(review: Review): boolean =>
-					review.city.toLowerCase() === cityFilter.name.toLowerCase(),
+					review.city.toLowerCase().trim() ===
+					cityFilter.name.toLowerCase().trim(),
 			)
 			newReviews = temp
 		} else {
 			newReviews = newReviews.filter(
 				(review: Review): boolean =>
-					review.city.toLowerCase() === cityFilter.name.toLowerCase(),
+					review.city.toLowerCase().trim() ===
+					cityFilter.name.toLowerCase().trim(),
 			)
 		}
 	}
@@ -156,11 +158,11 @@ export const getCityOptions = (
 	if (!data) return []
 	if (data.length) {
 		const allCityOptions = data.map((review, id) => {
-			const city = review.city.toLowerCase()
+			const city = review.city.toLowerCase().trim()
 			return {
 				id: id + 1,
 				name: city.split(' ').map(capitalize).join(' '),
-				value: review.city.toLowerCase(),
+				value: review.city.toLowerCase().trim(),
 			}
 		})
 
@@ -169,6 +171,8 @@ export const getCityOptions = (
 		const alphaCity = cityOptions.sort((a: Options, b: Options): number =>
 			a.name.localeCompare(b.name),
 		)
+
+		console.log(alphaCity)
 
 		return alphaCity
 	}
