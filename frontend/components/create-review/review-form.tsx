@@ -5,6 +5,7 @@ import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
 import countries from '@/util/countries.json'
 import provinces from '@/util/provinces.json'
+import regions from '@/util/regions.json'
 import states from '@/util/states.json'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {useTranslation} from 'react-i18next'
@@ -18,7 +19,7 @@ import AddReviewModal from './add-review-modal'
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
 
 const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US',
+	(c) => c === 'CA' || c === 'US' || c === 'GB',
 )
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
@@ -208,7 +209,9 @@ function ReviewForm(): JSX.Element {
 									htmlFor="region"
 									className="block text-sm font-medium text-gray-700"
 								>
-									{t('create-review.review-form.state')}
+									{country === 'GB'
+										? t('create-review.review-form.region')
+										: t('create-review.review-form.state')}
 								</label>
 								<div className="mt-1">
 									<select
@@ -223,6 +226,14 @@ function ReviewForm(): JSX.Element {
 													return (
 														<option key={province.short} value={province.name}>
 															{province.name}
+														</option>
+													)
+											  })
+											: country === 'GB'
+											? regions.map((region) => {
+													return (
+														<option key={region.short} value={region.name}>
+															{region.name}
 														</option>
 													)
 											  })

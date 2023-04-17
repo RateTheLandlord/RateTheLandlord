@@ -12,6 +12,7 @@
 			"country": "Country",
 			"city": "City",
 			"state": "State / Province",
+			"region": "Region",
 			"zip": "ZIP / Postal Code",
 			"rate-title": "Please rate the following on a scale from 1 (worst) to 5 (best)",
 			"health": "Health and Safety",
