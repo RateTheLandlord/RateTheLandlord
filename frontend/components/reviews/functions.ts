@@ -60,6 +60,7 @@ export const updateReviews = (
 	stateFilter: Options | null,
 	countryFilter: Options | null,
 	cityFilter: Options | null,
+	zipFilter: Options | null,
 	initialData: Array<Review>,
 	search: string,
 	sort: string,
@@ -102,6 +103,22 @@ export const updateReviews = (
 			)
 		}
 	}
+	if (zipFilter) {
+		if (newReviews.length) {
+			const temp: Array<Review> = newReviews.filter(
+				(review: Review): boolean =>
+					review.zip.toLowerCase().trim() ===
+					zipFilter.name.toLowerCase().trim(),
+			)
+			newReviews = temp
+		} else {
+			newReviews = newReviews.filter(
+				(review: Review): boolean =>
+					review.zip.toLowerCase().trim() ===
+					zipFilter.name.toLowerCase().trim(),
+			)
+		}
+	}
 
 	newReviews = updateSort(sort, newReviews)
 
@@ -112,6 +129,7 @@ export const updateActiveFilters = (
 	countryFilter: Options | null,
 	stateFilter: Options | null,
 	cityFilter: Options | null,
+	zipFilter: Options | null,
 ) => {
 	const filters: Array<Options> = []
 	if (countryFilter) {
@@ -122,6 +140,9 @@ export const updateActiveFilters = (
 	}
 	if (cityFilter) {
 		filters.push(cityFilter)
+	}
+	if (zipFilter) {
+		filters.push(zipFilter)
 	}
 	return filters
 }
@@ -175,6 +196,33 @@ export const getCityOptions = (
 		console.log(alphaCity)
 
 		return alphaCity
+	}
+	return []
+}
+
+export const getZipOptions = (
+	data: Array<Review> | undefined,
+): Array<Options> => {
+	if (!data) return []
+	if (data.length) {
+		const allZipOptions = data.map((review, id) => {
+			const zip = review.zip.toLowerCase().trim()
+			return {
+				id: id + 1,
+				name: zip.split(' ').map(capitalize).join(' '),
+				value: review.zip.toLowerCase().trim(),
+			}
+		})
+
+		const zipOptions = removeDuplicates(allZipOptions, 'value')
+
+		const alphaZip = zipOptions.sort((a: Options, b: Options): number =>
+			a.name.localeCompare(b.name),
+		)
+
+		console.log(alphaZip)
+
+		return alphaZip
 	}
 	return []
 }

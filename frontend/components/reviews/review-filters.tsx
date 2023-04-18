@@ -20,10 +20,13 @@ interface FiltersProps {
 	setStateFilter: (option: Options) => void
 	cityFilter: Options | null
 	setCityFilter: (option: Options) => void
+	zipFilter: Options | null
+	setZipFilter: (option: Options) => void
 	activeFilters: Options[] | null
 	cityOptions: Options[]
 	countryOptions: Options[]
 	stateOptions: Options[]
+	zipOptions: Options[]
 	removeFilter: (index: number) => void
 	setSearchState: (str: string) => void
 }
@@ -38,10 +41,13 @@ function ReviewFilters({
 	setStateFilter,
 	cityFilter,
 	setCityFilter,
+	zipFilter,
+	setZipFilter,
 	activeFilters,
 	cityOptions,
 	countryOptions,
 	stateOptions,
+	zipOptions,
 	removeFilter,
 	setSearchState,
 }: FiltersProps): JSX.Element {
@@ -64,6 +70,9 @@ function ReviewFilters({
 				cityFilter={cityFilter}
 				setCityFilter={setCityFilter}
 				cityOptions={cityOptions}
+				zipFilter={zipFilter}
+				setZipFilter={setZipFilter}
+				zipOptions={zipOptions}
 				setSearchState={setSearchState}
 			/>
 
@@ -125,6 +134,12 @@ function ReviewFilters({
 											setState={setCityFilter}
 											options={cityOptions}
 											name={t('reviews.city')}
+										/>
+										<SelectList
+											state={zipFilter}
+											setState={setZipFilter}
+											options={zipOptions}
+											name={t('reviews.zip')}
 										/>
 									</div>
 								</div>

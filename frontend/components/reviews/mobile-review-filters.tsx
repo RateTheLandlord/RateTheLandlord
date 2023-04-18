@@ -15,9 +15,12 @@ interface FiltersProps {
 	setStateFilter: (option: Options) => void
 	cityFilter: Options | null
 	setCityFilter: (option: Options) => void
+	zipFilter: Options | null
+	setZipFilter: (option: Options) => void
 	cityOptions: Options[]
 	countryOptions: Options[]
 	stateOptions: Options[]
+	zipOptions: Options[]
 	setSearchState: (str: string) => void
 }
 
@@ -30,9 +33,12 @@ export default function MobileReviewFilters({
 	setStateFilter,
 	cityFilter,
 	setCityFilter,
+	zipFilter,
+	setZipFilter,
 	cityOptions,
 	countryOptions,
 	stateOptions,
+	zipOptions,
 	setSearchState,
 }: FiltersProps) {
 	const {t} = useTranslation('reviews')
@@ -102,6 +108,12 @@ export default function MobileReviewFilters({
 										setState={setCityFilter}
 										options={cityOptions}
 										name={t('reviews.city')}
+									/>
+									<MobileSelectList
+										state={zipFilter}
+										setState={setZipFilter}
+										options={zipOptions}
+										name={t('reviews.zip')}
 									/>
 								</Popover.Group>
 							</div>
