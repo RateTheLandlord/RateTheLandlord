@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
 import RatingsRadio from './ratings-radio'
@@ -105,6 +105,12 @@ function ReviewForm(): JSX.Element {
 	const onVerifyCaptcha = (token: string) => {
 		setToken(token)
 	}
+
+	useEffect(() => {
+		if (country === 'GB') {
+			setProvince('England')
+		}
+	}, [country])
 
 	return (
 		<div

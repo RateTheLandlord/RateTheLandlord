@@ -25,8 +25,8 @@ function ReviewTable({
 	if (data.length) {
 		return (
 			<div data-testid="review-table-1">
-				<div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-					<div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
+				<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+					<div className="mt-6 space-y-10 divide-y divide-gray-200 border-t border-b border-gray-200 pb-10">
 						{data.map((review) => {
 							const ratings = [
 								{title: t('reviews.health'), rating: review.health},
@@ -41,11 +41,11 @@ function ReviewTable({
 									key={review.id}
 									className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
 								>
-									<div className="mt-6 flex flex-wrap items-center text-sm lg:mt-0 lg:col-start-1 lg:col-span-4 lg:row-start-1 lg:flex-col lg:items-start xl:col-span-3">
-										<p className="font-medium text-lg w-full mb-4 lg:mb-0">
+									<div className="mt-6 flex flex-wrap items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+										<p className="mb-4 w-full text-lg font-medium lg:mb-0">
 											{review.landlord}
 										</p>
-										<div className="mb-4 lg:mb-0 flex items-center w-full">
+										<div className="mb-4 flex w-full items-center lg:mb-0">
 											{[0, 1, 2, 3, 4].map((star) => {
 												let totalReview = 0
 												for (let i = 0; i < ratings.length; i++) {
@@ -66,8 +66,12 @@ function ReviewTable({
 												)
 											})}
 										</div>
-										<p className="text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0 w-full">{`${review.city}, ${review.state}, ${review.country_code}, ${review.zip}`}</p>
-										<p className="mb-4 lg:mb-0 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
+										<p className="w-full text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${
+											review.city
+										}, ${review.state}, ${
+											review.country_code === 'GB' ? 'UK' : review.country_code
+										}, ${review.zip}`}</p>
+										<p className="mb-4 text-gray-500 lg:mb-0 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 											{date}
 										</p>
 										<div className="mt-4 w-full">
@@ -76,8 +80,8 @@ function ReviewTable({
 											</ButtonLight>
 										</div>
 									</div>
-									<div className="lg:col-start-5 lg:col-span-8 xl:col-start-4 xl:col-span-9 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:items-start">
-										<div className="flex flex-wrap flex-row items-center xl:col-span-1">
+									<div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+										<div className="flex flex-row flex-wrap items-center xl:col-span-1">
 											{ratings.map((rating) => {
 												return (
 													<div key={rating.title} className="mx-2 my-1">
@@ -101,10 +105,10 @@ function ReviewTable({
 											})}
 										</div>
 
-										<div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
+										<div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
 											<p>{t('reviews.review')}</p>
 											{review.admin_edited ? (
-												<p className="text-red-400 text-xs">
+												<p className="text-xs text-red-400">
 													{t('reviews.edited')}
 												</p>
 											) : null}
