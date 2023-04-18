@@ -7,6 +7,7 @@ import Contact from '@/components/about/contact'
 import Faq from '@/components/about/faq'
 import Moderation from '@/components/about/moderation'
 import Privacy from '@/components/about/privacy'
+import Contributing from '@/components/about/contributing'
 
 describe("About Section ", () => {
     test("AboutUs component renders", () => {
@@ -29,5 +30,8 @@ describe("About Section ", () => {
         render(<Privacy/>);
         expect(screen.getByTestId('about-privacy-1')).toBeInTheDocument();
     })
-    
+    test("Contributing component renders", () => {
+        render(<Contributing/>);
+        expect(screen.getByTestId('about-contributing-1')).toBeInTheDocument();
+    })
 })
