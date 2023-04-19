@@ -7,6 +7,7 @@
 		"country": "Country",
 		"state": "State / Province",
 		"city": "City",
+		"zip" : "Postal Code",
 		"health": "Health and Safety",
 		"respect": "Respect",
 		"privacy": "Tenant Privacy",
