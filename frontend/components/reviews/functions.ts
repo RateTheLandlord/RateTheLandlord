@@ -107,15 +107,15 @@ export const updateReviews = (
 		if (newReviews.length) {
 			const temp: Array<Review> = newReviews.filter(
 				(review: Review): boolean =>
-					review.zip.toLowerCase().trim() ===
-					zipFilter.name.toLowerCase().trim(),
+					review.zip.toUpperCase().replace(/\s+/g, '') ===
+					zipFilter.name.toUpperCase().replace(/\s+/g, ''),
 			)
 			newReviews = temp
 		} else {
 			newReviews = newReviews.filter(
 				(review: Review): boolean =>
-					review.zip.toLowerCase().trim() ===
-					zipFilter.name.toLowerCase().trim(),
+					review.zip.toUpperCase().replace(/\s+/g, '') ===
+					zipFilter.name.toUpperCase().replace(/\s+/g, ''),
 			)
 		}
 	}
@@ -206,11 +206,11 @@ export const getZipOptions = (
 	if (!data) return []
 	if (data.length) {
 		const allZipOptions = data.map((review, id) => {
-			const zip = review.zip.toLowerCase().trim()
+			const zip = review.zip.toUpperCase().replace(/\s+/g, '')
 			return {
 				id: id + 1,
-				name: zip.split(' ').map(capitalize).join(' '),
-				value: review.zip.toLowerCase().trim(),
+				name: zip.toUpperCase().replace(/\s+/g, ''),
+				value: review.zip.toUpperCase().replace(/\s+/g, ''),
 			}
 		})
 
