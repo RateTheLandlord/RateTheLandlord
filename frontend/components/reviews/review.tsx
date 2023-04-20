@@ -16,7 +16,7 @@ import Head from 'next/head'
 import useSWR from 'swr'
 
 const country_codes: string[] = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US',
+	(c) => c === 'CA' || c === 'US' || c === 'GB',
 )
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())

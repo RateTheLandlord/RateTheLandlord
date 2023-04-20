@@ -9,8 +9,7 @@ import {useRouter} from 'next/router'
 export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
 	const title = 'Reviews | Rate The Landlord'
 	const desc =
-		'Share information with tenants like you. We are a community platform that elevates tenant voices to promote landlord accountability.'
-
+		'View Landlord Reviews. We are a community platform that elevates tenant voices to promote landlord accountability.'
 	const siteURL = 'https://ratethelandlord.org'
 	const pathName = useRouter().pathname
 	const pageURL = pathName === '/' ? siteURL : siteURL + pathName
