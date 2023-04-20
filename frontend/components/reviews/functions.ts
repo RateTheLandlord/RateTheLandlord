@@ -193,8 +193,6 @@ export const getCityOptions = (
 			a.name.localeCompare(b.name),
 		)
 
-		console.log(alphaCity)
-
 		return alphaCity
 	}
 	return []
@@ -219,8 +217,6 @@ export const getZipOptions = (
 		const alphaZip = zipOptions.sort((a: Options, b: Options): number =>
 			a.name.localeCompare(b.name),
 		)
-
-		console.log(alphaZip)
 
 		return alphaZip
 	}
