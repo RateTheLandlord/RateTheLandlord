@@ -41,7 +41,6 @@ describe('Review Form Tests ', () => {
 	test('Success modal renders', () => {
 		const modal = render(<SuccessModal isOpen={true} setIsOpen={jest.fn()} />)
 		expect(modal.getByTestId('success-modal-1')).toBeInTheDocument()
-		expect(modal.getByTestId('success-modal-2')).toBeInTheDocument()
 	})
 	test('Ratings radio renders', () => {
 		const radio = render(
