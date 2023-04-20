@@ -15,7 +15,12 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 	const router = useRouter()
 	return (
 		<Transition.Root show={isOpen} as={Fragment}>
-			<Dialog as="div" className="relative z-10" onClose={setIsOpen}>
+			<Dialog
+				as="div"
+				data-testid="success-modal-1"
+				className="relative z-10"
+				onClose={setIsOpen}
+			>
 				<Transition.Child
 					as={Fragment}
 					enter="ease-out duration-300"

@@ -113,10 +113,9 @@ function ReviewTable({
 												</p>
 											) : null}
 
-											<div
-												className="mt-3 space-y-6 text-sm text-gray-500"
-												dangerouslySetInnerHTML={{__html: review.review}}
-											/>
+											<div className="mt-3 space-y-6 text-sm text-gray-500">
+												{review.review}
+											</div>
 										</div>
 									</div>
 								</div>
