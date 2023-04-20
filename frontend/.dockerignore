@@ -1,0 +1,16 @@
+.next
+node_modules
+
+.git
+.gitignore
+coverage
+LICENSE
+README.md
+CONTRIBUTING.md
+docker-compose.yml
+Dockerfile
+node_modules/
+.github
+.vscode
+npm-debug.log
+npm-debug.log.*
