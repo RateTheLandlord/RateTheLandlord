@@ -66,7 +66,11 @@ function ReviewTable({
 												)
 											})}
 										</div>
-										<p className="w-full text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${review.city}, ${review.state}, ${review.country_code}, ${review.zip}`}</p>
+										<p className="w-full text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">{`${
+											review.city
+										}, ${review.state}, ${
+											review.country_code === 'GB' ? 'UK' : review.country_code
+										}, ${review.zip}`}</p>
 										<p className="mb-4 text-gray-500 lg:mb-0 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0">
 											{date}
 										</p>

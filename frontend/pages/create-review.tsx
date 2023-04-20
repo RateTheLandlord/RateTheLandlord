@@ -6,8 +6,7 @@ import React from 'react'
 function CreateReview(): JSX.Element {
 	const title = 'Create Review | Rate The Landlord'
 	const desc =
-		'Share information with tenants like you. We are a community platform that elevates tenant voices to promote landlord accountability.'
-
+		'Create a Review for your Landlord. Share information with tenants like you and rate your landlord. We are a community platform that elevates tenant voices to promote landlord accountability.'
 	const siteURL = 'https://ratethelandlord.org'
 	const pathName = useRouter().pathname
 	const pageURL = pathName === '/' ? siteURL : siteURL + pathName
@@ -15,7 +14,7 @@ function CreateReview(): JSX.Element {
 	const siteName = 'RateTheLandlord.org'
 	return (
 		<div
-			className="w-full flex justify-center"
+			className="flex w-full justify-center"
 			data-testid="create-review-form-1"
 		>
 			<NextSeo
