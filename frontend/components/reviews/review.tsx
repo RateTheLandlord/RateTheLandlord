@@ -7,6 +7,7 @@ import {
 	updateReviews,
 	getStateOptions,
 	getCityOptions,
+	getZipOptions,
 } from '@/components/reviews/functions'
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
@@ -27,6 +28,7 @@ const Review = () => {
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
+	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
 	const [searchState, setSearchState] = useState<string>('')
 
@@ -46,17 +48,20 @@ const Review = () => {
 
 	const stateOptions = getStateOptions(data)
 
+	const zipOptions = getZipOptions(data)
+
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
 			if (cityFilter === activeFilters[index]) setCityFilter(null)
 			if (stateFilter === activeFilters[index]) setStateFilter(null)
 			if (countryFilter === activeFilters[index]) setCountryFilter(null)
+			if (zipFilter === activeFilters[index]) setZipFilter(null)
 		}
 	}
 
 	useEffect(() => {
 		setActiveFilters(
-			updateActiveFilters(countryFilter, stateFilter, cityFilter),
+			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
 		)
 		if (data) {
 			setReviews(
@@ -64,13 +69,14 @@ const Review = () => {
 					stateFilter,
 					countryFilter,
 					cityFilter,
+					zipFilter,
 					data,
 					searchState,
 					selectedSort.name,
 				),
 			)
 		}
-	}, [cityFilter, stateFilter, countryFilter, data, searchState, selectedSort])
+	}, [cityFilter, stateFilter, countryFilter, zipFilter, data, searchState, selectedSort])
 
 	return (
 		<>
@@ -94,9 +100,12 @@ const Review = () => {
 					setStateFilter={setStateFilter}
 					cityFilter={cityFilter}
 					setCityFilter={setCityFilter}
+					zipFilter={zipFilter}
+					setZipFilter={setZipFilter}
 					cityOptions={cityOptions}
 					stateOptions={stateOptions}
 					countryOptions={countryOptions}
+					zipOptions={zipOptions}
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}
 				/>

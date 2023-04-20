@@ -73,10 +73,13 @@ describe('Reviews Page', () => {
 				setStateFilter={jest.fn()}
 				cityFilter={null}
 				setCityFilter={jest.fn()}
+				zipFilter={null}
+				setZipFilter={jest.fn()}
 				activeFilters={null}
 				cityOptions={[]}
 				countryOptions={[]}
 				stateOptions={[]}
+				zipOptions={[]}
 				removeFilter={jest.fn()}
 				setSearchState={jest.fn()}
 			/>,
@@ -104,9 +107,12 @@ describe('Reviews Page', () => {
 				setStateFilter={jest.fn()}
 				cityFilter={null}
 				setCityFilter={jest.fn()}
+				zipFilter={null}
+				setZipFilter={jest.fn()}
 				cityOptions={[]}
 				countryOptions={[]}
 				stateOptions={[]}
+				zipOptions={[]}
 				setSearchState={jest.fn()}
 			/>,
 		)
