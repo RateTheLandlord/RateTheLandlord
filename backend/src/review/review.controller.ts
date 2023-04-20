@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -25,8 +26,8 @@ export class ReviewController {
 
   // Get All Reviews
   @Get()
-  get(): Promise<Review[]> {
-    return this.reviewService.get();
+  get(@Query('page') page: number): Promise<Review[]> {
+    return this.reviewService.get(page);
   }
 
   //Get Specific Review

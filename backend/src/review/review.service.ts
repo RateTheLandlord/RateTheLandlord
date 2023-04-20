@@ -6,8 +6,14 @@ import { Review } from './models/review';
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  get(): Promise<Review[]> {
-    return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
+  // Possible Query for getting these reviews is page number, number per page, sort by (newest, olders, alpha)
+  // Query for page will update with pagination from FE
+  get(page = 0): Promise<Review[]> {
+    return this.databaseService.sql<
+      Review[]
+    >`SELECT * FROM review ORDER BY id DESC LIMIT 5;`;
+
+    // return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
   }
 
   findOne(id: number): Promise<Review[]> {

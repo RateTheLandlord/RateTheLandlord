@@ -3,7 +3,7 @@ import {NextApiRequest, NextApiResponse} from 'next'
 const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
-	fetch(`${url}/review`, {
+	fetch(`${url}/review?page=1`, {
 		headers: {
 			'Content-Type': 'application/json',
 		},
