@@ -13,6 +13,8 @@ const homeURL = 'https://ratethelandlord.org'
 			'!pages/404.tsx',
 			'!pages/login.tsx',
 			'!pages/admin/[admin].tsx',
+			'!pages/randomstringofchars-create-review',
+			'!pages/randomstringofchars-reviews',
 		])
 
 		const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
