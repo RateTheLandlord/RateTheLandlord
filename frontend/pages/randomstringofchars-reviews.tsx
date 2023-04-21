@@ -56,7 +56,7 @@ export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
 //Page is statically generated at build time and then revalidated at a minimum of every 100 seconds based on when the page is accessed
 export async function getStaticProps() {
 	try {
-		const req = await fetch(`http://backend:5000/review`)
+		const req = await fetch(`https://ratethelandlord.org/review`)
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const data: Review[] = await req.json()
 
