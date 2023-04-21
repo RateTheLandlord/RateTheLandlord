@@ -48,9 +48,9 @@ function Hero(): JSX.Element {
 								<br />
 								<br />
 								We are thrilled to announce that we have received over 1,000
-								reviews in just one week! Thank you for submitting your and
-								keeping your community informed. We appreciate your enthusiasm
-								and support for our website.
+								reviews in just one week! Thank you for submitting your reviews
+								and keeping your community informed. We appreciate your
+								enthusiasm and support for our website.
 								<br />
 								<br />
 								Unfortunately, in order to accommodate all this new information,
