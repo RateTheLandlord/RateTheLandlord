@@ -1,19 +1,62 @@
-import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
+import { Injectable } from '@nestjs/common';
 import { Review } from './models/review';
+
+type ReviewQuery = {
+  page: number;
+  limit?: number;
+  search?: string;
+  sort?: 'newest' | 'oldest' | 'alpha';
+  order?: 'asc' | 'desc';
+  state?: string;
+  country?: string;
+  city?: string;
+  zip?: string;
+};
 
 @Injectable()
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  // Possible Query for getting these reviews is page number, number per page, sort by (newest, olders, alpha)
-  // Query for page will update with pagination from FE
-  get(page = 0): Promise<Review[]> {
-    return this.databaseService.sql<
-      Review[]
-    >`SELECT * FROM review ORDER BY id DESC LIMIT 5;`;
+  async get(params: ReviewQuery): Promise<Review[]> {
+    const { page, limit, search, sort, order, state, country, city, zip } =
+      params;
+    const offset = (page - 1) * limit;
 
-    // return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
+    let orderBy = 'id';
+    if (sort === 'newest') {
+      orderBy = 'created_at';
+    } else if (sort === 'oldest') {
+      orderBy = 'created_at';
+    } else if (sort === 'alpha') {
+      orderBy = 'title';
+    }
+
+    const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
+
+    const whereClauses = [];
+    if (search) {
+      whereClauses.push(
+        `(title ILIKE '%${search}%' OR content ILIKE '%${search}%')`,
+      );
+    }
+    if (state) whereClauses.push(`state = '${state}'`);
+    if (country) whereClauses.push(`country = '${country}'`);
+    if (city) whereClauses.push(`city = '${city}'`);
+    if (zip) whereClauses.push(`zip = '${zip}'`);
+
+    const whereClause =
+      whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
+
+    const sqlQuery = `
+      SELECT * FROM review
+      ${whereClause}
+      ORDER BY ${orderBy} ${sortOrder}
+      LIMIT ${limit}
+      OFFSET ${offset};
+    `;
+
+    return this.databaseService.sql<Review[]>`${sqlQuery}`;
   }
 
   findOne(id: number): Promise<Review[]> {

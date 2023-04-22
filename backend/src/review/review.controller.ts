@@ -26,8 +26,22 @@ export class ReviewController {
 
   // Get All Reviews
   @Get()
-  get(@Query('page') page: number): Promise<Review[]> {
-    return this.reviewService.get(page);
+  get(
+    @Query('page') page: number,
+    @Query('search') search?: string,
+    @Query('state') state?: string,
+    @Query('country') country?: string,
+    @Query('city') city?: string,
+    @Query('zip') zip?: string,
+  ): Promise<Review[]> {
+    return this.reviewService.get({
+      page,
+      search,
+      state,
+      country,
+      city,
+      zip,
+    });
   }
 
   //Get Specific Review
