@@ -6,8 +6,7 @@ type ReviewQuery = {
   page?: number;
   limit?: number;
   search?: string;
-  sort?: 'newest' | 'oldest' | 'alpha';
-  order?: 'asc' | 'desc';
+  sort?: 'az' | 'za' | 'new' | 'old';
   state?: string;
   country?: string;
   city?: string;
@@ -24,7 +23,6 @@ export class ReviewService {
       limit: limitParam,
       search,
       sort,
-      order,
       state,
       country,
       city,
@@ -37,20 +35,18 @@ export class ReviewService {
     const offset = (page - 1) * limit;
 
     let orderBy = 'id';
-    if (sort === 'newest') {
-      orderBy = 'created_at';
-    } else if (sort === 'oldest') {
-      orderBy = 'created_at';
-    } else if (sort === 'alpha') {
-      orderBy = 'title';
+    if (sort === 'az' || sort === 'za') {
+      orderBy = 'landlord';
+    } else if (sort === 'new' || sort === 'old') {
+      orderBy = 'dataadded';
     }
 
-    const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
+    const sortOrder = sort === 'az' || sort === 'old' ? 'ASC' : 'DESC';
 
     const whereClauses = [];
     if (search) {
       whereClauses.push(
-        `(title ILIKE '%${search}%' OR content ILIKE '%${search}%')`,
+        `(title ILIKE '%${search}%' OR review ILIKE '%${search}%' OR city ILIKE '%${search}%' OR state ILIKE '%${search}%' OR zip ILIKE '%${search}%')`,
       );
     }
     if (state) whereClauses.push(`state = '${state}'`);
@@ -61,15 +57,11 @@ export class ReviewService {
     const whereClause =
       whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
 
-    const sqlQuery = `
-      SELECT * FROM review
-      ${whereClause}
-      ORDER BY ${orderBy} ${sortOrder}
-      LIMIT ${limit}
-      OFFSET ${offset};
+    return this.databaseService.sql<Review[]>`
+      SELECT * FROM review ${whereClause}
+      ORDER BY ${orderBy} ${sortOrder} LIMIT ${limit}
+      OFFSET ${offset}
     `;
-
-    return this.databaseService.sql<Review[]>`${sqlQuery}`;
   }
 
   findOne(id: number): Promise<Review[]> {

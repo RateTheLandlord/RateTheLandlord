@@ -4,7 +4,6 @@ import {sortOptions} from '@/util/filter-options'
 import {Options, Review} from '@/util/interfaces'
 import {
 	updateActiveFilters,
-	updateReviews,
 	getStateOptions,
 	getCityOptions,
 	getZipOptions,
@@ -22,8 +21,6 @@ const country_codes: string[] = Object.keys(countries).filter(
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
-	const {data} = useSWR<Array<Review>>('/api/get-reviews', fetcher)
-
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
@@ -32,11 +29,31 @@ const Review = () => {
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
 	const [searchState, setSearchState] = useState<string>('')
 
+	const queryParams = new URLSearchParams({
+		sort: selectedSort.value,
+		state: stateFilter?.value || '',
+		country: countryFilter?.value || '',
+		city: cityFilter?.value || '',
+		zip: zipFilter?.value || '',
+		search: searchState || '',
+	})
+
+	const {data} = useSWR<Array<Review>>(
+		`/api/get-reviews?${queryParams.toString()}`,
+		fetcher,
+	)
+
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
 	const [reviews, setReviews] = useState<Review[]>(data || [])
+
+	useEffect(() => {
+		if (data) {
+			setReviews(data)
+		}
+	}, [data])
 
 	const countryOptions: Options[] = country_codes.map(
 		(item: string, ind: number): Options => {
@@ -63,20 +80,20 @@ const Review = () => {
 		setActiveFilters(
 			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
 		)
+	}, [
+		cityFilter,
+		stateFilter,
+		countryFilter,
+		zipFilter,
+		searchState,
+		selectedSort,
+	])
+
+	useEffect(() => {
 		if (data) {
-			setReviews(
-				updateReviews(
-					stateFilter,
-					countryFilter,
-					cityFilter,
-					zipFilter,
-					data,
-					searchState,
-					selectedSort.name,
-				),
-			)
+			setReviews(data)
 		}
-	}, [cityFilter, stateFilter, countryFilter, zipFilter, data, searchState, selectedSort])
+	}, [data])
 
 	return (
 		<>
