@@ -28,7 +28,10 @@ export class ReviewController {
   @Get()
   get(
     @Query('page') page: number,
+    @Query('limit') limit?: number,
     @Query('search') search?: string,
+    @Query('sort') sort?: 'newest' | 'oldest' | 'alpha',
+    @Query('order') order?: 'asc' | 'desc',
     @Query('state') state?: string,
     @Query('country') country?: string,
     @Query('city') city?: string,
@@ -36,7 +39,10 @@ export class ReviewController {
   ): Promise<Review[]> {
     return this.reviewService.get({
       page,
+      limit,
       search,
+      sort,
+      order,
       state,
       country,
       city,
