@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Review } from './models/review';
 
 type ReviewQuery = {
-  page: number;
+  page?: number;
   limit?: number;
   search?: string;
   sort?: 'newest' | 'oldest' | 'alpha';
@@ -19,8 +19,21 @@ export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async get(params: ReviewQuery): Promise<Review[]> {
-    const { page, limit, search, sort, order, state, country, city, zip } =
-      params;
+    const {
+      page: pageParam,
+      limit: limitParam,
+      search,
+      sort,
+      order,
+      state,
+      country,
+      city,
+      zip,
+    } = params;
+
+    const page = pageParam ? pageParam : 1;
+    const limit = limitParam ? limitParam : 10;
+
     const offset = (page - 1) * limit;
 
     let orderBy = 'id';

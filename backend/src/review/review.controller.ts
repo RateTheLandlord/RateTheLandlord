@@ -27,7 +27,7 @@ export class ReviewController {
   // Get All Reviews
   @Get()
   get(
-    @Query('page') page: number,
+    @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('search') search?: string,
     @Query('sort') sort?: 'newest' | 'oldest' | 'alpha',

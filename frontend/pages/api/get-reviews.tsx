@@ -2,8 +2,14 @@ import {NextApiRequest, NextApiResponse} from 'next'
 
 const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
+	const queryParams = Object.entries(req.query)
+		.map(
+			([key, value]) =>
+				`${encodeURIComponent(key)}=${encodeURIComponent(value as string)}`,
+		)
+		.join('&')
 
-	fetch(`${url}/review?page=1`, {
+	fetch(`${url}/review?${queryParams}`, {
 		headers: {
 			'Content-Type': 'application/json',
 		},
