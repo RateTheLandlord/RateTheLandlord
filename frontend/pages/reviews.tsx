@@ -1,6 +1,7 @@
+import Review, {ReviewsResponse} from '@/components/reviews/review'
+
 import {NextSeo} from 'next-seo'
 import React from 'react'
-import Review from '@/components/reviews/review'
 import {SWRConfig} from 'swr'
 import {useRouter} from 'next/router'
 
@@ -55,15 +56,24 @@ export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
 
 //Page is statically generated at build time and then revalidated at a minimum of every 100 seconds based on when the page is accessed
 export async function getStaticProps() {
+	const fallback: ReviewsResponse = {
+		reviews: [],
+		total: 0,
+		countries: [],
+		states: [],
+		cities: [],
+		zips: [],
+	}
+
 	try {
 		const req = await fetch(`http://backend:8080/review`)
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		const data: Review[] = await req.json()
+		const data: ReviewsResponse = await req.json()
 
 		return {
 			props: {
 				fallback: {
-					'/api/get-reviews': data ? data : [],
+					'/api/get-reviews': data ?? fallback,
 				},
 			},
 			revalidate: 100,
@@ -72,7 +82,7 @@ export async function getStaticProps() {
 		return {
 			props: {
 				fallback: {
-					'/api/get-reviews': [],
+					'/api/get-reviews': fallback,
 				},
 			},
 			revalidate: 100,

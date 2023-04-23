@@ -15,7 +15,7 @@ import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
 import { Review } from './models/review';
-import { ReviewService } from './review.service';
+import { ReviewService, ReviewsResponse } from './review.service';
 
 @Controller('review')
 export class ReviewController {
@@ -35,7 +35,7 @@ export class ReviewController {
     @Query('country') country?: string,
     @Query('city') city?: string,
     @Query('zip') zip?: string,
-  ): Promise<Review[]> {
+  ): Promise<ReviewsResponse> {
     return this.reviewService.get({
       page,
       limit,

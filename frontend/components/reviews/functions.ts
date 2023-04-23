@@ -1,7 +1,6 @@
 import {capitalize, removeDuplicates} from '@/util/helper-functions'
 
 import {Options} from '@/util/interfaces'
-import {Review} from '@/util/interfaces'
 
 export const updateActiveFilters = (
 	countryFilter: Options | null,
@@ -26,16 +25,16 @@ export const updateActiveFilters = (
 }
 
 export const getStateOptions = (
-	data: Array<Review> | undefined,
+	states: string[] | undefined,
 ): Array<Options> => {
-	if (!data) return []
-	if (data.length) {
-		const allStateOptions = data.map((review, id) => {
-			const state = review.state.toLowerCase()
+	if (!states) return []
+	if (states.length) {
+		const allStateOptions = states.map((s, id) => {
+			const state = s.toLowerCase()
 			return {
 				id: id + 1,
 				name: state.split(' ').map(capitalize).join(' '),
-				value: review.state,
+				value: s,
 			}
 		})
 
@@ -52,16 +51,16 @@ export const getStateOptions = (
 }
 
 export const getCityOptions = (
-	data: Array<Review> | undefined,
+	cities: string[] | undefined,
 ): Array<Options> => {
-	if (!data) return []
-	if (data.length) {
-		const allCityOptions = data.map((review, id) => {
-			const city = review.city.toLowerCase().trim()
+	if (!cities) return []
+	if (cities.length) {
+		const allCityOptions = cities.map((c, id) => {
+			const city = c.toLowerCase().trim()
 			return {
 				id: id + 1,
 				name: city.split(' ').map(capitalize).join(' '),
-				value: review.city.toLowerCase().trim(),
+				value: c.toLowerCase().trim(),
 			}
 		})
 
@@ -76,17 +75,15 @@ export const getCityOptions = (
 	return []
 }
 
-export const getZipOptions = (
-	data: Array<Review> | undefined,
-): Array<Options> => {
-	if (!data) return []
-	if (data.length) {
-		const allZipOptions = data.map((review, id) => {
-			const zip = review.zip.toUpperCase().replace(/\s+/g, '')
+export const getZipOptions = (zips: string[] | undefined): Array<Options> => {
+	if (!zips) return []
+	if (zips.length) {
+		const allZipOptions = zips.map((z, id) => {
+			const zip = z.toUpperCase().replace(/\s+/g, '')
 			return {
 				id: id + 1,
 				name: zip.toUpperCase().replace(/\s+/g, ''),
-				value: review.zip.toUpperCase().replace(/\s+/g, ''),
+				value: z.toUpperCase().replace(/\s+/g, ''),
 			}
 		})
 

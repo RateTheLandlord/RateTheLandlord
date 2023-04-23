@@ -13,6 +13,16 @@ import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
 import Head from 'next/head'
 import useSWR from 'swr'
+import Paginator from './paginator'
+
+export type ReviewsResponse = {
+	reviews: Review[]
+	total: number
+	countries: string[]
+	states: string[]
+	cities: string[]
+	zips: string[]
+}
 
 const country_codes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US' || c === 'GB',
@@ -22,14 +32,18 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
+
+	const [searchState, setSearchState] = useState<string>('')
+	const [page, setPage] = useState<number>(1)
+
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
-	const [searchState, setSearchState] = useState<string>('')
 
 	const queryParams = new URLSearchParams({
+		page: page.toString(),
 		sort: selectedSort.value,
 		state: stateFilter?.value || '',
 		country: countryFilter?.value || '',
@@ -38,20 +52,19 @@ const Review = () => {
 		search: searchState || '',
 	})
 
-	const {data} = useSWR<Array<Review>>(
+	const {data} = useSWR<ReviewsResponse>(
 		`/api/get-reviews?${queryParams.toString()}`,
 		fetcher,
 	)
 
+	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
-	const [reviews, setReviews] = useState<Review[]>(data || [])
-
 	useEffect(() => {
 		if (data) {
-			setReviews(data)
+			setReviews(data.reviews)
 		}
 	}, [data])
 
@@ -61,11 +74,9 @@ const Review = () => {
 		},
 	)
 
-	const cityOptions = getCityOptions(data)
-
-	const stateOptions = getStateOptions(data)
-
-	const zipOptions = getZipOptions(data)
+	const cityOptions = getCityOptions(data?.cities ?? [])
+	const stateOptions = getStateOptions(data?.states ?? [])
+	const zipOptions = getZipOptions(data?.zips ?? [])
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
@@ -91,7 +102,7 @@ const Review = () => {
 
 	useEffect(() => {
 		if (data) {
-			setReviews(data)
+			setReviews(data.reviews)
 		}
 	}, [data])
 
@@ -130,6 +141,11 @@ const Review = () => {
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
+				/>
+				<Paginator
+					onSelect={(page: number) => setPage(page)}
+					currentPage={page}
+					totalPages={data?.total ?? 0}
 				/>
 			</div>
 		</>

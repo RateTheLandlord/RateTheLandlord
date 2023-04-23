@@ -13,11 +13,20 @@ type ReviewQuery = {
   zip?: string;
 };
 
+export type ReviewsResponse = {
+  reviews: Review[];
+  total: number;
+  countries: string[];
+  states: string[];
+  cities: string[];
+  zips: string[];
+};
+
 @Injectable()
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async get(params: ReviewQuery): Promise<Review[]> {
+  async get(params: ReviewQuery): Promise<ReviewsResponse> {
     const {
       page: pageParam,
       limit: limitParam,
@@ -59,11 +68,52 @@ export class ReviewService {
     const cityClause = city ? sql`AND city = ${city}` : sql``;
     const zipClause = zip ? sql`AND zip = ${zip}` : sql``;
 
-    return this.databaseService.sql<Review[]>`
+    // Fetch reviews
+    const reviews = (await sql`
       SELECT * FROM review WHERE 1=1 ${searchClause} ${stateClause} ${countryClause} ${cityClause} ${zipClause}
       ORDER BY ${orderBy} ${sortOrder} LIMIT ${limit}
       OFFSET ${offset}
+    `) as any;
+
+    // Fetch total number of reviews
+    const totalResult = await sql`
+      SELECT COUNT(*) as count FROM review WHERE 1=1 ${searchClause} ${stateClause} ${countryClause} ${cityClause} ${zipClause}
     `;
+    const total = totalResult[0].count;
+
+    // Fetch countries
+    const countries = await sql`
+      SELECT DISTINCT country_code FROM review;
+    `;
+    const countryList = countries.map(({ country_code }) => country_code);
+
+    // Fetch states
+    const states = await sql`
+      SELECT DISTINCT state FROM review;
+    `;
+    const stateList = states.map(({ state }) => state);
+
+    // Fetch cities
+    const cities = await sql`
+      SELECT DISTINCT city FROM review;
+    `;
+    const cityList = cities.map(({ city }) => city);
+
+    // Fetch zips
+    const zips = await sql`
+      SELECT DISTINCT zip FROM review;
+    `;
+    const zipList = zips.map(({ zip }) => zip);
+
+    // Return ReviewsResponse object
+    return {
+      reviews,
+      total,
+      countries: countryList,
+      states: stateList,
+      cities: cityList,
+      zips: zipList,
+    };
   }
 
   findOne(id: number): Promise<Review[]> {
