@@ -34,31 +34,33 @@ export class ReviewService {
 
     const offset = (page - 1) * limit;
 
-    let orderBy = 'id';
+    const sql = this.databaseService.sql;
+
+    let orderBy = sql`id`;
     if (sort === 'az' || sort === 'za') {
-      orderBy = 'landlord';
+      orderBy = sql`landlord`;
     } else if (sort === 'new' || sort === 'old') {
-      orderBy = 'dataadded';
+      orderBy = sql`dataadded`;
     }
 
-    const sortOrder = sort === 'az' || sort === 'old' ? 'ASC' : 'DESC';
+    const sortOrder = sort === 'az' || sort === 'old' ? sql`ASC` : sql`DESC`;
 
-    const whereClauses = [];
-    if (search) {
-      whereClauses.push(
-        `(title ILIKE '%${search}%' OR review ILIKE '%${search}%' OR city ILIKE '%${search}%' OR state ILIKE '%${search}%' OR zip ILIKE '%${search}%')`,
-      );
-    }
-    if (state) whereClauses.push(`state = '${state}'`);
-    if (country) whereClauses.push(`country = '${country}'`);
-    if (city) whereClauses.push(`city = '${city}'`);
-    if (zip) whereClauses.push(`zip = '${zip}'`);
+    const searchClause =
+      search?.length > 0
+        ? sql`AND (landlord ILIKE ${'%' + search + '%'} OR review ILIKE ${
+            '%' + search + '%'
+          } OR city ILIKE ${'%' + search + '%'} OR state ILIKE ${
+            '%' + search + '%'
+          } OR zip ILIKE ${'%' + search + '%'})`
+        : sql``;
 
-    const whereClause =
-      whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
+    const stateClause = state ? sql`AND state = ${state}` : sql``;
+    const countryClause = country ? sql`AND country_code = ${country}` : sql``;
+    const cityClause = city ? sql`AND city = ${city}` : sql``;
+    const zipClause = zip ? sql`AND zip = ${zip}` : sql``;
 
     return this.databaseService.sql<Review[]>`
-      SELECT * FROM review ${whereClause}
+      SELECT * FROM review WHERE 1=1 ${searchClause} ${stateClause} ${countryClause} ${cityClause} ${zipClause}
       ORDER BY ${orderBy} ${sortOrder} LIMIT ${limit}
       OFFSET ${offset}
     `;
