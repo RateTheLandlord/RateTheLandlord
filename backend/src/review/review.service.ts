@@ -49,7 +49,7 @@ export class ReviewService {
     if (sort === 'az' || sort === 'za') {
       orderBy = sql`landlord`;
     } else if (sort === 'new' || sort === 'old') {
-      orderBy = sql`dataadded`;
+      orderBy = sql`date_added`;
     }
 
     const sortOrder = sort === 'az' || sort === 'old' ? sql`ASC` : sql`DESC`;
@@ -104,6 +104,15 @@ export class ReviewService {
       SELECT DISTINCT zip FROM review;
     `;
     const zipList = zips.map(({ zip }) => zip);
+
+    console.log({
+      reviews,
+      total,
+      countries: countryList,
+      states: stateList,
+      cities: cityList,
+      zips: zipList,
+    })
 
     // Return ReviewsResponse object
     return {

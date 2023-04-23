@@ -35,7 +35,7 @@ function ReviewTable({
 								{title: t('reviews.repair'), rating: review.repair},
 								{title: t('reviews.stability'), rating: review.stability},
 							]
-							const date = new Date(review.dataadded).toLocaleDateString()
+							const date = new Date(review.date_added).toLocaleDateString()
 							return (
 								<div
 									key={review.id}

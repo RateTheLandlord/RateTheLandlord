@@ -9,7 +9,7 @@ export interface Review {
 	respect: string
 	review: string
 	stability: string
-	dataadded: string
+	date_added: string
 	state: string
 	zip: string
 	flagged: boolean

@@ -55,6 +55,7 @@ export class ReviewController {
   }
 
   //Update Review
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async update(
     @Param('id') id: number,
@@ -64,6 +65,7 @@ export class ReviewController {
   }
 
   //Delete Review
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<boolean> {
     return this.reviewService.delete(id);

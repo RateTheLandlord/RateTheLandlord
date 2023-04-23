@@ -57,6 +57,8 @@ const Review = () => {
 		fetcher,
 	)
 
+	console.log(data)
+
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
