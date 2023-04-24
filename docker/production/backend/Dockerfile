@@ -1,6 +1,6 @@
 FROM node:alpine
 
-ENV PORT 5000
+ENV PORT 8080
 
 RUN mkdir -p /app
 
@@ -22,7 +22,7 @@ ENV NODE_ENV=production
 # Build Nest
 RUN npm run build
 
-EXPOSE 5000
+EXPOSE 8080
 
 # Run npm dev, as we would via the command line 
 CMD ["npm", "run", "start:prod"]

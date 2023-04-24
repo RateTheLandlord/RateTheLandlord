@@ -1,23 +1,22 @@
-import Hero from '@/components/home/hero'
-import IconSection from '@/components/home/icon-section'
+import ReviewForm from '@/components/create-review/review-form'
 import {NextSeo} from 'next-seo'
 import {useRouter} from 'next/router'
 import React from 'react'
 
-//This page should be statically generated at build. No need for Data fetching here
-
-export default function Home(): JSX.Element {
-	const title = 'Rate The Landlord'
+function CreateReview(): JSX.Element {
+	const title = 'Create Review | Rate The Landlord'
 	const desc =
-		'Share information with tenants like you and rate your landlord. We are a community platform that elevates tenant voices to promote landlord accountability.'
+		'Create a Review for your Landlord. Share information with tenants like you and rate your landlord. We are a community platform that elevates tenant voices to promote landlord accountability.'
 	const siteURL = 'https://ratethelandlord.org'
 	const pathName = useRouter().pathname
 	const pageURL = pathName === '/' ? siteURL : siteURL + pathName
 	const twitterHandle = '@r8thelandlord'
 	const siteName = 'RateTheLandlord.org'
-
 	return (
-		<div>
+		<div
+			className="flex w-full justify-center"
+			data-testid="create-review-form-1"
+		>
 			<NextSeo
 				title={title}
 				description={desc}
@@ -49,8 +48,11 @@ export default function Home(): JSX.Element {
 					},
 				]}
 			/>
-			<Hero />
-			<IconSection />
+			<div className="flex flex-col">
+				<ReviewForm />
+			</div>
 		</div>
 	)
 }
+
+export default CreateReview

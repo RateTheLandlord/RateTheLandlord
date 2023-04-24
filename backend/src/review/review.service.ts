@@ -1,13 +1,121 @@
-import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
+import { Injectable } from '@nestjs/common';
 import { Review } from './models/review';
+
+type ReviewQuery = {
+  page?: number;
+  limit?: number;
+  search?: string;
+  sort?: 'az' | 'za' | 'new' | 'old';
+  state?: string;
+  country?: string;
+  city?: string;
+  zip?: string;
+};
+
+export type ReviewsResponse = {
+  reviews: Review[];
+  total: number;
+  countries: string[];
+  states: string[];
+  cities: string[];
+  zips: string[];
+  limit: number;
+};
 
 @Injectable()
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  get(): Promise<Review[]> {
-    return this.databaseService.sql<Review[]>`SELECT * FROM review;`;
+  async get(params: ReviewQuery): Promise<ReviewsResponse> {
+    const {
+      page: pageParam,
+      limit: limitParam,
+      search,
+      sort,
+      state,
+      country,
+      city,
+      zip,
+    } = params;
+
+    const page = pageParam ? pageParam : 1;
+    const limit = limitParam ? limitParam : 10;
+
+    const offset = (page - 1) * limit;
+
+    const sql = this.databaseService.sql;
+
+    let orderBy = sql`id`;
+    if (sort === 'az' || sort === 'za') {
+      orderBy = sql`landlord`;
+    } else if (sort === 'new' || sort === 'old') {
+      orderBy = sql`date_added`;
+    }
+
+    const sortOrder = sort === 'az' || sort === 'old' ? sql`ASC` : sql`DESC`;
+
+    const searchClause =
+      search?.length > 0
+        ? sql`AND (landlord ILIKE ${'%' + search + '%'} OR review ILIKE ${
+            '%' + search + '%'
+          } OR city ILIKE ${'%' + search + '%'} OR state ILIKE ${
+            '%' + search + '%'
+          } OR zip ILIKE ${'%' + search + '%'})`
+        : sql``;
+
+    const stateClause = state ? sql`AND state = ${state}` : sql``;
+    const countryClause = country ? sql`AND country_code = ${country}` : sql``;
+    const cityClause = city ? sql`AND city = ${city}` : sql``;
+    const zipClause = zip ? sql`AND zip = ${zip}` : sql``;
+
+    // Fetch reviews
+    const reviews = (await sql`
+      SELECT * FROM review WHERE 1=1 ${searchClause} ${stateClause} ${countryClause} ${cityClause} ${zipClause}
+      ORDER BY ${orderBy} ${sortOrder} LIMIT ${limit}
+      OFFSET ${offset}
+    `) as any;
+
+    // Fetch total number of reviews
+    const totalResult = await sql`
+      SELECT COUNT(*) as count FROM review WHERE 1=1 ${searchClause} ${stateClause} ${countryClause} ${cityClause} ${zipClause}
+    `;
+    const total = totalResult[0].count;
+
+    // Fetch countries
+    const countries = await sql`
+      SELECT DISTINCT country_code FROM review;
+    `;
+    const countryList = countries.map(({ country_code }) => country_code);
+
+    // Fetch states
+    const states = await sql`
+      SELECT DISTINCT state FROM review;
+    `;
+    const stateList = states.map(({ state }) => state);
+
+    // Fetch cities
+    const cities = await sql`
+      SELECT DISTINCT city FROM review;
+    `;
+    const cityList = cities.map(({ city }) => city);
+
+    // Fetch zips
+    const zips = await sql`
+      SELECT DISTINCT zip FROM review;
+    `;
+    const zipList = zips.map(({ zip }) => zip);
+
+    // Return ReviewsResponse object
+    return {
+      reviews,
+      total,
+      countries: countryList,
+      states: stateList,
+      cities: cityList,
+      zips: zipList,
+      limit: limit,
+    };
   }
 
   findOne(id: number): Promise<Review[]> {

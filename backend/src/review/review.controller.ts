@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -14,7 +15,7 @@ import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
 import { Review } from './models/review';
-import { ReviewService } from './review.service';
+import { ReviewService, ReviewsResponse } from './review.service';
 
 @Controller('review')
 export class ReviewController {
@@ -25,8 +26,26 @@ export class ReviewController {
 
   // Get All Reviews
   @Get()
-  get(): Promise<Review[]> {
-    return this.reviewService.get();
+  get(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('search') search?: string,
+    @Query('sort') sort?: 'az' | 'za' | 'new' | 'old',
+    @Query('state') state?: string,
+    @Query('country') country?: string,
+    @Query('city') city?: string,
+    @Query('zip') zip?: string,
+  ): Promise<ReviewsResponse> {
+    return this.reviewService.get({
+      page,
+      limit,
+      search,
+      sort,
+      state,
+      country,
+      city,
+      zip,
+    });
   }
 
   //Get Specific Review
@@ -36,6 +55,7 @@ export class ReviewController {
   }
 
   //Update Review
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async update(
     @Param('id') id: number,
@@ -45,6 +65,7 @@ export class ReviewController {
   }
 
   //Delete Review
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<boolean> {
     return this.reviewService.delete(id);
