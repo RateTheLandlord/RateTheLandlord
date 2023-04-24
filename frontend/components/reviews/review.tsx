@@ -4,7 +4,6 @@ import {sortOptions} from '@/util/filter-options'
 import {Options, Review} from '@/util/interfaces'
 import {
 	updateActiveFilters,
-	updateReviews,
 	getStateOptions,
 	getCityOptions,
 	getZipOptions,
@@ -14,6 +13,17 @@ import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
 import Head from 'next/head'
 import useSWR from 'swr'
+import Paginator from './paginator'
+
+export type ReviewsResponse = {
+	reviews: Review[]
+	total: number
+	countries: string[]
+	states: string[]
+	cities: string[]
+	zips: string[]
+	limit: number
+}
 
 const country_codes: string[] = Object.keys(countries).filter(
 	(c) => c === 'CA' || c === 'US' || c === 'GB',
@@ -22,21 +32,45 @@ const country_codes: string[] = Object.keys(countries).filter(
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
-	const {data} = useSWR<Array<Review>>('/api/get-reviews', fetcher)
-
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
+
+	const [searchState, setSearchState] = useState<string>('')
+	const [page, setPage] = useState<number>(1)
+
 	const [countryFilter, setCountryFilter] = useState<Options | null>(null)
 	const [stateFilter, setStateFilter] = useState<Options | null>(null)
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
-	const [searchState, setSearchState] = useState<string>('')
 
+	const queryParams = new URLSearchParams({
+		page: page.toString(),
+		sort: selectedSort.value,
+		state: stateFilter?.value || '',
+		country: countryFilter?.value || '',
+		city: cityFilter?.value || '',
+		zip: zipFilter?.value || '',
+		search: searchState || '',
+		limit: '10',
+	})
+
+	const {data} = useSWR<ReviewsResponse>(
+		`/api/get-reviews?${queryParams.toString()}`,
+		fetcher,
+	)
+
+	console.log('Reviews: ', data)
+
+	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
-	const [reviews, setReviews] = useState<Review[]>(data || [])
+	useEffect(() => {
+		if (data) {
+			setReviews(data.reviews)
+		}
+	}, [data])
 
 	const countryOptions: Options[] = country_codes.map(
 		(item: string, ind: number): Options => {
@@ -44,11 +78,9 @@ const Review = () => {
 		},
 	)
 
-	const cityOptions = getCityOptions(data)
-
-	const stateOptions = getStateOptions(data)
-
-	const zipOptions = getZipOptions(data)
+	const cityOptions = getCityOptions(data?.cities ?? [])
+	const stateOptions = getStateOptions(data?.states ?? [])
+	const zipOptions = getZipOptions(data?.zips ?? [])
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
@@ -63,20 +95,20 @@ const Review = () => {
 		setActiveFilters(
 			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
 		)
+	}, [
+		cityFilter,
+		stateFilter,
+		countryFilter,
+		zipFilter,
+		searchState,
+		selectedSort,
+	])
+
+	useEffect(() => {
 		if (data) {
-			setReviews(
-				updateReviews(
-					stateFilter,
-					countryFilter,
-					cityFilter,
-					zipFilter,
-					data,
-					searchState,
-					selectedSort.name,
-				),
-			)
+			setReviews(data.reviews)
 		}
-	}, [cityFilter, stateFilter, countryFilter, zipFilter, data, searchState, selectedSort])
+	}, [data])
 
 	return (
 		<>
@@ -113,6 +145,12 @@ const Review = () => {
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
+				/>
+				<Paginator
+					onSelect={(page: number) => setPage(page)}
+					currentPage={page}
+					totalPages={data?.total ?? 0}
+					limit={data?.limit ?? 10}
 				/>
 			</div>
 		</>

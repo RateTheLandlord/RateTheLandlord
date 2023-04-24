@@ -28,7 +28,7 @@ const testReview: Review = {
 	flagged_reason: '',
 	admin_approved: null,
 	admin_edited: false,
-	dataadded: new Date().toLocaleDateString(),
+	date_added: new Date().toLocaleDateString(),
 }
 
 describe('Reviews Page', () => {
