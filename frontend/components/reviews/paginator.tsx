@@ -31,6 +31,7 @@ export default function Paginator({
 						: 'hover:bg-gray-50'
 				} mx-1 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700`}
 				disabled={currentPage === 1}
+				data-umami-event="Previous Page Clicked"
 			>
 				Previous
 			</button>
@@ -56,6 +57,7 @@ export default function Paginator({
 						: 'hover:bg-gray-50'
 				} mx-1 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700`}
 				disabled={currentPage === totalPages}
+				data-umami-event="Next Page Clicked"
 			>
 				Next
 			</button>
