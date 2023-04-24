@@ -378,8 +378,13 @@ function ReviewForm(): JSX.Element {
 						className="flex justify-center sm:justify-end"
 						data-testid="create-review-form-submit-button-1"
 					>
-						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
-						<Button disabled={!token || !disclaimer}>
+						<ButtonLight data-umami-event="Create Review Form Reset">
+							{t('create-review.review-form.reset')}
+						</ButtonLight>
+						<Button
+							disabled={!token || !disclaimer}
+							data-umami-event="Review Submitted"
+						>
 							{t('create-review.review-form.submit')}
 						</Button>
 					</div>

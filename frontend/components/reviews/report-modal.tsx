@@ -95,16 +95,22 @@ function ReportModal({
 										name="report"
 										id="report"
 										onChange={(e) => setReason(e.target.value)}
-										className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 										placeholder="Write your reasoning here..."
 									/>
 								</div>
 							</div>
 
-							<ButtonLight onClick={() => setIsOpen(false)}>
+							<ButtonLight
+								onClick={() => setIsOpen(false)}
+								data-umami-event="Report Cancelled"
+							>
 								{t('reviews.report.cancel')}
 							</ButtonLight>
-							<Button onClick={() => handleSubmit()}>
+							<Button
+								onClick={() => handleSubmit()}
+								data-umami-event="Report Submitted"
+							>
 								{t('reviews.report.submit')}
 							</Button>
 						</>
