@@ -10,7 +10,7 @@ import {useRouter} from 'next/router'
 export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
 	const title = 'Reviews | Rate The Landlord'
 	const desc =
-		'View Landlord Reviews. We are a community platform that elevates tenant voices to promote landlord accountability.'
+		'View and Search for Landlord Reviews. We are a community platform that elevates tenant voices to promote landlord accountability.'
 	const siteURL = 'https://ratethelandlord.org'
 	const pathName = useRouter().pathname
 	const pageURL = pathName === '/' ? siteURL : siteURL + pathName
@@ -63,6 +63,7 @@ export async function getStaticProps() {
 		states: [],
 		cities: [],
 		zips: [],
+		limit: 10,
 	}
 
 	try {

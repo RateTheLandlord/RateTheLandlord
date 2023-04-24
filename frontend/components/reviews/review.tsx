@@ -22,6 +22,7 @@ export type ReviewsResponse = {
 	states: string[]
 	cities: string[]
 	zips: string[]
+	limit: number
 }
 
 const country_codes: string[] = Object.keys(countries).filter(
@@ -50,6 +51,7 @@ const Review = () => {
 		city: cityFilter?.value || '',
 		zip: zipFilter?.value || '',
 		search: searchState || '',
+		limit: '10',
 	})
 
 	const {data} = useSWR<ReviewsResponse>(
@@ -57,7 +59,7 @@ const Review = () => {
 		fetcher,
 	)
 
-	console.log(data)
+	console.log('Reviews: ', data)
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
@@ -148,6 +150,7 @@ const Review = () => {
 					onSelect={(page: number) => setPage(page)}
 					currentPage={page}
 					totalPages={data?.total ?? 0}
+					limit={data?.limit ?? 10}
 				/>
 			</div>
 		</>

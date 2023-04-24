@@ -4,14 +4,19 @@ interface FiltersProps {
 	onSelect: (page: number) => void
 	currentPage: number
 	totalPages: number
+	limit: number
 }
 
 export default function Paginator({
 	onSelect,
 	currentPage,
 	totalPages,
+	limit,
 }: FiltersProps) {
-	const pageNumbers = Array.from({length: totalPages}, (_, i) => i + 1)
+	const pageNumbers = Array.from(
+		{length: Math.ceil(totalPages / limit)},
+		(_, i) => i + 1,
+	)
 
 	return (
 		<nav

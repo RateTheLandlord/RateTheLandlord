@@ -20,6 +20,7 @@ export type ReviewsResponse = {
   states: string[];
   cities: string[];
   zips: string[];
+  limit: number;
 };
 
 @Injectable()
@@ -105,15 +106,6 @@ export class ReviewService {
     `;
     const zipList = zips.map(({ zip }) => zip);
 
-    console.log({
-      reviews,
-      total,
-      countries: countryList,
-      states: stateList,
-      cities: cityList,
-      zips: zipList,
-    })
-
     // Return ReviewsResponse object
     return {
       reviews,
@@ -122,6 +114,7 @@ export class ReviewService {
       states: stateList,
       cities: cityList,
       zips: zipList,
+      limit: limit,
     };
   }
 
