@@ -27,7 +27,7 @@ const updatePassword = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw new Error()
+				throw result
 			}
 			return result.json()
 		})
@@ -35,10 +35,9 @@ const updatePassword = (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(200).json(data)
 		})
 		.catch((err: Response) => {
-			console.log('Error: ', err)
 			return res
-				.status(500)
-				.json({error: 'Failed to edit password', response: err})
+				.status(err.status)
+				.json({error: 'Failed to edit password', response: err.statusText})
 		})
 }
 

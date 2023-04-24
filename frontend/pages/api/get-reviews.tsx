@@ -16,7 +16,7 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw new Error()
+				throw result
 			}
 			return result.json()
 		})
@@ -25,7 +25,9 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.catch((err: Response) => {
 			console.log(err)
-			res.status(500).json({error: 'Failed to get Reviews', response: err})
+			res
+				.status(err.status)
+				.json({error: 'Failed to get Reviews', response: err.statusText})
 		})
 }
 
