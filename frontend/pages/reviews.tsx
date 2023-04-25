@@ -1,23 +1,23 @@
-import Hero from '@/components/home/hero'
-import IconSection from '@/components/home/icon-section'
+import Review, {ReviewsResponse} from '@/components/reviews/review'
+
 import {NextSeo} from 'next-seo'
-import {useRouter} from 'next/router'
 import React from 'react'
+import {SWRConfig} from 'swr'
+import {useRouter} from 'next/router'
 
-//This page should be statically generated at build. No need for Data fetching here
+//fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
 
-export default function Home(): JSX.Element {
-	const title = 'Rate The Landlord'
+export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
+	const title = 'Reviews | Rate The Landlord'
 	const desc =
-		'Share information with tenants like you and rate your landlord. We are a community platform that elevates tenant voices to promote landlord accountability.'
+		'View and Search for Landlord Reviews. We are a community platform that elevates tenant voices to promote landlord accountability.'
 	const siteURL = 'https://ratethelandlord.org'
 	const pathName = useRouter().pathname
 	const pageURL = pathName === '/' ? siteURL : siteURL + pathName
 	const twitterHandle = '@r8thelandlord'
 	const siteName = 'RateTheLandlord.org'
-
 	return (
-		<div>
+		<SWRConfig value={{fallback}}>
 			<NextSeo
 				title={title}
 				description={desc}
@@ -49,8 +49,44 @@ export default function Home(): JSX.Element {
 					},
 				]}
 			/>
-			<Hero />
-			<IconSection />
-		</div>
+			<Review />
+		</SWRConfig>
 	)
+}
+
+//Page is statically generated at build time and then revalidated at a minimum of every 100 seconds based on when the page is accessed
+export async function getStaticProps() {
+	const fallback: ReviewsResponse = {
+		reviews: [],
+		total: 0,
+		countries: [],
+		states: [],
+		cities: [],
+		zips: [],
+		limit: 10,
+	}
+
+	try {
+		const req = await fetch(`http://backend:8080/review`)
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const data: ReviewsResponse = await req.json()
+
+		return {
+			props: {
+				fallback: {
+					'/api/get-reviews': data ?? fallback,
+				},
+			},
+			revalidate: 100,
+		}
+	} catch (error) {
+		return {
+			props: {
+				fallback: {
+					'/api/get-reviews': fallback,
+				},
+			},
+			revalidate: 100,
+		}
+	}
 }

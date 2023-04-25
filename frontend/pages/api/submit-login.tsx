@@ -20,7 +20,7 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw new Error()
+				throw result
 			}
 			return result.json()
 		})
@@ -28,8 +28,9 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 			res.status(200).json(data)
 		})
 		.catch((error: Response) => {
-			console.log('error: ', error)
-			res.status(500).json({error: 'Failed to Login', response: error})
+			res
+				.status(error.status)
+				.json({error: 'Failed to Login', response: error.statusText})
 		})
 }
 

@@ -25,7 +25,7 @@ const updateUser = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw new Error()
+				throw result
 			}
 			return result.json()
 		})
@@ -33,8 +33,9 @@ const updateUser = (req: NextApiRequest, res: NextApiResponse) => {
 			res.status(200).json(data)
 		})
 		.catch((err: Response) => {
-			console.log(err)
-			res.status(500).json({error: 'Failed to edit User', response: err})
+			res
+				.status(err.status)
+				.json({error: 'Failed to edit User', response: err.statusText})
 		})
 }
 
