@@ -5,6 +5,27 @@ import Link from 'next/link'
 import {useTranslation} from 'react-i18next'
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
+import Instagram from '../svg/social/instagram'
+import Twitter from '../svg/social/twitter'
+import TikTok from '../svg/social/tiktok'
+
+const navigation = [
+	{
+		name: 'Instagram',
+		href: 'https://www.instagram.com/ratethelandlord',
+		icon: () => <Instagram />,
+	},
+	{
+		name: 'Twitter',
+		href: 'https://twitter.com/r8thelandlord',
+		icon: () => <Twitter />,
+	},
+	{
+		name: 'TikTok',
+		href: 'https://www.tiktok.com/@ratethelandlord',
+		icon: () => <TikTok />,
+	},
+]
 
 export default function Navbar(): JSX.Element {
 	const {t} = useTranslation('layout')
@@ -86,6 +107,19 @@ export default function Navbar(): JSX.Element {
 										/>
 									</div>
 								</div> */}
+								<div className="hidden justify-center space-x-6 lg:flex">
+									{navigation.map((item) => (
+										<a
+											key={item.name}
+											href={item.href}
+											className="text-gray-400 hover:text-gray-500"
+											data-umami-event={`Footer Link to ${item.name}`}
+										>
+											<span className="sr-only">{item.name}</span>
+											<item.icon aria-hidden="true" />
+										</a>
+									))}
+								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 									<Link

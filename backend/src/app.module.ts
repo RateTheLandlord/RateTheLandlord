@@ -6,10 +6,15 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
 import { PasswordModule } from './password/password.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ThrottlerModule.forRoot({
+      ttl: 10,
+      limit: 100,
+    }),
     ReviewModule,
     CaptchaModule,
     AuthModule,
