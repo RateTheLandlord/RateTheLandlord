@@ -55,7 +55,8 @@ export const getCityOptions = (
 ): Array<Options> => {
 	if (!cities) return []
 	if (cities.length) {
-		const allCityOptions = cities.map((c, id) => {
+		const filteredCity = cities.filter((n) => n)
+		const allCityOptions = filteredCity.map((c, id) => {
 			const city = c.toLowerCase().trim()
 			return {
 				id: id + 1,

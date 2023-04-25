@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react'
 
 interface FiltersProps {
@@ -35,20 +36,41 @@ export default function Paginator({
 			>
 				Previous
 			</button>
-			{pageNumbers.map((number) => (
-				<button
-					key={number}
-					onClick={() => onSelect(number)}
-					aria-current={number === currentPage ? 'page' : undefined}
-					className={`${
-						number === currentPage
-							? 'border-teal-600 bg-teal-600 text-white hover:bg-teal-700'
-							: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-					} mx-1 cursor-pointer rounded-md px-4 py-2 text-sm font-medium`}
-				>
-					{number}
-				</button>
-			))}
+			{pageNumbers.length > 10
+				? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
+						<button
+							key={number}
+							onClick={() => onSelect(number)}
+							aria-current={number === currentPage ? 'page' : undefined}
+							className={`${
+								number === currentPage
+									? 'border-teal-600 bg-teal-600 text-white hover:bg-teal-700'
+									: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+							} mx-1 cursor-pointer rounded-md px-4 py-2 text-sm font-medium`}
+						>
+							{number}
+						</button>
+				  ))
+				: pageNumbers.map((number) => (
+						<button
+							key={number}
+							onClick={() => onSelect(number)}
+							aria-current={number === currentPage ? 'page' : undefined}
+							className={`${
+								number === currentPage
+									? 'border-teal-600 bg-teal-600 text-white hover:bg-teal-700'
+									: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+							} mx-1 cursor-pointer rounded-md px-4 py-2 text-sm font-medium`}
+						>
+							{number}
+						</button>
+				  ))}
+			{pageNumbers.length > 10 ? (
+				<div className="mx-1 rounded-md border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+					...
+				</div>
+			) : null}
+
 			<button
 				onClick={() => currentPage < totalPages && onSelect(currentPage + 1)}
 				className={`${

@@ -22,6 +22,10 @@ function ReviewTable({
 		setSelectedReview(review)
 		setReportOpen(true)
 	}
+
+	if (!data) {
+		return <></>
+	}
 	if (data.length) {
 		return (
 			<div data-testid="review-table-1">
