@@ -1,12 +1,10 @@
 import {Disclosure} from '@headlessui/react'
-import {MenuIcon, XIcon} from '@heroicons/react/outline'
+import {MenuIcon, SearchIcon, XIcon} from '@heroicons/react/outline'
 import Logo from '../svg/logo/logo'
 import Link from 'next/link'
 import {useTranslation} from 'react-i18next'
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
-
-//TODO Apply "Current" styling to Navbar as necessary
 
 export default function Navbar(): JSX.Element {
 	const {t} = useTranslation('layout')
@@ -44,16 +42,19 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									{/* <Link href="/reviews">
+									<Link
+										href="/reviews"
+										data-umami-event="Navbar Link to Reviews"
+									>
 										<a
 											className={`${
 												activeTab === 2 ? 'border-b-2 border-teal-500' : ''
-											} text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium`}
+											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
 											{t('layout.nav.reviews')}
 										</a>
-									</Link> */}
-									<Link href="/about">
+									</Link>
+									<Link href="/about" data-umami-event="Navbar Link to About">
 										<a
 											className={`${
 												activeTab === 3 ? 'border-b-2 border-teal-500' : ''
@@ -87,11 +88,14 @@ export default function Navbar(): JSX.Element {
 								</div> */}
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									{/* <Link href="/create-review">
+									<Link
+										href="/create-review"
+										data-umami-event="Navbar Link to Create Review"
+									>
 										<a className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
 											{t('layout.nav.submit')}
 										</a>
-									</Link> */}
+									</Link>
 								</div>
 							</div>
 							<div className="flex items-center lg:hidden">
@@ -112,17 +116,23 @@ export default function Navbar(): JSX.Element {
 					<Disclosure.Panel className="lg:hidden">
 						<div className="space-y-1 pt-2 pb-3">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-							{/* <Link href="/reviews">
+							<Link
+								href="/reviews"
+								data-umami-event="Mobile Navbar Link to Reviews Page"
+							>
 								<Disclosure.Button
 									as="a"
-									className={`bg-teal-50 text-teal-700 block pl-3 pr-4 py-2 text-base font-medium cursor-pointer ${
-										activeTab === 2 ? 'border-teal-500 border-l-4' : ''
+									className={`block cursor-pointer bg-teal-50 py-2 pl-3 pr-4 text-base font-medium text-teal-700 ${
+										activeTab === 2 ? 'border-l-4 border-teal-500' : ''
 									}`}
 								>
 									{t('layout.nav.reviews')}
 								</Disclosure.Button>
-							</Link> */}
-							{/* <Link href="/create-review">
+							</Link>
+							<Link
+								href="/create-review"
+								data-umami-event="Navbar Mobile Link to Create Review"
+							>
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
@@ -131,8 +141,11 @@ export default function Navbar(): JSX.Element {
 								>
 									{t('layout.nav.submit')}
 								</Disclosure.Button>
-							</Link> */}
-							<Link href="/about">
+							</Link>
+							<Link
+								href="/about"
+								data-umami-event="Navbar Mobile Link to About"
+							>
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${

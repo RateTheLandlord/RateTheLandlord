@@ -14,7 +14,7 @@ const getUsers = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw new Error()
+				throw result
 			}
 			return result.json()
 		})
@@ -23,7 +23,9 @@ const getUsers = (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.catch((err: Response) => {
 			console.log(err)
-			res.status(500).json({error: 'Failed to get users', response: err})
+			res
+				.status(err.status)
+				.json({error: 'Failed to get users', response: err.statusText})
 		})
 }
 

@@ -10,6 +10,7 @@ const Contact = () => {
 				<a
 					href="mailto:contact@ratethelandlord.org"
 					className="mt-8 text-xl leading-8 text-gray-500"
+					data-umami-event="Contact Us Link Clicked"
 				>
 					Email us: contact@ratethelandlord.org
 				</a>
