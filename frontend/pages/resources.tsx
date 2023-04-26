@@ -43,6 +43,10 @@ function Resources(): JSX.Element {
 			<div className="container mt-5 flex flex-col items-center gap-4 px-2">
 				<ResourcesInfo />
 				<ResourceTenantLinks />
+				<p className="mt-8 text-center text-xl leading-8 text-gray-500">
+					If you have a helpful resource you think should be on our site, send
+					us an email at contact@ratethelandlord.org
+				</p>
 			</div>
 		</div>
 	)
