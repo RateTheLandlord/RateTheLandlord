@@ -52,75 +52,73 @@ function ReviewForm(): JSX.Element {
 
 	const [postalError, setPostalError] = useState(false)
 
-	// Submit button state
+	// Additional state for disabling submit
 	const [maliciousStringDetected, setMaliciousStringDetected] = useState(false)
 
 	// Malicious string check
 	const detectMaliciousString = (stringToCheck: string): boolean => {
 		const maliciousPatterns = /<script>|http|\p{Extended_Pictographic}/giu
-
 		const hasMaliciousPatterns = maliciousPatterns.test(stringToCheck)
 
 		return hasMaliciousPatterns
 	}
 
 	// Updated text change handler with malicious string check
-	const handleLandlordChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleTextChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+		inputName: string,
+	) => {
 		const stringIsMalicious = detectMaliciousString(e.target.value)
 
-		if (stringIsMalicious) {
-			setMaliciousStringDetected(true)
-			console.log('Malicious!')
-			setMaliciousAlertOpen(true)
-			setLandlord('')
-			e.target.value = ''
-		} else {
-			setLandlord(e.target.value)
-		}
-	}
-
-	const handleCityChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const stringIsMalicious = detectMaliciousString(e.target.value)
-
-		if (stringIsMalicious) {
-			setMaliciousStringDetected(true)
-			console.log('Malicious!')
-			// Alert
-			setMaliciousAlertOpen(true)
-			setCity('')
-			e.target.value = ''
-		} else {
-			setCity(e.target.value)
-		}
-	}
-
-	const handlePostalChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const stringIsMalicious = detectMaliciousString(e.target.value)
-
-		if (stringIsMalicious) {
-			setMaliciousStringDetected(true)
-			console.log('Malicious!')
-			// Alert
-			setMaliciousAlertOpen(true)
-			setPostal('')
-			e.target.value = ''
-		} else {
-			setPostal(e.target.value)
-		}
-	}
-
-	const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const stringIsMalicious = detectMaliciousString(e.target.value)
-
-		if (stringIsMalicious) {
-			setMaliciousStringDetected(true)
-			console.log('Malicious!')
-			// Alert
-			setMaliciousAlertOpen(true)
-			setReview('')
-			e.target.value = ''
-		} else {
-			setReview(e.target.value)
+		switch (inputName) {
+			case 'landlord':
+				if (stringIsMalicious) {
+					setMaliciousStringDetected(true)
+					console.log('Malicious!')
+					setMaliciousAlertOpen(true)
+					setLandlord('')
+					e.target.value = ''
+				} else {
+					setLandlord(e.target.value)
+					setMaliciousStringDetected(false)
+				}
+				break
+			case 'city':
+				if (stringIsMalicious) {
+					setMaliciousStringDetected(true)
+					console.log('Malicious!')
+					setMaliciousAlertOpen(true)
+					setCity('')
+					e.target.value = ''
+				} else {
+					setCity(e.target.value)
+					setMaliciousStringDetected(false)
+				}
+				break
+			case 'postal':
+				if (stringIsMalicious) {
+					setMaliciousStringDetected(true)
+					console.log('Malicious!')
+					setMaliciousAlertOpen(true)
+					setPostal('')
+					e.target.value = ''
+				} else {
+					setPostal(e.target.value)
+					setMaliciousStringDetected(false)
+				}
+				break
+			case 'review':
+				if (stringIsMalicious) {
+					setMaliciousStringDetected(true)
+					console.log('Malicious!')
+					setMaliciousAlertOpen(true)
+					setReview('')
+					e.target.value = ''
+				} else {
+					setReview(e.target.value)
+					setMaliciousStringDetected(false)
+				}
+				break
 		}
 	}
 
@@ -233,7 +231,7 @@ function ReviewForm(): JSX.Element {
 										id="landlord"
 										required
 										placeholder={t('create-review.review-form.landlord')}
-										onChange={(e) => handleLandlordChange(e)}
+										onChange={(e) => handleTextChange(e, 'landlord')}
 										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 										data-testid="create-review-form-landlord-1"
 									/>
@@ -280,7 +278,7 @@ function ReviewForm(): JSX.Element {
 										id="city"
 										placeholder={t('create-review.review-form.city')}
 										required
-										onChange={(e) => handleCityChange(e)}
+										onChange={(e) => handleTextChange(e, 'city')}
 										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 										data-testid="create-review-form-city-1"
 									/>
@@ -345,7 +343,7 @@ function ReviewForm(): JSX.Element {
 										id="postal-code"
 										placeholder={t('create-review.review-form.zip')}
 										required
-										onChange={(e) => handlePostalChange(e)}
+										onChange={(e) => handleTextChange(e, 'postal')}
 										className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
 											postalError ? 'border-red-400' : ''
 										}`}
@@ -412,7 +410,7 @@ function ReviewForm(): JSX.Element {
 							rows={4}
 							name="comment"
 							id="comment"
-							onChange={(e) => handleReviewChange(e)}
+							onChange={(e) => handleTextChange(e, 'review')}
 							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 							defaultValue={''}
 							data-testid="create-review-form-text-1"

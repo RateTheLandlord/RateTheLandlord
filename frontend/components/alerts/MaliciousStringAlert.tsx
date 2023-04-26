@@ -14,7 +14,7 @@ const MaliciousStringAlert = ({setMaliciousAlertOpen}: IProps) => {
 				</div>
 				<div className="ml-3">
 					<p className="text-sm font-medium text-orange-700">
-						Warning! Potentially malicious scripts detected in your entries.
+						Warning! Potentially malicious scripts detected in your entry.
 						Please try rephrasing your entry to avoid this error.
 					</p>
 				</div>
