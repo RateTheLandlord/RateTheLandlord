@@ -7,6 +7,7 @@ import countries from '@/util/countries.json'
 import provinces from '@/util/provinces.json'
 import regions from '@/util/regions.json'
 import states from '@/util/states.json'
+import territories from '@/util/territories.json'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {useTranslation} from 'react-i18next'
 import Alert from '../alerts/Alert'
@@ -20,7 +21,7 @@ import AddReviewModal from './add-review-modal'
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
 
 const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB',
+	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
 )
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
@@ -254,11 +255,19 @@ function ReviewForm(): JSX.Element {
 										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 									>
 										{country_codes.map((country) => {
-											return (
-												<option key={country} value={country}>
-													{countries[country]}
-												</option>
-											)
+											if (country === 'CA') {
+												return (
+													<option key={country} value={country} selected>
+														{countries[country]}
+													</option>
+												)
+											} else {
+												return (
+													<option key={country} value={country}>
+														{countries[country]}
+													</option>
+												)
+											}
 										})}
 									</select>
 								</div>
@@ -315,6 +324,17 @@ function ReviewForm(): JSX.Element {
 													return (
 														<option key={region.short} value={region.name}>
 															{region.name}
+														</option>
+													)
+											  })
+											: country === 'AU'
+											? territories.map((territory) => {
+													return (
+														<option
+															key={territory.short}
+															value={territory.name}
+														>
+															{territory.name}
 														</option>
 													)
 											  })
