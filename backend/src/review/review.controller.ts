@@ -67,6 +67,12 @@ export class ReviewController {
     return this.reviewService.update(id, review);
   }
 
+  @Throttle(5, 60)
+  @Put('/report/:id')
+  async report(@Param('id') id:number, @Body() reason: string): Promise<number> {
+    return this.reviewService.report(id, reason)
+  }
+
   //Delete Review
   @Throttle(10, 120)
   @UseGuards(JwtAuthGuard)

@@ -11,12 +11,12 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	fetch(`${url}/review/${body.newReview.id}`, {
+	fetch(`${url}/review/report/${body.newReview.id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(body.newReview),
+		body: JSON.stringify({reason: body.newReview.flagged_reason}),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
@@ -28,7 +28,7 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 			console.log('error: ', error)
 			res
 				.status(error.status)
-				.json({error: 'Failed to Submit Review', response: error.statusText})
+				.json({error: 'Failed to Report Review', response: error.statusText})
 		})
 }
 

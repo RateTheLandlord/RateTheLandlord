@@ -152,6 +152,14 @@ export class ReviewService {
     return review;
   }
 
+  async report(id:number, reason: string): Promise<number> {
+     await this.databaseService
+      .sql`UPDATE review SET flagged = true, flagged_reason = ${reason}
+      WHERE id = ${id};`;
+
+    return id;
+  }
+
   async delete(id: number): Promise<boolean> {
     await this.databaseService.sql`DELETE FROM review WHERE ID = ${id};`;
 
