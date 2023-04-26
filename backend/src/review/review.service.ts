@@ -66,7 +66,7 @@ export class ReviewService {
 
     const stateClause = state ? sql`AND state = ${state}` : sql``;
     const countryClause = country ? sql`AND country_code = ${country}` : sql``;
-    const cityClause = city ? sql`AND city = ${city}` : sql``;
+    const cityClause = city ? sql`AND city = ${city.toUpperCase()}` : sql``;
     const zipClause = zip ? sql`AND zip = ${zip}` : sql``;
 
     // Fetch reviews

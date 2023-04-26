@@ -59,8 +59,6 @@ const Review = () => {
 		fetcher,
 	)
 
-	console.log('Reviews: ', data)
-
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
@@ -103,12 +101,6 @@ const Review = () => {
 		searchState,
 		selectedSort,
 	])
-
-	useEffect(() => {
-		if (data) {
-			setReviews(data.reviews)
-		}
-	}, [data])
 
 	return (
 		<>
