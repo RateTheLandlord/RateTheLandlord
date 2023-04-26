@@ -38,6 +38,9 @@
 			"add-review": "Please Add a Written Review",
 			"add-review-desc": "We love your enthusiasm to leave a rating for your Landlord! However, can you please leave a small review to give more context to your rating so that other tenants can be better informed!",
 			"close": "Close"
+		},
+		"alert": {
+			"maliciousString": "Warning! We've detected that a link or script in your entry. Please remove or rephrase before submitting."
 		}
 	}
 }

@@ -74,10 +74,8 @@ function ReviewForm(): JSX.Element {
 			case 'landlord':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-					console.log('Malicious!')
+
 					setMaliciousAlertOpen(true)
-					setLandlord('')
-					e.target.value = ''
 				} else {
 					setLandlord(e.target.value)
 					setMaliciousStringDetected(false)
@@ -86,10 +84,8 @@ function ReviewForm(): JSX.Element {
 			case 'city':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-					console.log('Malicious!')
+
 					setMaliciousAlertOpen(true)
-					setCity('')
-					e.target.value = ''
 				} else {
 					setCity(e.target.value)
 					setMaliciousStringDetected(false)
@@ -98,10 +94,8 @@ function ReviewForm(): JSX.Element {
 			case 'postal':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-					console.log('Malicious!')
+
 					setMaliciousAlertOpen(true)
-					setPostal('')
-					e.target.value = ''
 				} else {
 					setPostal(e.target.value)
 					setMaliciousStringDetected(false)
@@ -110,10 +104,8 @@ function ReviewForm(): JSX.Element {
 			case 'review':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-					console.log('Malicious!')
+
 					setMaliciousAlertOpen(true)
-					setReview('')
-					e.target.value = ''
 				} else {
 					setReview(e.target.value)
 					setMaliciousStringDetected(false)
