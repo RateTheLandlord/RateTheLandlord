@@ -6,28 +6,35 @@ const Faq = () => {
 	const {t} = useTranslation('about')
 	const faqs = [
 		{
-			question: t('about.faq.repairs'),
-			answer: t('about.faq.repairs_description'),
+			question: t('about.faq.anonymous'),
+			answer: t('about.faq.anonymous_description'),
 		},
 		{
-			question: t('about.faq.stability'),
-			answer: t('about.faq.stability_description'),
+			question: t('about.faq.fair'),
+			answer: (
+				<div>
+					<p>{t('about.faq.fair_description-1')}</p>
+					<p>{t('about.faq.fair_description-2')}</p>
+					<p>{t('about.faq.fair_description-3')}</p>
+					<p>{t('about.faq.fair_description-4')}</p>
+				</div>
+			),
 		},
 		{
-			question: t('about.faq.privacy'),
-			answer: t('about.faq.privacy_description'),
+			question: t('about.faq.help'),
+			answer: t('about.faq.help_description'),
 		},
 		{
-			question: t('about.faq.respect'),
-			answer: t('about.faq.respect_description'),
+			question: t('about.faq.dishonest'),
+			answer: t('about.faq.dishonest_description'),
 		},
 		{
-			question: t('about.faq.health'),
-			answer: t('about.faq.health_description'),
+			question: t('about.faq.names'),
+			answer: t('about.faq.names_description'),
 		},
 	]
 	return (
-		<div className="bg-white w-full" data-testid="about-faq-1">
+		<div className="w-full bg-white" data-testid="about-faq-1">
 			<div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
 				<div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
 					<h2 className="mt-2 block text-center text-xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">

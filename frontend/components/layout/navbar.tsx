@@ -41,6 +41,8 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(3)
 		} else if (urlString.includes('create')) {
 			setActiveTab(4)
+		} else if (urlString.includes('resources')) {
+			setActiveTab(5)
 		} else {
 			setActiveTab(1)
 		}
@@ -82,6 +84,18 @@ export default function Navbar(): JSX.Element {
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
 											{t('layout.nav.about')}
+										</a>
+									</Link>
+									<Link
+										href="/resources"
+										data-umami-event="Navbar Link to Resources"
+									>
+										<a
+											className={`${
+												activeTab === 4 ? 'border-b-2 border-teal-500' : ''
+											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
+										>
+											{t('layout.nav.resources')}
 										</a>
 									</Link>
 								</div>
@@ -187,6 +201,19 @@ export default function Navbar(): JSX.Element {
 									}`}
 								>
 									{t('layout.nav.about')}
+								</Disclosure.Button>
+							</Link>
+							<Link
+								href="/resources"
+								data-umami-event="Navbar Mobile Link to Resources"
+							>
+								<Disclosure.Button
+									as="a"
+									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
+										activeTab === 3 ? 'border-l-4 border-teal-500' : ''
+									}`}
+								>
+									{t('layout.nav.resources')}
 								</Disclosure.Button>
 							</Link>
 						</div>
