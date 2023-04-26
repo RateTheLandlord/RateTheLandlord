@@ -3,7 +3,9 @@ import {Review} from '@/util/interfaces'
 import {Dispatch, SetStateAction} from 'react'
 import countries from '@/util/countries.json'
 import provinces from '@/util/provinces.json'
+import regions from '@/util/regions.json'
 import states from '@/util/states.json'
+import territories from '@/util/territories.json'
 
 interface IProps {
 	selectedReview: Review | undefined
@@ -22,7 +24,7 @@ interface IProps {
 }
 
 const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US',
+	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
 )
 
 const EditReviewModal = ({
@@ -59,7 +61,7 @@ const EditReviewModal = ({
 							placeholder="Landlord"
 							value={landlord ? landlord : selectedReview?.landlord}
 							onChange={(e) => setLandlord(e.target.value)}
-							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 							data-testid="create-review-form-landlord-1"
 						/>
 					</div>
@@ -78,7 +80,7 @@ const EditReviewModal = ({
 							required
 							value={country ? country : selectedReview?.country_code}
 							onChange={(e) => setCountry(e.target.value)}
-							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 						>
 							{country_codes.map((country) => {
 								return (
@@ -106,7 +108,7 @@ const EditReviewModal = ({
 							value={city ? city : selectedReview?.city}
 							required
 							onChange={(e) => setCity(e.target.value)}
-							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 							data-testid="create-review-form-city-1"
 						/>
 					</div>
@@ -125,7 +127,7 @@ const EditReviewModal = ({
 							required
 							value={province ? province : selectedReview?.state}
 							onChange={(e) => setProvince(e.target.value)}
-							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 						>
 							<option>{province}</option>
 							{country === 'CA'
@@ -133,6 +135,22 @@ const EditReviewModal = ({
 										return (
 											<option key={province.short} value={province.name}>
 												{province.name}
+											</option>
+										)
+								  })
+								: country === 'GB'
+								? regions.map((region) => {
+										return (
+											<option key={region.short} value={region.name}>
+												{region.name}
+											</option>
+										)
+								  })
+								: country === 'AU'
+								? territories.map((territory) => {
+										return (
+											<option key={territory.short} value={territory.name}>
+												{territory.name}
 											</option>
 										)
 								  })
@@ -162,7 +180,7 @@ const EditReviewModal = ({
 							required
 							value={postal ? postal : selectedReview?.zip}
 							onChange={(e) => setPostal(e.target.value)}
-							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+							className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 							data-testid="create-review-form-postal-code-1"
 						/>
 					</div>
