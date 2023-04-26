@@ -1,11 +1,13 @@
 import {XIcon, XCircleIcon} from '@heroicons/react/solid'
 import {Dispatch, SetStateAction} from 'react'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
 	setMaliciousAlertOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const MaliciousStringAlert = ({setMaliciousAlertOpen}: IProps) => {
+	const {t} = useTranslation('create')
 	return (
 		<div className="rounded-md bg-orange-200 p-4" data-testid="alert-1">
 			<div className="flex">
@@ -14,8 +16,7 @@ const MaliciousStringAlert = ({setMaliciousAlertOpen}: IProps) => {
 				</div>
 				<div className="ml-3">
 					<p className="text-sm font-medium text-orange-700">
-						Warning! Potentially malicious scripts detected in your entry.
-						Please try rephrasing your entry to avoid this error.
+						{t('create-review.alert.maliciousString')}
 					</p>
 				</div>
 				<div className="ml-auto pl-3">
