@@ -26,7 +26,7 @@ export type ReviewsResponse = {
 }
 
 const country_codes: string[] = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB',
+	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
 )
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
