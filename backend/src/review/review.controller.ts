@@ -16,6 +16,7 @@ import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
 import { Review } from './models/review';
 import { ReviewService, ReviewsResponse } from './review.service';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
 @Controller('review')
 export class ReviewController {
@@ -25,6 +26,7 @@ export class ReviewController {
   ) {}
 
   // Get All Reviews
+  @SkipThrottle()
   @Get()
   get(
     @Query('page') page?: number,
@@ -55,6 +57,7 @@ export class ReviewController {
   }
 
   //Update Review
+  @Throttle(10, 10)
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async update(
@@ -65,6 +68,7 @@ export class ReviewController {
   }
 
   //Delete Review
+  @Throttle(10, 120)
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async delete(@Param('id') id: number): Promise<boolean> {
@@ -72,6 +76,7 @@ export class ReviewController {
   }
 
   //Create Review
+  @Throttle(2, 60)
   @Post()
   async create(
     @Body() review: CreateReview,
@@ -90,6 +95,7 @@ export class ReviewController {
   }
 
   //Get Flagged Reviews
+  @Throttle(10, 120)
   @UseGuards(JwtAuthGuard)
   @Get('/flagged')
   getFlagged(): Promise<Review[]> {
