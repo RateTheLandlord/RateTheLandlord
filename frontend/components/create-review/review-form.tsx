@@ -174,6 +174,8 @@ function ReviewForm(): JSX.Element {
 	useEffect(() => {
 		if (country === 'GB') {
 			setProvince('England')
+		} else if (country === 'AU') {
+			setProvince ('Northern Territory')
 		}
 	}, [country])
 

@@ -55,7 +55,9 @@ function ReviewTable({
 												for (let i = 0; i < ratings.length; i++) {
 													totalReview += parseInt(ratings[i].rating)
 												}
-												const avgRating = totalReview / ratings.length
+												const avgRating = Math.round(
+													totalReview / ratings.length,
+												)
 												return (
 													<StarIcon
 														key={star}
