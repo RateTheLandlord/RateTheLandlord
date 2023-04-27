@@ -53,9 +53,9 @@ function About(): JSX.Element {
 			/>
 			<div className="flex flex-col container items-center gap-4 mt-5 px-2">
 				<AboutUs />
+				<Faq />
 				<Privacy />
 				<Moderation />
-				<Faq />
 				<Contact />
 				<Contributing />
 			</div>
