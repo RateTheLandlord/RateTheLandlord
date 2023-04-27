@@ -22,6 +22,7 @@ const ResourceTenantLinks = () => {
 						{links.map((link) => {
 							return link.country === country ? (
 								<a
+									data-umami-event={`Resource - ${link.name}`}
 									href={link.link}
 									key={link.name}
 									className="w-full cursor-pointer rounded-lg bg-white px-4 py-5 text-center text-black shadow hover:bg-teal-600 hover:text-white sm:p-6 lg:w-auto lg:text-left"
