@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 
+interface IHookProps {
+  width: number | undefined
+  height: number | undefined
+}
 
 const useWindowSize = () =>  {
-    const [windowSize, setWindowSize] = useState({
+    const [windowSize, setWindowSize] = useState<IHookProps>({
       width: undefined,
       height: undefined,
     });

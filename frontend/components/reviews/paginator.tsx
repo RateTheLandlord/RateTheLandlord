@@ -40,7 +40,7 @@ export default function Paginator({
 				Previous
 			</button>
 			{pageNumbers.length > 10 ?
-				width > 1024 
+				width && width > 1024 
 				? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
 						<button
 							key={number}
