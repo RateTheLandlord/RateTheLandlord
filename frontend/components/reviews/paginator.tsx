@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import useWindowSize from '@/util/hooks/useWindowDimensions'
 import React from 'react'
 
 interface FiltersProps {
@@ -19,6 +20,8 @@ export default function Paginator({
 		(_, i) => i + 1,
 	)
 
+	const {width} = useWindowSize()
+
 	return (
 		<nav
 			className="mt-8 flex items-center justify-center"
@@ -36,7 +39,8 @@ export default function Paginator({
 			>
 				Previous
 			</button>
-			{pageNumbers.length > 10
+			{pageNumbers.length > 10 ?
+				width > 1024 
 				? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
 						<button
 							key={number}
@@ -51,7 +55,7 @@ export default function Paginator({
 							{number}
 						</button>
 				  ))
-				: pageNumbers.map((number) => (
+				: null : pageNumbers.map((number) => (
 						<button
 							key={number}
 							onClick={() => onSelect(number)}
@@ -64,7 +68,7 @@ export default function Paginator({
 						>
 							{number}
 						</button>
-				  ))}
+				  )) }
 			{pageNumbers.length > 10 ? (
 				<div className="mx-1 rounded-md border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
 					...
