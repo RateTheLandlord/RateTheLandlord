@@ -138,7 +138,16 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/RateTh
 
 ### Your First Code Contribution
 
-- To Be Completed
+Once you've successfully forked the codebase, you're ready to start contributing. Follow these guidelines to have your contribution approved.
+
+1. Find an issue that you would like to work on in the issues tab. If you have an issue in mind but it isn't there, create a new issue.
+2. If possible, assign yourself to the issue. If not, comment that you are going to work on this issue. If possible, provide an ETA on when you hope to have the issue completed.
+3. Make sure you create your new branch from the `develop` branch. The `main` branch is used for production and shouldn't be worked from as it may be slightly out of date depending on the last release.
+4. Once you are done working on your issue, and you've tested it locally, make sure to write any tests that may be needed for components you created.
+5. Make a PR with the base branch being `develop`. If you don't set the base branch to be `develop`, your PR may be deleted and you'll be asked to re-submit.
+6. Request a review from `RateTheLandlordAdmin`
+7. Within a day or so you should receive feedback from the review. If your PR failed any checks, you will need to fix these before merging.
+8. If everything looks good then your PR will be merged into `develop` for the next release.
 
 ### Improving The Documentation
 
