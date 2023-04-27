@@ -2,7 +2,7 @@ name: Merge Actions
 
 on:
   pull_request:
-    branches: ['release-*']
+    branches: ['develop', 'main']
 
 jobs:
   lint-be:
