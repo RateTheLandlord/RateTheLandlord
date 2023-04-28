@@ -76,19 +76,16 @@ function ReviewFilters({
 				setSearchState={setSearchState}
 			/>
 
-			<main className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+			<main className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 				{/* TITLE AND DESCRIPTION */}
 				<div>
-					<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+					<div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
 						<h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
 							{t('reviews.title')}
 						</h1>
 						<p className="mt-4 max-w-xl text-sm text-gray-700">
 							{t('reviews.body')}
 						</p>
-						<div className="mt-6 max-w-xl text-sm text-blue-700 underline">
-							<Link href="/about#faq">{t('reviews.faq')}</Link>
-						</div>
 					</div>
 				</div>
 
@@ -98,8 +95,8 @@ function ReviewFilters({
 						{t('reviews.filters')}
 					</h2>
 
-					<div className="relative z-10 bg-white border-b border-gray-200 pb-4">
-						<div className="max-w-7xl mx-auto px-4 flex justify-between lg:px-8">
+					<div className="relative z-10 border-b border-gray-200 bg-white pb-4">
+						<div className="mx-auto flex max-w-7xl justify-between px-4 lg:px-8">
 							<SelectList
 								state={selectedSort}
 								setState={setSelectedSort}
@@ -149,7 +146,7 @@ function ReviewFilters({
 
 					{/* Active filters */}
 					<div className="bg-gray-100">
-						<div className="max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8">
+						<div className="mx-auto max-w-7xl py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8">
 							<h3 className="text-xs font-semibold uppercase tracking-wide text-gray-500">
 								{t('reviews.filters')}
 								<span className="sr-only">, active</span>
@@ -157,7 +154,7 @@ function ReviewFilters({
 
 							<div
 								aria-hidden="true"
-								className="hidden w-px h-5 bg-gray-300 sm:block sm:ml-4"
+								className="hidden h-5 w-px bg-gray-300 sm:ml-4 sm:block"
 							/>
 
 							<div className="mt-2 sm:mt-0 sm:ml-4">

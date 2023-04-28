@@ -16,7 +16,7 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({reason: body.newReview.flagged_reason}),
+		body: JSON.stringify({flagged_reason: body.newReview.flagged_reason}),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
