@@ -175,7 +175,7 @@ function ReviewForm(): JSX.Element {
 		if (country === 'GB') {
 			setProvince('England')
 		} else if (country === 'AU') {
-			setProvince ('Northern Territory')
+			setProvince('Northern Territory')
 		}
 	}, [country])
 
@@ -429,6 +429,14 @@ function ReviewForm(): JSX.Element {
 							defaultValue={''}
 							data-testid="create-review-form-text-1"
 						/>
+					</div>
+					<div>
+						<p className="text-sm font-bold text-gray-500">
+							Please keep this review as civil and objective as possible. Any
+							malicious or defamatory language may result in the review being
+							edited or removed. Do not post any specific addresses as these
+							will be removed.
+						</p>
 					</div>
 				</div>
 
