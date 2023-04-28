@@ -6,6 +6,7 @@ import {useEffect, useState} from 'react'
 import useSWR, {useSWRConfig} from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
+import {ReviewsResponse} from '@/components/reviews/review'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -194,8 +195,10 @@ const FlaggedReviews = () => {
 			})
 	}
 
+	console.log(flaggedReviews)
+
 	return (
-		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8 container">
+		<div className="container flex w-full flex-wrap justify-center px-4 sm:px-6 lg:px-8">
 			{removeAlertOpen ? (
 				<div className="w-full">
 					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
@@ -239,11 +242,11 @@ const FlaggedReviews = () => {
 					/>
 				</>
 			) : null}
-			<div className="w-full flex justify-end container py-4">
+			<div className="container flex w-full justify-end py-4">
 				<h5 className="px-2">Show Approved: </h5>
 				<ToggleSwitch enabled={showApproved} setEnabled={setShowApproved} />
 			</div>
-			<div className="-mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg container">
+			<div className="container -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
 				<table className="min-w-full divide-y divide-gray-300">
 					<thead className="bg-gray-50">
 						<tr>

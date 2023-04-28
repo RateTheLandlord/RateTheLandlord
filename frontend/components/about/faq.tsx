@@ -11,14 +11,7 @@ const Faq = () => {
 		},
 		{
 			question: t('about.faq.fair'),
-			answer: (
-				<div>
-					<p>{t('about.faq.fair_description-1')}</p>
-					<p>{t('about.faq.fair_description-2')}</p>
-					<p>{t('about.faq.fair_description-3')}</p>
-					<p>{t('about.faq.fair_description-4')}</p>
-				</div>
-			),
+			answer: t('about.faq.fair_description'),
 		},
 		{
 			question: t('about.faq.help'),
