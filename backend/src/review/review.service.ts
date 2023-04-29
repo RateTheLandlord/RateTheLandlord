@@ -1,6 +1,7 @@
 import { DatabaseService } from 'src/database/database.service';
 import { Injectable } from '@nestjs/common';
 import { Review } from './models/review';
+import { filterReview } from './helpers';
 
 type ReviewQuery = {
   page?: number;
@@ -124,7 +125,9 @@ export class ReviewService {
     >`Select * FROM review WHERE id IN(${id});`;
   }
 
-  async create(review: Review): Promise<Review> {
+  async create(inputReview: Review): Promise<Review> {
+    const review = await filterReview(inputReview);
+
     review.landlord = review.landlord.toLocaleUpperCase();
     review.country_code = review.country_code.toLocaleUpperCase();
     review.city = review.city.toLocaleUpperCase();
@@ -152,8 +155,8 @@ export class ReviewService {
     return review;
   }
 
-  async report(id:number, reason: string): Promise<number> {
-     await this.databaseService
+  async report(id: number, reason: string): Promise<number> {
+    await this.databaseService
       .sql`UPDATE review SET flagged = true, flagged_reason = ${reason}
       WHERE id = ${id};`;
 
