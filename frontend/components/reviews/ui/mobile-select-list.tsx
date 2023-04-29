@@ -20,11 +20,13 @@ export default function MobileSelectList({
 		<Listbox value={state} onChange={setState}>
 			{({open}) => (
 				<>
-					<div className="pt-2 relative w-full">
-						<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-						data-umami-event={`Mobile Select Interaction for ${name}`}>
-							<span className="block truncate">{name}</span>
-							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+					<div className="relative w-full pt-2">
+						<Listbox.Button
+							className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+							data-umami-event={`Mobile Select Interaction for ${name}`}
+						>
+							<span className="block truncate">{state?.name || name}</span>
+							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<SelectorIcon
 									className="h-5 w-5 text-gray-400"
 									aria-hidden="true"
@@ -39,7 +41,7 @@ export default function MobileSelectList({
 							leaveFrom="opacity-100"
 							leaveTo="opacity-0"
 						>
-							<Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 								{options.map((option) => (
 									<Listbox.Option
 										key={option.id}

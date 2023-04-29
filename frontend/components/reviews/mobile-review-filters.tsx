@@ -122,6 +122,14 @@ export default function MobileReviewFilters({
 										options={zipOptions}
 										name={t('reviews.zip')}
 									/>
+									<div className="mt-5 w-full">
+										<button
+											onClick={() => setMobileFiltersOpen(false)}
+											className="w-full rounded-lg bg-teal-600 py-2 text-white"
+										>
+											Apply Filters
+										</button>
+									</div>
 								</Popover.Group>
 							</div>
 						</Dialog.Panel>
