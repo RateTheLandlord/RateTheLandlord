@@ -484,18 +484,28 @@ function ReviewForm(): JSX.Element {
 						<ButtonLight data-umami-event="Create Review Form Reset">
 							{t('create-review.review-form.reset')}
 						</ButtonLight>
-						<Button
-							disabled={
-								!token || !disclaimer || maliciousStringDetected || loading
-							}
-							data-umami-event="Review Submitted"
-						>
-							{loading ? (
-								<div className="spinner h-4 w-4 animate-spin rounded-full border-t-2 border-solid border-white"></div>
-							) : (
-								t('create-review.review-form.submit')
-							)}
-						</Button>
+						{loading ? (
+							<div className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 bg-teal-200 bg-teal-600 hover:bg-teal-700'
+							}`}>
+							<div
+								className="text-primary inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+								role="status"
+							>
+								<span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+									Loading...
+								</span>
+							</div>
+							</div>
+						) : (
+							<Button
+								disabled={
+									!token || !disclaimer || maliciousStringDetected || loading
+								}
+								data-umami-event="Review Submitted"
+							>
+								{t('create-review.review-form.submit')}
+							</Button>
+						)}
 					</div>
 				</div>
 			</form>
