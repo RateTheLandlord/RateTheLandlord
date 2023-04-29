@@ -57,11 +57,7 @@ export class ReviewService {
 
     const searchClause =
       search?.length > 0
-        ? sql`AND (landlord ILIKE ${'%' + search + '%'} OR review ILIKE ${
-            '%' + search + '%'
-          } OR city ILIKE ${'%' + search + '%'} OR state ILIKE ${
-            '%' + search + '%'
-          } OR zip ILIKE ${'%' + search + '%'})`
+        ? sql`AND (landlord ILIKE ${'%' + search + '%'})`
         : sql``;
 
     const stateClause = state ? sql`AND state = ${state}` : sql``;
