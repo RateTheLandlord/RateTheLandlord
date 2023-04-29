@@ -2,11 +2,7 @@ name: Merge Actions
 
 on:
   pull_request:
-<<<<<<< Updated upstream
-    branches: ['develop', 'main']
-=======
-    branches: ["release-*"]
->>>>>>> Stashed changes
+    branches: ["develop", "main"]
 
 jobs:
   lint-be:
