@@ -45,8 +45,6 @@ services:
       - internal
     env_file:
       - ./.env
-    depends_on:
-      - backend
 
   postgres:
     image: postgres

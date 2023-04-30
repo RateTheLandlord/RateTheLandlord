@@ -4,6 +4,7 @@ import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
 import {Review} from '@/util/interfaces'
 import {useTranslation} from 'react-i18next'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 interface IProps {
 	isOpen: boolean
@@ -16,6 +17,8 @@ interface IReportReason {
 	key: string
 	reason: string
 }
+
+const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 const reportReasons: Array<IReportReason> = [
 	{
@@ -69,21 +72,19 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 
 	const [submitSuccess, setSubmitSuccess] = useState(false)
 	const [submitError, setSubmitError] = useState(false)
+	const [token, setToken] = useState<string>('')
 
 	const handleSubmit = () => {
 		if (selectedReview) {
-			const newReview: Review = {
-				...selectedReview,
-				flagged: true,
-				flagged_reason: reason,
-			}
 			fetch(`/api/flag-review`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					newReview,
+					id: selectedReview.id,
+					captchaToken: token,
+					flagged_reason: reason,
 				}),
 			})
 				.then((result: Response) => {
@@ -100,6 +101,10 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 					setSubmitError(false)
 				})
 		}
+	}
+
+	const onVerifyCaptcha = (token: string) => {
+		setToken(token)
 	}
 
 	return (
@@ -234,9 +239,20 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 											className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 											placeholder="Write your reasoning here..."
 										/>
+										<p
+											className={`text-xs ${
+												reason.length >= 255 ? 'text-red-400' : 'text-black'
+											}`}
+										>
+											Limit of 250 Characters: {reason.length - 5}/250
+										</p>
 									</div>
 								</div>
 							) : null}
+
+							<div className="mb-2 flex justify-center">
+								<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
+							</div>
 
 							<div className="flex flex-row justify-end">
 								<ButtonLight
@@ -252,6 +268,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 								<Button
 									onClick={() => handleSubmit()}
 									data-umami-event="Report Submitted"
+									disabled={!token || reason.length >= 255}
 								>
 									{t('reviews.report.submit')}
 								</Button>

@@ -1,8 +1,9 @@
-import {Review} from '@/util/interfaces'
 import {NextApiRequest, NextApiResponse} from 'next'
 
 interface IBody {
-	newReview: Review
+	id: number
+	flagged_reason: string
+	captchaToken: string
 }
 
 const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,12 +12,15 @@ const FlagReview = (req: NextApiRequest, res: NextApiResponse) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const {body}: {body: IBody} = req
 
-	fetch(`${url}/review/report/${body.newReview.id}`, {
+	fetch(`${url}/review/report/${body.id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({flagged_reason: body.newReview.flagged_reason}),
+		body: JSON.stringify({
+			flagged_reason: body.flagged_reason,
+			captchaToken: body.captchaToken,
+		}),
 	})
 		.then((result: Response) => {
 			if (!result.ok) {

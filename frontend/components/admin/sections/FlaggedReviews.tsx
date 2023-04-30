@@ -301,7 +301,7 @@ const FlaggedReviews = () => {
 										</dd>
 									</dl>
 								</td>
-								<td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+								<td className="hidden max-w-xs truncate px-3 py-4 text-sm text-gray-500 lg:table-cell">
 									{review.flagged_reason}
 								</td>
 								<td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
