@@ -1,0 +1,10 @@
+[
+	{"short": "ACT", "name": "Australian Capital Territory", "country": "AU"},
+	{"short": "NSW", "name": "New South Wales", "country": "AU"},
+	{"short": "NT", "name": "Northern Territory", "country": "AU"},
+	{"short": "QLD", "name": "Queensland", "country": "AU"},
+	{"short": "SA", "name": "South Australia", "country": "AU"},
+	{"short": "TAS", "name": "Tasmania", "country": "AU"},
+	{"short": "VIC", "name": "Victoria", "country": "AU"},
+	{"short": "WA", "name": "Western Australia", "country": "AU"}
+]

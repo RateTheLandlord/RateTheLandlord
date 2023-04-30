@@ -1,0 +1,37 @@
+{
+	"about": {
+		"about-us": {
+			"about": "About Us",
+			"header": "For every business, there are reviews. Why is housing the exception?",
+			"p-1": "Rate the Landlord was created as a tool for tenants to stay informed about housing the same way we stay informed about every other business, through crowd-sourced reviews.",
+			"p-2": "We know that tenants are often in the dark when it comes to renting with a new landlord. This conflicts with the standards we hold for every other business and service where reviews allow the consumer to make an informed decision based on reports of quality and conduct.",
+			"p-3": "Something as important as housing shouldn't be an exception. Reviewing landlords alongside other businesses will make for a more transparent marketplace. By sharing rental experiences, tenants can help others avoid situations of negligence or mistreatment and find landlords who will uphold best practices and adhere to their local legislation.",
+			"p-4": "Share your experiences, read the reviews, and help us keep one another safe, informed, and empowered."
+		},
+		"privacy": {
+			"privacy": "Privacy Policy",
+			"p-1": "At Rate the Landlord, we are committed to protecting the privacy of those who submit reviews. All submissions made to our website are anonymous. We do not collect any personal data or information that could be used to identify you, such as your name, email address, or phone number."
+		},
+		"moderation": {
+			"moderation": "Moderation Policy",
+			"p-1": "We reserve the right to modify reviews that contain excessive profanity. We will remove any reviews that contain defamatory remarks or discrimination. Any reviews that contain an explicit address (e.g., 123 Main St.) or sensitive information of any kind will have this section removed from the review."
+		},
+		"contributing": {
+			"contributing": "Want to Contribute?",
+			"p-1": "This project is open source and we would love help with its development! Send us an email or join us on Github to see how you can help grow this project and help Renters."
+		},
+		"faq": {
+			"faq": "Frequently asked questions",
+			"anonymous": "Why are the reviews anonymous?",
+			"anonymous_description": "We believe in protecting tenants and empowering people to keep their community informed without fear of harassment. Housing is vitally important, and no one should feel they are putting themselves at risk for providing a review. We strongly recommend posting low-tier reviews after leaving a poor rental situation to avoid any unpleasant backlash while renting.",
+			"fair": "How is reviewing landlords fair if you can't review tenants?",
+			"fair_description": "Tenants are not running a business; they are paying landlords for housing and are therefore in the position to provide reviews. On the whole, businesses do not rate their patrons. Although platforms like Uber and Airbnb also rate passengers and guests, these are third-party services that connect two parties who agreed to participate in their two-way rating systems. In the same way there are websites like RateMyDoctor but no \"RateMyPatient\", tenants should not be reviewed since they are not the service providers. Most importantly, tenants already go through extensive background checks when applying for housing, so they are subjected to a formal review by the landlord during this process.",
+			"help": "What should I do if I can't review my current landlord but still need help?",
+			"help_description": "We suggest checking out our resource page for information on your rights as a tenant as well as information about tenant unions that may help you navigate your current situation.",
+			"dishonest": "What do I do if I receive a dishonest review?",
+			"dishonest_description": "Landlords who believe they have received a dishonest review can report the review and include their email in the report form. We will contact you directly to address the issue. ",
+			"names": "Why does RTL include landlord names?",
+			"names_description": "From chain restaurants to mom-and-pop shops, retailers to individual artisans, businesses and the people running them receive reviews. By choosing to run a business under their name, landlords put themselves in the position to be held to the same standards as a business, and that includes being reviewed."
+		}
+	}
+}

@@ -1,0 +1,20 @@
+[
+	{"short": "AB", "name": "Alberta", "country": "CA"},
+	{"short": "BC", "name": "British Columbia", "country": "CA"},
+	{"short": "MB", "name": "Manitoba", "country": "CA"},
+	{"short": "NB", "name": "New Brunswick", "country": "CA"},
+	{
+		"short": "NL",
+		"name": "Newfoundland and Labrador",
+		"country": "CA",
+		"alt": ["Newfoundland", "Labrador"]
+	},
+	{"short": "NS", "name": "Nova Scotia", "country": "CA"},
+	{"short": "NU", "name": "Nunavut", "country": "CA"},
+	{"short": "NT", "name": "Northwest Territories", "country": "CA"},
+	{"short": "ON", "name": "Ontario", "country": "CA"},
+	{"short": "PE", "name": "Prince Edward Island", "country": "CA"},
+	{"short": "QC", "name": "Quebec", "country": "CA"},
+	{"short": "SK", "name": "Saskatchewan", "country": "CA"},
+	{"short": "YT", "name": "Yukon", "country": "CA"}
+]

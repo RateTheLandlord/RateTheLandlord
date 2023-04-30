@@ -1,0 +1,46 @@
+{
+	"create-review": {
+		"review-radio": {
+			"rating": "Rating",
+			"choose": "Choose a rating"
+		},
+		"review-form": {
+			"header": "Enter your Review",
+			"title": "Landlord or Property Management Information",
+			"sub": "Please make sure all this information matches your Lease",
+			"landlord": "Landlord Name (or Property Management Company)",
+			"country": "Country",
+			"city": "City",
+			"state": "State / Province",
+			"region": "UK Country",
+			"zip": "ZIP / Postal Code",
+			"rate-title": "Please rate the following on a scale from 1 (worst) to 5 (best)",
+			"health": "Health and Safety",
+			"health_description": "Landlords must ensure that the rental property complies with local health and safety standards, such as maintaining smoke detectors, removing mold, and employing pest control when necessary.",
+			"stability": "Rental Stability",
+			"stability_description": "Landlords must abide by rental agreements and not engage in practices that would disrupt the tenant's rental stability, such as unjustified rent increases or arbitrary evictions.",
+			"privacy": "Tenant Privacy",
+			"privacy_description": "Landlords must respect their tenants' privacy, and may only enter the rental property with the tenant's consent or for specific reasons outlined in the rental agreement. Landlords should also refrain from probing into the personal lives of their tenants or asking for information that is not necessary to form a professional rental agreement.",
+			"respect": "Respect",
+			"respect_description": "Landlords must treat their tenants with respect, and must not engage in behavior that would violate the tenant's rights, such as discrimination or harassment.",
+			"repair": "Repair",
+			"repair_description": "Landlords have a legal obligation to keep the rental property in a safe and habitable condition. Tenants should receive timely repairs by trained professionals to keep their vital systems like plumbing and heating in order.",
+			"review": "Written Review",
+			"submit": "Submit",
+			"reset": "Reset",
+			"postal-error": "Error. Postal Code / ZIP Invalid"
+		},
+		"modal": {
+			"success": "Review Submitted Successfully!",
+			"description": "Your review may take a few minutes to show up on the site, but don't worry we have received it!",
+			"submit-another": "Submit Another Review",
+			"go-to": "Go To Reviews",
+			"add-review": "Please Add a Written Review",
+			"add-review-desc": "We love your enthusiasm to leave a rating for your Landlord! However, can you please leave a small review to give more context to your rating so that other tenants can be better informed!",
+			"close": "Close"
+		},
+		"alert": {
+			"maliciousString": "Warning! We've detected that a link or script in your entry. Please remove or rephrase before submitting."
+		}
+	}
+}
