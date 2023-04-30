@@ -8,7 +8,8 @@ const SYSTEM_MESSAGE = `
     This type of content is not allowed:
 
     - Personal information (ONLY names are permitted)
-    - Addresses and phone numbers
+    - Addresses 
+    - Phone numbers
     - Emails
     - Swear words
     - Racial slurs
