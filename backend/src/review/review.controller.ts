@@ -26,7 +26,6 @@ export class ReviewController {
   ) {}
 
   // Get All Reviews
-  @SkipThrottle()
   @Get()
   get(
     @Query('page') page?: number,
