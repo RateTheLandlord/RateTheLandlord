@@ -26,6 +26,7 @@ export class ReviewController {
   ) {}
 
   // Get All Reviews
+  @Throttle(5, 60)
   @Get()
   get(
     @Query('page') page?: number,
@@ -50,6 +51,7 @@ export class ReviewController {
   }
 
   //Get Specific Review
+  @Throttle(2, 10)
   @Get('review/:id')
   findOne(@Param('id') id: string): Promise<Review[]> {
     return this.reviewService.findOne(Number(id));

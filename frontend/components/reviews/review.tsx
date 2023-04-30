@@ -51,7 +51,7 @@ const Review = () => {
 		city: cityFilter?.value || '',
 		zip: zipFilter?.value || '',
 		search: searchState || '',
-		limit: '10',
+		limit: '25',
 	})
 
 	const {data} = useSWR<ReviewsResponse>(
@@ -142,7 +142,7 @@ const Review = () => {
 					onSelect={(page: number) => setPage(page)}
 					currentPage={page}
 					totalPages={data?.total ?? 0}
-					limit={data?.limit ?? 10}
+					limit={data?.limit ?? 25}
 				/>
 			</div>
 		</>
