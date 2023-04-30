@@ -12,8 +12,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
   imports: [
     ConfigModule.forRoot(),
     ThrottlerModule.forRoot({
-      ttl: 10,
-      limit: 100,
+      ttl: 100,
+      limit: 10,
     }),
     ReviewModule,
     CaptchaModule,
