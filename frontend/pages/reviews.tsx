@@ -63,7 +63,7 @@ export async function getStaticProps() {
 		states: [],
 		cities: [],
 		zips: [],
-		limit: 10,
+		limit: 25,
 	}
 
 	try {

@@ -41,7 +41,7 @@ export class ReviewService {
     } = params;
 
     const page = pageParam ? pageParam : 1;
-    const limit = limitParam ? limitParam : 10;
+    const limit = limitParam ? limitParam : 25;
 
     const offset = (page - 1) * limit;
 
