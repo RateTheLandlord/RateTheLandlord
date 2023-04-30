@@ -152,6 +152,9 @@ export class ReviewService {
   }
 
   async report(id: number, reason: string): Promise<number> {
+    reason.length > 250
+      ? (reason = `${reason.substring(0, 250)}...`)
+      : (reason = reason);
     await this.databaseService
       .sql`UPDATE review SET flagged = true, flagged_reason = ${reason}
       WHERE id = ${id};`;
