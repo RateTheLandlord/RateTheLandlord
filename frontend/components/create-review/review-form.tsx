@@ -1,20 +1,21 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useState} from 'react'
+
+import AddReviewModal from './add-review-modal'
+import Alert from '../alerts/Alert'
 import Button from '../ui/button'
 import ButtonLight from '../ui/button-light'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import MaliciousStringAlert from '../alerts/MaliciousStringAlert'
 import RatingsRadio from './ratings-radio'
+import SuccessModal from './success-modal'
 import countries from '@/util/countries.json'
+import {postcodeValidator} from 'postcode-validator'
 import provinces from '@/util/provinces.json'
 import regions from '@/util/regions.json'
 import states from '@/util/states.json'
 import territories from '@/util/territories.json'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {useTranslation} from 'react-i18next'
-import Alert from '../alerts/Alert'
-import MaliciousStringAlert from '../alerts/MaliciousStringAlert'
-import SuccessModal from './success-modal'
-import {postcodeValidator} from 'postcode-validator'
-import AddReviewModal from './add-review-modal'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
@@ -50,6 +51,7 @@ function ReviewForm(): JSX.Element {
 
 	const [disclaimer, setDisclaimer] = useState(false)
 	const [token, setToken] = useState<string>('')
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const [postalError, setPostalError] = useState(false)
 
@@ -117,6 +119,7 @@ function ReviewForm(): JSX.Element {
 
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
+		setLoading(true)
 		if (review.trim().length < 1) {
 			setReviewModalOpen(true)
 		} else {
@@ -160,6 +163,9 @@ function ReviewForm(): JSX.Element {
 					.catch(() => {
 						setSuccess(false)
 						setAlertOpen(true)
+					})
+					.finally(() => {
+						setLoading(false)
 					})
 			} else {
 				setPostalError(true)
@@ -478,12 +484,30 @@ function ReviewForm(): JSX.Element {
 						<ButtonLight data-umami-event="Create Review Form Reset">
 							{t('create-review.review-form.reset')}
 						</ButtonLight>
-						<Button
-							disabled={!token || !disclaimer || maliciousStringDetected}
-							data-umami-event="Review Submitted"
-						>
-							{t('create-review.review-form.submit')}
-						</Button>
+						{loading ? (
+							<div
+								className={`hover:bg-teal-700' } ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-200 bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500
+							focus:ring-offset-2`}
+							>
+								<div
+									className="text-primary inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+									role="status"
+								>
+									<span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+										Loading...
+									</span>
+								</div>
+							</div>
+						) : (
+							<Button
+								disabled={
+									!token || !disclaimer || maliciousStringDetected || loading
+								}
+								data-umami-event="Review Submitted"
+							>
+								{t('create-review.review-form.submit')}
+							</Button>
+						)}
 					</div>
 				</div>
 			</form>

@@ -2,7 +2,7 @@ name: Merge Actions
 
 on:
   pull_request:
-    branches: ['develop', 'main']
+    branches: ["develop", "main"]
 
 jobs:
   lint-be:
@@ -84,6 +84,7 @@ jobs:
           echo JWT_KEY="${{secrets.JWT_KEY}}" >> .env
           echo API_URL=${{secrets.API_URL}} >> .env
           echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
+          echo OPENAI_API_KEY=${{secrets.OPENAI_API_KEY}} >> .env
           echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
           echo PGHOST=${{secrets.PGHOST}} >> .env
           echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .env
