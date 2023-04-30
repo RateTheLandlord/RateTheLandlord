@@ -18,7 +18,7 @@ const SYSTEM_MESSAGE = `
     - They will provide you with a single review, which may have multiple paragraphs
     - You will keep the review as close as possible to the original words and format
     - You will use the rules above to replace any content that is not allowed with *********
-    - If there are no edits to be made, you will respondn with the original review
+    - If there are no edits to be made, you will respond with the original review
     - You will reply ONLY with the edited review, no additional prose or commentary
 
     Here's an example of a review that needs to be edited:
