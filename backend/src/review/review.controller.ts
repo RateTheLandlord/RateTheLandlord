@@ -69,8 +69,8 @@ export class ReviewController {
 
   @Throttle(5, 60)
   @Put('/report/:id')
-  async report(@Param('id') id:number, @Body() reason: any): Promise<number> {
-    return this.reviewService.report(id, reason.flagged_reason)
+  async report(@Param('id') id: number, @Body() reason: any): Promise<number> {
+    return this.reviewService.report(id, reason.flagged_reason);
   }
 
   //Delete Review

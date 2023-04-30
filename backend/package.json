@@ -33,6 +33,7 @@
     "@nestjs/throttler": "^4.0.0",
     "bcrypt": "^5.1.0",
     "ley": "^0.7.1",
+    "openai": "^3.2.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
