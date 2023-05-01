@@ -435,6 +435,9 @@ function ReviewForm(): JSX.Element {
 							defaultValue={''}
 							data-testid="create-review-form-text-1"
 						/>
+						<div className='w-full flex justify-end'>
+							<p className={`text-xs ${review.length > 2000 ? 'text-red-400':'text-black'}`}>Character Limit: {review.length}/2000</p>
+						</div>
 					</div>
 					<div>
 						<p className="text-sm font-bold text-gray-500">
@@ -501,7 +504,7 @@ function ReviewForm(): JSX.Element {
 						) : (
 							<Button
 								disabled={
-									!token || !disclaimer || maliciousStringDetected || loading
+									!token || !disclaimer || maliciousStringDetected || loading || review.length > 2000
 								}
 								data-umami-event="Review Submitted"
 							>
