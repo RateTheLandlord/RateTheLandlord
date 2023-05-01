@@ -113,11 +113,11 @@ function ReviewTable({
 
 										<div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
 											<p>{t('reviews.review')}</p>
-											{review.admin_edited ? (
+											{/* {review.admin_edited ? (
 												<p className="text-xs text-red-400">
 													{t('reviews.edited')}
 												</p>
-											) : null}
+											) : null} */}
 
 											<div className="mt-3 space-y-6 text-sm text-gray-500">
 												{review.review}
