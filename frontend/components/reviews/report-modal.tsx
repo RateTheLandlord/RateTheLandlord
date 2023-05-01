@@ -202,21 +202,10 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 
 							{selectedReason.key === 'aboutme' ? (
 								<div className="mb-2">
-									<label htmlFor="email" className="sr-only">
-										Please enter your email and we will reach out to you.
-									</label>
-									<input
-										type="email"
-										name="email"
-										id="email"
-										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-										placeholder="you@example.com"
-										onChange={(e) =>
-											setReason(
-												`${selectedReason.reason} - email: ${e.target.value}`,
-											)
-										}
-									/>
+									<p>
+										Please email us at contact@ratethelandlord.org
+									</p>
+									
 								</div>
 							) : null}
 
@@ -268,7 +257,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 								<Button
 									onClick={() => handleSubmit()}
 									data-umami-event="Report Submitted"
-									disabled={!token || reason.length >= 255}
+									disabled={!token || reason.length >= 255 || selectedReason.key === 'aboutme'}
 								>
 									{t('reviews.report.submit')}
 								</Button>

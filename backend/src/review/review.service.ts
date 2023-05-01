@@ -124,11 +124,11 @@ export class ReviewService {
   async create(inputReview: Review): Promise<Review> {
     const review = await filterReview(inputReview);
 
-    review.landlord = review.landlord.toLocaleUpperCase();
+    review.landlord = review.landlord.substring(0, 150).toLocaleUpperCase();
     review.country_code = review.country_code.toLocaleUpperCase();
-    review.city = review.city.toLocaleUpperCase();
+    review.city = review.city.substring(0, 150).toLocaleUpperCase();
     review.state = review.state.toLocaleUpperCase();
-    review.zip = review.zip.toLocaleUpperCase();
+    review.zip = review.zip.substring(0, 50).toLocaleUpperCase();
     review.admin_approved = null;
 
     const id = (
