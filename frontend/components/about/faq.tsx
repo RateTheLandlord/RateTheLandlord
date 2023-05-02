@@ -18,10 +18,6 @@ const Faq = () => {
 			answer: t('about.faq.help_description'),
 		},
 		{
-			question: t('about.faq.dishonest'),
-			answer: t('about.faq.dishonest_description'),
-		},
-		{
 			question: t('about.faq.names'),
 			answer: t('about.faq.names_description'),
 		},
