@@ -50,20 +50,23 @@ export const filterReview = (review: Review) => {
   // This pattern is more permissive and covers a wider range of addresses, but may also have false positives
   const addressPattern =
     /(^|\s)\d+\s+\w+(\s+\w+)*(,\s*\w+(\s+\w+)*)*(\s+(Avenue|Street|Road|Boulevard|Drive|Terrace|Place|Court|Crescent|Lane|Parkway|Way|Circle|Heights|Loop|Alley|Run|Glen|Bend|Plaza|Trace|Row))?(\.)?(?=\s|$)/gi;
-
-  review.review = review.review.replace(addressPattern, '*****');
-
   // Replace phone numbers
   const phonePattern =
     /(\+\d{1,4}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4}[-.\s]?){2,4}\d{1,4}([-.\s]?(x|ext\.?|extension)\s?\d{1,6})?/gi;
-  review.review = review.review.replace(phonePattern, '*****');
+  
 
   // Replace emails
   const emailPattern = /[\w\.-]+@[\w\.-]+\.\w+/gi;
-  review.review = review.review.replace(emailPattern, '*****');
 
-  // Replace swear words
-  review.review = badWordsFilter.clean(review.review);
-
-  return review;
+  if(addressPattern.test(review.review)){
+    return {flagged: true, reason: 'Filter Flagged for Address'}
+  } else if(emailPattern.test(review.review)) {
+    return {flagged: true, reason: 'Filter Flagged for Email'}
+  } else if(phonePattern.test(review.review)) {
+    return {flagged: true, reason: 'Filter flagged for Phone Number'}
+  } else if(badWordsFilter.isProfane(review.review)){
+    return {flagged: true, reason: 'Filter flagged for Language'}
+  } else {
+    return {flagged: false, reason: ''}
+  }
 };
