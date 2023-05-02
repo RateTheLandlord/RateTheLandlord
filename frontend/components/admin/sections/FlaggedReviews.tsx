@@ -1,12 +1,10 @@
 import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
-import ToggleSwitch from '@/components/ui/toggleswitch'
 import {Review} from '@/util/interfaces'
 import {useEffect, useState} from 'react'
 import useSWR, {useSWRConfig} from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
-import {ReviewsResponse} from '@/components/reviews/review'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -21,8 +19,6 @@ const FlaggedReviews = () => {
 	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
 	const [success, setSuccess] = useState(false)
 	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
-
-	const [showApproved, setShowApproved] = useState(false)
 
 	const [landlord, setLandlord] = useState<string>(
 		selectedReview?.landlord || '',
@@ -43,20 +39,12 @@ const FlaggedReviews = () => {
 	useEffect(() => {
 		if (reviews) {
 			if (reviews.length) {
-				if (showApproved) {
+				
 					setFlaggedReviews([...reviews])
-				} else {
-					setFlaggedReviews(() => {
-						return reviews.filter(
-							(review) =>
-								review.admin_approved === false ||
-								review.admin_approved === null,
-						)
-					})
-				}
+				
 			}
 		}
-	}, [reviews, showApproved])
+	}, [reviews])
 
 	useEffect(() => {
 		if (selectedReview) {
@@ -110,6 +98,7 @@ const FlaggedReviews = () => {
 			review: newReview,
 			admin_edited: true,
 			admin_approved: true,
+			flagged: false
 		}
 		fetch('/api/edit-review', {
 			method: 'POST',
@@ -136,40 +125,11 @@ const FlaggedReviews = () => {
 			})
 	}
 
-	const removeFlag = (review: Review) => {
+	const onSubmitApproveReview = (review: Review) => {
 		const editedReview = {
 			...review,
-			flagged: false,
-		}
-		fetch('/api/edit-review', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(editedReview),
-		})
-			.then((result) => {
-				if (!result.ok) {
-					throw new Error()
-				}
-			})
-			.then(() => {
-				mutate('/api/get-flagged').catch((err) => console.log(err))
-				setEditReviewOpen(false)
-				setSuccess(true)
-				setRemoveAlertOpen(true)
-			})
-			.catch((err) => {
-				console.log(err)
-				setSuccess(false)
-				setRemoveAlertOpen(true)
-			})
-	}
-
-	const onSubmitApproveReview = (id?: number) => {
-		const editedReview = {
-			...selectedReview,
 			admin_approved: true,
+			flagged: false
 		}
 		fetch('/api/edit-review', {
 			method: 'POST',
@@ -242,10 +202,6 @@ const FlaggedReviews = () => {
 					/>
 				</>
 			) : null}
-			<div className="container flex w-full justify-end py-4">
-				<h5 className="px-2">Show Approved: </h5>
-				<ToggleSwitch enabled={showApproved} setEnabled={setShowApproved} />
-			</div>
 			<div className="container -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
 				<table className="min-w-full divide-y divide-gray-300">
 					<thead className="bg-gray-50">
@@ -277,9 +233,7 @@ const FlaggedReviews = () => {
 							<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
 								<span className="sr-only">Remove</span>
 							</th>
-							<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-								<span className="sr-only">Remove Flag</span>
-							</th>
+							
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
@@ -308,17 +262,15 @@ const FlaggedReviews = () => {
 									{review.review}
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									{review.admin_approved ? null : (
+									
 										<button
 											onClick={() => {
-												setSelectedReview(review)
-												onSubmitApproveReview(review.id)
+												onSubmitApproveReview(review)
 											}}
 											className="text-indigo-600 hover:text-indigo-900"
 										>
 											Approve
 										</button>
-									)}
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
 									<button
@@ -342,16 +294,7 @@ const FlaggedReviews = () => {
 										Remove
 									</button>
 								</td>
-								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									<button
-										onClick={() => {
-											removeFlag(review)
-										}}
-										className="text-indigo-600 hover:text-indigo-900"
-									>
-										Remove Flag
-									</button>
-								</td>
+								
 							</tr>
 						))}
 					</tbody>

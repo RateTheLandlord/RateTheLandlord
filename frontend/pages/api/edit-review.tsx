@@ -4,7 +4,7 @@ interface IBody {
 	id: number
 }
 
-const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
+const EditReview = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = req.cookies
@@ -40,4 +40,4 @@ const getReviews = (req: NextApiRequest, res: NextApiResponse) => {
 		})
 }
 
-export default getReviews
+export default EditReview
