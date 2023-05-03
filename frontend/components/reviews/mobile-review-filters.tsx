@@ -5,6 +5,7 @@ import MobileSelectList from './ui/mobile-select-list'
 import SearchBar from './ui/searchbar'
 import {Options} from '@/util/interfaces'
 import {useTranslation} from 'react-i18next'
+import ComboBox from './ui/combobox'
 
 interface FiltersProps {
 	mobileFiltersOpen: boolean
@@ -104,24 +105,24 @@ export default function MobileReviewFilters({
 										options={countryOptions}
 										name={t('reviews.country')}
 									/>
-									<MobileSelectList
-										state={stateFilter}
-										setState={setStateFilter}
-										options={stateOptions}
-										name={t('reviews.state')}
-									/>
-									<MobileSelectList
-										state={cityFilter}
-										setState={setCityFilter}
-										options={cityOptions}
-										name={t('reviews.city')}
-									/>
-									<MobileSelectList
-										state={zipFilter}
-										setState={setZipFilter}
-										options={zipOptions}
-										name={t('reviews.zip')}
-									/>
+									<ComboBox
+											state={stateFilter}
+											setState={setStateFilter}
+											options={stateOptions}
+											name={t('reviews.state')}
+										/>
+										<ComboBox
+											state={cityFilter}
+											setState={setCityFilter}
+											options={cityOptions}
+											name={t('reviews.city')}
+										/>
+										<ComboBox
+											state={zipFilter}
+											setState={setZipFilter}
+											options={zipOptions}
+											name={t('reviews.zip')}
+										/>
 									<div className="mt-5 w-full">
 										<button
 											onClick={() => setMobileFiltersOpen(false)}

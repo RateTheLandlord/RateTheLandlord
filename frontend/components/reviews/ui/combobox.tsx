@@ -26,18 +26,20 @@ export default function ComboBox({
 		query === ''
 			? options
 			: options.filter((option) =>
-					option.name.toLowerCase().includes(query.toLowerCase()),
+					option.name
+						.toLowerCase()
+						.replace(/\s+/g, '')
+						.includes(query.toLowerCase().replace(/\s+/g, '')),
 			  )
 	return (
 		<Combobox value={state} onChange={setState}>
-			<div className="relative px-2">
+			<div className="relative w-full pt-2 lg:px-2 lg:pt-0">
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 					<Combobox.Input
 						className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
 						data-umami-event={`Select List Interaction for ${name}`}
-						displayValue={(state: Options) =>
-							state && state.name ? state.name : name
-						}
+						displayValue={(state: Options) => state?.name}
+						placeholder={`Search ${name}`}
 						onChange={(event) => setQuery(event.target.value)}
 					/>
 					<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -53,7 +55,7 @@ export default function ComboBox({
 					leaveFrom="opacity-100"
 					leaveTo="opacity-0"
 				>
-					<Combobox.Options className="absolute mt-1 max-h-60 w-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+					<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 						{filterOptions.length === 0 && query !== '' ? (
 							<div className="relative cursor-default select-none py-2 px-4 text-gray-700">
 								Nothing found.
