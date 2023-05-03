@@ -61,10 +61,10 @@ export class ReviewService {
         ? sql`AND (landlord ILIKE ${'%' + search + '%'})`
         : sql``;
 
-    const stateClause = state ? sql`AND state = ${state}` : sql``;
-    const countryClause = country ? sql`AND country_code = ${country}` : sql``;
+    const stateClause = state ? sql`AND state = ${state.toUpperCase()}` : sql``;
+    const countryClause = country ? sql`AND country_code = ${country.toUpperCase()}` : sql``;
     const cityClause = city ? sql`AND city = ${city.toUpperCase()}` : sql``;
-    const zipClause = zip ? sql`AND zip = ${zip}` : sql``;
+    const zipClause = zip ? sql`AND zip = ${zip.toUpperCase()}` : sql``;
 
     // Fetch reviews
     const reviews = (await sql`
