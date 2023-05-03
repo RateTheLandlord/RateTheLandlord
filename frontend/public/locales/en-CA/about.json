@@ -14,7 +14,12 @@
 		},
 		"moderation": {
 			"moderation": "Moderation Policy",
-			"p-1": "We reserve the right to modify reviews that contain excessive profanity. We will remove any reviews that contain defamatory remarks or discrimination. Any reviews that contain an explicit address (e.g., 123 Main St.) or sensitive information of any kind will have this section removed from the review."
+			"p-1": "Tenants come to Rate The Landlord to find information on perspective Landlords as reviewed by their previous tenants. We will moderate the reviews submitted to the best of our ability to make sure they are relevant, appropriate, respect privacy, and free from conflict of interest.",
+			"p-2": "For your review to be relevant, please make sure they are about the Landlord and your experience as their tenant. Reviews are not a place for matters that don't address the core of the tenant experience.",
+			"p-3": "For your review to be appropriate, please refrain from posting any threats, harassment, lewdness, hate speech, or other displays of bigotry.",
+			"p-4": "To avoid any conflict of interest, please do not post reviews for Landlord's that you have not personally been a tenant of.",
+			"p-5": "Privacy is important to us at Rate The Landlord. Though we allow for a Landlord's name to be used in a review, we do not allow the posting of addresses, phone numbers, or any other identifiable information in regards to the Landlord, or other parties.",
+			"p-6": "Finally, any review's that we deem to violate this policy will be amended or removed at our discretion. We will not take sides when it comes to factual disputes of the content of the review and any will not remove just because of a dispute of it's facts."
 		},
 		"contributing": {
 			"contributing": "Want to Contribute?",
