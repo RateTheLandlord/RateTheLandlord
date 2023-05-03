@@ -7,6 +7,7 @@ import MobileReviewFilters from './mobile-review-filters'
 import {useTranslation} from 'react-i18next'
 import ButtonLight from '../ui/button-light'
 import Link from 'next/link'
+import ComboBox from './ui/combobox'
 
 //Review filters and Logic
 
@@ -120,19 +121,19 @@ function ReviewFilters({
 											options={countryOptions}
 											name={t('reviews.country')}
 										/>
-										<SelectList
+										<ComboBox
 											state={stateFilter}
 											setState={setStateFilter}
 											options={stateOptions}
 											name={t('reviews.state')}
 										/>
-										<SelectList
+										<ComboBox
 											state={cityFilter}
 											setState={setCityFilter}
 											options={cityOptions}
 											name={t('reviews.city')}
 										/>
-										<SelectList
+										<ComboBox
 											state={zipFilter}
 											setState={setZipFilter}
 											options={zipOptions}
