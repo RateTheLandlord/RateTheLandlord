@@ -49,7 +49,9 @@ function ReviewForm(): JSX.Element {
 	const [respect, setRespect] = useState<number>(3)
 	const [review, setReview] = useState<string>('')
 
-	const [disclaimer, setDisclaimer] = useState(false)
+	const [disclaimerOne, setDisclaimerOne] = useState(false)
+	const [disclaimerTwo, setDisclaimerTwo] = useState(false)
+	const [disclaimerThree, setDisclaimerThree] = useState(false)
 	const [token, setToken] = useState<string>('')
 	const [loading, setLoading] = useState<boolean>(false)
 
@@ -435,47 +437,81 @@ function ReviewForm(): JSX.Element {
 							defaultValue={''}
 							data-testid="create-review-form-text-1"
 						/>
-						<div className='w-full flex justify-end'>
-							<p className={`text-xs ${review.length > 2000 ? 'text-red-400':'text-black'}`}>Character Limit: {review.length}/2000</p>
+						<div className="flex w-full justify-end">
+							<p
+								className={`text-xs ${
+									review.length > 2000 ? 'text-red-400' : 'text-black'
+								}`}
+							>
+								Character Limit: {review.length}/2000
+							</p>
 						</div>
 					</div>
 					<div>
-						<p className="text-sm font-bold text-gray-500">
-							Please keep this review as civil and objective as possible. Any
+						<p className="text-sm font-extrabold text-gray-500">
+							Please keep this review as civil and objective as possible. Do not
+							post any specific addresses as these will be removed. Any
 							malicious or defamatory language may result in the review being
-							edited or removed. Do not post any specific addresses as these
-							will be removed.
+							edited or removed.
 						</p>
 					</div>
 				</div>
 
-				<div className="py-5">
-					<div className="mb-2 flex justify-center space-x-2">
+				<div className="w-full py-5">
+					<div className="mb-2 flex w-full justify-start space-x-2">
 						<div className="flex h-5 items-center">
 							<input
 								id="terms"
 								name="terms"
 								type="checkbox"
-								checked={disclaimer}
-								onChange={() => setDisclaimer((p) => !p)}
+								checked={disclaimerOne}
+								onChange={() => setDisclaimerOne((p) => !p)}
 								className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 							/>
 						</div>
 						<label htmlFor="terms" className="text-sm text-gray-500">
 							I understand that posting a review on Rate The Landlord is public
-							and can be viewed by anyone. Rate The Landlord reserves the right
-							to modify reviews if they break our review standards or rules. I
-							also understand that Rate The Landlord is not responsible for any
-							consequences as a result of posting my review and that while the
-							review is anonymous, it may still be linked back to me. Finally, I
-							understand that Rate The Landlord recommends leaving a review
-							after my tenancy is over and that doing otherwise is my decision.
+							and can be viewed by anyone including the landlord in my review.
+						</label>
+					</div>
+					<div className="mb-2 flex w-full justify-start space-x-2">
+						<div className="flex h-5 items-center">
+							<input
+								id="terms"
+								name="terms"
+								type="checkbox"
+								checked={disclaimerTwo}
+								onChange={() => setDisclaimerTwo((p) => !p)}
+								className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+							/>
+						</div>
+						<label htmlFor="terms" className="text-sm text-gray-500">
+							I understand that once I post this review I cannot have it taken
+							down unless it violates the Rate The Landlord policy and recognize
+							that Rate The Landlord recommends posting reviews after my tenancy
+							is over.
+						</label>
+					</div>
+					<div className="mb-2 flex w-full justify-start space-x-2">
+						<div className="flex h-5 items-center">
+							<input
+								id="terms"
+								name="terms"
+								type="checkbox"
+								checked={disclaimerThree}
+								onChange={() => setDisclaimerThree((p) => !p)}
+								className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+							/>
+						</div>
+						<label htmlFor="terms" className="text-sm text-gray-500">
+							I understand that Rate The Landlord is not responsible for any
+							consequences that occur as a result my review.
 						</label>
 					</div>
 
 					<div
 						data-testid="create-review-form-captcha-1"
-						className="mb-2 flex justify-center"
+						className="my-2 flex justify-center"
 					>
 						<HCaptcha sitekey={siteKey} onVerify={onVerifyCaptcha} />
 					</div>
@@ -504,7 +540,13 @@ function ReviewForm(): JSX.Element {
 						) : (
 							<Button
 								disabled={
-									!token || !disclaimer || maliciousStringDetected || loading || review.length > 2000
+									!token ||
+									!disclaimerOne ||
+									!disclaimerTwo ||
+									!disclaimerThree ||
+									maliciousStringDetected ||
+									loading ||
+									review.length > 2000
 								}
 								data-umami-event="Review Submitted"
 							>
