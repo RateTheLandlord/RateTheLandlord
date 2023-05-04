@@ -14,7 +14,7 @@ const ResourceTenantLinks = () => {
 				return (
 					<div
 						key={country}
-						className="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-4 px-6 text-lg lg:px-8"
+						className="mx-auto mt-2 flex max-w-7xl flex-row flex-wrap justify-center gap-4 px-6 text-lg lg:px-8"
 					>
 						<h3 className="mt-2 block w-full text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
 							{country}
@@ -27,7 +27,7 @@ const ResourceTenantLinks = () => {
 									key={link.name}
 									className="w-full cursor-pointer rounded-lg bg-white px-4 py-5 text-center text-black shadow hover:bg-teal-600 hover:text-white sm:p-6 lg:w-auto lg:text-left"
 								>
-									<p className="mt-1 text-3xl font-semibold tracking-tight">
+									<p className="mt-1 text-xl md:text-3xl font-semibold tracking-tight">
 										{link.name}
 									</p>
 									{link.country === link.city ? (
