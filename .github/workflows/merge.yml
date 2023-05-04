@@ -91,6 +91,7 @@ jobs:
           echo PGPORT=${{secrets.PGPORT}} >> .env
           echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
           cat .env
+          source .env
       - name: Pull Docker
         run: docker-compose pull
       - name: Build Docker
