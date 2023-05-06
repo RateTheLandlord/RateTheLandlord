@@ -257,11 +257,11 @@ export class ReviewService {
     }
 
     const totalUK =
-      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'UK'`;
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'GB'`;
     const total_uk_reviews = totalUK[0].count;
 
     const uk_states = await sql`
-      SELECT DISTINCT state FROM review WHERE country_code = 'UK';
+      SELECT DISTINCT state FROM review WHERE country_code = 'GB';
     `;
     const uk_states_list = uk_states.map(({ state }) => state);
 
