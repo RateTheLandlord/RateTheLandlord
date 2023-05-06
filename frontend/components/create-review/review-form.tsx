@@ -184,6 +184,8 @@ function ReviewForm(): JSX.Element {
 			setProvince('England')
 		} else if (country === 'AU') {
 			setProvince('Northern Territory')
+		} else if (country === 'US') {
+			setProvince('Alabama')
 		}
 	}, [country])
 

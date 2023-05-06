@@ -24,6 +24,38 @@ export type ReviewsResponse = {
   limit: number;
 };
 
+export interface IStats {
+  total_reviews: number;
+  total_ca_reviews: {
+    total: string;
+    states: Array<{
+      key: string;
+      total: string;
+    }>;
+  };
+  total_us_reviews: {
+    total: string;
+    states: Array<{
+      key: string;
+      total: string;
+    }>;
+  };
+  total_au_reviews: {
+    total: string;
+    states: Array<{
+      key: string;
+      total: string;
+    }>;
+  };
+  total_uk_reviews: {
+    total: string;
+    states: Array<{
+      key: string;
+      total: string;
+    }>;
+  };
+}
+
 @Injectable()
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) {}
@@ -62,7 +94,9 @@ export class ReviewService {
         : sql``;
 
     const stateClause = state ? sql`AND state = ${state.toUpperCase()}` : sql``;
-    const countryClause = country ? sql`AND country_code = ${country.toUpperCase()}` : sql``;
+    const countryClause = country
+      ? sql`AND country_code = ${country.toUpperCase()}`
+      : sql``;
     const cityClause = city ? sql`AND city = ${city.toUpperCase()}` : sql``;
     const zipClause = zip ? sql`AND zip = ${zip.toUpperCase()}` : sql``;
 
@@ -122,16 +156,18 @@ export class ReviewService {
   }
 
   async create(inputReview: Review): Promise<Review> {
-    const filterResult = filterReview(inputReview)
+    const filterResult = filterReview(inputReview);
 
-    inputReview.landlord = inputReview.landlord.substring(0, 150).toLocaleUpperCase();
+    inputReview.landlord = inputReview.landlord
+      .substring(0, 150)
+      .toLocaleUpperCase();
     inputReview.country_code = inputReview.country_code.toLocaleUpperCase();
     inputReview.city = inputReview.city.substring(0, 150).toLocaleUpperCase();
     inputReview.state = inputReview.state.toLocaleUpperCase();
     inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
     inputReview.admin_approved = null;
-    inputReview.flagged = filterResult.flagged
-    inputReview.flagged_reason = filterResult.reason
+    inputReview.flagged = filterResult.flagged;
+    inputReview.flagged_reason = filterResult.reason;
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
@@ -170,9 +206,110 @@ export class ReviewService {
     return true;
   }
 
-  getFlagged(): Promise<Review[]> {
-    return this.databaseService.sql<
+  async getFlagged(): Promise<Review[]> {
+    return await this.databaseService.sql<
       Review[]
     >`SELECT * FROM review WHERE flagged = true;`;
+  }
+
+  async getStats(): Promise<IStats> {
+    const sql = this.databaseService.sql;
+
+    const totalResult = await sql`
+      SELECT COUNT(*) as count FROM review
+    `;
+    const total_reviews = totalResult[0].count;
+
+    const totalCA =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'CA'`;
+    const total_ca_reviews = totalCA[0].count;
+
+    const ca_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'CA';
+    `;
+    const ca_states_list = ca_states.map(({ state }) => state);
+
+    const ca_total_for_states = [];
+
+    for (let i = 0; i < ca_states_list.length; i++) {
+      const key = ca_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${ca_states_list[i]}`;
+      ca_total_for_states.push({ key: key, total: total[0].count });
+    }
+
+    const totalUS =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'US'`;
+    const total_us_reviews = totalUS[0].count;
+
+    const us_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'US';
+    `;
+    const us_states_list = us_states.map(({ state }) => state);
+
+    const us_total_for_states = [];
+
+    for (let i = 0; i < us_states_list.length; i++) {
+      const key = us_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${us_states_list[i]}`;
+      us_total_for_states.push({ key: key, total: total[0].count });
+    }
+
+    const totalUK =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'UK'`;
+    const total_uk_reviews = totalUK[0].count;
+
+    const uk_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'UK';
+    `;
+    const uk_states_list = uk_states.map(({ state }) => state);
+
+    const uk_total_for_states = [];
+
+    for (let i = 0; i < uk_states_list.length; i++) {
+      const key = uk_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${uk_states_list[i]}`;
+      uk_total_for_states.push({ key: key, total: total[0].count });
+    }
+
+    const totalAU =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'AU'`;
+    const total_au_reviews = totalAU[0].count;
+
+    const au_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'AU';
+    `;
+    const au_states_list = au_states.map(({ state }) => state);
+
+    const au_total_for_states = [];
+
+    for (let i = 0; i < au_states_list.length; i++) {
+      const key = au_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${au_states_list[i]}`;
+      au_total_for_states.push({ key: key, total: total[0].count });
+    }
+
+    return {
+      total_reviews: total_reviews,
+      total_ca_reviews: {
+        total: total_ca_reviews,
+        states: ca_total_for_states,
+      },
+      total_au_reviews: {
+        total: total_au_reviews,
+        states: au_total_for_states,
+      },
+      total_uk_reviews: {
+        total: total_uk_reviews,
+        states: uk_total_for_states,
+      },
+      total_us_reviews: {
+        total: total_us_reviews,
+        states: us_total_for_states,
+      },
+    };
   }
 }
