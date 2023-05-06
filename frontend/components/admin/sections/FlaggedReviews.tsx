@@ -39,9 +39,7 @@ const FlaggedReviews = () => {
 	useEffect(() => {
 		if (reviews) {
 			if (reviews.length) {
-				
-					setFlaggedReviews([...reviews])
-				
+				setFlaggedReviews([...reviews])
 			}
 		}
 	}, [reviews])
@@ -98,7 +96,7 @@ const FlaggedReviews = () => {
 			review: newReview,
 			admin_edited: true,
 			admin_approved: true,
-			flagged: false
+			flagged: false,
 		}
 		fetch('/api/edit-review', {
 			method: 'POST',
@@ -129,7 +127,7 @@ const FlaggedReviews = () => {
 		const editedReview = {
 			...review,
 			admin_approved: true,
-			flagged: false
+			flagged: false,
 		}
 		fetch('/api/edit-review', {
 			method: 'POST',
@@ -154,8 +152,6 @@ const FlaggedReviews = () => {
 				setRemoveAlertOpen(true)
 			})
 	}
-
-	console.log(flaggedReviews)
 
 	return (
 		<div className="container flex w-full flex-wrap justify-center px-4 sm:px-6 lg:px-8">
@@ -233,7 +229,6 @@ const FlaggedReviews = () => {
 							<th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
 								<span className="sr-only">Remove</span>
 							</th>
-							
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200 bg-white">
@@ -262,15 +257,14 @@ const FlaggedReviews = () => {
 									{review.review}
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-									
-										<button
-											onClick={() => {
-												onSubmitApproveReview(review)
-											}}
-											className="text-indigo-600 hover:text-indigo-900"
-										>
-											Approve
-										</button>
+									<button
+										onClick={() => {
+											onSubmitApproveReview(review)
+										}}
+										className="text-indigo-600 hover:text-indigo-900"
+									>
+										Approve
+									</button>
 								</td>
 								<td className="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
 									<button
@@ -294,7 +288,6 @@ const FlaggedReviews = () => {
 										Remove
 									</button>
 								</td>
-								
 							</tr>
 						))}
 					</tbody>

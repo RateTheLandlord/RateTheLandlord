@@ -15,8 +15,8 @@ import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
 import { Review } from './models/review';
-import { ReviewService, ReviewsResponse } from './review.service';
-import { SkipThrottle, Throttle } from '@nestjs/throttler';
+import { IStats, ReviewService, ReviewsResponse } from './review.service';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller('review')
 export class ReviewController {
@@ -119,5 +119,12 @@ export class ReviewController {
   @Get('/flagged')
   getFlagged(): Promise<Review[]> {
     return this.reviewService.getFlagged();
+  }
+
+  @Throttle(10, 120)
+  @UseGuards(JwtAuthGuard)
+  @Get('/stats')
+  getStats(): Promise<IStats> {
+    return this.reviewService.getStats();
   }
 }
