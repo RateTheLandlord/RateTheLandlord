@@ -12,8 +12,8 @@ const StateStats = ({
 			{sortedStates.map((state) => {
 				return (
 					<div
-						key={state.key}
-						className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r"
+						key={state.key + state.total}
+						className="flex flex-col p-6 text-center"
 					>
 						<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
 							{state.key}

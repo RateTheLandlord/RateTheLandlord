@@ -60,8 +60,8 @@ const Stats = () => {
 
 	return (
 		<div className="container flex w-full flex-wrap justify-center px-4 sm:px-6 lg:px-8">
-			<div className="flex w-full flex-row justify-center gap-3">
-				<div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
+			<div className="mt-3 flex w-full flex-row justify-center gap-3">
+				<div className="flex flex-col p-6 text-center">
 					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
 						Total Reviews
 					</dt>
@@ -71,7 +71,7 @@ const Stats = () => {
 				</div>
 				<div
 					onClick={() => setCountry('CA')}
-					className={`flex cursor-pointer flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r ${
+					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
 						country && country === 'CA' ? 'bg-gray-200' : ''
 					}`}
 				>
@@ -84,7 +84,7 @@ const Stats = () => {
 				</div>
 				<div
 					onClick={() => setCountry('US')}
-					className={`flex cursor-pointer flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r ${
+					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
 						country && country === 'US' ? 'bg-gray-200' : ''
 					}`}
 				>
@@ -97,7 +97,7 @@ const Stats = () => {
 				</div>
 				<div
 					onClick={() => setCountry('UK')}
-					className={`flex cursor-pointer flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r ${
+					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
 						country && country === 'UK' ? 'bg-gray-200' : ''
 					}`}
 				>
@@ -110,7 +110,7 @@ const Stats = () => {
 				</div>
 				<div
 					onClick={() => setCountry('AU')}
-					className={`flex cursor-pointer flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r ${
+					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
 						country && country === 'AU' ? 'bg-gray-200' : ''
 					}`}
 				>
