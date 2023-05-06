@@ -7,11 +7,13 @@ import MyInfo from '@/components/admin/sections/MyInfo'
 import {parseCookies} from 'nookies'
 import Link from 'next/link'
 import {NextSeo} from 'next-seo'
+import Stats from '@/components/admin/sections/Stats'
 
 const startingTabs = [
 	{name: 'Flagged Reviews', component: <FlaggedReviews />, current: true},
 	{name: 'Team Members', component: <TeamMembers />, current: false},
 	{name: 'My Info', component: <MyInfo />, current: false},
+	{name: 'Stats', component: <Stats />, current: false},
 ]
 
 function Admin(): JSX.Element {
@@ -32,11 +34,11 @@ function Admin(): JSX.Element {
 
 	if (noCookie) {
 		return (
-			<div className="w-full flex flex-col items-center gap-4">
+			<div className="flex w-full flex-col items-center gap-4">
 				<h1 className="text-center">Not Logged In</h1>
 				<Link
 					href="/login"
-					className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+					className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 				>
 					Go To Login
 				</Link>
@@ -44,7 +46,7 @@ function Admin(): JSX.Element {
 		)
 	}
 	return (
-		<div className="w-full flex flex-col items-center">
+		<div className="flex w-full flex-col items-center">
 			<NextSeo noindex={true} />
 			<Tabs
 				currentTab={currentTab}
