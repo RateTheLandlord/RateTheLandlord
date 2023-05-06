@@ -19,9 +19,6 @@ export default function ComboBox({
 }: ComponentProps) {
 	const [query, setQuery] = useState('')
 
-	console.log(options)
-	console.log(state)
-
 	const filterOptions =
 		query === ''
 			? options
