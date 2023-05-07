@@ -1,0 +1,12 @@
+[
+	{"short": "AU", "name": "Auckland", "country": "NZ"},
+	{"short": "NP", "name": "New Plymouth", "country": "NZ"},
+	{"short": "HB", "name": "Hawke's Bay", "country": "NZ"},
+	{"short": "WE", "name": "Wellington", "country": "NZ"},
+	{"short": "NE", "name": "Nelson", "country": "NZ"},
+	{"short": "MB", "name": "Marlborough", "country": "NZ"},
+	{"short": "WL", "name": "Westland", "country": "NZ"},
+	{"short": "CA", "name": "Canterbury", "country": "NZ"},
+	{"short": "OT", "name": "Otago", "country": "NZ"},
+	{"short": "SL", "name": "Southland", "country": "NZ"}
+]
