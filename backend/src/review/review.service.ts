@@ -1,6 +1,6 @@
 import { DatabaseService } from 'src/database/database.service';
 import { Injectable } from '@nestjs/common';
-import { Review } from './models/review';
+import { IStats, Review, ReviewsResponse } from './models/review';
 import { filterReview } from './helpers';
 
 type ReviewQuery = {
@@ -13,48 +13,6 @@ type ReviewQuery = {
   city?: string;
   zip?: string;
 };
-
-export type ReviewsResponse = {
-  reviews: Review[];
-  total: number;
-  countries: string[];
-  states: string[];
-  cities: string[];
-  zips: string[];
-  limit: number;
-};
-
-export interface IStats {
-  total_reviews: number;
-  total_ca_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_us_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_au_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_uk_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-}
 
 @Injectable()
 export class ReviewService {
@@ -121,19 +79,19 @@ export class ReviewService {
 
     // Fetch states
     const states = await sql`
-      SELECT DISTINCT state FROM review;
+      SELECT DISTINCT state FROM review WHERE 1=1 ${countryClause};
     `;
     const stateList = states.map(({ state }) => state);
 
     // Fetch cities
     const cities = await sql`
-      SELECT DISTINCT city FROM review;
+      SELECT DISTINCT city FROM review WHERE 1=1 ${countryClause} ${stateClause};
     `;
     const cityList = cities.map(({ city }) => city);
 
     // Fetch zips
     const zips = await sql`
-      SELECT DISTINCT zip FROM review;
+      SELECT DISTINCT zip FROM review WHERE 1=1 ${countryClause} ${stateClause} ${cityClause};
     `;
     const zipList = zips.map(({ zip }) => zip);
 
