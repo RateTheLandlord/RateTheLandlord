@@ -1,7 +1,7 @@
 import { DatabaseService } from 'src/database/database.service';
 import { Injectable } from '@nestjs/common';
 import { IStats, Review, ReviewsResponse } from './models/review';
-import { filterReview } from './helpers';
+import { filterReviewWithAI } from './helpers';
 
 type ReviewQuery = {
   page?: number;
@@ -114,7 +114,7 @@ export class ReviewService {
   }
 
   async create(inputReview: Review): Promise<Review> {
-    const filterResult = filterReview(inputReview);
+    const filterResult = await filterReviewWithAI(inputReview);
 
     inputReview.landlord = inputReview.landlord
       .substring(0, 150)
@@ -125,7 +125,7 @@ export class ReviewService {
     inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
     inputReview.admin_approved = null;
     inputReview.flagged = filterResult.flagged;
-    inputReview.flagged_reason = filterResult.reason;
+    inputReview.flagged_reason = filterResult.flagged_reason;
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
