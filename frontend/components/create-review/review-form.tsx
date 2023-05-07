@@ -15,6 +15,7 @@ import provinces from '@/util/provinces.json'
 import regions from '@/util/regions.json'
 import states from '@/util/states.json'
 import territories from '@/util/territories.json'
+import nz_provinces from '@/util/nz-provinces.json'
 import {useTranslation} from 'react-i18next'
 
 //This components will hold the review form and it's data handling logic
@@ -22,7 +23,7 @@ import {useTranslation} from 'react-i18next'
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
 
 const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
+	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU' || c === 'NZ',
 )
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
@@ -79,7 +80,6 @@ function ReviewForm(): JSX.Element {
 			case 'landlord':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-
 					setMaliciousAlertOpen(true)
 				} else {
 					setLandlord(e.target.value)
@@ -89,7 +89,6 @@ function ReviewForm(): JSX.Element {
 			case 'city':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-
 					setMaliciousAlertOpen(true)
 				} else {
 					setCity(e.target.value)
@@ -99,7 +98,6 @@ function ReviewForm(): JSX.Element {
 			case 'postal':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-
 					setMaliciousAlertOpen(true)
 				} else {
 					setPostal(e.target.value)
@@ -109,7 +107,6 @@ function ReviewForm(): JSX.Element {
 			case 'review':
 				if (stringIsMalicious) {
 					setMaliciousStringDetected(true)
-
 					setMaliciousAlertOpen(true)
 				} else {
 					setReview(e.target.value)
@@ -186,6 +183,10 @@ function ReviewForm(): JSX.Element {
 			setProvince('Northern Territory')
 		} else if (country === 'US') {
 			setProvince('Alabama')
+		} else if (country === 'NZ') {
+			setProvince('Marlborough')
+		} else {
+			setProvince('Alberta')
 		}
 	}, [country])
 
@@ -339,6 +340,14 @@ function ReviewForm(): JSX.Element {
 															value={territory.name}
 														>
 															{territory.name}
+														</option>
+													)
+											  })
+											: country === 'NZ'
+											? nz_provinces.map((prov) => {
+													return (
+														<option key={prov.short} value={prov.name}>
+															{prov.name}
 														</option>
 													)
 											  })
