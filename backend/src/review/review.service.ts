@@ -270,4 +270,12 @@ export class ReviewService {
       },
     };
   }
+
+  async getLandlords(): Promise<string[]> {
+    const landlords = await this.databaseService
+      .sql`SELECT DISTINCT landlord FROM review;`;
+    const landlordList = landlords.map(({ landlord }) => landlord);
+
+    return landlordList;
+  }
 }

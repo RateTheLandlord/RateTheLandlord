@@ -127,4 +127,10 @@ export class ReviewController {
   getStats(): Promise<IStats> {
     return this.reviewService.getStats();
   }
+
+  @Throttle(10, 120)
+  @Get('/landlords')
+  getLandlords(): Promise<string[]> {
+    return this.reviewService.getLandlords();
+  }
 }
