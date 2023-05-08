@@ -1,7 +1,7 @@
 import { DatabaseService } from 'src/database/database.service';
 import { Injectable } from '@nestjs/common';
-import { Review } from './models/review';
-import { filterReview } from './helpers';
+import { IStats, Review, ReviewsResponse } from './models/review';
+import { filterReviewWithAI } from './helpers';
 
 type ReviewQuery = {
   page?: number;
@@ -13,48 +13,6 @@ type ReviewQuery = {
   city?: string;
   zip?: string;
 };
-
-export type ReviewsResponse = {
-  reviews: Review[];
-  total: number;
-  countries: string[];
-  states: string[];
-  cities: string[];
-  zips: string[];
-  limit: number;
-};
-
-export interface IStats {
-  total_reviews: number;
-  total_ca_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_us_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_au_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-  total_uk_reviews: {
-    total: string;
-    states: Array<{
-      key: string;
-      total: string;
-    }>;
-  };
-}
 
 @Injectable()
 export class ReviewService {
@@ -121,19 +79,19 @@ export class ReviewService {
 
     // Fetch states
     const states = await sql`
-      SELECT DISTINCT state FROM review;
+      SELECT DISTINCT state FROM review WHERE 1=1 ${countryClause};
     `;
     const stateList = states.map(({ state }) => state);
 
     // Fetch cities
     const cities = await sql`
-      SELECT DISTINCT city FROM review;
+      SELECT DISTINCT city FROM review WHERE 1=1 ${countryClause} ${stateClause};
     `;
     const cityList = cities.map(({ city }) => city);
 
     // Fetch zips
     const zips = await sql`
-      SELECT DISTINCT zip FROM review;
+      SELECT DISTINCT zip FROM review WHERE 1=1 ${countryClause} ${stateClause} ${cityClause};
     `;
     const zipList = zips.map(({ zip }) => zip);
 
@@ -156,7 +114,7 @@ export class ReviewService {
   }
 
   async create(inputReview: Review): Promise<Review> {
-    const filterResult = filterReview(inputReview);
+    const filterResult = await filterReviewWithAI(inputReview);
 
     inputReview.landlord = inputReview.landlord
       .substring(0, 150)
@@ -167,7 +125,7 @@ export class ReviewService {
     inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
     inputReview.admin_approved = null;
     inputReview.flagged = filterResult.flagged;
-    inputReview.flagged_reason = filterResult.reason;
+    inputReview.flagged_reason = filterResult.flagged_reason;
 
     const id = (
       await this.databaseService.sql<{ id: number }[]>`
@@ -292,6 +250,24 @@ export class ReviewService {
       au_total_for_states.push({ key: key, total: total[0].count });
     }
 
+    const totalNZ =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'NZ'`;
+    const total_nz_reviews = totalNZ[0].count;
+
+    const nz_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'NZ';
+    `;
+    const nz_states_list = nz_states.map(({ state }) => state);
+
+    const nz_total_for_states = [];
+
+    for (let i = 0; i < nz_states_list.length; i++) {
+      const key = nz_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${nz_states_list[i]}`;
+      nz_total_for_states.push({ key: key, total: total[0].count });
+    }
+
     return {
       total_reviews: total_reviews,
       total_ca_reviews: {
@@ -309,6 +285,10 @@ export class ReviewService {
       total_us_reviews: {
         total: total_us_reviews,
         states: us_total_for_states,
+      },
+      total_nz_reviews: {
+        total: total_nz_reviews,
+        states: nz_total_for_states,
       },
     };
   }

@@ -14,8 +14,8 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
-import { Review } from './models/review';
-import { IStats, ReviewService, ReviewsResponse } from './review.service';
+import { IStats, Review, ReviewsResponse } from './models/review';
+import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
 
 @Controller('review')
