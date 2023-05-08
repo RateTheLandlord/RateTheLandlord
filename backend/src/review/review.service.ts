@@ -250,6 +250,24 @@ export class ReviewService {
       au_total_for_states.push({ key: key, total: total[0].count });
     }
 
+    const totalNZ =
+      await sql`SELECT COUNT(*) as count FROM review WHERE country_code = 'NZ'`;
+    const total_nz_reviews = totalNZ[0].count;
+
+    const nz_states = await sql`
+      SELECT DISTINCT state FROM review WHERE country_code = 'NZ';
+    `;
+    const nz_states_list = nz_states.map(({ state }) => state);
+
+    const nz_total_for_states = [];
+
+    for (let i = 0; i < nz_states_list.length; i++) {
+      const key = nz_states_list[i];
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${nz_states_list[i]}`;
+      nz_total_for_states.push({ key: key, total: total[0].count });
+    }
+
     return {
       total_reviews: total_reviews,
       total_ca_reviews: {
@@ -267,6 +285,10 @@ export class ReviewService {
       total_us_reviews: {
         total: total_us_reviews,
         states: us_total_for_states,
+      },
+      total_nz_reviews: {
+        total: total_nz_reviews,
+        states: nz_total_for_states,
       },
     };
   }

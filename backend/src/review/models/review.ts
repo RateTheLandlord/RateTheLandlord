@@ -58,4 +58,11 @@ export interface IStats {
       total: string;
     }>;
   };
+  total_nz_reviews: {
+    total: string;
+    states: Array<{
+      key: string;
+      total: string;
+    }>;
+  };
 }
