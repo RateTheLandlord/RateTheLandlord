@@ -278,4 +278,14 @@ export class ReviewService {
 
     return landlordList;
   }
+
+  async getLandlordReviews(landlord: string): Promise<Review[]> {
+    landlord = landlord.split('%20').join(' ');
+
+    console.log('CALLED');
+
+    return this.databaseService.sql<
+      Review[]
+    >`Select * FROM review WHERE landlord IN(${landlord});`;
+  }
 }

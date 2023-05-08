@@ -1,40 +1,21 @@
 import LandlordInfo from '@/components/landlord/LandlordInfo'
 import {classNames} from '@/util/helper-functions'
+import {Review} from '@/util/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
-import {GetStaticPropsContext} from 'next'
 
-const reviews = {
-	average: 4,
-	totalCount: 1624,
-	counts: [
-		{rating: 5, count: 1019},
-		{rating: 4, count: 162},
-		{rating: 3, count: 97},
-		{rating: 2, count: 199},
-		{rating: 1, count: 147},
-	],
-	featured: [
-		{
-			id: 1,
-			rating: 5,
-			content: `
-          <p>This is the bag of my dreams. I took it on my last vacation and was able to fit an absurd amount of snacks for the many long and hungry flights.</p>
-        `,
-			author: 'Emily Selman',
-			avatarSrc:
-				'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-		},
-		// More reviews...
-	],
-}
-
-const Landlord = ({landlord}: {landlord: string}) => {
+const Landlord = ({
+	landlord,
+	reviews,
+}: {
+	landlord: string
+	reviews: Review[]
+}) => {
 	console.log(landlord)
 	return (
 		<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:my-16 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:px-8">
 			<LandlordInfo name="Landlord Name" average={2.5} total={20} />
 
-			<div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
+			{/* <div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
 				<h3 className="sr-only">Recent reviews</h3>
 
 				<div className="flow-root">
@@ -69,7 +50,7 @@ const Landlord = ({landlord}: {landlord: string}) => {
 						))}
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	)
 }
@@ -81,10 +62,10 @@ export async function getStaticPaths() {
 		const data: string[] = await req.json()
 
 		const paths = data.map((landlord) => ({
-			params: {landlord: landlord},
+			params: {landlord: landlord.split(' ').join('%20')},
 		}))
 
-		console.log(paths)
+		console.log('Paths: ', paths)
 
 		return {
 			paths: paths,
@@ -98,12 +79,32 @@ export async function getStaticPaths() {
 	}
 }
 
-export function getStaticProps({params}: {params: {landlord: string}}) {
-	console.log(params)
-	return {
-		props: {
-			landlord: params.landlord,
-		},
+export async function getStaticProps({params}: {params: {landlord: string}}) {
+	console.log('PARAMS: ', params)
+
+	try {
+		const req = await fetch(
+			`http://backend:8080/review/landlords/${params.landlord}`,
+		)
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const data: Review[] = await req.json()
+
+		console.log(data)
+		return {
+			props: {
+				landlord: params.landlord,
+				reviews: data,
+			},
+			revalidate: 100,
+		}
+	} catch (error) {
+		return {
+			props: {
+				landlord: '',
+				reviews: [],
+			},
+			revalidate: 100,
+		}
 	}
 }
 
