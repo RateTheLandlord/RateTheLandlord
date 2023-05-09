@@ -3,7 +3,7 @@ import {StarIcon} from '@heroicons/react/solid'
 
 const LandlordInfo = ({name, average, total}) => {
 	return (
-		<div className="lg:col-span-4">
+		<div className="w-2/5">
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">
 				{name}
 			</h2>
