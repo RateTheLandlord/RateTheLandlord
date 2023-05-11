@@ -104,9 +104,6 @@ const Review = () => {
 
 	return (
 		<>
-			<Head>
-				<title>Reviews | Rate The Landlord</title>
-			</Head>
 			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}
