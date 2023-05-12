@@ -3,7 +3,7 @@ import {StarIcon} from '@heroicons/react/solid'
 
 const LandlordInfo = ({name, average, total}) => {
 	return (
-		<div className="w-full">
+		<div className="w-full border-b border-b-gray-200 pb-4">
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">
 				{name}
 			</h2>
@@ -31,14 +31,15 @@ const LandlordInfo = ({name, average, total}) => {
 					Share your thoughts
 				</h3>
 				<p className="mt-1 text-sm text-gray-600">
-					If you've had this Landlord, share your experience with other tenants
+					If you&apos;ve rented from this Landlord, share your experience with
+					other tenants
 				</p>
 
 				<a
 					href="/create-review"
-					className="mt-6 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50"
+					className="mt-2 inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 				>
-					Write a review
+					Submit a review
 				</a>
 			</div>
 		</div>

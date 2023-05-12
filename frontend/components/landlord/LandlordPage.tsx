@@ -1,23 +1,25 @@
-import { useState } from "react"
-import ReportModal from "../reviews/report-modal"
-import LandlordInfo from "./LandlordInfo"
-import { useTranslation } from "react-i18next"
-import { Review } from "@/util/interfaces"
-import useSWR from "swr"
+import {useState} from 'react'
+import ReportModal from '../reviews/report-modal'
+import LandlordInfo from './LandlordInfo'
+import {useTranslation} from 'react-i18next'
+import {Review} from '@/util/interfaces'
+import {StarIcon} from '@heroicons/react/solid'
+import {classNames} from '@/util/helper-functions'
+import ButtonLight from '../ui/button-light'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
-
-const LandlordPage = ({landlord}:{landlord:string}) => {
-    const {t} = useTranslation('reviews')
+const LandlordPage = ({
+	landlord,
+	reviews,
+}: {
+	landlord: string
+	reviews: Review[]
+}) => {
+	const {t} = useTranslation('reviews')
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
-    const {data} = useSWR<Review[]>(
-		`/api/landlord/${landlord}`,
-		fetcher,
-	)
-    const totalStars = data.reduce(
+	const totalStars = reviews.reduce(
 		(sum, review) =>
 			sum +
 			(Number(review.stability) +
@@ -32,21 +34,22 @@ const LandlordPage = ({landlord}:{landlord:string}) => {
 		setSelectedReview(review)
 		setReportOpen(true)
 	}
-	const average = Math.round(totalStars / (data.length * 5))
-	return <>
-    <ReportModal
+	const average = Math.round(totalStars / (reviews.length * 5))
+	return (
+		<>
+			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}
 				selectedReview={selectedReview}
 			/>
 			<div className="mt-10 flex w-full justify-center">
-				<div className="mx-auto flex max-w-2xl flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+				<div className="mx-auto flex max-w-2xl flex-col gap-3 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 					<LandlordInfo
 						name={landlord}
 						total={reviews.length}
 						average={average}
 					/>
-					<div className="flex w-full flex-col divide-y divide-gray-200 bg-green-200">
+					<div className="flex w-full flex-col gap-3 divide-y divide-gray-200">
 						{reviews.map((review) => {
 							const ratings = [
 								{title: t('reviews.health'), rating: review.health},
@@ -142,7 +145,9 @@ const LandlordPage = ({landlord}:{landlord:string}) => {
 						})}
 					</div>
 				</div>
-			</div></>
+			</div>
+		</>
+	)
 }
 
 export default LandlordPage

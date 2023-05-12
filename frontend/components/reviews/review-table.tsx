@@ -1,9 +1,10 @@
 import {classNames} from '@/util/helper-functions'
 import {Review} from '@/util/interfaces'
-import {StarIcon} from '@heroicons/react/solid'
+import {LinkIcon, StarIcon} from '@heroicons/react/solid'
 import React, {Dispatch, SetStateAction} from 'react'
 import {useTranslation} from 'react-i18next'
 import ButtonLight from '../ui/button-light'
+import Link from 'next/link'
 
 //Review table. Data will need to be shared with Review Filters. Data received from Review Page
 
@@ -46,9 +47,16 @@ function ReviewTable({
 									className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
 								>
 									<div className="mt-6 flex flex-wrap items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-										<p className="mb-4 w-full text-lg font-medium lg:mb-0">
-											{review.landlord}
-										</p>
+										<Link
+											href={`/landlord/${encodeURI(review.landlord)}`}
+											target="_blank"
+											rel="noopener noreferrer"
+											prefetch
+										>
+											<p className="mb-4 w-full cursor-pointer text-lg font-medium lg:mb-0">
+												{review.landlord}
+											</p>
+										</Link>
 										<div className="mb-4 flex w-full items-center lg:mb-0">
 											{[0, 1, 2, 3, 4].map((star) => {
 												let totalReview = 0
