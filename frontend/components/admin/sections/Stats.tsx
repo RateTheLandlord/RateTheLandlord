@@ -34,6 +34,13 @@ export interface IStats {
 			total: string
 		}>
 	}
+	total_nz_reviews: {
+		total: string
+		states: Array<{
+			key: string
+			total: string
+		}>
+	}
 }
 
 const Stats = () => {
@@ -53,6 +60,8 @@ const Stats = () => {
 				return <StateStats states={data.total_uk_reviews.states} />
 			case 'AU':
 				return <StateStats states={data.total_au_reviews.states} />
+			case 'NZ':
+				return <StateStats states={data.total_nz_reviews.states} />
 			default:
 				return <></>
 		}
@@ -119,6 +128,19 @@ const Stats = () => {
 					</dt>
 					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
 						{data.total_au_reviews.total}
+					</dd>
+				</div>
+				<div
+					onClick={() => setCountry('AU')}
+					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
+						country && country === 'NZ' ? 'bg-gray-200' : ''
+					}`}
+				>
+					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
+						New Zealand Reviews
+					</dt>
+					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
+						{data.total_nz_reviews.total}
 					</dd>
 				</div>
 			</div>

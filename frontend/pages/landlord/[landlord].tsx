@@ -17,7 +17,19 @@ const Landlord = ({landlord, reviews}: IProps) => {
 	const twitterHandle = '@r8thelandlord'
 	const siteName = 'RateTheLandlord.org'
 
-	if (!reviews) return <div>Error Finding Landlord</div>
+	if (!reviews)
+		return (
+			<div
+				className="text-primary inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite]"
+				role="status"
+			>
+				<span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+					Loading...
+				</span>
+			</div>
+		)
+
+	if (reviews.length === 0) return <div>Error Loading Landlord</div>
 
 	return (
 		<>
@@ -74,8 +86,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}: {params: {landlord: string}}) {
-	console.log('PARAMS: ', params)
-
 	try {
 		const req = await fetch(
 			`http://backend:8080/review/landlords/${params.landlord}`,
