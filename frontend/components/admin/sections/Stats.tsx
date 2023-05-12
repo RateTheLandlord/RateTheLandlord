@@ -131,7 +131,7 @@ const Stats = () => {
 					</dd>
 				</div>
 				<div
-					onClick={() => setCountry('AU')}
+					onClick={() => setCountry('NZ')}
 					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
 						country && country === 'NZ' ? 'bg-gray-200' : ''
 					}`}

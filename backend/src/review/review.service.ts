@@ -263,7 +263,8 @@ export class ReviewService {
 
     for (let i = 0; i < nz_states_list.length; i++) {
       const key = nz_states_list[i];
-      await sql`SELECT COUNT(*) as count FROM review WHERE state = ${nz_states_list[i]}`;
+      const total =
+        await sql`SELECT COUNT(*) as count FROM review WHERE state = ${nz_states_list[i]}`;
       nz_total_for_states.push({ key: key, total: total[0].count });
     }
 
