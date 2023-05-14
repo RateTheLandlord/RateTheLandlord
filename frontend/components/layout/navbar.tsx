@@ -8,6 +8,7 @@ import {useRouter} from 'next/router'
 import Instagram from '../svg/social/instagram'
 import Twitter from '../svg/social/twitter'
 import TikTok from '../svg/social/tiktok'
+import {useAppSelector} from '@/redux/hooks'
 
 const navigation = [
 	{
@@ -33,6 +34,8 @@ export default function Navbar(): JSX.Element {
 	const [activeTab, setActiveTab] = useState<number>(1)
 	const router = useRouter()
 
+	const user = useAppSelector((state) => state.user)
+
 	useEffect(() => {
 		const urlString = router.pathname
 		if (urlString.includes('reviews')) {
@@ -43,6 +46,8 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(4)
 		} else if (urlString.includes('resources')) {
 			setActiveTab(5)
+		} else if (urlString.includes('admin')) {
+			setActiveTab(6)
 		} else {
 			setActiveTab(1)
 		}
@@ -92,12 +97,23 @@ export default function Navbar(): JSX.Element {
 									>
 										<a
 											className={`${
-												activeTab === 4 ? 'border-b-2 border-teal-500' : ''
+												activeTab === 5 ? 'border-b-2 border-teal-500' : ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
 											{t('layout.nav.resources')}
 										</a>
 									</Link>
+									{user.jwt.access_token ? (
+										<Link href={`/admin/${user.result.id || 0}`}>
+											<a
+												className={`${
+													activeTab === 6 ? 'border-b-2 border-teal-500' : ''
+												} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
+											>
+												Admin
+											</a>
+										</Link>
+									) : null}
 								</div>
 							</div>
 							<div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">

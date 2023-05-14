@@ -11,9 +11,11 @@ import {
 import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
-import Head from 'next/head'
-import useSWR from 'swr'
+import useSWR, {mutate} from 'swr'
 import Paginator from './paginator'
+import Modal from '../modal/Modal'
+import Alert from '../alerts/Alert'
+import RemoveReviewModal from '../admin/components/RemoveReviewModal'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -42,6 +44,8 @@ const Review = () => {
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
+	const [success, setSuccess] = useState(false)
+	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
 
 	const queryParams = new URLSearchParams({
 		page: page.toString(),
@@ -61,6 +65,7 @@ const Review = () => {
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
+	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
@@ -69,6 +74,19 @@ const Review = () => {
 			setReviews(data.reviews)
 		}
 	}, [data])
+
+	useEffect(() => {
+		setActiveFilters(
+			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
+		)
+	}, [
+		cityFilter,
+		stateFilter,
+		countryFilter,
+		zipFilter,
+		searchState,
+		selectedSort,
+	])
 
 	const countryOptions: Options[] = country_codes.map(
 		(item: string, ind: number): Options => {
@@ -89,18 +107,34 @@ const Review = () => {
 		}
 	}
 
-	useEffect(() => {
-		setActiveFilters(
-			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
-		)
-	}, [
-		cityFilter,
-		stateFilter,
-		countryFilter,
-		zipFilter,
-		searchState,
-		selectedSort,
-	])
+	const onSubmitRemoveReview = (id: number) => {
+		fetch('/api/delete-review', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({id: id}),
+		})
+			.then((result) => {
+				if (!result.ok) {
+					throw new Error()
+				}
+			})
+			.then(() => {
+				mutate(`/api/get-reviews?${queryParams.toString()}`).catch((err) =>
+					console.log(err),
+				)
+				setRemoveReviewOpen(false)
+				setSuccess(true)
+				setRemoveAlertOpen(true)
+			})
+			.catch((err) => {
+				console.log(err)
+				setRemoveAlertOpen(false)
+				setSuccess(false)
+				setRemoveAlertOpen(true)
+			})
+	}
 
 	return (
 		<>
@@ -109,7 +143,25 @@ const Review = () => {
 				setIsOpen={setReportOpen}
 				selectedReview={selectedReview}
 			/>
+			{selectedReview ? (
+				<>
+					<Modal
+						title="Remove Review"
+						open={removeReviewOpen}
+						setOpen={setRemoveReviewOpen}
+						element={<RemoveReviewModal />}
+						onSubmit={onSubmitRemoveReview}
+						buttonColour="red"
+						selectedId={selectedReview?.id}
+					/>
+				</>
+			) : null}
 			<div className="w-full">
+				{removeAlertOpen ? (
+					<div className="w-full">
+						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
+					</div>
+				) : null}
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
@@ -134,6 +186,7 @@ const Review = () => {
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
+					setRemoveReviewOpen={setRemoveReviewOpen}
 				/>
 				<Paginator
 					onSelect={(page: number) => setPage(page)}
