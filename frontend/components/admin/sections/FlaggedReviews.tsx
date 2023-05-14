@@ -1,12 +1,11 @@
 import Alert from '@/components/alerts/Alert'
 import Modal from '@/components/modal/Modal'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {useEffect, useState} from 'react'
 import useSWR, {useSWRConfig} from 'swr'
 import EditReviewModal from '../components/EditReviewModal'
 import RemoveReviewModal from '../components/RemoveReviewModal'
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+import {fetcher} from '@/util/helpers/fetcher'
 
 const FlaggedReviews = () => {
 	const {mutate} = useSWRConfig()

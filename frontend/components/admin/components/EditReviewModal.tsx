@@ -6,6 +6,7 @@ import provinces from '@/util/provinces.json'
 import regions from '@/util/regions.json'
 import states from '@/util/states.json'
 import territories from '@/util/territories.json'
+import {country_codes} from '@/util/helpers/getCountryCodes'
 
 interface IProps {
 	selectedReview: Review | undefined
@@ -22,10 +23,6 @@ interface IProps {
 	postal: string
 	setPostal: Dispatch<SetStateAction<string>>
 }
-
-const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
-)
 
 const EditReviewModal = ({
 	selectedReview,

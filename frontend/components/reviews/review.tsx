@@ -1,14 +1,13 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {sortOptions} from '@/util/filter-options'
-import {Options, Review} from '@/util/interfaces'
+import {sortOptions} from '@/util/helpers/filter-options'
+import {Options, Review} from '@/util/interfaces/interfaces'
 import {
 	updateActiveFilters,
 	getStateOptions,
 	getCityOptions,
 	getZipOptions,
 } from '@/components/reviews/functions'
-import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
 import useSWR, {mutate} from 'swr'
@@ -16,6 +15,7 @@ import Paginator from './paginator'
 import Modal from '../modal/Modal'
 import Alert from '../alerts/Alert'
 import RemoveReviewModal from '../admin/components/RemoveReviewModal'
+import {fetcher} from '@/util/helpers/fetcher'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -26,12 +26,6 @@ export type ReviewsResponse = {
 	zips: string[]
 	limit: number
 }
-
-const country_codes: string[] = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU' || c === 'NZ',
-)
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
@@ -87,12 +81,6 @@ const Review = () => {
 		searchState,
 		selectedSort,
 	])
-
-	const countryOptions: Options[] = country_codes.map(
-		(item: string, ind: number): Options => {
-			return {id: ind + 1, name: countries[item] as string, value: item}
-		},
-	)
 
 	const cityOptions = getCityOptions(data?.cities ?? [])
 	const stateOptions = getStateOptions(data?.states ?? [])
@@ -177,7 +165,6 @@ const Review = () => {
 					setZipFilter={setZipFilter}
 					cityOptions={cityOptions}
 					stateOptions={stateOptions}
-					countryOptions={countryOptions}
 					zipOptions={zipOptions}
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}

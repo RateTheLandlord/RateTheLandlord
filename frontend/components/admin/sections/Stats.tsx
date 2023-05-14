@@ -1,8 +1,7 @@
 import useSWR from 'swr'
 import StateStats from '../components/StateStats'
 import {useState} from 'react'
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+import {fetcher} from '@/util/helpers/fetcher'
 
 export interface IStats {
 	total_reviews: number
