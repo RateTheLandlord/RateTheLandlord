@@ -81,19 +81,21 @@ export async function getStaticPaths() {
 
 	return {
 		paths: paths,
-		fallback: true,
+		fallback: 'blocking',
 	}
 }
 
 export async function getStaticProps({params}: {params: {landlord: string}}) {
 	try {
-		const req = await fetch(
-			`http://backend:8080/review/landlords/${params.landlord}`,
-		)
+		const req = await fetch(`http://backend:8080/review/landlords/landlord`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({landlord: params.landlord}),
+		})
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const data: Review[] = await req.json()
-
-		console.log(data)
 		return {
 			props: {
 				landlord: params.landlord,

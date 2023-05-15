@@ -60,7 +60,9 @@ function ReviewTable({
 									>
 										<div className="mt-6 flex flex-wrap items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
 											<Link
-												href={`/landlord/${encodeURI(review.landlord)}`}
+												href={`/landlord/${encodeURIComponent(
+													review.landlord,
+												)}`}
 												passHref
 												legacyBehavior
 											>

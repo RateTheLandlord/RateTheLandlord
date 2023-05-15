@@ -15,8 +15,6 @@ const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 
 	const id = body.id
 
-	console.log(id)
-
 	fetch(`${url}/user/${id}`, {
 		headers: {
 			'Content-Type': 'application/json',

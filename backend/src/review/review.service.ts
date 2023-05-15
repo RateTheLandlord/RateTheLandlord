@@ -302,9 +302,9 @@ export class ReviewService {
   }
 
   async getLandlordReviews(landlord: string): Promise<Review[]> {
-    landlord = landlord.split('%20').join(' ');
+    landlord = decodeURIComponent(landlord);
 
-    console.log('CALLED');
+    console.log(landlord);
 
     return this.databaseService.sql<
       Review[]
