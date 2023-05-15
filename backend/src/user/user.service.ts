@@ -15,10 +15,17 @@ export class UserService {
     >`SELECT * FROM users WHERE email = ${email}`;
   }
 
-  async getMe(id: number): Promise<IUser> {
-    const users = this.databaseService
-      .sql`SELECT * FROM users WHERE id = ${id}`;
-    return users[0];
+  async getMe(id: number): Promise<IGetUsers> {
+    const users = await this.databaseService.sql<
+      IUser[]
+    >`SELECT * FROM users WHERE id = ${id}`;
+
+    const arrUsers = (await users).map((user) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...result } = user;
+      return result;
+    });
+    return arrUsers[0];
   }
 
   async deleteUser(id: number): Promise<boolean> {

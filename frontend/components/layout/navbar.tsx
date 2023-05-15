@@ -82,7 +82,6 @@ export default function Navbar(): JSX.Element {
 					return result.json()
 				})
 				.then((data: IResult) => {
-					console.log(data)
 					const userInfo = {
 						jwt: {
 							access_token: cookies.ratethelandlord,

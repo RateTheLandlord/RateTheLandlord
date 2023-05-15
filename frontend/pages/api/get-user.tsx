@@ -30,7 +30,6 @@ const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 			return result.json()
 		})
 		.then((data) => {
-			console.log(data)
 			res.status(200).json(data)
 		})
 		.catch((err: Response) => {
