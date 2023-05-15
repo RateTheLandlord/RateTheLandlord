@@ -1,5 +1,5 @@
 import LandlordPage from '@/components/landlord/LandlordPage'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {NextSeo} from 'next-seo'
 import {useRouter} from 'next/router'
 

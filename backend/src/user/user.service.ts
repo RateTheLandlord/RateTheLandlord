@@ -15,6 +15,12 @@ export class UserService {
     >`SELECT * FROM users WHERE email = ${email}`;
   }
 
+  async getMe(id: number): Promise<IUser> {
+    const users = this.databaseService
+      .sql`SELECT * FROM users WHERE id = ${id}`;
+    return users[0];
+  }
+
   async deleteUser(id: number): Promise<boolean> {
     await this.databaseService.sql`DELETE FROM users WHERE ID = ${id}`;
 

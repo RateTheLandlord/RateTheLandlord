@@ -1,5 +1,5 @@
-import {classNames} from '@/util/helper-functions'
-import {Review} from '@/util/interfaces'
+import {classNames} from '@/util/helpers/helper-functions'
+import {Review} from '@/util/interfaces/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
 import React, {Dispatch, SetStateAction} from 'react'
 import {useTranslation} from 'react-i18next'

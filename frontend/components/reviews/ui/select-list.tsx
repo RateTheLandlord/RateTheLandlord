@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Listbox, Transition} from '@headlessui/react'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 
 interface ComponentProps {
 	name: string

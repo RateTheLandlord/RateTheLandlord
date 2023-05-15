@@ -42,6 +42,13 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Throttle(3, 60)
+  @Get('/:id')
+  getUser(@Param('id') id: number): Promise<IUser> {
+    return this.userService.getMe(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Throttle(1, 60)
   @Delete('/:id')
   async deleteUser(@Param('id') id: number): Promise<boolean> {

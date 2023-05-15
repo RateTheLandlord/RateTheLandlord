@@ -7,7 +7,7 @@ import ReviewTable from '@/components/reviews/review-table'
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReportModal from '@/components/reviews/report-modal'
 import MobileReviewFilters from '@/components/reviews/mobile-review-filters'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 
 // Test review so the table renders
 const testReview: Review = {

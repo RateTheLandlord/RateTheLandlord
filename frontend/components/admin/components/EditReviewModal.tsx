@@ -1,11 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {Dispatch, SetStateAction} from 'react'
-import countries from '@/util/countries.json'
-import provinces from '@/util/provinces.json'
-import regions from '@/util/regions.json'
-import states from '@/util/states.json'
-import territories from '@/util/territories.json'
+import countries from '@/util/countries/countries.json'
+import provinces from '@/util/countries/canada/provinces.json'
+import regions from '@/util/countries/unitedKingdom/regions.json'
+import states from '@/util/countries/unitedStates/states.json'
+import territories from '@/util/countries/australia/territories.json'
 import {country_codes} from '@/util/helpers/getCountryCodes'
 
 interface IProps {

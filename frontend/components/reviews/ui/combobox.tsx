@@ -2,7 +2,7 @@
 import React, {Fragment, useState} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Combobox, Transition} from '@headlessui/react'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 
 interface ComponentProps {
 	name: string

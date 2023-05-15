@@ -1,6 +1,6 @@
-import {capitalize, removeDuplicates} from '@/util/helper-functions'
+import {capitalize, removeDuplicates} from '@/util/helpers/helper-functions'
 
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 
 export const updateActiveFilters = (
 	countryFilter: Options | null,

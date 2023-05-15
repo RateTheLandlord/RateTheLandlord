@@ -8,7 +8,9 @@ import {useRouter} from 'next/router'
 import Instagram from '../svg/social/instagram'
 import Twitter from '../svg/social/twitter'
 import TikTok from '../svg/social/tiktok'
-import {useAppSelector} from '@/redux/hooks'
+import {useAppSelector, useAppDispatch} from '@/redux/hooks'
+import {parseCookies} from 'nookies'
+import {updateUser} from '@/redux/user/userSlice'
 
 const navigation = [
 	{
@@ -28,13 +30,23 @@ const navigation = [
 	},
 ]
 
+interface IResult {
+	id: number
+	name: string
+	email: string
+	blocked: boolean
+	role: string
+}
+
 export default function Navbar(): JSX.Element {
+	const cookies = parseCookies()
 	const {t} = useTranslation('layout')
 
 	const [activeTab, setActiveTab] = useState<number>(1)
 	const router = useRouter()
 
 	const user = useAppSelector((state) => state.user)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		const urlString = router.pathname
@@ -52,6 +64,40 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(1)
 		}
 	}, [router])
+
+	useEffect(() => {
+		const userID = localStorage.getItem('rtlUserId')
+		if (cookies.ratethelandlord && userID) {
+			fetch('/api/get-user', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({id: userID}),
+			})
+				.then((result: Response) => {
+					if (!result.ok) {
+						throw new Error()
+					}
+					return result.json()
+				})
+				.then((data: IResult) => {
+					console.log(data)
+					const userInfo = {
+						jwt: {
+							access_token: cookies.ratethelandlord,
+						},
+						result: {
+							...data,
+						},
+					}
+					dispatch(updateUser(userInfo))
+				})
+				.catch((error) => {
+					console.log(error)
+				})
+		}
+	}, [cookies.ratethelandlord])
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({open}) => (

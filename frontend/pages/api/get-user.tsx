@@ -1,12 +1,21 @@
 import {NextApiRequest, NextApiResponse} from 'next'
 
+interface IBody {
+	id: number
+}
+
 const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = req.cookies
 	const jwt = cookies.ratethelandlord
 
-	const id = localStorage.getItem('rtl') || ''
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const {body}: {body: IBody} = req
+
+	const id = body.id
+
+	console.log(id)
 
 	fetch(`${url}/user/${id}`, {
 		headers: {
@@ -21,6 +30,7 @@ const GetUser = (req: NextApiRequest, res: NextApiResponse) => {
 			return result.json()
 		})
 		.then((data) => {
+			console.log(data)
 			res.status(200).json(data)
 		})
 		.catch((err: Response) => {

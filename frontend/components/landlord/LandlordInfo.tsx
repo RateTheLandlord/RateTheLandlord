@@ -1,4 +1,4 @@
-import {classNames} from '@/util/helper-functions'
+import {classNames} from '@/util/helpers/helper-functions'
 import {StarIcon} from '@heroicons/react/solid'
 
 interface IProps {
@@ -7,7 +7,7 @@ interface IProps {
 	total: number
 }
 
-const LandlordInfo = ({name, average, total}:IProps) => {
+const LandlordInfo = ({name, average, total}: IProps) => {
 	return (
 		<div className="w-full border-b border-b-gray-200 pb-4">
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">

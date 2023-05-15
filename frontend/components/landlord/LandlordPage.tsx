@@ -2,9 +2,9 @@ import {useState} from 'react'
 import ReportModal from '../reviews/report-modal'
 import LandlordInfo from './LandlordInfo'
 import {useTranslation} from 'react-i18next'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {StarIcon} from '@heroicons/react/solid'
-import {classNames} from '@/util/helper-functions'
+import {classNames} from '@/util/helpers/helper-functions'
 import ButtonLight from '../ui/button-light'
 
 const LandlordPage = ({
