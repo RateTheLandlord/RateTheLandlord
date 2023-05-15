@@ -91,7 +91,7 @@ function VirtualizedList({ items }: { items: Options[] }) {
                     position: 'relative',
                 }}
             >
-                {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => (
                     <Combobox.Option
                         key={virtualRow.index}
                         style={{
