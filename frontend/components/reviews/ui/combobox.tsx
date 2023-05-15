@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useRef, useState} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Combobox, Transition} from '@headlessui/react'
 import {Options} from '@/util/interfaces'
@@ -73,7 +73,7 @@ export default function ComboBox({
 
 
 function VirtualizedList({ items }: { items: Options[] }) {
-	const parentRef = React.useRef()
+	const parentRef = useRef<HTMLDivElement>(null)
 
     const rowVirtualizer = useVirtualizer({
         count: items?.length,
