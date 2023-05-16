@@ -16,6 +16,7 @@
 		"@hcaptcha/react-hcaptcha": "^1.4.3",
 		"@headlessui/react": "^1.6.5",
 		"@heroicons/react": "^1.0.6",
+		"@tanstack/react-virtual": "beta",
 		"@reduxjs/toolkit": "^1.9.2",
 		"cors": "^2.8.5",
 		"i18next": "^21.8.14",

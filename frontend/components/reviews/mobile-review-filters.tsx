@@ -110,19 +110,19 @@ export default function MobileReviewFilters({
 											setState={setStateFilter}
 											options={stateOptions}
 											name={t('reviews.state')}
-										/>
-										<ComboBox
-											state={cityFilter}
-											setState={setCityFilter}
-											options={cityOptions}
-											name={t('reviews.city')}
-										/>
-										<ComboBox
-											state={zipFilter}
-											setState={setZipFilter}
-											options={zipOptions}
-											name={t('reviews.zip')}
-										/>
+									/>
+									<ComboBox
+										state={cityFilter}
+										setState={setCityFilter}
+										options={cityOptions}
+										name={t('reviews.city')}
+									/>
+									<ComboBox
+										state={zipFilter}
+										setState={setZipFilter}
+										options={zipOptions}
+										name={t('reviews.zip')}
+									/>
 									<div className="mt-5 w-full">
 										<button
 											onClick={() => setMobileFiltersOpen(false)}
