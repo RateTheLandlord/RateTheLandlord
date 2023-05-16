@@ -2,7 +2,7 @@ import React, {SetStateAction, useState} from 'react'
 import {Dialog} from '@headlessui/react'
 import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {useTranslation} from 'react-i18next'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 

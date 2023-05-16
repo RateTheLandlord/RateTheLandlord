@@ -53,6 +53,7 @@ export default function LoginForm(): JSX.Element {
 				setCookie(null, 'ratethelandlord', data.jwt.access_token, {
 					maxAge: 30 * 24 * 60,
 				})
+				localStorage.setItem('rtlUserId', data.result.id.toString())
 				dispatch(updateUser(data))
 				router.push(`/admin/${data.result.id}`).catch((err) => console.log(err))
 			})

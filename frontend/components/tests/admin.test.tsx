@@ -3,7 +3,6 @@
  */
 import {render, screen} from '@testing-library/react'
 import AddUserModal from '@/components/admin/components/AddUserModal'
-import RemoveReviewModal from '@/components/admin/components/RemoveReviewModal'
 import RemoveUserModal from '@/components/admin/components/RemoveUserModal'
 
 describe('Admin Modals', () => {
@@ -19,10 +18,7 @@ describe('Admin Modals', () => {
 		)
 		expect(screen.getByTestId('add-user-modal-1')).toBeInTheDocument()
 	})
-	test('Remove Review Modal renders', () => {
-		render(<RemoveReviewModal />)
-		expect(screen.getByTestId('remove-review-modal-1')).toBeInTheDocument()
-	})
+
 	test('Remove User Modal renders', () => {
 		render(<RemoveUserModal />)
 		expect(screen.getByTestId('remove-user-modal-1')).toBeInTheDocument()

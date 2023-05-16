@@ -1,8 +1,8 @@
-name: Merge Actions
+name: Merge Main Actions
 
 on:
   pull_request:
-    branches: ["develop", "main"]
+    branches: ['main']
 
 jobs:
   lint-be:

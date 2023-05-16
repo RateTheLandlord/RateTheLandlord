@@ -2,8 +2,8 @@
 import React, {Fragment, useRef, useState} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Combobox, Transition} from '@headlessui/react'
-import {Options} from '@/util/interfaces'
-import { useVirtualizer } from '@tanstack/react-virtual';
+import {Options} from '@/util/interfaces/interfaces'
+import {useVirtualizer} from '@tanstack/react-virtual'
 
 interface ComponentProps {
 	name: string
@@ -68,52 +68,55 @@ export default function ComboBox({
 	)
 }
 
-
-function VirtualizedList({ items }: { items: Options[] }) {
+function VirtualizedList({items}: {items: Options[]}) {
 	const parentRef = useRef<HTMLDivElement>(null)
 
-    const rowVirtualizer = useVirtualizer({
-        count: items?.length,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => 35,
-        overscan: 5,
-    });
+	const rowVirtualizer = useVirtualizer({
+		count: items?.length,
+		getScrollElement: () => parentRef.current,
+		estimateSize: () => 35,
+		overscan: 5,
+	})
 
-    return (
-        <div ref={parentRef}>
-            <div
-                style={{
-                    height: `${rowVirtualizer.getTotalSize()}px`,
-                    width: '100%',
-                    position: 'relative',
-                }}
-            >
-                {rowVirtualizer.getVirtualItems().map((virtualRow) => (
-                    <Combobox.Option
-                        key={virtualRow.index}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: `${virtualRow.size}px`,
-                            transform: `translateY(${virtualRow.start}px)`,
-                        }}
-                        className={({ active }) =>
-						`relative cursor-default select-none py-2 pl-10 pr-4 ${	active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
-                            }`
-                        }
-                        value={items?.[virtualRow.index]}
-                    >
-                        {({ selected, active }) => (
-                            <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                                {items?.[virtualRow.index].name}
-                            </span>
-                        )}
-                    </Combobox.Option>
-                ))}
-            </div>
-
-        </div>
-    );
+	return (
+		<div ref={parentRef}>
+			<div
+				style={{
+					height: `${rowVirtualizer.getTotalSize()}px`,
+					width: '100%',
+					position: 'relative',
+				}}
+			>
+				{rowVirtualizer.getVirtualItems().map((virtualRow) => (
+					<Combobox.Option
+						key={virtualRow.index}
+						style={{
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							width: '100%',
+							height: `${virtualRow.size}px`,
+							transform: `translateY(${virtualRow.start}px)`,
+						}}
+						className={({active}) =>
+							`relative cursor-default select-none py-2 pl-10 pr-4 ${
+								active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+							}`
+						}
+						value={items?.[virtualRow.index]}
+					>
+						{({selected, active}) => (
+							<span
+								className={`block truncate ${
+									selected ? 'font-medium' : 'font-normal'
+								}`}
+							>
+								{items?.[virtualRow.index].name}
+							</span>
+						)}
+					</Combobox.Option>
+				))}
+			</div>
+		</div>
+	)
 }

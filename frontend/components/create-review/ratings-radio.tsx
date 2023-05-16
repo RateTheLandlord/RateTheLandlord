@@ -1,6 +1,6 @@
 import React from 'react'
 import {RadioGroup} from '@headlessui/react'
-import {classNames} from '@/util/helper-functions'
+import {classNames} from '@/util/helpers/helper-functions'
 import {useTranslation} from 'react-i18next'
 
 const ratings = [1, 2, 3, 4, 5]
@@ -26,18 +26,18 @@ function RatingsRadio({title, rating, setRating, tooltip}: Props) {
 				<RadioGroup.Label className="sr-only">
 					{t('create-review.review-radio.choose')}
 				</RadioGroup.Label>
-				<div className="grid gap-2 sm:gap-3 grid-cols-5">
+				<div className="grid grid-cols-5 gap-2 sm:gap-3">
 					{ratings.map((option) => (
 						<RadioGroup.Option
 							key={option}
 							value={option}
 							className={({active, checked}) =>
 								classNames(
-									active ? 'ring-2 ring-offset-2 ring-teal-500' : '',
+									active ? 'ring-2 ring-teal-500 ring-offset-2' : '',
 									checked
-										? 'bg-teal-600 border-transparent text-white hover:bg-teal-700'
-										: 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-									'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1',
+										? 'border-transparent bg-teal-600 text-white hover:bg-teal-700'
+										: 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
+									'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1',
 								)
 							}
 						>

@@ -292,4 +292,22 @@ export class ReviewService {
       },
     };
   }
+
+  async getLandlords(): Promise<string[]> {
+    const landlords = await this.databaseService
+      .sql`SELECT DISTINCT landlord FROM review;`;
+    const landlordList = landlords.map(({ landlord }) => landlord);
+
+    return landlordList;
+  }
+
+  async getLandlordReviews(landlord: string): Promise<Review[]> {
+    landlord = decodeURIComponent(landlord);
+
+    console.log(landlord);
+
+    return this.databaseService.sql<
+      Review[]
+    >`Select * FROM review WHERE landlord IN(${landlord});`;
+  }
 }

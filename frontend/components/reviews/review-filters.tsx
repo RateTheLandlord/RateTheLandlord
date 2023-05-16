@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 import SelectList from './ui/select-list'
 import ActiveFilters from './ui/active-filters'
 import SearchBar from './ui/searchbar'
 import MobileReviewFilters from './mobile-review-filters'
 import {useTranslation} from 'react-i18next'
 import ButtonLight from '../ui/button-light'
-import Link from 'next/link'
 import ComboBox from './ui/combobox'
+import {countryOptions} from '@/util/helpers/getCountryCodes'
 
 //Review filters and Logic
 
@@ -25,7 +25,6 @@ interface FiltersProps {
 	setZipFilter: (option: Options) => void
 	activeFilters: Options[] | null
 	cityOptions: Options[]
-	countryOptions: Options[]
 	stateOptions: Options[]
 	zipOptions: Options[]
 	removeFilter: (index: number) => void
@@ -46,7 +45,6 @@ function ReviewFilters({
 	setZipFilter,
 	activeFilters,
 	cityOptions,
-	countryOptions,
 	stateOptions,
 	zipOptions,
 	removeFilter,
@@ -64,7 +62,6 @@ function ReviewFilters({
 				setMobileFiltersOpen={setMobileFiltersOpen}
 				countryFilter={countryFilter}
 				setCountryFilter={setCountryFilter}
-				countryOptions={countryOptions}
 				stateFilter={stateFilter}
 				setStateFilter={setStateFilter}
 				stateOptions={stateOptions}

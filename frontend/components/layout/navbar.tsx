@@ -8,6 +8,9 @@ import {useRouter} from 'next/router'
 import Instagram from '../svg/social/instagram'
 import Twitter from '../svg/social/twitter'
 import TikTok from '../svg/social/tiktok'
+import {useAppSelector, useAppDispatch} from '@/redux/hooks'
+import {parseCookies} from 'nookies'
+import {updateUser} from '@/redux/user/userSlice'
 
 const navigation = [
 	{
@@ -27,11 +30,23 @@ const navigation = [
 	},
 ]
 
+interface IResult {
+	id: number
+	name: string
+	email: string
+	blocked: boolean
+	role: string
+}
+
 export default function Navbar(): JSX.Element {
+	const cookies = parseCookies()
 	const {t} = useTranslation('layout')
 
 	const [activeTab, setActiveTab] = useState<number>(1)
 	const router = useRouter()
+
+	const user = useAppSelector((state) => state.user)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		const urlString = router.pathname
@@ -43,10 +58,45 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(4)
 		} else if (urlString.includes('resources')) {
 			setActiveTab(5)
+		} else if (urlString.includes('admin')) {
+			setActiveTab(6)
 		} else {
 			setActiveTab(1)
 		}
 	}, [router])
+
+	useEffect(() => {
+		const userID = localStorage.getItem('rtlUserId')
+		if (cookies.ratethelandlord && userID) {
+			fetch('/api/get-user', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({id: userID}),
+			})
+				.then((result: Response) => {
+					if (!result.ok) {
+						throw new Error()
+					}
+					return result.json()
+				})
+				.then((data: IResult) => {
+					const userInfo = {
+						jwt: {
+							access_token: cookies.ratethelandlord,
+						},
+						result: {
+							...data,
+						},
+					}
+					dispatch(updateUser(userInfo))
+				})
+				.catch((error) => {
+					console.log(error)
+				})
+		}
+	}, [cookies.ratethelandlord])
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({open}) => (
@@ -92,12 +142,23 @@ export default function Navbar(): JSX.Element {
 									>
 										<a
 											className={`${
-												activeTab === 4 ? 'border-b-2 border-teal-500' : ''
+												activeTab === 5 ? 'border-b-2 border-teal-500' : ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
 											{t('layout.nav.resources')}
 										</a>
 									</Link>
+									{user.jwt.access_token ? (
+										<Link href={`/admin/${user.result.id || 0}`}>
+											<a
+												className={`${
+													activeTab === 6 ? 'border-b-2 border-teal-500' : ''
+												} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
+											>
+												Admin
+											</a>
+										</Link>
+									) : null}
 								</div>
 							</div>
 							<div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">

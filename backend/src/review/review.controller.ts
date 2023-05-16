@@ -95,7 +95,7 @@ export class ReviewController {
   }
 
   //Create Review
-  @Throttle(2, 60)
+  @Throttle(2, 86000)
   @Post()
   async create(
     @Body() review: CreateReview,
@@ -126,5 +126,20 @@ export class ReviewController {
   @Get('/stats')
   getStats(): Promise<IStats> {
     return this.reviewService.getStats();
+  }
+
+  @Throttle(10, 120)
+  @Get('/landlords')
+  getLandlords(): Promise<string[]> {
+    return this.reviewService.getLandlords();
+  }
+
+  @Throttle(10, 120)
+  @Post('/landlords/landlord')
+  getLandlordReviews(
+    @Body() landlord: { landlord: string },
+  ): Promise<Review[]> {
+    console.log(landlord.landlord);
+    return this.reviewService.getLandlordReviews(landlord.landlord);
   }
 }

@@ -7,7 +7,9 @@ import ReviewTable from '@/components/reviews/review-table'
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReportModal from '@/components/reviews/report-modal'
 import MobileReviewFilters from '@/components/reviews/mobile-review-filters'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
+import {Provider} from 'react-redux'
+import {store} from '@/redux/store'
 
 // Test review so the table renders
 const testReview: Review = {
@@ -43,23 +45,34 @@ describe('Reviews Page', () => {
 	})
 	test('Reviews Table component renders', () => {
 		render(
-			<ReviewTable
-				data={[testReview]}
-				setReportOpen={jest.fn()}
-				setSelectedReview={jest.fn()}
-			/>,
+			<Provider store={store}>
+				<ReviewTable
+					data={[testReview]}
+					setReportOpen={jest.fn()}
+					setSelectedReview={jest.fn()}
+					setEditReviewOpen={jest.fn()}
+					setRemoveReviewOpen={jest.fn()}
+				/>
+				,
+			</Provider>,
 		)
 		expect(screen.queryByTestId('review-table-1')).toBeInTheDocument()
 	})
 	test('Reviews Table component does not render when there is no data', () => {
 		render(
-			<ReviewTable
-				data={[]}
-				setReportOpen={jest.fn()}
-				setSelectedReview={jest.fn()}
-			/>,
+			<Provider store={store}>
+				<ReviewTable
+					data={[testReview]}
+					setReportOpen={jest.fn()}
+					setSelectedReview={jest.fn()}
+					setEditReviewOpen={jest.fn()}
+					setRemoveReviewOpen={jest.fn()}
+				/>
+			</Provider>,
 		)
-		expect(screen.queryByTestId('review-table-1')).not.toBeInTheDocument()
+		expect(
+			screen.queryByTestId('review-table-1-no-data'),
+		).not.toBeInTheDocument()
 	})
 	test('Review Filters component renders', () => {
 		render(
@@ -77,7 +90,6 @@ describe('Reviews Page', () => {
 				setZipFilter={jest.fn()}
 				activeFilters={null}
 				cityOptions={[]}
-				countryOptions={[]}
 				stateOptions={[]}
 				zipOptions={[]}
 				removeFilter={jest.fn()}
@@ -110,7 +122,6 @@ describe('Reviews Page', () => {
 				zipFilter={null}
 				setZipFilter={jest.fn()}
 				cityOptions={[]}
-				countryOptions={[]}
 				stateOptions={[]}
 				zipOptions={[]}
 				setSearchState={jest.fn()}
