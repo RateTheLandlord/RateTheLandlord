@@ -21,7 +21,7 @@ function ReviewTable({
 	setReportOpen,
 	setSelectedReview,
 	setRemoveReviewOpen,
-	setEditReviewOpen
+	setEditReviewOpen,
 }: IProps): JSX.Element {
 	const {t} = useTranslation('reviews')
 	const user = useAppSelector((state) => state.user)
@@ -42,7 +42,7 @@ function ReviewTable({
 	}
 
 	if (!data) {
-		return <></>
+		return <div data-testid="review-table-1-no-data"></div>
 	}
 
 	if (data.length) {
