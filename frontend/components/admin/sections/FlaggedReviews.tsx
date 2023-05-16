@@ -80,14 +80,17 @@ const FlaggedReviews = () => {
 						setSuccess={setSuccess}
 						setRemoveAlertOpen={setRemoveAlertOpen}
 						editReviewOpen={editReviewOpen}
+						setSelectedReview={setSelectedReview}
 					/>
-					<RemoveReviewModal selectedReview={selectedReview}
+					<RemoveReviewModal
+						selectedReview={selectedReview}
 						mutateString={'/api/get-flagged'}
 						setRemoveReviewOpen={setRemoveReviewOpen}
 						setSuccess={setSuccess}
 						setRemoveAlertOpen={setRemoveAlertOpen}
-						removeReviewOpen={removeReviewOpen} />
-					
+						removeReviewOpen={removeReviewOpen}
+						setSelectedReview={setSelectedReview}
+					/>
 				</>
 			) : null}
 			<div className="container -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">

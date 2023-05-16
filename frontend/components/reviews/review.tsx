@@ -96,6 +96,8 @@ const Review = () => {
 		}
 	}
 
+	console.log(selectedReview)
+
 	return (
 		<>
 			<ReportModal
@@ -112,6 +114,7 @@ const Review = () => {
 						setSuccess={setSuccess}
 						setRemoveAlertOpen={setRemoveAlertOpen}
 						editReviewOpen={editReviewOpen}
+						setSelectedReview={setSelectedReview}
 					/>
 					<RemoveReviewModal
 						selectedReview={selectedReview}
@@ -120,6 +123,7 @@ const Review = () => {
 						setSuccess={setSuccess}
 						setRemoveAlertOpen={setRemoveAlertOpen}
 						removeReviewOpen={removeReviewOpen}
+						setSelectedReview={setSelectedReview}
 					/>
 				</>
 			) : null}

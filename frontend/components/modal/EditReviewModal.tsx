@@ -17,6 +17,7 @@ interface IProps {
 	setSuccess: Dispatch<SetStateAction<boolean>>
 	setRemoveAlertOpen: Dispatch<SetStateAction<boolean>>
 	editReviewOpen: boolean
+	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 }
 
 const EditReviewModal = ({
@@ -26,6 +27,7 @@ const EditReviewModal = ({
 	setSuccess,
 	setRemoveAlertOpen,
 	editReviewOpen,
+	setSelectedReview,
 }: IProps) => {
 	const [landlord, setLandlord] = useState<string>(
 		selectedReview?.landlord || '',
@@ -68,11 +70,13 @@ const EditReviewModal = ({
 				setEditReviewOpen(false)
 				setSuccess(true)
 				setRemoveAlertOpen(true)
+				setSelectedReview(undefined)
 			})
 			.catch((err) => {
 				console.log(err)
 				setSuccess(false)
 				setRemoveAlertOpen(true)
+				setSelectedReview(undefined)
 			})
 	}
 	return (
@@ -278,7 +282,10 @@ const EditReviewModal = ({
 									<button
 										type="button"
 										className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
-										onClick={() => setEditReviewOpen(false)}
+										onClick={() => {
+											setSelectedReview(undefined)
+											setEditReviewOpen(false)
+										}}
 									>
 										Cancel
 									</button>
