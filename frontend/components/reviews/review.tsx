@@ -10,12 +10,12 @@ import {
 } from '@/components/reviews/functions'
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
-import useSWR, {mutate} from 'swr'
+import useSWR from 'swr'
 import Paginator from './paginator'
-import Modal from '../modal/Modal'
 import Alert from '../alerts/Alert'
-import RemoveReviewModal from '../admin/components/RemoveReviewModal'
 import {fetcher} from '@/util/helpers/fetcher'
+import EditReviewModal from '../modal/EditReviewModal'
+import RemoveReviewModal from '../modal/RemoveReviewModal'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -40,6 +40,7 @@ const Review = () => {
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
 	const [success, setSuccess] = useState(false)
 	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
+	const [editReviewOpen, setEditReviewOpen] = useState(false)
 
 	const queryParams = new URLSearchParams({
 		page: page.toString(),
@@ -95,35 +96,6 @@ const Review = () => {
 		}
 	}
 
-	const onSubmitRemoveReview = (id: number) => {
-		fetch('/api/delete-review', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({id: id}),
-		})
-			.then((result) => {
-				if (!result.ok) {
-					throw new Error()
-				}
-			})
-			.then(() => {
-				mutate(`/api/get-reviews?${queryParams.toString()}`).catch((err) =>
-					console.log(err),
-				)
-				setRemoveReviewOpen(false)
-				setSuccess(true)
-				setRemoveAlertOpen(true)
-			})
-			.catch((err) => {
-				console.log(err)
-				setRemoveAlertOpen(false)
-				setSuccess(false)
-				setRemoveAlertOpen(true)
-			})
-	}
-
 	return (
 		<>
 			<ReportModal
@@ -133,14 +105,21 @@ const Review = () => {
 			/>
 			{selectedReview ? (
 				<>
-					<Modal
-						title="Remove Review"
-						open={removeReviewOpen}
-						setOpen={setRemoveReviewOpen}
-						element={<RemoveReviewModal />}
-						onSubmit={onSubmitRemoveReview}
-						buttonColour="red"
-						selectedId={selectedReview?.id}
+					<EditReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setEditReviewOpen={setEditReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						editReviewOpen={editReviewOpen}
+					/>
+					<RemoveReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setRemoveReviewOpen={setRemoveReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						removeReviewOpen={removeReviewOpen}
 					/>
 				</>
 			) : null}
@@ -174,6 +153,7 @@ const Review = () => {
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
 					setRemoveReviewOpen={setRemoveReviewOpen}
+					setEditReviewOpen={setEditReviewOpen}
 				/>
 				<Paginator
 					onSelect={(page: number) => setPage(page)}

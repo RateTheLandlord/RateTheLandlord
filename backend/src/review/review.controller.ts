@@ -95,7 +95,7 @@ export class ReviewController {
   }
 
   //Create Review
-  @Throttle(2, 60)
+  @Throttle(2, 86000)
   @Post()
   async create(
     @Body() review: CreateReview,

@@ -13,6 +13,7 @@ interface IProps {
 	setReportOpen: Dispatch<SetStateAction<boolean>>
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 	setRemoveReviewOpen: Dispatch<SetStateAction<boolean>>
+	setEditReviewOpen: Dispatch<SetStateAction<boolean>>
 }
 
 function ReviewTable({
@@ -20,6 +21,7 @@ function ReviewTable({
 	setReportOpen,
 	setSelectedReview,
 	setRemoveReviewOpen,
+	setEditReviewOpen
 }: IProps): JSX.Element {
 	const {t} = useTranslation('reviews')
 	const user = useAppSelector((state) => state.user)
@@ -32,6 +34,11 @@ function ReviewTable({
 	const handleDelete = (review: Review) => {
 		setSelectedReview(review)
 		setRemoveReviewOpen(true)
+	}
+
+	const handleEdit = (review: Review) => {
+		setSelectedReview(review)
+		setEditReviewOpen(true)
 	}
 
 	if (!data) {
@@ -120,6 +127,11 @@ function ReviewTable({
 													<div className="mt-4 w-full">
 														<ButtonLight onClick={() => handleDelete(review)}>
 															Remove Review
+														</ButtonLight>
+													</div>
+													<div className="mt-4 w-full">
+														<ButtonLight onClick={() => handleEdit(review)}>
+															Edit Review
 														</ButtonLight>
 													</div>
 												</>
