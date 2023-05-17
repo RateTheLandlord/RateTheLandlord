@@ -31,11 +31,8 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		updateUser(state, action: PayloadAction<IUsers>) {
-			state.result.email = action.payload.result.email
-			state.result.id = action.payload.result.id
-			state.result.name = action.payload.result.name
-			state.result.blocked = action.payload.result.blocked
-			state.result.role = action.payload.result.role
+			state.jwt = action.payload.jwt
+			state.result = action.payload.result
 		},
 	},
 })

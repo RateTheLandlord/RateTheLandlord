@@ -1,4 +1,4 @@
-import {classNames} from '@/util/helper-functions'
+import {classNames} from '@/util/helpers/helper-functions'
 import {Switch} from '@headlessui/react'
 import {Dispatch, SetStateAction} from 'react'
 
@@ -18,7 +18,10 @@ const AddUserModal = ({
 	isAdmin,
 }: IProps) => {
 	return (
-		<form className="space-y-8 divide-y divide-gray-200 w-full container" data-testid="add-user-modal-1">
+		<form
+			className="container w-full space-y-8 divide-y divide-gray-200"
+			data-testid="add-user-modal-1"
+		>
 			<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 				<div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
 					<div className="space-y-6 sm:space-y-5">
@@ -83,7 +86,7 @@ const AddUserModal = ({
 						>
 							<Switch.Label
 								as="span"
-								className="text-sm font-medium text-gray-900 w-full"
+								className="w-full text-sm font-medium text-gray-900"
 								passive
 							>
 								Admin?

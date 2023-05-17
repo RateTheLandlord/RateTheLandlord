@@ -3,9 +3,10 @@ import {Dialog, Popover, Transition} from '@headlessui/react'
 import {XIcon} from '@heroicons/react/outline'
 import MobileSelectList from './ui/mobile-select-list'
 import SearchBar from './ui/searchbar'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 import {useTranslation} from 'react-i18next'
 import ComboBox from './ui/combobox'
+import {countryOptions} from '@/util/helpers/getCountryCodes'
 
 interface FiltersProps {
 	mobileFiltersOpen: boolean
@@ -19,7 +20,6 @@ interface FiltersProps {
 	zipFilter: Options | null
 	setZipFilter: (option: Options) => void
 	cityOptions: Options[]
-	countryOptions: Options[]
 	stateOptions: Options[]
 	zipOptions: Options[]
 	setSearchState: (str: string) => void
@@ -37,7 +37,6 @@ export default function MobileReviewFilters({
 	zipFilter,
 	setZipFilter,
 	cityOptions,
-	countryOptions,
 	stateOptions,
 	zipOptions,
 	setSearchState,
@@ -106,23 +105,23 @@ export default function MobileReviewFilters({
 										name={t('reviews.country')}
 									/>
 									<ComboBox
-											state={stateFilter}
-											setState={setStateFilter}
-											options={stateOptions}
-											name={t('reviews.state')}
-										/>
-										<ComboBox
-											state={cityFilter}
-											setState={setCityFilter}
-											options={cityOptions}
-											name={t('reviews.city')}
-										/>
-										<ComboBox
-											state={zipFilter}
-											setState={setZipFilter}
-											options={zipOptions}
-											name={t('reviews.zip')}
-										/>
+										state={stateFilter}
+										setState={setStateFilter}
+										options={stateOptions}
+										name={t('reviews.state')}
+									/>
+									<ComboBox
+										state={cityFilter}
+										setState={setCityFilter}
+										options={cityOptions}
+										name={t('reviews.city')}
+									/>
+									<ComboBox
+										state={zipFilter}
+										setState={setZipFilter}
+										options={zipOptions}
+										name={t('reviews.zip')}
+									/>
 									<div className="mt-5 w-full">
 										<button
 											onClick={() => setMobileFiltersOpen(false)}

@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react'
 import useSWR, {useSWRConfig} from 'swr'
 import AddUserModal from '../components/AddUserModal'
 import RemoveUserModal from '../components/RemoveUserModal'
+import {fetcher} from '@/util/helpers/fetcher'
 
 interface IUsers {
 	id: number
@@ -13,8 +14,6 @@ interface IUsers {
 	blocked: boolean
 	role: string
 }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const TeamMembers = () => {
 	const {mutate} = useSWRConfig()
@@ -110,7 +109,7 @@ const TeamMembers = () => {
 			})
 	}
 	return (
-		<div className="w-full flex flex-wrap justify-center px-4 sm:px-6 lg:px-8">
+		<div className="flex w-full flex-wrap justify-center px-4 sm:px-6 lg:px-8">
 			{removeAlertOpen ? (
 				<div className="w-full">
 					<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
@@ -145,7 +144,7 @@ const TeamMembers = () => {
 				selectedId={1}
 			/>
 
-			<div className="sm:flex sm:items-center w-full container mt-3">
+			<div className="container mt-3 w-full sm:flex sm:items-center">
 				<div className="sm:flex-auto">
 					<h1 className="text-xl font-semibold text-gray-900">Users</h1>
 				</div>
@@ -158,7 +157,7 @@ const TeamMembers = () => {
 					</button>
 				</div>
 			</div>
-			<div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg container">
+			<div className="container -mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
 				<table className="min-w-full divide-y divide-gray-300">
 					<thead className="bg-gray-50">
 						<tr>

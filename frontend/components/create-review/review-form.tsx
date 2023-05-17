@@ -9,22 +9,19 @@ import HCaptcha from '@hcaptcha/react-hcaptcha'
 import MaliciousStringAlert from '../alerts/MaliciousStringAlert'
 import RatingsRadio from './ratings-radio'
 import SuccessModal from './success-modal'
-import countries from '@/util/countries.json'
+import countries from '@/util/countries/countries.json'
 import {postcodeValidator} from 'postcode-validator'
-import provinces from '@/util/provinces.json'
-import regions from '@/util/regions.json'
-import states from '@/util/states.json'
-import territories from '@/util/territories.json'
-import nz_provinces from '@/util/nz-provinces.json'
+import provinces from '@/util/countries/canada/provinces.json'
+import regions from '@/util/countries/unitedKingdom/regions.json'
+import states from '@/util/countries/unitedStates/states.json'
+import territories from '@/util/countries/australia/territories.json'
+import nz_provinces from '@/util/countries/newZealand/nz-provinces.json'
 import {useTranslation} from 'react-i18next'
+import {country_codes} from '@/util/helpers/getCountryCodes'
 
 //This components will hold the review form and it's data handling logic
 //Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
 //Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
-
-const country_codes = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU' || c === 'NZ',
-)
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
@@ -531,9 +528,7 @@ function ReviewForm(): JSX.Element {
 						className="flex justify-center sm:justify-end"
 						data-testid="create-review-form-submit-button-1"
 					>
-						<ButtonLight data-umami-event="Create Review Form Reset">
-							{t('create-review.review-form.reset')}
-						</ButtonLight>
+						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
 						{loading ? (
 							<div
 								className={`hover:bg-teal-700' } ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-200 bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500
@@ -559,7 +554,6 @@ function ReviewForm(): JSX.Element {
 									loading ||
 									review.length > 2000
 								}
-								data-umami-event="Review Submitted"
 							>
 								{t('create-review.review-form.submit')}
 							</Button>

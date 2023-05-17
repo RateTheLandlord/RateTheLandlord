@@ -1,4 +1,4 @@
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 import React from 'react'
 
 interface Props {
@@ -15,13 +15,13 @@ export default function ActiveFilters({
 	return (
 		<span
 			key={activeFilter.name}
-			className="m-1 inline-flex rounded-full border border-gray-200 items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900"
+			className="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900"
 		>
 			<span>{activeFilter.name}</span>
 			<button
 				onClick={() => removeFilter(index)}
 				type="button"
-				className="flex-shrink-0 ml-1 h-4 w-4 p-1 rounded-full inline-flex text-gray-400 hover:bg-gray-200 hover:text-gray-500"
+				className="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
 			>
 				<span className="sr-only">Remove filter for {activeFilter.name}</span>
 				<svg

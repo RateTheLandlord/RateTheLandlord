@@ -8,6 +8,9 @@ import {useRouter} from 'next/router'
 import Instagram from '../svg/social/instagram'
 import Twitter from '../svg/social/twitter'
 import TikTok from '../svg/social/tiktok'
+import {useAppSelector, useAppDispatch} from '@/redux/hooks'
+import {parseCookies} from 'nookies'
+import {updateUser} from '@/redux/user/userSlice'
 
 const navigation = [
 	{
@@ -27,11 +30,23 @@ const navigation = [
 	},
 ]
 
+interface IResult {
+	id: number
+	name: string
+	email: string
+	blocked: boolean
+	role: string
+}
+
 export default function Navbar(): JSX.Element {
+	const cookies = parseCookies()
 	const {t} = useTranslation('layout')
 
 	const [activeTab, setActiveTab] = useState<number>(1)
 	const router = useRouter()
+
+	const user = useAppSelector((state) => state.user)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		const urlString = router.pathname
@@ -43,10 +58,45 @@ export default function Navbar(): JSX.Element {
 			setActiveTab(4)
 		} else if (urlString.includes('resources')) {
 			setActiveTab(5)
+		} else if (urlString.includes('admin')) {
+			setActiveTab(6)
 		} else {
 			setActiveTab(1)
 		}
 	}, [router])
+
+	useEffect(() => {
+		const userID = localStorage.getItem('rtlUserId')
+		if (cookies.ratethelandlord && userID) {
+			fetch('/api/get-user', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({id: userID}),
+			})
+				.then((result: Response) => {
+					if (!result.ok) {
+						throw new Error()
+					}
+					return result.json()
+				})
+				.then((data: IResult) => {
+					const userInfo = {
+						jwt: {
+							access_token: cookies.ratethelandlord,
+						},
+						result: {
+							...data,
+						},
+					}
+					dispatch(updateUser(userInfo))
+				})
+				.catch((error) => {
+					console.log(error)
+				})
+		}
+	}, [cookies.ratethelandlord])
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({open}) => (
@@ -65,10 +115,7 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<Link
-										href="/reviews"
-										data-umami-event="Navbar Link to Reviews"
-									>
+									<Link href="/reviews">
 										<a
 											className={`${
 												activeTab === 2 ? 'border-b-2 border-teal-500' : ''
@@ -77,7 +124,7 @@ export default function Navbar(): JSX.Element {
 											{t('layout.nav.reviews')}
 										</a>
 									</Link>
-									<Link href="/about" data-umami-event="Navbar Link to About">
+									<Link href="/about">
 										<a
 											className={`${
 												activeTab === 3 ? 'border-b-2 border-teal-500' : ''
@@ -86,18 +133,26 @@ export default function Navbar(): JSX.Element {
 											{t('layout.nav.about')}
 										</a>
 									</Link>
-									<Link
-										href="/resources"
-										data-umami-event="Navbar Link to Resources"
-									>
+									<Link href="/resources">
 										<a
 											className={`${
-												activeTab === 4 ? 'border-b-2 border-teal-500' : ''
+												activeTab === 5 ? 'border-b-2 border-teal-500' : ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
 											{t('layout.nav.resources')}
 										</a>
 									</Link>
+									{user.jwt.access_token ? (
+										<Link href={`/admin/${user.result.id || 0}`}>
+											<a
+												className={`${
+													activeTab === 6 ? 'border-b-2 border-teal-500' : ''
+												} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
+											>
+												Admin
+											</a>
+										</Link>
+									) : null}
 								</div>
 							</div>
 							<div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -127,7 +182,6 @@ export default function Navbar(): JSX.Element {
 											key={item.name}
 											href={item.href}
 											className="text-gray-400 hover:text-gray-500"
-											data-umami-event={`Footer Link to ${item.name}`}
 										>
 											<span className="sr-only">{item.name}</span>
 											<item.icon aria-hidden="true" />
@@ -136,10 +190,7 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<Link
-										href="/create-review"
-										data-umami-event="Navbar Link to Create Review"
-									>
+									<Link href="/create-review">
 										<a className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
 											{t('layout.nav.submit')}
 										</a>
@@ -164,10 +215,7 @@ export default function Navbar(): JSX.Element {
 					<Disclosure.Panel className="lg:hidden">
 						<div className="space-y-1 pt-2 pb-3">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-							<Link
-								href="/reviews"
-								data-umami-event="Mobile Navbar Link to Reviews Page"
-							>
+							<Link href="/reviews">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer bg-teal-50 py-2 pl-3 pr-4 text-base font-medium text-teal-700 ${
@@ -177,10 +225,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.reviews')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/create-review"
-								data-umami-event="Navbar Mobile Link to Create Review"
-							>
+							<Link href="/create-review">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
@@ -190,10 +235,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.submit')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/about"
-								data-umami-event="Navbar Mobile Link to About"
-							>
+							<Link href="/about">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
@@ -203,10 +245,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.about')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/resources"
-								data-umami-event="Navbar Mobile Link to Resources"
-							>
+							<Link href="/resources">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${

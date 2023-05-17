@@ -1,8 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useRef, useState} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Combobox, Transition} from '@headlessui/react'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
+import {useVirtualizer} from '@tanstack/react-virtual'
 
 interface ComponentProps {
 	name: string
@@ -34,7 +35,6 @@ export default function ComboBox({
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 					<Combobox.Input
 						className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-						data-umami-event={`Select List Interaction for ${name}`}
 						displayValue={(state: Options) => state?.name}
 						placeholder={`Search ${name}`}
 						onChange={(event) => setQuery(event.target.value)}
@@ -58,37 +58,64 @@ export default function ComboBox({
 								Nothing found.
 							</div>
 						) : (
-							filterOptions.map((option) => (
-								<Combobox.Option
-									key={option.id}
-									className={({active}) =>
-										`relative cursor-default select-none py-2 pl-10 pr-4 ${
-											active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
-										}`
-									}
-									value={option}
-								>
-									<span
-										className={`block truncate ${
-											option.name === state?.name
-												? 'font-medium'
-												: 'font-normal'
-										}`}
-									>
-										{option.name}
-									</span>
-
-									{option.name === state?.name ? (
-										<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-											<CheckIcon className="h-5 w-5" aria-hidden="true" />
-										</span>
-									) : null}
-								</Combobox.Option>
-							))
+							<VirtualizedList items={filterOptions ?? []} />
 						)}
 					</Combobox.Options>
 				</Transition>
 			</div>
 		</Combobox>
+	)
+}
+
+function VirtualizedList({items}: {items: Options[]}) {
+	const parentRef = useRef<HTMLDivElement>(null)
+
+	const rowVirtualizer = useVirtualizer({
+		count: items?.length,
+		getScrollElement: () => parentRef.current,
+		estimateSize: () => 35,
+		overscan: 5,
+	})
+
+	return (
+		<div ref={parentRef}>
+			<div
+				style={{
+					height: `${rowVirtualizer.getTotalSize()}px`,
+					width: '100%',
+					position: 'relative',
+				}}
+			>
+				{rowVirtualizer.getVirtualItems().map((virtualRow) => (
+					<Combobox.Option
+						key={virtualRow.index}
+						style={{
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							width: '100%',
+							height: `${virtualRow.size}px`,
+							transform: `translateY(${virtualRow.start}px)`,
+						}}
+						className={({active}) =>
+							`relative cursor-default select-none py-2 pl-10 pr-4 ${
+								active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+							}`
+						}
+						value={items?.[virtualRow.index]}
+					>
+						{({selected, active}) => (
+							<span
+								className={`block truncate ${
+									selected ? 'font-medium' : 'font-normal'
+								}`}
+							>
+								{items?.[virtualRow.index].name}
+							</span>
+						)}
+					</Combobox.Option>
+				))}
+			</div>
+		</div>
 	)
 }

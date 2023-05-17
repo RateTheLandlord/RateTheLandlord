@@ -1,19 +1,21 @@
 import ReviewFilters from '@/components/reviews/review-filters'
 import ReviewTable from '@/components/reviews/review-table'
-import {sortOptions} from '@/util/filter-options'
-import {Options, Review} from '@/util/interfaces'
+import {sortOptions} from '@/util/helpers/filter-options'
+import {Options, Review} from '@/util/interfaces/interfaces'
 import {
 	updateActiveFilters,
 	getStateOptions,
 	getCityOptions,
 	getZipOptions,
 } from '@/components/reviews/functions'
-import countries from '@/util/countries.json'
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
-import Head from 'next/head'
 import useSWR from 'swr'
 import Paginator from './paginator'
+import Alert from '../alerts/Alert'
+import {fetcher} from '@/util/helpers/fetcher'
+import EditReviewModal from '../modal/EditReviewModal'
+import RemoveReviewModal from '../modal/RemoveReviewModal'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -24,12 +26,6 @@ export type ReviewsResponse = {
 	zips: string[]
 	limit: number
 }
-
-const country_codes: string[] = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU' || c === 'NZ',
-)
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
@@ -42,6 +38,9 @@ const Review = () => {
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
+	const [success, setSuccess] = useState(false)
+	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
+	const [editReviewOpen, setEditReviewOpen] = useState(false)
 
 	const queryParams = new URLSearchParams({
 		page: page.toString(),
@@ -61,6 +60,7 @@ const Review = () => {
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 	const [reportOpen, setReportOpen] = useState<boolean>(false)
+	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
@@ -69,25 +69,6 @@ const Review = () => {
 			setReviews(data.reviews)
 		}
 	}, [data])
-
-	const countryOptions: Options[] = country_codes.map(
-		(item: string, ind: number): Options => {
-			return {id: ind + 1, name: countries[item] as string, value: item}
-		},
-	)
-
-	const cityOptions = getCityOptions(data?.cities ?? [])
-	const stateOptions = getStateOptions(data?.states ?? [])
-	const zipOptions = getZipOptions(data?.zips ?? [])
-
-	const removeFilter = (index: number) => {
-		if (activeFilters?.length) {
-			if (cityFilter === activeFilters[index]) setCityFilter(null)
-			if (stateFilter === activeFilters[index]) setStateFilter(null)
-			if (countryFilter === activeFilters[index]) setCountryFilter(null)
-			if (zipFilter === activeFilters[index]) setZipFilter(null)
-		}
-	}
 
 	useEffect(() => {
 		setActiveFilters(
@@ -102,17 +83,54 @@ const Review = () => {
 		selectedSort,
 	])
 
+	const cityOptions = getCityOptions(data?.cities ?? [])
+	const stateOptions = getStateOptions(data?.states ?? [])
+	const zipOptions = getZipOptions(data?.zips ?? [])
+
+	const removeFilter = (index: number) => {
+		if (activeFilters?.length) {
+			if (cityFilter === activeFilters[index]) setCityFilter(null)
+			if (stateFilter === activeFilters[index]) setStateFilter(null)
+			if (countryFilter === activeFilters[index]) setCountryFilter(null)
+			if (zipFilter === activeFilters[index]) setZipFilter(null)
+		}
+	}
+
 	return (
 		<>
-			<Head>
-				<title>Reviews | Rate The Landlord</title>
-			</Head>
 			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}
 				selectedReview={selectedReview}
 			/>
+			{selectedReview ? (
+				<>
+					<EditReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setEditReviewOpen={setEditReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						editReviewOpen={editReviewOpen}
+						setSelectedReview={setSelectedReview}
+					/>
+					<RemoveReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setRemoveReviewOpen={setRemoveReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						removeReviewOpen={removeReviewOpen}
+						setSelectedReview={setSelectedReview}
+					/>
+				</>
+			) : null}
 			<div className="w-full">
+				{removeAlertOpen ? (
+					<div className="w-full">
+						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
+					</div>
+				) : null}
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
@@ -128,7 +146,6 @@ const Review = () => {
 					setZipFilter={setZipFilter}
 					cityOptions={cityOptions}
 					stateOptions={stateOptions}
-					countryOptions={countryOptions}
 					zipOptions={zipOptions}
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}
@@ -137,6 +154,8 @@ const Review = () => {
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
+					setRemoveReviewOpen={setRemoveReviewOpen}
+					setEditReviewOpen={setEditReviewOpen}
 				/>
 				<Paginator
 					onSelect={(page: number) => setPage(page)}

@@ -41,7 +41,6 @@ function Footer(): JSX.Element {
 							key={item.name}
 							href={item.href}
 							className="text-gray-400 hover:text-gray-500"
-							data-umami-event={`Footer Link to ${item.name}`}
 						>
 							<span className="sr-only">{item.name}</span>
 							<item.icon aria-hidden="true" />

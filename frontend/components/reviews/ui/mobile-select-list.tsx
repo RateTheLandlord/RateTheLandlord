@@ -1,7 +1,7 @@
 import {Fragment} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
-import {Options} from '@/util/interfaces'
+import {Options} from '@/util/interfaces/interfaces'
 
 interface ComponentProps {
 	name: string
@@ -23,7 +23,7 @@ export default function MobileSelectList({
 					<div className="relative w-full pt-2">
 						<Listbox.Button
 							className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-							data-umami-event={`Mobile Select Interaction for ${name}`}
+						
 						>
 							<span className="block truncate">{state?.name || name}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
