@@ -226,13 +226,11 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 										setReason(reportReasons[0].reason)
 										setIsOpen(false)
 									}}
-									data-umami-event="Report Cancelled"
 								>
 									{t('reviews.report.cancel')}
 								</ButtonLight>
 								<Button
 									onClick={() => handleSubmit()}
-									data-umami-event="Report Submitted"
 									disabled={!token || reason.length >= 255}
 								>
 									{t('reviews.report.submit')}
