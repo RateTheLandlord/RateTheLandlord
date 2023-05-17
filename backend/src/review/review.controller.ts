@@ -139,7 +139,6 @@ export class ReviewController {
   getLandlordReviews(
     @Body() landlord: { landlord: string },
   ): Promise<Review[]> {
-    console.log(landlord.landlord);
     return this.reviewService.getLandlordReviews(landlord.landlord);
   }
 }

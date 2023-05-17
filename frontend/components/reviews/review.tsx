@@ -96,8 +96,6 @@ const Review = () => {
 		}
 	}
 
-	console.log(selectedReview)
-
 	return (
 		<>
 			<ReportModal
