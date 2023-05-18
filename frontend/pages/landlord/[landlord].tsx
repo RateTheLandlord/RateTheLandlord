@@ -71,17 +71,24 @@ const Landlord = ({landlord, reviews}: IProps) => {
 }
 
 export async function getStaticPaths() {
-	const req = await fetch(`http://backend:8080/review/landlords`)
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const data: string[] = await req.json()
+	try {
+		const req = await fetch(`http://backend:8080/review/landlords`)
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const data: string[] = await req.json()
 
-	const paths = data.map((landlord) => ({
-		params: {landlord: encodeURIComponent(landlord)},
-	}))
+		const paths = data.map((landlord) => ({
+			params: {landlord: encodeURIComponent(landlord)},
+		}))
 
-	return {
-		paths: paths,
-		fallback: 'blocking',
+		return {
+			paths: paths,
+			fallback: 'blocking',
+		}
+	} catch (error) {
+		return {
+			paths: [],
+			fallback: 'blocking',
+		}
 	}
 }
 

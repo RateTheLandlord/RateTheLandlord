@@ -19,8 +19,6 @@ const LandlordPage = ({
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
-	console.log(reviews)
-
 	if (!reviews.length) return <div>Loading... </div>
 
 	const totalStars = reviews.reduce(

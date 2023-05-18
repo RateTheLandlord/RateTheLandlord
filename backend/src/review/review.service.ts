@@ -304,8 +304,6 @@ export class ReviewService {
   async getLandlordReviews(landlord: string): Promise<Review[]> {
     landlord = decodeURIComponent(landlord);
 
-    console.log(landlord);
-
     return this.databaseService.sql<
       Review[]
     >`Select * FROM review WHERE landlord IN(${landlord});`;

@@ -18,6 +18,8 @@
 		"@heroicons/react": "^1.0.6",
 		"@tanstack/react-virtual": "beta",
 		"@reduxjs/toolkit": "^1.9.2",
+		"@tanstack/react-virtual": "beta",
+		"axios": "^1.4.0",
 		"cors": "^2.8.5",
 		"i18next": "^21.8.14",
 		"i18next-browser-languagedetector": "^6.1.4",

@@ -115,10 +115,7 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<Link
-										href="/reviews"
-										data-umami-event="Navbar Link to Reviews"
-									>
+									<Link href="/reviews">
 										<a
 											className={`${
 												activeTab === 2 ? 'border-b-2 border-teal-500' : ''
@@ -127,7 +124,7 @@ export default function Navbar(): JSX.Element {
 											{t('layout.nav.reviews')}
 										</a>
 									</Link>
-									<Link href="/about" data-umami-event="Navbar Link to About">
+									<Link href="/about">
 										<a
 											className={`${
 												activeTab === 3 ? 'border-b-2 border-teal-500' : ''
@@ -136,10 +133,7 @@ export default function Navbar(): JSX.Element {
 											{t('layout.nav.about')}
 										</a>
 									</Link>
-									<Link
-										href="/resources"
-										data-umami-event="Navbar Link to Resources"
-									>
+									<Link href="/resources">
 										<a
 											className={`${
 												activeTab === 5 ? 'border-b-2 border-teal-500' : ''
@@ -188,7 +182,6 @@ export default function Navbar(): JSX.Element {
 											key={item.name}
 											href={item.href}
 											className="text-gray-400 hover:text-gray-500"
-											data-umami-event={`Footer Link to ${item.name}`}
 										>
 											<span className="sr-only">{item.name}</span>
 											<item.icon aria-hidden="true" />
@@ -197,10 +190,7 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<Link
-										href="/create-review"
-										data-umami-event="Navbar Link to Create Review"
-									>
+									<Link href="/create-review">
 										<a className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
 											{t('layout.nav.submit')}
 										</a>
@@ -225,10 +215,7 @@ export default function Navbar(): JSX.Element {
 					<Disclosure.Panel className="lg:hidden">
 						<div className="space-y-1 pt-2 pb-3">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-							<Link
-								href="/reviews"
-								data-umami-event="Mobile Navbar Link to Reviews Page"
-							>
+							<Link href="/reviews">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer bg-teal-50 py-2 pl-3 pr-4 text-base font-medium text-teal-700 ${
@@ -238,10 +225,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.reviews')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/create-review"
-								data-umami-event="Navbar Mobile Link to Create Review"
-							>
+							<Link href="/create-review">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
@@ -251,10 +235,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.submit')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/about"
-								data-umami-event="Navbar Mobile Link to About"
-							>
+							<Link href="/about">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
@@ -264,10 +245,7 @@ export default function Navbar(): JSX.Element {
 									{t('layout.nav.about')}
 								</Disclosure.Button>
 							</Link>
-							<Link
-								href="/resources"
-								data-umami-event="Navbar Mobile Link to Resources"
-							>
+							<Link href="/resources">
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
