@@ -16,6 +16,7 @@ import Alert from '../alerts/Alert'
 import {fetcher} from '@/util/helpers/fetcher'
 import EditReviewModal from '../modal/EditReviewModal'
 import RemoveReviewModal from '../modal/RemoveReviewModal'
+import InfiniteScroll from './InfiniteScroll'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -66,7 +67,7 @@ const Review = () => {
 
 	useEffect(() => {
 		if (data) {
-			setReviews(data.reviews)
+			setReviews([...reviews, ...data.reviews])
 		}
 	}, [data])
 
@@ -95,6 +96,8 @@ const Review = () => {
 			if (zipFilter === activeFilters[index]) setZipFilter(null)
 		}
 	}
+
+	console.log(page)
 
 	return (
 		<>
@@ -150,19 +153,28 @@ const Review = () => {
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}
 				/>
-				<ReviewTable
+				<InfiniteScroll
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
 					setRemoveReviewOpen={setRemoveReviewOpen}
 					setEditReviewOpen={setEditReviewOpen}
+					page={page}
+					setPage={setPage}
 				/>
-				<Paginator
+				{/* <ReviewTable
+					data={reviews}
+					setReportOpen={setReportOpen}
+					setSelectedReview={setSelectedReview}
+					setRemoveReviewOpen={setRemoveReviewOpen}
+					setEditReviewOpen={setEditReviewOpen}
+				/> */}
+				{/* <Paginator
 					onSelect={(page: number) => setPage(page)}
 					currentPage={page}
 					totalPages={data?.total ?? 0}
 					limit={data?.limit ?? 25}
-				/>
+				/> */}
 			</div>
 		</>
 	)
