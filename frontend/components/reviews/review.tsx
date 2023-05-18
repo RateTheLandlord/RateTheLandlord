@@ -1,5 +1,4 @@
 import ReviewFilters from '@/components/reviews/review-filters'
-import ReviewTable from '@/components/reviews/review-table'
 import {sortOptions} from '@/util/helpers/filter-options'
 import {Options, Review} from '@/util/interfaces/interfaces'
 import {
@@ -11,7 +10,6 @@ import {
 import React, {useEffect, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
 import useSWR from 'swr'
-import Paginator from './paginator'
 import Alert from '../alerts/Alert'
 import {fetcher} from '@/util/helpers/fetcher'
 import EditReviewModal from '../modal/EditReviewModal'
@@ -42,6 +40,7 @@ const Review = () => {
 	const [success, setSuccess] = useState(false)
 	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
 	const [editReviewOpen, setEditReviewOpen] = useState(false)
+	const [hasMore, setHasMore] = useState(true) // Track if there is more content to load
 
 	const queryParams = new URLSearchParams({
 		page: page.toString(),
@@ -70,6 +69,12 @@ const Review = () => {
 			setReviews([...reviews, ...data.reviews])
 		}
 	}, [data])
+
+	useEffect(() => {
+		if (data) {
+			if (reviews.length >= data?.total) setHasMore(false)
+		}
+	}, [reviews, data])
 
 	useEffect(() => {
 		setActiveFilters(
@@ -159,22 +164,9 @@ const Review = () => {
 					setSelectedReview={setSelectedReview}
 					setRemoveReviewOpen={setRemoveReviewOpen}
 					setEditReviewOpen={setEditReviewOpen}
-					page={page}
 					setPage={setPage}
+					hasMore={hasMore}
 				/>
-				{/* <ReviewTable
-					data={reviews}
-					setReportOpen={setReportOpen}
-					setSelectedReview={setSelectedReview}
-					setRemoveReviewOpen={setRemoveReviewOpen}
-					setEditReviewOpen={setEditReviewOpen}
-				/> */}
-				{/* <Paginator
-					onSelect={(page: number) => setPage(page)}
-					currentPage={page}
-					totalPages={data?.total ?? 0}
-					limit={data?.limit ?? 25}
-				/> */}
 			</div>
 		</>
 	)

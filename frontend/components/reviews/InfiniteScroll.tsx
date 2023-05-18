@@ -8,8 +8,8 @@ interface IProps {
 	setSelectedReview: Dispatch<SetStateAction<Review | undefined>>
 	setRemoveReviewOpen: Dispatch<SetStateAction<boolean>>
 	setEditReviewOpen: Dispatch<SetStateAction<boolean>>
-	page: number
 	setPage: Dispatch<SetStateAction<number>>
+	hasMore: boolean
 }
 
 function InfiniteScroll({
@@ -18,12 +18,11 @@ function InfiniteScroll({
 	setSelectedReview,
 	setRemoveReviewOpen,
 	setEditReviewOpen,
-	page,
 	setPage,
+	hasMore,
 }: IProps) {
 	const [content, setContent] = useState<Review[]>([]) // Store loaded content
 	const [isLoading, setIsLoading] = useState(false) // Track loading state
-	const [hasMore, setHasMore] = useState(true) // Track if there is more content to load
 
 	// Add a scroll event listener
 	useEffect(() => {
@@ -61,7 +60,11 @@ function InfiniteScroll({
 				setRemoveReviewOpen={setRemoveReviewOpen}
 				setEditReviewOpen={setEditReviewOpen}
 			/>
-			{isLoading && <div>Loading...</div>}
+			{isLoading && (
+				<div className="flex w-full items-center justify-center">
+					<div className="h-16 w-16 animate-spin rounded-full border-t-4 border-b-4 border-teal-400"></div>
+				</div>
+			)}
 		</div>
 	)
 }
