@@ -19,10 +19,6 @@ import nz_provinces from '@/util/countries/newZealand/nz-provinces.json'
 import {useTranslation} from 'react-i18next'
 import {country_codes} from '@/util/helpers/getCountryCodes'
 
-//This components will hold the review form and it's data handling logic
-//Completed reviews should be sent to the backend with a success confirmation for the user (maybe need a Modal?)
-//Once completed, it should give an option to reset the form for another review or direct Client to Reviews page
-
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {

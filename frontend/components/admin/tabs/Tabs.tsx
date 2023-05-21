@@ -40,7 +40,6 @@ const Tabs = ({
 				<label htmlFor="tabs" className="sr-only">
 					Select a tab
 				</label>
-				{/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
 				<select
 					id="tabs"
 					name="tabs"
@@ -62,8 +61,8 @@ const Tabs = ({
 								className={classNames(
 									tab.current
 										? 'border-indigo-500 text-indigo-600'
-										: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-									'w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm',
+										: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+									'w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium',
 								)}
 							>
 								{tab.name}

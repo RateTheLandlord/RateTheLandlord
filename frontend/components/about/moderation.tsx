@@ -17,7 +17,11 @@ const Moderation = () => {
 				</h3>
 				{paragraphs.map((p, i) => {
 					return (
-						<p key={i} className="mt-8 text-xl leading-8 text-gray-500">
+						<p
+							role="paragraph"
+							key={i}
+							className="mt-8 text-xl leading-8 text-gray-500"
+						>
 							{p}
 						</p>
 					)
