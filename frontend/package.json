@@ -10,7 +10,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"tsc": "tsc",
-		"test": "jest --watch"
+		"test": "jest --watch",
+		"test-merge": "jest"
 	},
 	"dependencies": {
 		"@hcaptcha/react-hcaptcha": "^1.4.3",
