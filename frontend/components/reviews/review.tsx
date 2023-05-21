@@ -7,7 +7,7 @@ import {
 	getCityOptions,
 	getZipOptions,
 } from '@/components/reviews/functions'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
 import useSWR from 'swr'
 import Alert from '../alerts/Alert'
@@ -42,16 +42,32 @@ const Review = () => {
 	const [editReviewOpen, setEditReviewOpen] = useState(false)
 	const [hasMore, setHasMore] = useState(true) // Track if there is more content to load
 
-	const queryParams = new URLSearchParams({
-		page: page.toString(),
-		sort: selectedSort.value,
-		state: stateFilter?.value || '',
-		country: countryFilter?.value || '',
-		city: cityFilter?.value || '',
-		zip: zipFilter?.value || '',
-		search: searchState || '',
-		limit: '25',
-	})
+	const [reportOpen, setReportOpen] = useState<boolean>(false)
+	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
+
+	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
+
+	const queryParams = useMemo(() => {
+		const params = new URLSearchParams({
+			page: page.toString(),
+			sort: selectedSort.value,
+			state: stateFilter?.value || '',
+			country: countryFilter?.value || '',
+			city: cityFilter?.value || '',
+			zip: zipFilter?.value || '',
+			search: searchState || '',
+			limit: '25',
+		})
+		return params.toString()
+	}, [
+		page,
+		selectedSort,
+		stateFilter,
+		countryFilter,
+		cityFilter,
+		zipFilter,
+		searchState,
+	])
 
 	const {data} = useSWR<ReviewsResponse>(
 		`/api/get-reviews?${queryParams.toString()}`,
@@ -59,14 +75,10 @@ const Review = () => {
 	)
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
-	const [reportOpen, setReportOpen] = useState<boolean>(false)
-	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
-
-	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
 	useEffect(() => {
 		if (data) {
-			setReviews([...reviews, ...data.reviews])
+			setReviews((prevReviews) => [...prevReviews, ...data.reviews])
 		}
 	}, [data])
 
@@ -89,9 +101,18 @@ const Review = () => {
 		selectedSort,
 	])
 
-	const cityOptions = getCityOptions(data?.cities ?? [])
-	const stateOptions = getStateOptions(data?.states ?? [])
-	const zipOptions = getZipOptions(data?.zips ?? [])
+	const cityOptions = useMemo(
+		() => getCityOptions(data?.cities ?? []),
+		[data?.cities],
+	)
+	const stateOptions = useMemo(
+		() => getStateOptions(data?.states ?? []),
+		[data?.states],
+	)
+	const zipOptions = useMemo(
+		() => getZipOptions(data?.zips ?? []),
+		[data?.zips],
+	)
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
@@ -101,8 +122,6 @@ const Review = () => {
 			if (zipFilter === activeFilters[index]) setZipFilter(null)
 		}
 	}
-
-	console.log(page)
 
 	return (
 		<>
