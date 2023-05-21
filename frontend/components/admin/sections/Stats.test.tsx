@@ -33,11 +33,11 @@ describe('Stats component', () => {
 	}
 
 	beforeEach(() => {
-		;(useSWR as jest.Mock).mockReturnValue({data: mockData, error: null})
+		(useSWR as jest.Mock).mockReturnValue({data: mockData, error: null})
 	})
 
 	it('should render error state when there is an error', async () => {
-		;(useSWR as jest.Mock).mockReturnValue({
+		(useSWR as jest.Mock).mockReturnValue({
 			data: null,
 			error: new Error('Fetch error'),
 		})
