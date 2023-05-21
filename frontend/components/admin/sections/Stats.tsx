@@ -1,7 +1,7 @@
 import useSWR from 'swr'
-import StateStats from '../components/StateStats'
 import {useState} from 'react'
 import {fetcher} from '@/util/helpers/fetcher'
+import StateStats from '../components/StateStats'
 
 export interface IStats {
 	total_reviews: number
@@ -44,12 +44,73 @@ export interface IStats {
 
 const Stats = () => {
 	const [country, setCountry] = useState<string | null>(null)
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const {data, error} = useSWR<IStats>('/api/get-stats', fetcher)
+	const {data, error} = useSWR<IStats, boolean>('/api/get-stats', fetcher)
+
 	if (error) return <div>failed to load</div>
 	if (!data) return <div>loading...</div>
 
-	const getComponent = () => {
+	const handleCountryClick = (country: string) => {
+		setCountry(country)
+	}
+
+	const renderStats = () => {
+		const stats: Array<{
+			country: string
+			label: string
+			data: string
+			isActive: boolean
+		}> = [
+			{
+				country: 'CA',
+				label: 'Canadian Reviews',
+				data: data.total_ca_reviews.total,
+				isActive: country === 'CA',
+			},
+			{
+				country: 'US',
+				label: 'US Reviews',
+				data: data.total_us_reviews.total,
+				isActive: country === 'US',
+			},
+			{
+				country: 'UK',
+				label: 'UK Reviews',
+				data: data.total_uk_reviews.total,
+				isActive: country === 'UK',
+			},
+			{
+				country: 'AU',
+				label: 'Australia Reviews',
+				data: data.total_au_reviews.total,
+				isActive: country === 'AU',
+			},
+			{
+				country: 'NZ',
+				label: 'New Zealand Reviews',
+				data: data.total_nz_reviews.total,
+				isActive: country === 'NZ',
+			},
+		]
+
+		return stats.map((stat) => (
+			<div
+				key={stat.country}
+				onClick={() => handleCountryClick(stat.country)}
+				className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
+					stat.isActive ? 'bg-gray-200' : ''
+				}`}
+			>
+				<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
+					{stat.label}
+				</dt>
+				<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
+					{stat.data}
+				</dd>
+			</div>
+		))
+	}
+
+	const renderSelectedStateStats = () => {
 		switch (country) {
 			case 'CA':
 				return <StateStats states={data.total_ca_reviews.states} />
@@ -62,7 +123,7 @@ const Stats = () => {
 			case 'NZ':
 				return <StateStats states={data.total_nz_reviews.states} />
 			default:
-				return <></>
+				return null
 		}
 	}
 
@@ -77,73 +138,9 @@ const Stats = () => {
 						{data.total_reviews}
 					</dd>
 				</div>
-				<div
-					onClick={() => setCountry('CA')}
-					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
-						country && country === 'CA' ? 'bg-gray-200' : ''
-					}`}
-				>
-					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-						Canadian Reviews
-					</dt>
-					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-						{data.total_ca_reviews.total}
-					</dd>
-				</div>
-				<div
-					onClick={() => setCountry('US')}
-					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
-						country && country === 'US' ? 'bg-gray-200' : ''
-					}`}
-				>
-					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-						US Reviews
-					</dt>
-					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-						{data.total_us_reviews.total}
-					</dd>
-				</div>
-				<div
-					onClick={() => setCountry('UK')}
-					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
-						country && country === 'UK' ? 'bg-gray-200' : ''
-					}`}
-				>
-					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-						UK Reviews
-					</dt>
-					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-						{data.total_uk_reviews.total}
-					</dd>
-				</div>
-				<div
-					onClick={() => setCountry('AU')}
-					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
-						country && country === 'AU' ? 'bg-gray-200' : ''
-					}`}
-				>
-					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-						Australia Reviews
-					</dt>
-					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-						{data.total_au_reviews.total}
-					</dd>
-				</div>
-				<div
-					onClick={() => setCountry('NZ')}
-					className={`flex cursor-pointer flex-col rounded-xl border p-6 text-center ${
-						country && country === 'NZ' ? 'bg-gray-200' : ''
-					}`}
-				>
-					<dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-						New Zealand Reviews
-					</dt>
-					<dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">
-						{data.total_nz_reviews.total}
-					</dd>
-				</div>
+				{renderStats()}
 			</div>
-			{getComponent()}
+			{renderSelectedStateStats()}
 		</div>
 	)
 }

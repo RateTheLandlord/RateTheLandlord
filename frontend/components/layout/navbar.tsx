@@ -142,7 +142,7 @@ export default function Navbar(): JSX.Element {
 											{t('layout.nav.resources')}
 										</a>
 									</Link>
-									{user.jwt.access_token ? (
+									{user?.jwt.access_token ? (
 										<Link href={`/admin/${user.result.id || 0}`}>
 											<a
 												className={`${
