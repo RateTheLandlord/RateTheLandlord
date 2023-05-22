@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Request review
-        uses: ankeetmaini/mandatory-reviews@v5
-        env:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
         with:
-          usernames: 'RateTheLandlordAdmin' # Add the usernames of the reviewers you want to add, separated by commas
-
+          reviewers: 'RateTheLandlordAdmin'
+          token: ${{ secrets.GITHUB_TOKEN }}
