@@ -1,0 +1,15 @@
+name: Request Review
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  request-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request review
+        uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
+        with:
+          reviewers: 'RateTheLandlordAdmin'
+          token: ${{ secrets.GITHUB_TOKEN }}
