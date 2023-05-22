@@ -7,6 +7,7 @@ import ButtonLight from '../ui/button-light'
 import Link from 'next/link'
 import {OpenLinkIcon} from '../icons/OpenLinkIcon'
 import {useAppSelector} from '@/redux/hooks'
+
 interface IProps {
 	data: Review[]
 	setReportOpen: Dispatch<SetStateAction<boolean>>
@@ -40,7 +41,7 @@ function ReviewTable({
 		setEditReviewOpen(true)
 	}
 
-	if (!data) {
+	if (!data.length || !data) {
 		return <div data-testid="review-table-1-no-data"></div>
 	}
 

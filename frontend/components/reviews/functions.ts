@@ -40,11 +40,9 @@ export const getStateOptions = (
 
 		const stateOptions = removeDuplicates(allStateOptions, 'name')
 
-		const alphaOptions = stateOptions.sort((a: Options, b: Options): number =>
+		return stateOptions.sort((a: Options, b: Options): number =>
 			a.name.localeCompare(b.name),
 		)
-
-		return alphaOptions
 	}
 
 	return []
@@ -67,11 +65,9 @@ export const getCityOptions = (
 
 		const cityOptions = removeDuplicates(allCityOptions, 'value')
 
-		const alphaCity = cityOptions.sort((a: Options, b: Options): number =>
+		return cityOptions.sort((a: Options, b: Options): number =>
 			a.name.localeCompare(b.name),
 		)
-
-		return alphaCity
 	}
 	return []
 }
@@ -90,11 +86,9 @@ export const getZipOptions = (zips: string[] | undefined): Array<Options> => {
 
 		const zipOptions = removeDuplicates(allZipOptions, 'value')
 
-		const alphaZip = zipOptions.sort((a: Options, b: Options): number =>
+		return zipOptions.sort((a: Options, b: Options): number =>
 			a.name.localeCompare(b.name),
 		)
-
-		return alphaZip
 	}
 	return []
 }
