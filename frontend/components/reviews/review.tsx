@@ -47,9 +47,11 @@ const Review = () => {
 
 	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
 
+	const [previousQueryParams, setPreviousQueryParams] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
+
 	const queryParams = useMemo(() => {
 		const params = new URLSearchParams({
-			page: page.toString(),
 			sort: selectedSort.value,
 			state: stateFilter?.value || '',
 			country: countryFilter?.value || '',
@@ -60,7 +62,6 @@ const Review = () => {
 		})
 		return params.toString()
 	}, [
-		page,
 		selectedSort,
 		stateFilter,
 		countryFilter,
@@ -70,21 +71,27 @@ const Review = () => {
 	])
 
 	const {data} = useSWR<ReviewsResponse>(
-		`/api/get-reviews?${queryParams.toString()}`,
+		`/api/get-reviews?page=${page}&${queryParams.toString()}`,
 		fetcher,
 	)
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
 
 	useEffect(() => {
-		if (data) {
+		if (queryParams !== previousQueryParams) {
+			setReviews(data?.reviews || [])
+			setIsLoading(false)
+		} else if (data) {
 			setReviews((prevReviews) => [...prevReviews, ...data.reviews])
+			setIsLoading(false)
 		}
-	}, [data])
+		setPreviousQueryParams(queryParams)
+	}, [data, queryParams, previousQueryParams])
 
 	useEffect(() => {
 		if (data) {
-			if (reviews.length >= data?.total) setHasMore(false)
+			if (reviews.length >= data?.total || data.reviews.length <= 0)
+				setHasMore(false)
 		}
 	}, [reviews, data])
 
@@ -92,6 +99,7 @@ const Review = () => {
 		setActiveFilters(
 			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
 		)
+		setPage(1)
 	}, [
 		cityFilter,
 		stateFilter,
@@ -185,6 +193,8 @@ const Review = () => {
 					setEditReviewOpen={setEditReviewOpen}
 					setPage={setPage}
 					hasMore={hasMore}
+					isLoading={isLoading}
+					setIsLoading={setIsLoading}
 				/>
 			</div>
 		</>
