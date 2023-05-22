@@ -8,7 +8,7 @@ import {Provider} from 'react-redux'
 import {store} from '@/redux/store'
 
 describe('LoginForm', () => {
-	test('renders the login form ', async () => {
+	test('renders the login form ', () => {
 		render(
 			<Provider store={store}>
 				<LoginForm />
