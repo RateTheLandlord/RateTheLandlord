@@ -10,6 +10,8 @@ interface IProps {
 	setEditReviewOpen: Dispatch<SetStateAction<boolean>>
 	setPage: Dispatch<SetStateAction<number>>
 	hasMore: boolean
+	isLoading: boolean
+	setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
 function InfiniteScroll({
@@ -20,10 +22,10 @@ function InfiniteScroll({
 	setEditReviewOpen,
 	setPage,
 	hasMore,
+	isLoading,
+	setIsLoading
 }: IProps) {
 	const [content, setContent] = useState<Review[]>([]) // Store loaded content
-	const [isLoading, setIsLoading] = useState(false) // Track loading state
-
 	// Add a scroll event listener
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
