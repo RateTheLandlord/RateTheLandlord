@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Request review
-        uses: pullreminders/request-review@v1
-        with:
-          reviewers: 'RateTheLandlordAdmin' # Add the usernames of the reviewers you want to add, separated by commas
+        uses: ankeetmaini/mandatory-reviews@v5
+        env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          usernames: 'RateTheLandlordAdmin' # Add the usernames of the reviewers you want to add, separated by commas
+
