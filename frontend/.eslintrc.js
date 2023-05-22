@@ -10,14 +10,15 @@ module.exports = {
 			version: 'detect',
 		},
 		'import/resolver': {
-			typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
+			typescript: {
+				project: './tsconfig.json', // Updated to specify the relative path of tsconfig.json
+			},
 		},
 	},
 
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		project: 'tsconfig.json', // tells parser relative path of tsconfig.json
-		tsconfigRootDir: __dirname,
+		project: './tsconfig.json', // Updated to specify the relative path of tsconfig.json
 		ecmaFeatures: {
 			jsx: true,
 		},
@@ -41,4 +42,4 @@ module.exports = {
 	rules: {
 		'jsx-a11y/anchor-is-valid': 'off', // disable this rule
 	},
-}
+};
