@@ -2,7 +2,13 @@ import {resource_links} from './links'
 
 const links = resource_links
 
-const countries = ['Canada', 'United States', 'United Kingdom', 'Australia']
+const countries = [
+	'Canada',
+	'United States',
+	'United Kingdom',
+	'Australia',
+	'New Zealand',
+]
 
 const ResourceTenantLinks = () => {
 	return (
