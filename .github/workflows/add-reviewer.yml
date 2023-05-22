@@ -1,0 +1,15 @@
+name: Request Review
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  request-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request review
+        uses: pullreminders/request-review@v1
+        with:
+          reviewers: 'RateTheLandlordAdmin' # Add the usernames of the reviewers you want to add, separated by commas
+          github-token: ${{ secrets.GITHUB_TOKEN }}
