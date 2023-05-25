@@ -17,17 +17,17 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		project: 'tsconfig.json', // tells parser relative path of tsconfig.json
-		tsconfigRootDir: __dirname,
 		ecmaFeatures: {
 			jsx: true,
 		},
+		tsconfigRootDir: __dirname,
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
 
 	// all plugins (eslint-plugin-xxx) go here:
 	plugins: ['@typescript-eslint'],
-
+	ignorePatterns: ['.eslintrc.js'],
 	// all configs (eslint-config-xxx) go here:
 	extends: [
 		'eslint:recommended',
