@@ -33,6 +33,35 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 				</div>
 				<p className="ml-2 text-sm text-gray-900">Based on {total} reviews</p>
 			</div>
+
+			<div>
+				<h2>Tenants Guide to Reviews</h2>
+				<ol>
+					<li className="list-item">
+						Look for Specific Details: Genuine reviews often contain specific
+						details about the tenant's experience with the landlord. Vague
+						praises, promotional language, or meaningless criticisms might be
+						less trustworthy.
+					</li>
+					<li>
+						Balance of Reviews: If a negative review is suddenly followed by a
+						highly positive one, take a moment to question this. It's possible
+						for a landlord/company to have both good and bad traits, but drastic
+						shifts in tone might indicate something is amiss.
+					</li>
+					<li>
+						Frequency of Reviews: A sudden influx of positive reviews after a
+						string of negative ones might be a red flag. Authentic reviews tend
+						to come in at a steady pace over time.
+					</li>
+					<li>
+						Consistency: Look for consistency in feedback across reviews. If
+						several reviews mention similar pros or cons, they are likely
+						reliable.
+					</li>
+				</ol>
+			</div>
+
 			<div className="mt-10">
 				<h3 className="text-lg font-medium text-gray-900">
 					Share your thoughts
