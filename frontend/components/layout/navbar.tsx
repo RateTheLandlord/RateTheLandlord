@@ -1,5 +1,5 @@
 import {Disclosure} from '@headlessui/react'
-import {MenuIcon, SearchIcon, XIcon} from '@heroicons/react/outline'
+import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import Logo from '../svg/logo/logo'
 import Link from 'next/link'
 import {useTranslation} from 'react-i18next'
@@ -8,7 +8,7 @@ import {useRouter} from 'next/router'
 import Instagram from '../svg/social/instagram'
 import Twitter from '../svg/social/twitter'
 import TikTok from '../svg/social/tiktok'
-import {useAppSelector, useAppDispatch} from '@/redux/hooks'
+import {useAppDispatch, useAppSelector} from '@/redux/hooks'
 import {parseCookies} from 'nookies'
 import {updateUser} from '@/redux/user/userSlice'
 
@@ -249,7 +249,7 @@ export default function Navbar(): JSX.Element {
 								<Disclosure.Button
 									as="a"
 									className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
-										activeTab === 3 ? 'border-l-4 border-teal-500' : ''
+										activeTab === 4 ? 'border-l-4 border-teal-500' : ''
 									}`}
 								>
 									{t('layout.nav.resources')}
