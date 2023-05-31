@@ -1,6 +1,7 @@
 import {classNames} from '@/util/helpers/helper-functions'
-import {StarIcon} from '@heroicons/react/solid'
+import {MinusSmIcon, PlusSmIcon, StarIcon} from '@heroicons/react/solid'
 import Link from 'next/link'
+import {Disclosure} from '@headlessui/react'
 
 interface IProps {
 	name: string
@@ -33,7 +34,8 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 				</div>
 				<p className="ml-2 text-sm text-gray-900">Based on {total} reviews</p>
 			</div>
-			<div className="mt-10">
+
+			<div>
 				<h3 className="text-lg font-medium text-gray-900">
 					Share your thoughts
 				</h3>
@@ -47,6 +49,56 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 						Submit a review
 					</p>
 				</Link>
+			</div>
+			<div className="mt-4 divide-gray-900/10 border-t">
+				<Disclosure as="div" className="py-3">
+					{({open}) => (
+						<>
+							<dt>
+								<Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+									<span className="text-base font-semibold leading-7">
+										Tenants Guide to Reviews
+									</span>
+									<span className="ml-6 flex h-7 items-center">
+										{open ? (
+											<MinusSmIcon className="h-6 w-6" aria-hidden="true" />
+										) : (
+											<PlusSmIcon className="h-6 w-6" aria-hidden="true" />
+										)}
+									</span>
+								</Disclosure.Button>
+							</dt>
+							<Disclosure.Panel as="dd" className="mt-2 pr-12 pl-4">
+								<ol className="list-decimal">
+									<li className="list-item text-base leading-7 text-gray-600">
+										Look for Specific Details: Genuine reviews often contain
+										specific details about the tenant&apos;s experience with the
+										landlord. Vague praises, promotional language, or
+										meaningless criticisms might be less trustworthy.
+									</li>
+									<li className="list-item text-base leading-7 text-gray-600">
+										Balance of Reviews: If a negative review is suddenly
+										followed by a highly positive one, take a moment to question
+										this. It&apos;s possible for a landlord/company to have both
+										good and bad traits, but drastic shifts in tone might
+										indicate something is amiss.
+									</li>
+									<li className="list-item text-base leading-7 text-gray-600">
+										Frequency of Reviews: A sudden influx of positive reviews
+										after a string of negative ones might be a red flag.
+										Authentic reviews tend to come in at a steady pace over
+										time.
+									</li>
+									<li className="list-item text-base leading-7 text-gray-600">
+										Consistency: Look for consistency in feedback across
+										reviews. If several reviews mention similar pros or cons,
+										they are likely reliable.
+									</li>
+								</ol>
+							</Disclosure.Panel>
+						</>
+					)}
+				</Disclosure>
 			</div>
 		</div>
 	)
