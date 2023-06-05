@@ -2,6 +2,7 @@ import {classNames} from '@/util/helpers/helper-functions'
 import {MinusSmIcon, PlusSmIcon, StarIcon} from '@heroicons/react/solid'
 import Link from 'next/link'
 import {Disclosure} from '@headlessui/react'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
 	name: string
@@ -10,6 +11,8 @@ interface IProps {
 }
 
 const LandlordInfo = ({name, average, total}: IProps) => {
+	const {t} = useTranslation('landlord')
+	const tenantList: Array<string> = t('tenant-list', {returnObjects: true})
 	return (
 		<div className="w-full border-b border-b-gray-200 pb-4">
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">
@@ -36,17 +39,12 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 			</div>
 
 			<div>
-				<h3 className="text-lg font-medium text-gray-900">
-					Share your thoughts
-				</h3>
-				<p className="mt-1 text-sm text-gray-600">
-					If you&apos;ve rented from this Landlord, share your experience with
-					other tenants
-				</p>
+				<h3 className="text-lg font-medium text-gray-900">{t('share')}</h3>
+				<p className="mt-1 text-sm text-gray-600">{t('share-sub')}</p>
 
 				<Link href="/create-review">
 					<p className="mt-2 inline-flex cursor-pointer items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
-						Submit a review
+						{t('submit')}
 					</p>
 				</Link>
 			</div>
@@ -57,7 +55,7 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 							<dt>
 								<Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
 									<span className="text-base font-semibold leading-7">
-										Tenants Guide to Reviews
+										{t('tenant')}
 									</span>
 									<span className="ml-6 flex h-7 items-center">
 										{open ? (
@@ -70,30 +68,16 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 							</dt>
 							<Disclosure.Panel as="dd" className="mt-2 pr-12 pl-4">
 								<ol className="list-decimal">
-									<li className="list-item text-base leading-7 text-gray-600">
-										Look for Specific Details: Genuine reviews often contain
-										specific details about the tenant&apos;s experience with the
-										landlord. Vague praises, promotional language, or
-										meaningless criticisms might be less trustworthy.
-									</li>
-									<li className="list-item text-base leading-7 text-gray-600">
-										Balance of Reviews: If a negative review is suddenly
-										followed by a highly positive one, take a moment to question
-										this. It&apos;s possible for a landlord/company to have both
-										good and bad traits, but drastic shifts in tone might
-										indicate something is amiss.
-									</li>
-									<li className="list-item text-base leading-7 text-gray-600">
-										Frequency of Reviews: A sudden influx of positive reviews
-										after a string of negative ones might be a red flag.
-										Authentic reviews tend to come in at a steady pace over
-										time.
-									</li>
-									<li className="list-item text-base leading-7 text-gray-600">
-										Consistency: Look for consistency in feedback across
-										reviews. If several reviews mention similar pros or cons,
-										they are likely reliable.
-									</li>
+									{tenantList.map((item, i) => {
+										return (
+											<li
+												key={i}
+												className="list-item text-base leading-7 text-gray-600"
+											>
+												{item}
+											</li>
+										)
+									})}
 								</ol>
 							</Disclosure.Panel>
 						</>

@@ -1,0 +1,12 @@
+{
+  "landlord": {
+    "share": "Share your thoughts",
+    "share-sub": "If you've rented from this Landlord, share your experience with other tenants",
+    "submit": "Submit a review",
+    "tenant": "Tenants guide to Reviews",
+    "tenant-list": ["Look for Specific Details: Genuine reviews often contain specific details about the tenant's experience with the landlord. Vague praises, promotional language, or meaningless criticisms might be less trustworthy.",
+    "Balance of Reviews: If a negative review is suddenly followed by a highly positive one, take a moment to question this. It's possible for a landlord/company to have both good and bad traits, but drastic shifts in tone might indicate something is amiss.",
+    "Frequency of Reviews: A sudden influx of positive reviews after a string of negative ones might be a red flag. Authentic reviews tend to come in at a steady pace over time.",
+    "Consistency: Look for consistency in feedback across reviews. If several reviews mention similar pros or cons, they are likely reliable."]
+  }
+}

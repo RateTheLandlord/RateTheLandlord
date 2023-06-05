@@ -7,6 +7,7 @@ import homeENCA from './public/locales/en-CA/home.json'
 import createreviewENCA from './public/locales/en-CA/createreview.json'
 import reviewsENCA from './public/locales/en-CA/reviews.json'
 import aboutENCA from './public/locales/en-CA/about.json'
+import landlordENCA from './public/locales/en-CA/landlord.json'
 
 const resources = {
 	en: {
@@ -15,6 +16,7 @@ const resources = {
 		create: createreviewENCA,
 		reviews: reviewsENCA,
 		about: aboutENCA,
+		landlord: landlordENCA,
 	},
 }
 
