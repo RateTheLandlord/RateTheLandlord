@@ -16,13 +16,13 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 		returnObjects: true,
 	})
 	return (
-		<div className="w-full border-b border-b-gray-200">
+		<div className="w-full border-b border-b-gray-200 pb-4">
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">
 				{name}
 			</h2>
 
-			<div className="mt-3 flex items-center gap-4">
-				<div className="flex flex-col gap-4">
+			<div className="mt-3 flex items-center">
+				<div>
 					<div className="flex items-center">
 						{[0, 1, 2, 3, 4].map((rating) => (
 							<StarIcon

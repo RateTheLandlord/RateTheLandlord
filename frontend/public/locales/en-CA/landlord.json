@@ -10,5 +10,6 @@
     "Consistency: Look for consistency in feedback across reviews. If several reviews mention similar pros or cons, they are likely reliable."],
     "average": "{{average}} out of 5 stars",
     "total": "Based on {{total}} reviews"
+
   }
 }
