@@ -1,7 +1,7 @@
 import { DatabaseService } from 'src/database/database.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { IStats, Review, ReviewsResponse } from './models/review';
-import { filterReviewWithAI } from './helpers';
+import { IResult, filterReviewWithAI } from './helpers';
 
 type ReviewQuery = {
   page?: number;
@@ -16,7 +16,17 @@ type ReviewQuery = {
 
 @Injectable()
 export class ReviewService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) { }
+
+  // So this method is hardcoded for now to just block review spam for Sheldon Rakowsky
+  // but we would like to make this feature more robust to stop review spam in general
+  async checkForExistingRevews(inputReview: Review): Promise<void> {
+    const existingReview = await this.databaseService.sql<Review[]>
+      `SELECT REVIEW FROM review WHERE landlord = 'SHELDON RAKOWSKY' AND ZIP = 'V3T0N2';`;
+    if (existingReview.length > 0) {
+      return Promise.reject(new BadRequestException('Too many reviews for this user'));
+    }
+  }
 
   async get(params: ReviewQuery): Promise<ReviewsResponse> {
     const {
@@ -114,29 +124,37 @@ export class ReviewService {
   }
 
   async create(inputReview: Review): Promise<Review> {
-    const filterResult = await filterReviewWithAI(inputReview);
-
-    inputReview.landlord = inputReview.landlord
-      .substring(0, 150)
-      .toLocaleUpperCase();
-    inputReview.country_code = inputReview.country_code.toLocaleUpperCase();
-    inputReview.city = inputReview.city.substring(0, 150).toLocaleUpperCase();
-    inputReview.state = inputReview.state.toLocaleUpperCase();
-    inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
-    inputReview.admin_approved = null;
-    inputReview.flagged = filterResult.flagged;
-    inputReview.flagged_reason = filterResult.flagged_reason;
-
-    const id = (
-      await this.databaseService.sql<{ id: number }[]>`
-        INSERT INTO review 
-          (landlord, country_code, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flagged_reason, admin_approved, admin_edited) 
-        VALUES (${inputReview.landlord}, ${inputReview.country_code}, ${inputReview.city}, ${inputReview.state}, ${inputReview.zip}, ${inputReview.review}, ${inputReview.repair}, ${inputReview.health}, ${inputReview.stability}, ${inputReview.privacy}, ${inputReview.respect}, ${inputReview.flagged}, ${inputReview.flagged_reason}, ${inputReview.admin_approved}, ${inputReview.admin_edited}) 
-        RETURNING id;`
-    )[0].id;
-
-    inputReview.id = id;
-    return inputReview;
+    try {
+      const filterResult: IResult = await filterReviewWithAI(inputReview);
+  
+      // Check the reviews for that landlord
+      await this.checkForExistingRevews(inputReview);
+  
+      inputReview.landlord = inputReview.landlord
+        .substring(0, 150)
+        .toLocaleUpperCase();
+      inputReview.country_code = inputReview.country_code.toLocaleUpperCase();
+      inputReview.city = inputReview.city.substring(0, 150).toLocaleUpperCase();
+      inputReview.state = inputReview.state.toLocaleUpperCase();
+      inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
+      inputReview.admin_approved = null;
+      inputReview.flagged = filterResult.flagged;
+      inputReview.flagged_reason = filterResult.flagged_reason;
+  
+      const id = (
+        await this.databaseService.sql<{ id: number }[]>`
+          INSERT INTO review 
+            (landlord, country_code, city, state, zip, review, repair, health, stability, privacy, respect, flagged, flagged_reason, admin_approved, admin_edited) 
+          VALUES (${inputReview.landlord}, ${inputReview.country_code}, ${inputReview.city}, ${inputReview.state}, ${inputReview.zip}, ${inputReview.review}, ${inputReview.repair}, ${inputReview.health}, ${inputReview.stability}, ${inputReview.privacy}, ${inputReview.respect}, ${inputReview.flagged}, ${inputReview.flagged_reason}, ${inputReview.admin_approved}, ${inputReview.admin_edited}) 
+          RETURNING id;`
+      )[0].id;
+  
+      inputReview.id = id;
+      return inputReview;
+    } catch (e) {
+      console.log("Got here 1!: ", e);
+      throw e;
+    }
   }
 
   async update(id: number, review: Review): Promise<Review> {

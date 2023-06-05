@@ -17,7 +17,10 @@ RUN npm install
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
 
+# Build the TypeScript files and copy source maps
+RUN npm run build
+
 EXPOSE 8080
 
-# Run npm dev, as we would via the command line 
-CMD ["npm", "run", "start:dev"]
+# Run npm dev, as we would via the command line
+CMD ["npm", "run", "start:debug"]

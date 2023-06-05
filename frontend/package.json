@@ -8,6 +8,7 @@
 		"build": "next build",
 		"postbuild": "node ./scripts/generate-sitemap.mjs",
 		"start": "next start",
+		"start:debug": "NODE_OPTIONS='--inspect=0.0.0.0:9998' next dev",
 		"lint": "next lint",
 		"tsc": "tsc",
 		"test": "jest --watch",

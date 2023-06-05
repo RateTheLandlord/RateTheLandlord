@@ -38,9 +38,12 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 			if (!result.ok) {
 				throw result
 			}
+			console.log('HERE GOOD')
+			console.log('res')
 			res.status(200).json(result)
 		})
 		.catch((error: Response) => {
+			console.log('HERE BAD')
 			res
 				.status(error.status)
 				.json({error: 'Failed to Submit Review', response: error.statusText})

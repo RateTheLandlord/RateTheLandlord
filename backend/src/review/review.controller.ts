@@ -4,11 +4,13 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
   Param,
   Post,
   Put,
   Query,
   UseGuards,
+  HttpStatus
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
@@ -18,12 +20,23 @@ import { IStats, Review, ReviewsResponse } from './models/review';
 import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
 
+export type ReviewControllerException = { statusCode: number; message: string | object; }
+
 @Controller('review')
 export class ReviewController {
   constructor(
     private readonly reviewService: ReviewService,
     private captchaService: CaptchaService,
   ) {}
+
+  private handleException(e: any): never {
+    if (e instanceof BadRequestException) {
+      throw new HttpException('Not acceptable', HttpStatus.NOT_ACCEPTABLE);
+    } else {
+      console.error('An error occurred:', e);
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   // Get All Reviews
   @Throttle(5, 60)
@@ -100,17 +113,17 @@ export class ReviewController {
   async create(
     @Body() review: CreateReview,
     @IpAddress() ip: string,
-  ): Promise<Review> {
-    const validRequest = await this.captchaService.verifyToken(
-      review.captchaToken,
-      ip,
-    );
-
-    if (!validRequest) {
-      throw new BadRequestException('Invalid captcha');
+  ): Promise<Review | ReviewControllerException> {
+    try {
+      await this.captchaService.verifyToken(
+        review.captchaToken,
+        ip,
+      );
+      const reviewCreated = await this.reviewService.create(review.review);
+      return reviewCreated;
+    } catch (e) {
+      return this.handleException(e);
     }
-
-    return this.reviewService.create(review.review);
   }
 
   //Get Flagged Reviews
