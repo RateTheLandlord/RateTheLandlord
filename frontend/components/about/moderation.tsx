@@ -2,7 +2,7 @@ import {useTranslation} from 'react-i18next'
 
 const Moderation = () => {
 	const {t} = useTranslation('about')
-	const info: Array<string> = t('about.moderation.info')
+	const info: Array<string> = t('about.moderation.info', {returnObjects: true})
 
 	return (
 		<div data-testid="about-moderation-1" className="w-full bg-white">

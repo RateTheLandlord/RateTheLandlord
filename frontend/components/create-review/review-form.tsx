@@ -447,16 +447,13 @@ function ReviewForm(): JSX.Element {
 									review.length > 2000 ? 'text-red-400' : 'text-black'
 								}`}
 							>
-								Character Limit: {review.length}/2000
+								{t('create-review.review-form.limit', {length: review.length})}
 							</p>
 						</div>
 					</div>
 					<div>
 						<p className="text-sm font-extrabold text-gray-500">
-							Please keep this review as civil and objective as possible. Do not
-							post any specific addresses as these will be removed. Any
-							malicious or defamatory language may result in the review being
-							edited or removed.
+							{t('create-review.review-form.civil')}
 						</p>
 					</div>
 				</div>
@@ -474,8 +471,7 @@ function ReviewForm(): JSX.Element {
 							/>
 						</div>
 						<label htmlFor="terms" className="text-sm text-gray-500">
-							I understand that posting a review on Rate The Landlord is public
-							and can be viewed by anyone including the landlord in my review.
+							{t('create-review.review-form.disclaimer-1')}
 						</label>
 					</div>
 					<div className="mb-2 flex w-full justify-start space-x-2">
@@ -490,10 +486,7 @@ function ReviewForm(): JSX.Element {
 							/>
 						</div>
 						<label htmlFor="terms" className="text-sm text-gray-500">
-							I understand that once I post this review I cannot have it taken
-							down unless it violates the Rate The Landlord policy and recognize
-							that Rate The Landlord recommends posting reviews after my tenancy
-							is over.
+							{t('create-review.review-form.disclaimer-2')}
 						</label>
 					</div>
 					<div className="mb-2 flex w-full justify-start space-x-2">
@@ -508,8 +501,7 @@ function ReviewForm(): JSX.Element {
 							/>
 						</div>
 						<label htmlFor="terms" className="text-sm text-gray-500">
-							I understand that Rate The Landlord is not responsible for any
-							consequences that occur as a result my review.
+							{t('create-review.review-form.disclaimer-3')}
 						</label>
 					</div>
 
