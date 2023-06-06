@@ -18,18 +18,18 @@ type ReviewQuery = {
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) { }
 
-  public async editDistance(string1, string2) {
+  public editDistance(string1: string, string2: string ) {
     string1 = string1.toLowerCase();
     string2 = string2.toLowerCase();
-    var costs = new Array();
+    var costs: number[] = new Array();
     for (var i = 0; i <= string1.length; i++) {
-      var lastValue = i;
+      var lastValue: number = i;
       for (var j = 0; j <= string2.length; j++) {
         if (i == 0)
           costs[j] = j;
         else {
           if (j > 0) {
-            var newValue = costs[j - 1];
+            var newValue: number = costs[j - 1];
             if (string1.charAt(i - 1) != string2.charAt(j - 1))
               newValue = Math.min(Math.min(newValue, lastValue),
                 costs[j]) + 1;
@@ -38,14 +38,15 @@ export class ReviewService {
           }
         }
       }
-      if (i > 0)
+      if (i > 0) {
         costs[string2.length] = lastValue;
+      }
     }
     return costs[string2.length];
   }
 
   // https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
-  public async reviewSimilarity(review1: string, review2: string) {
+  public reviewSimilarity(review1: string, review2: string) {
     var longer: string = review1;
     var shorter: string = review2;
     if (review1.length < review2.length) {
