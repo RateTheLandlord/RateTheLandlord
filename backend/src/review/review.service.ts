@@ -1,5 +1,5 @@
 import { DatabaseService } from 'src/database/database.service';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { IStats, Review, ReviewsResponse } from './models/review';
 import { IResult, filterReviewWithAI } from './helpers';
 
@@ -18,17 +18,71 @@ type ReviewQuery = {
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) { }
 
-  // So this method is hardcoded for now to just block review spam for Sheldon Rakowsky
-  // but we would like to make this feature more robust to stop review spam in general
-  async checkForExistingRevews(inputReview: Review): Promise<void> {
-    const existingReview = await this.databaseService.sql<Review[]>
-      `SELECT REVIEW FROM review WHERE landlord = 'SHELDON RAKOWSKY' AND ZIP = 'V3T0N2';`;
-    if (existingReview.length > 0) {
-      return Promise.reject(new BadRequestException('Too many reviews for this user'));
+  public async editDistance(string1, string2) {
+    string1 = string1.toLowerCase();
+    string2 = string2.toLowerCase();
+    var costs = new Array();
+    for (var i = 0; i <= string1.length; i++) {
+      var lastValue = i;
+      for (var j = 0; j <= string2.length; j++) {
+        if (i == 0)
+          costs[j] = j;
+        else {
+          if (j > 0) {
+            var newValue = costs[j - 1];
+            if (string1.charAt(i - 1) != string2.charAt(j - 1))
+              newValue = Math.min(Math.min(newValue, lastValue),
+                costs[j]) + 1;
+            costs[j - 1] = lastValue;
+            lastValue = newValue;
+          }
+        }
+      }
+      if (i > 0)
+        costs[string2.length] = lastValue;
+    }
+    return costs[string2.length];
+  }
+
+  // https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
+  public async reviewSimilarity(review1: string, review2: string) {
+    var longer: string = review1;
+    var shorter: string = review2;
+    if (review1.length < review2.length) {
+      longer = review2;
+      shorter = review1;
+    }
+    var longerLength: number = longer.length;
+    if (longerLength == 0) {
+      return 1.0;
+    }
+    return (longerLength - this.editDistance(longer, shorter)) / parseFloat(longerLength.toString());
+  }
+
+  private async checkRreviewsForSimilarity(
+    reviewsFromDbForThatUser: Review[], 
+    reviewUserSubmitted: string
+  ) {
+    for (let review of reviewsFromDbForThatUser) {
+      const similarityScore: number = this.reviewSimilarity(review.review, reviewUserSubmitted);
+      if (similarityScore > 0.7) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private async getExistingRevewsForUser(inputReview: Review): Promise<Review[]> {
+    try {
+      const existingReview: Review[] = await this.databaseService.sql<Review[]>
+      `SELECT REVIEW FROM review WHERE landlord = ${inputReview.landlord} AND ZIP = ${inputReview.zip};`;
+      return existingReview;
+    } catch (e) {
+      throw new InternalServerErrorException('Failed to retrieve existing reviews from the database');
     }
   }
 
-  async get(params: ReviewQuery): Promise<ReviewsResponse> {
+  public async get(params: ReviewQuery): Promise<ReviewsResponse> {
     const {
       page: pageParam,
       limit: limitParam,
@@ -117,18 +171,22 @@ export class ReviewService {
     };
   }
 
-  findOne(id: number): Promise<Review[]> {
+  public findOne(id: number): Promise<Review[]> {
     return this.databaseService.sql<
       Review[]
     >`Select * FROM review WHERE id IN(${id});`;
   }
 
-  async create(inputReview: Review): Promise<Review> {
+  public async create(inputReview: Review): Promise<Review> {
     try {
       const filterResult: IResult = await filterReviewWithAI(inputReview);
   
-      // Check the reviews for that landlord
-      await this.checkForExistingRevews(inputReview);
+      // Check existing reviews for that landlord, if we detect the new review matches any existing ones by 75%
+      const existingReviews: Review[] = await this.getExistingRevewsForUser(inputReview);
+      const reviewSpamDetected: boolean = await this.checkRreviewsForSimilarity(existingReviews, inputReview.review);
+      if (reviewSpamDetected) {
+        throw new BadRequestException('Too many reviews for this landlord!');
+      }
   
       inputReview.landlord = inputReview.landlord
         .substring(0, 150)
@@ -152,12 +210,11 @@ export class ReviewService {
       inputReview.id = id;
       return inputReview;
     } catch (e) {
-      console.log("Got here 1!: ", e);
       throw e;
     }
   }
 
-  async update(id: number, review: Review): Promise<Review> {
+  public async update(id: number, review: Review): Promise<Review> {
     await this.databaseService
       .sql`UPDATE review SET landlord = ${review.landlord}, country_code = ${review.country_code}, city = ${review.city}, state = ${review.state}, zip = ${review.zip}, review = ${review.review}, repair = ${review.repair}, health = ${review.health}, stability = ${review.stability}, privacy = ${review.privacy}, respect = ${review.respect}, flagged = ${review.flagged}, flagged_reason = ${review.flagged_reason}, admin_approved = ${review.admin_approved}, admin_edited = ${review.admin_edited} 
       WHERE id = ${id};`;
@@ -165,7 +222,7 @@ export class ReviewService {
     return review;
   }
 
-  async report(id: number, reason: string): Promise<number> {
+  public async report(id: number, reason: string): Promise<number> {
     reason.length > 250
       ? (reason = `${reason.substring(0, 250)}...`)
       : (reason = reason);
@@ -176,19 +233,19 @@ export class ReviewService {
     return id;
   }
 
-  async delete(id: number): Promise<boolean> {
+  public async delete(id: number): Promise<boolean> {
     await this.databaseService.sql`DELETE FROM review WHERE ID = ${id};`;
 
     return true;
   }
 
-  async getFlagged(): Promise<Review[]> {
+  public async getFlagged(): Promise<Review[]> {
     return await this.databaseService.sql<
       Review[]
     >`SELECT * FROM review WHERE flagged = true;`;
   }
 
-  async getStats(): Promise<IStats> {
+  public async getStats(): Promise<IStats> {
     const sql = this.databaseService.sql;
 
     const totalResult = await sql`
@@ -311,7 +368,7 @@ export class ReviewService {
     };
   }
 
-  async getLandlords(): Promise<string[]> {
+  public async getLandlords(): Promise<string[]> {
     const landlords = await this.databaseService
       .sql`SELECT DISTINCT landlord FROM review;`;
     const landlordList = landlords.map(({ landlord }) => landlord);
@@ -319,7 +376,7 @@ export class ReviewService {
     return landlordList;
   }
 
-  async getLandlordReviews(landlord: string): Promise<Review[]> {
+  public async getLandlordReviews(landlord: string): Promise<Review[]> {
     landlord = decodeURIComponent(landlord);
 
     return this.databaseService.sql<
