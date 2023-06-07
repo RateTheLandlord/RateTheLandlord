@@ -1,7 +1,9 @@
 {
-  "title": "Resources",
-  "description": "Need support? Consider joining your local tenant union!",
-  "info": ["Tenant unions and advocacy groups play an important role in empowering renters by providing support, information, and resources to help them understand their rights and responsibilities. By joining a local tenant union, you can connect with others in your community and work together to address common issues and concerns.",
-  "To join a tenant union, begin by searching for local organizations in your state/province/region or territory.",
-  "Below are links to countrywide tenant organizations for each country along with tenants union websites in the three largest cities (when applicable)."]
+  "resources": {
+    "title": "Resources",
+    "description": "Need support? Consider joining your local tenant union!",
+    "info": ["Tenant unions and advocacy groups play an important role in empowering renters by providing support, information, and resources to help them understand their rights and responsibilities. By joining a local tenant union, you can connect with others in your community and work together to address common issues and concerns.",
+    "To join a tenant union, begin by searching for local organizations in your state/province/region or territory.",
+    "Below are links to countrywide tenant organizations for each country along with tenants union websites in the three largest cities (when applicable)."]
+  }
 }

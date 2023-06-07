@@ -13,14 +13,14 @@ import resourcesENCA from './public/locales/en-CA/resources.json'
 
 const resources = {
 	en: {
-		home: homeENCA,
-		layout: layoutENCA,
-		create: createreviewENCA,
-		reviews: reviewsENCA,
 		about: aboutENCA,
-		landlord: landlordENCA,
 		alerts: alertsENCA,
-		resources: resourcesENCA,
+		create: createreviewENCA,
+		home: homeENCA,
+		landlord: landlordENCA,
+		layout: layoutENCA,
+		resourcesPage: resourcesENCA,
+		reviews: reviewsENCA,
 	},
 }
 
