@@ -2,6 +2,7 @@ import {useTranslation} from 'react-i18next'
 
 const AboutUs = () => {
 	const {t} = useTranslation('about')
+	const info: Array<string> = t('about.about-us.info', {returnObjects: true})
 	return (
 		<div data-testid="about-aboutus-1" className="w-full bg-white">
 			<div className="mx-auto max-w-7xl px-6 text-lg lg:px-8">
@@ -10,21 +11,16 @@ const AboutUs = () => {
 						{t('about.about-us.about')}
 					</span>
 				</h1>
-				<p className="mt-8 text-center text-xl font-bold leading-8 text-gray-500">
-					{t('about.about-us.header')}
-				</p>
-				<p className="mt-8 text-xl leading-8 text-gray-500">
-					{t('about.about-us.p-1')}
-				</p>
-				<p className="mt-8 text-xl leading-8 text-gray-500">
-					{t('about.about-us.p-2')}
-				</p>
-				<p className="mt-8 text-xl leading-8 text-gray-500">
-					{t('about.about-us.p-3')}
-				</p>
-				<p className="mt-8 text-xl leading-8 text-gray-500">
-					{t('about.about-us.p-4')}
-				</p>
+				{info.map((item, i) => {
+					return (
+						<p
+							key={i}
+							className="mt-8 text-center text-xl leading-8 text-gray-500"
+						>
+							{item}
+						</p>
+					)
+				})}
 			</div>
 		</div>
 	)

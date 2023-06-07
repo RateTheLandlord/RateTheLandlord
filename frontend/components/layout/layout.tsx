@@ -2,7 +2,7 @@ import React from 'react'
 import Footer from './footer'
 import Navbar from './navbar'
 
-function Layout({children}): JSX.Element {
+function Layout({children}: {children: JSX.Element}): JSX.Element {
 	return (
 		<>
 			<Navbar />

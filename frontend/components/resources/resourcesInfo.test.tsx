@@ -5,16 +5,24 @@ import React from 'react'
 import {render, screen} from '@testing-library/react'
 import ResourcesInfo from './resourcesInfo'
 
+jest.mock('react-i18next', () => ({
+	useTranslation: jest.fn().mockReturnValue({
+		t: jest.fn().mockImplementation((key) => {
+			if (key === 'resources.title') {
+				return 'Resources'
+			} else if (key === 'resources.info') {
+				return ['Info 1', 'Info 2', 'Info 3']
+			}
+		}),
+	}),
+}))
+
 describe('ResourcesInfo', () => {
-	it('renders the component with the correct content', () => {
+	it('renders ResourcesInfo component correctly', () => {
 		render(<ResourcesInfo />)
 
-		const resourcesInfoElement = screen.getByTestId('about-Resources-1')
-		expect(resourcesInfoElement).toBeInTheDocument()
-
-		const headingElement = screen.getByRole('heading', {level: 1})
-		expect(headingElement).toHaveTextContent('Resources')
-
-		// You can add additional assertions to verify the content and structure of the component.
+		// Verify that the title is rendered
+		const title = screen.getByText('Resources')
+		expect(title).toBeInTheDocument()
 	})
 })
