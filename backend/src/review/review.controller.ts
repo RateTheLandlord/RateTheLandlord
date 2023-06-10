@@ -119,6 +119,7 @@ export class ReviewController {
         review.captchaToken,
         ip,
       );
+      console.log("review 1:", review);
       const reviewCreated = await this.reviewService.create(review.review);
       return reviewCreated;
     } catch (e) {

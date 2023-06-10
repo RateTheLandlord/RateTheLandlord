@@ -18,15 +18,16 @@ type ReviewQuery = {
 export class ReviewService {
   constructor(private readonly databaseService: DatabaseService) { }
 
-  public editDistance(string1: string, string2: string ) {
+  public editDistance(string1: string, string2: string) {
     string1 = string1.toLowerCase();
     string2 = string2.toLowerCase();
     var costs: number[] = new Array();
     for (var i = 0; i <= string1.length; i++) {
       var lastValue: number = i;
       for (var j = 0; j <= string2.length; j++) {
-        if (i == 0)
+        if (i == 0) {
           costs[j] = j;
+        }
         else {
           if (j > 0) {
             var newValue: number = costs[j - 1];
@@ -60,23 +61,26 @@ export class ReviewService {
     return (longerLength - this.editDistance(longer, shorter)) / parseFloat(longerLength.toString());
   }
 
+  // Loop through all the reviews retrieved from the db for this landlord and check if they are similar to the input text
   private async checkRreviewsForSimilarity(
-    reviewsFromDbForThatUser: Review[], 
+    reviewsFromDbForThatUser: Review[],
     reviewUserSubmitted: string
   ) {
     for (let review of reviewsFromDbForThatUser) {
       const similarityScore: number = this.reviewSimilarity(review.review, reviewUserSubmitted);
       if (similarityScore > 0.7) {
+        console.log("similar")
         return true;
       }
     }
+    console.log("not similar")
     return false;
   }
 
   private async getExistingRevewsForUser(inputReview: Review): Promise<Review[]> {
     try {
       const existingReview: Review[] = await this.databaseService.sql<Review[]>
-      `SELECT REVIEW FROM review WHERE landlord = ${inputReview.landlord} AND ZIP = ${inputReview.zip};`;
+        `SELECT REVIEW FROM review WHERE landlord = ${inputReview.landlord} AND ZIP = ${inputReview.zip};`; 
       return existingReview;
     } catch (e) {
       throw new InternalServerErrorException('Failed to retrieve existing reviews from the database');
@@ -181,14 +185,16 @@ export class ReviewService {
   public async create(inputReview: Review): Promise<Review> {
     try {
       const filterResult: IResult = await filterReviewWithAI(inputReview);
-  
+
       // Check existing reviews for that landlord, if we detect the new review matches any existing ones by 75%
       const existingReviews: Review[] = await this.getExistingRevewsForUser(inputReview);
       const reviewSpamDetected: boolean = await this.checkRreviewsForSimilarity(existingReviews, inputReview.review);
+      console.log("existingReviews: ", existingReviews)
+      console.log("reviewSpamDetected: ", reviewSpamDetected);
       if (reviewSpamDetected) {
-        throw new BadRequestException('Too many reviews for this landlord!');
+        return inputReview; // Prematurely return out of the review service if we detect review spam
       }
-  
+
       inputReview.landlord = inputReview.landlord
         .substring(0, 150)
         .toLocaleUpperCase();
@@ -199,7 +205,7 @@ export class ReviewService {
       inputReview.admin_approved = null;
       inputReview.flagged = filterResult.flagged;
       inputReview.flagged_reason = filterResult.flagged_reason;
-  
+
       const id = (
         await this.databaseService.sql<{ id: number }[]>`
           INSERT INTO review 
@@ -207,7 +213,7 @@ export class ReviewService {
           VALUES (${inputReview.landlord}, ${inputReview.country_code}, ${inputReview.city}, ${inputReview.state}, ${inputReview.zip}, ${inputReview.review}, ${inputReview.repair}, ${inputReview.health}, ${inputReview.stability}, ${inputReview.privacy}, ${inputReview.respect}, ${inputReview.flagged}, ${inputReview.flagged_reason}, ${inputReview.admin_approved}, ${inputReview.admin_edited}) 
           RETURNING id;`
       )[0].id;
-  
+
       inputReview.id = id;
       return inputReview;
     } catch (e) {
