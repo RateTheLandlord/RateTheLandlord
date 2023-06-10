@@ -42,7 +42,7 @@ describe('ValidateDuplicateReviewService', () => {
           city: 'New York',
           state: 'NY',
           zip: '10001',
-          review: 'This is a great product!',
+          review: 'This is a awesome product!',
           repair: 4,
           health: 3,
           stability: 5,
@@ -61,7 +61,7 @@ describe('ValidateDuplicateReviewService', () => {
           city: 'San Francisco',
           state: 'CA',
           zip: '94101',
-          review: 'I love this product!',
+          review: 'This is a great product ye!',
           repair: 5,
           health: 4,
           stability: 5,
@@ -74,7 +74,7 @@ describe('ValidateDuplicateReviewService', () => {
           admin_edited: false,
         },
       ];
-      const reviewUserSubmitted = 'This is an awesome product!';
+      const reviewUserSubmitted = 'This is a great product!';
 
       const result = await service.checkRreviewsForSimilarity(
         reviewsFromDb,
@@ -125,7 +125,7 @@ describe('ValidateDuplicateReviewService', () => {
           admin_edited: false,
         },
       ];
-      const reviewUserSubmitted = 'This product is okay.';
+      const reviewUserSubmitted = 'This sucks so bad I do not like it.';
 
       const result = await service.checkRreviewsForSimilarity(
         reviewsFromDb,
