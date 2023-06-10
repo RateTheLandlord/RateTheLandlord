@@ -31,22 +31,21 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export const filterReviewWithAI = async (review: Review): Promise<IResult> => {
-  return { flagged: false, flagged_reason: '' };
-  // const completion = await openai.createChatCompletion({
-  //   model: 'gpt-3.5-turbo',
-  //   messages: [
-  //     { role: 'system', content: SYSTEM_MESSAGE },
-  //     { role: 'user', content: review.review },
-  //   ],
-  // });
+  const completion = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'system', content: SYSTEM_MESSAGE },
+      { role: 'user', content: review.review },
+    ],
+  });
 
-  // const result = completion.data.choices[0].message.content ?? '';
+  const result = completion.data.choices[0].message.content ?? '';
 
-  // if (result.includes('TRUE')) {
-  //   return { flagged: true, flagged_reason: 'AI FLAGGED REVIEW' };
-  // } else {
-  //   return { flagged: false, flagged_reason: '' };
-  // }
+  if (result.includes('TRUE')) {
+    return { flagged: true, flagged_reason: 'AI FLAGGED REVIEW' };
+  } else {
+    return { flagged: false, flagged_reason: '' };
+  }
 };
 
 const badWordsFilter = new BadWordsFilter();
