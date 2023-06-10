@@ -83,4 +83,16 @@ export const resource_links = [
 		name: "New South Wales Tenants' Union",
 		link: 'https://www.tenants.org.au/nato',
 	},
+	{
+		country: 'New Zealand',
+		city: 'Te Tōpū Tiaki-ā-Kainoho',
+		name: 'Tenants Protection Association',
+		link: 'https://www.tpa.org.nz/',
+	},
+	{
+		country: 'New Zealand',
+		city: 'Auckland',
+		name: 'Tenants Protection Association',
+		link: 'https://tpaauckland.org.nz/',
+	},
 ]
