@@ -10,7 +10,7 @@ import {
   Put,
   Query,
   UseGuards,
-  HttpStatus
+  HttpStatus,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
@@ -20,7 +20,10 @@ import { IStats, Review, ReviewsResponse } from './models/review';
 import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
 
-export type ReviewControllerException = { statusCode: number; message: string | object; }
+export type ReviewControllerException = {
+  statusCode: number;
+  message: string | object;
+};
 
 @Controller('review')
 export class ReviewController {
@@ -34,7 +37,10 @@ export class ReviewController {
       throw new HttpException('Not acceptable', HttpStatus.NOT_ACCEPTABLE);
     } else {
       console.error('An error occurred:', e);
-      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -115,11 +121,7 @@ export class ReviewController {
     @IpAddress() ip: string,
   ): Promise<Review | ReviewControllerException> {
     try {
-      await this.captchaService.verifyToken(
-        review.captchaToken,
-        ip,
-      );
-      console.log("review 1:", review);
+      await this.captchaService.verifyToken(review.captchaToken, ip);
       const reviewCreated = await this.reviewService.create(review.review);
       return reviewCreated;
     } catch (e) {
