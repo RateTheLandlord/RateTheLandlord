@@ -52,7 +52,7 @@ export class ReviewSimilarityService {
   }
 
   // Loop through all the reviews retrieved from the db for this landlord and check if they are similar to the input text
-  public async checkRreviewsForSimilarity(
+  public async checkReviewsForSimilarity(
     reviewsFromDbForThatUser: Review[],
     reviewUserSubmitted: string,
   ): Promise<boolean> {

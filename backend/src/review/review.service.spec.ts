@@ -74,7 +74,7 @@ describe('ValidateDuplicateReviewService', () => {
       ];
       const reviewUserSubmitted: string = 'This is a great product!';
 
-      const result: boolean = await service.checkRreviewsForSimilarity(
+      const result: boolean = await service.checkReviewsForSimilarity(
         reviewsFromDb,
         reviewUserSubmitted,
       );
@@ -125,7 +125,7 @@ describe('ValidateDuplicateReviewService', () => {
       ];
       const reviewUserSubmitted: string = 'This sucks so bad I do not like it.';
 
-      const result: boolean = await service.checkRreviewsForSimilarity(
+      const result: boolean = await service.checkReviewsForSimilarity(
         reviewsFromDb,
         reviewUserSubmitted,
       );

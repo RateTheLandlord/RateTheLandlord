@@ -163,7 +163,7 @@ export class ReviewService {
       // Check existing reviews for that landlord, if we detect the new review matches any existing ones by 75%
       const existingReviews: Review[] = await this.getExistingRevewsForUser(inputReview);
       const reviewSpamDetected: boolean =
-        await this.reviewSimilarityService.checkRreviewsForSimilarity(
+        await this.reviewSimilarityService.checkReviewsForSimilarity(
           existingReviews,
           inputReview.review,
         );
