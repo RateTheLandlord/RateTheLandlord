@@ -3,6 +3,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { IStats, Review, ReviewsResponse } from './models/review';
 import { filterReviewWithAI, IResult } from './helpers';
 import { ReviewSimilarityService } from './review-text-match';
+import { FAILED_TO_RETRIEVE_REVIEWS } from '../auth/constants';
 
 type ReviewQuery = {
   page?: number;
@@ -28,12 +29,10 @@ export class ReviewService {
     try {
       return await this.databaseService.sql<Review[]>`SELECT REVIEW
         FROM review
-        WHERE landlord = ${inputReview.landlord}
-          AND ZIP = ${inputReview.zip};`;
+        WHERE landlord = ${inputReview.landlord.toLocaleUpperCase()}
+          AND ZIP = ${inputReview.zip.toLocaleUpperCase()};`;
     } catch (e) {
-      throw new InternalServerErrorException(
-        'Failed to retrieve existing reviews from the database',
-      );
+      throw new InternalServerErrorException(FAILED_TO_RETRIEVE_REVIEWS);
     }
   }
 

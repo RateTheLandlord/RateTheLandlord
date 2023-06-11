@@ -5,12 +5,12 @@ import {
   Delete,
   Get,
   HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
   Query,
   UseGuards,
-  HttpStatus,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
@@ -19,6 +19,7 @@ import { CreateReview } from './models/create-review';
 import { IStats, Review, ReviewsResponse } from './models/review';
 import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
+import { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from '../auth/constants';
 
 export type ReviewControllerException = {
   statusCode: number;
@@ -32,13 +33,14 @@ export class ReviewController {
     private captchaService: CaptchaService,
   ) {}
 
-  private handleException(e: any): never {
+  private handleException(
+    e: BadRequestException | HttpException | unknown,
+  ): never {
     if (e instanceof BadRequestException) {
-      throw new HttpException('Not acceptable', HttpStatus.NOT_ACCEPTABLE);
+      throw new HttpException(NOT_ACCEPTABLE, HttpStatus.NOT_ACCEPTABLE);
     } else {
-      console.error('An error occurred:', e);
       throw new HttpException(
-        'Internal server error',
+        INTERNAL_SERVER_ERROR,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -94,7 +96,7 @@ export class ReviewController {
     @Body() body: any,
     @IpAddress() ip: string,
   ): Promise<number> {
-    const validRequest = await this.captchaService.verifyToken(
+    const validRequest: boolean = await this.captchaService.verifyToken(
       body.captchaToken,
       ip,
     );
@@ -122,8 +124,7 @@ export class ReviewController {
   ): Promise<Review | ReviewControllerException> {
     try {
       await this.captchaService.verifyToken(review.captchaToken, ip);
-      const reviewCreated = await this.reviewService.create(review.review);
-      return reviewCreated;
+      return await this.reviewService.create(review.review);
     } catch (e) {
       return this.handleException(e);
     }

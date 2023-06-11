@@ -10,7 +10,7 @@ export class ReviewSimilarityService {
   public editDistance(string1: string, string2: string): number {
     string1 = string1.toLowerCase();
     string2 = string2.toLowerCase();
-    const costs: number[] = new Array();
+    const costs: number[] = [];
     for (let i = 0; i <= string1.length; i++) {
       let lastValue: number = i;
       for (let j = 0; j <= string2.length; j++) {
