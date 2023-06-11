@@ -49,7 +49,6 @@ export const filterReviewWithAI = async (review: Review): Promise<IResult> => {
       return { flagged: false, flagged_reason: '' };
     }
   } catch (e) {
-    console.log('e: ', e);
     throw e;
   }
 };

@@ -4,6 +4,7 @@ import { IStats, Review, ReviewsResponse } from './models/review';
 import { filterReviewWithAI, IResult } from './helpers';
 import { ReviewSimilarityService } from './review-text-match';
 import { FAILED_TO_RETRIEVE_REVIEWS } from '../auth/constants';
+import { ReviewModel } from './models/review-data-layer';
 
 type ReviewQuery = {
   page?: number;
@@ -21,6 +22,7 @@ export class ReviewService {
   constructor(
     private readonly databaseService: DatabaseService,
     private reviewSimilarityService: ReviewSimilarityService,
+    private reviewDataLayerService: ReviewModel,
   ) {}
 
   private async getExistingRevewsForUser(
@@ -159,43 +161,15 @@ export class ReviewService {
       const filterResult: IResult = await filterReviewWithAI(inputReview);
 
       // Check existing reviews for that landlord, if we detect the new review matches any existing ones by 75%
-      const existingReviews: Review[] = await this.getExistingRevewsForUser(
-        inputReview,
-      );
+      const existingReviews: Review[] = await this.getExistingRevewsForUser(inputReview);
       const reviewSpamDetected: boolean =
         await this.reviewSimilarityService.checkRreviewsForSimilarity(
           existingReviews,
           inputReview.review,
         );
-      if (reviewSpamDetected) {
-        return inputReview; // Prematurely return out of the review service if we detect review spam
-      }
 
-      inputReview.landlord = inputReview.landlord
-        .substring(0, 150)
-        .toLocaleUpperCase();
-      inputReview.country_code = inputReview.country_code.toLocaleUpperCase();
-      inputReview.city = inputReview.city.substring(0, 150).toLocaleUpperCase();
-      inputReview.state = inputReview.state.toLocaleUpperCase();
-      inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
-      inputReview.admin_approved = null;
-      inputReview.flagged = filterResult.flagged;
-      inputReview.flagged_reason = filterResult.flagged_reason;
-
-      const id = (
-        await this.databaseService.sql<{ id: number }[]>`
-            INSERT INTO review
-            (landlord, country_code, city, state, zip, review, repair, health, stability, privacy, respect, flagged,
-             flagged_reason, admin_approved, admin_edited)
-            VALUES (${inputReview.landlord}, ${inputReview.country_code}, ${inputReview.city}, ${inputReview.state},
-                    ${inputReview.zip}, ${inputReview.review}, ${inputReview.repair}, ${inputReview.health},
-                    ${inputReview.stability}, ${inputReview.privacy}, ${inputReview.respect}, ${inputReview.flagged},
-                    ${inputReview.flagged_reason}, ${inputReview.admin_approved},
-                    ${inputReview.admin_edited}) RETURNING id;`
-      )[0].id;
-
-      inputReview.id = id;
-      return inputReview;
+      if (reviewSpamDetected) return inputReview;
+      return this.reviewDataLayerService.createReview(inputReview, filterResult); // hit data layer to create review
     } catch (e) {
       throw e;
     }
