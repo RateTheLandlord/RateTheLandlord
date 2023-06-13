@@ -151,9 +151,9 @@ export class ReviewService {
         await this.reviewDataLayerService.getExistingReviewsForLandlord(inputReview);
       const reviewSpamDetected: boolean =
         await this.reviewSimilarityService.checkReviewsForSimilarity(existingReviewsForLandlord, inputReview.review);
-      if (reviewSpamDetected) return inputReview;
+      if (reviewSpamDetected) return inputReview; // Don't post the review to the DB if we detect spam
 
-      return this.reviewDataLayerService.createReview(inputReview, filterResult); // hit data layer to create review
+      return this.reviewDataLayerService.createReview(inputReview, filterResult); // Hit data layer to create review
     } catch (e) {
       throw e;
     }
