@@ -4,6 +4,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -17,6 +19,12 @@ import { CreateReview } from './models/create-review';
 import { IStats, Review, ReviewsResponse } from './models/review';
 import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
+import { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from '../auth/constants';
+
+export type ReviewControllerException = {
+  statusCode: number;
+  message: string | object;
+};
 
 @Controller('review')
 export class ReviewController {
@@ -24,6 +32,19 @@ export class ReviewController {
     private readonly reviewService: ReviewService,
     private captchaService: CaptchaService,
   ) {}
+
+  private handleException(
+    e: BadRequestException | HttpException | unknown,
+  ): never {
+    if (e instanceof BadRequestException) {
+      throw new HttpException(NOT_ACCEPTABLE, HttpStatus.NOT_ACCEPTABLE);
+    } else {
+      throw new HttpException(
+        INTERNAL_SERVER_ERROR,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 
   // Get All Reviews
   @Throttle(5, 60)
@@ -57,7 +78,7 @@ export class ReviewController {
     return this.reviewService.findOne(Number(id));
   }
 
-  //Update Review
+  // Update Review
   @Throttle(10, 10)
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
@@ -75,7 +96,7 @@ export class ReviewController {
     @Body() body: any,
     @IpAddress() ip: string,
   ): Promise<number> {
-    const validRequest = await this.captchaService.verifyToken(
+    const validRequest: boolean = await this.captchaService.verifyToken(
       body.captchaToken,
       ip,
     );
@@ -100,17 +121,13 @@ export class ReviewController {
   async create(
     @Body() review: CreateReview,
     @IpAddress() ip: string,
-  ): Promise<Review> {
-    const validRequest = await this.captchaService.verifyToken(
-      review.captchaToken,
-      ip,
-    );
-
-    if (!validRequest) {
-      throw new BadRequestException('Invalid captcha');
+  ): Promise<Review | ReviewControllerException> {
+    try {
+      await this.captchaService.verifyToken(review.captchaToken, ip);
+      return await this.reviewService.create(review.review);
+    } catch (e) {
+      return this.handleException(e);
     }
-
-    return this.reviewService.create(review.review);
   }
 
   //Get Flagged Reviews

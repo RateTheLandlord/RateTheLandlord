@@ -27,6 +27,7 @@ services:
     restart: unless-stopped
     ports:
       - ${BEPORT}:${BEPORT}
+      - 9999:9999
     networks:
       - internal
     depends_on:
@@ -41,6 +42,7 @@ services:
     restart: unless-stopped
     ports:
       - ${FEPORT}:${FEPORT}
+      - 9998:9998
     networks:
       - internal
     env_file:
