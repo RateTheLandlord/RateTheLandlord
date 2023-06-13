@@ -10,9 +10,9 @@ describe('ValidateDuplicateReviewService', () => {
 
   describe('editDistance', () => {
     it('should return the edit distance between two strings', () => {
-      const string1: string = 'kitten';
-      const string2: string = 'sitting';
-      const expectedDistance: number = 3;
+      const string1 = 'kitten';
+      const string2 = 'sitting';
+      const expectedDistance = 3;
       const distance: number = service.editDistance(string1, string2);
 
       expect(distance).toBe(expectedDistance);
@@ -21,9 +21,9 @@ describe('ValidateDuplicateReviewService', () => {
 
   describe('reviewSimilarity', () => {
     it('should return the similarity score between two reviews', () => {
-      const review1: string = 'This is a great product!';
-      const review2: string = 'This is an amazing product!';
-      const expectedSimilarity: number = 0.7037037037037037;
+      const review1 = 'This is a great product!';
+      const review2 = 'This is an amazing product!';
+      const expectedSimilarity = 0.7037037037037037;
       const similarity: number = service.reviewSimilarity(review1, review2);
 
       expect(similarity).toBe(expectedSimilarity);
@@ -72,7 +72,7 @@ describe('ValidateDuplicateReviewService', () => {
           admin_edited: false,
         },
       ];
-      const reviewUserSubmitted: string = 'This is a great product!';
+      const reviewUserSubmitted = 'This is a great product!';
 
       const result: boolean = await service.checkReviewsForSimilarity(
         reviewsFromDb,
@@ -123,7 +123,7 @@ describe('ValidateDuplicateReviewService', () => {
           admin_edited: false,
         },
       ];
-      const reviewUserSubmitted: string = 'This sucks so bad I do not like it.';
+      const reviewUserSubmitted = 'This sucks so bad I do not like it.';
 
       const result: boolean = await service.checkReviewsForSimilarity(
         reviewsFromDb,

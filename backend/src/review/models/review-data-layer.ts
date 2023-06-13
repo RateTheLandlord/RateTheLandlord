@@ -1,8 +1,8 @@
-import { DatabaseService } from "../../database/database.service";
-import { Review } from "./review";
-import { IResult } from "../helpers";
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { FAILED_TO_RETRIEVE_REVIEWS } from "../../auth/constants";
+import { DatabaseService } from '../../database/database.service';
+import { Review } from './review';
+import { IResult } from '../helpers';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { FAILED_TO_RETRIEVE_REVIEWS } from '../../auth/constants';
 
 /**
  * Data service layer for the reviews service of our backend.
@@ -63,11 +63,10 @@ export class ReviewModel {
   }
 
   public async update(id: number, review: Review): Promise<Review> {
-
     await this.databaseService.sql`UPDATE review
            SET landlord = ${review.landlord
-                            .substring(0, 150)
-                            .toLocaleUpperCase()},
+             .substring(0, 150)
+             .toLocaleUpperCase()},
                country_code = ${review.country_code.toLocaleUpperCase()},
                city = ${review.city.substring(0, 150).toLocaleUpperCase()},
                state = ${review.state.toLocaleUpperCase()},
