@@ -3,6 +3,7 @@ import { Review } from './models/review';
 
 @Injectable()
 export class ReviewSimilarityService {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {} // default constructor
 
   /* https://www.educative.io/answers/the-levenshtein-distance-algorithm
@@ -41,7 +42,7 @@ export class ReviewSimilarityService {
       longer = review2;
       shorter = review1;
     }
-    let longerLength: number = longer.length;
+    const longerLength: number = longer.length;
     if (longerLength == 0) {
       return 1.0;
     }
@@ -56,7 +57,7 @@ export class ReviewSimilarityService {
     reviewsFromDbForThatUser: Review[],
     reviewUserSubmitted: string,
   ): Promise<boolean> {
-    for (let review of reviewsFromDbForThatUser) {
+    for (const review of reviewsFromDbForThatUser) {
       const similarityScore: number = this.reviewSimilarity(
         review.review,
         reviewUserSubmitted,

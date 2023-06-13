@@ -148,12 +148,20 @@ export class ReviewService {
       const filterResult: IResult = await filterReviewWithAI(inputReview);
 
       const existingReviewsForLandlord: Review[] =
-        await this.reviewDataLayerService.getExistingReviewsForLandlord(inputReview);
+        await this.reviewDataLayerService.getExistingReviewsForLandlord(
+          inputReview,
+        );
       const reviewSpamDetected: boolean =
-        await this.reviewSimilarityService.checkReviewsForSimilarity(existingReviewsForLandlord, inputReview.review);
+        await this.reviewSimilarityService.checkReviewsForSimilarity(
+          existingReviewsForLandlord,
+          inputReview.review,
+        );
       if (reviewSpamDetected) return inputReview; // Don't post the review to the DB if we detect spam
 
-      return this.reviewDataLayerService.createReview(inputReview, filterResult); // Hit data layer to create review
+      return this.reviewDataLayerService.createReview(
+        inputReview,
+        filterResult,
+      ); // Hit data layer to create review
     } catch (e) {
       throw e;
     }

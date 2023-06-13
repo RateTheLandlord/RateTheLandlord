@@ -1,8 +1,8 @@
 import { DatabaseService } from '../../database/database.service';
 import { Review } from './review';
 import { IResult } from '../helpers';
-import {Injectable, InternalServerErrorException} from '@nestjs/common';
-import {FAILED_TO_RETRIEVE_REVIEWS} from "../../auth/constants";
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { FAILED_TO_RETRIEVE_REVIEWS } from '../../auth/constants';
 
 /**
  * Data service layer for the reviews service of our backend.
@@ -64,19 +64,21 @@ export class ReviewModel {
 
   public async update(id: number, review: Review): Promise<Review> {
     await this.databaseService.sql`UPDATE review
-           SET landlord = ${review.landlord.toLocaleUpperCase()},
+           SET landlord = ${review.landlord
+             .substring(0, 150)
+             .toLocaleUpperCase()},
                country_code = ${review.country_code.toLocaleUpperCase()},
-               city = ${review.city.toLocaleUpperCase()},
+               city = ${review.city.substring(0, 150).toLocaleUpperCase()},
                state = ${review.state.toLocaleUpperCase()},
-               zip = ${review.zip.toLocaleUpperCase()},
-               review = ${review.review.toLocaleUpperCase()},
+               zip = ${review.zip.substring(0, 50).toLocaleUpperCase()},
+               review = ${review.review},
                repair = ${review.repair},
                health = ${review.health},
                stability = ${review.stability},
                privacy = ${review.privacy},
                respect = ${review.respect},
                flagged = ${review.flagged},
-               flagged_reason = ${review.flagged_reason.toLocaleUpperCase()},
+               flagged_reason = ${review.flagged_reason},
                admin_approved = ${review.admin_approved},
                admin_edited   = ${review.admin_edited}
            WHERE id = ${id};`;
