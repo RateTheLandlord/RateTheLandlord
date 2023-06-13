@@ -1,8 +1,13 @@
 import { DatabaseService } from '../../database/database.service';
 import { Review } from './review';
 import { IResult } from '../helpers';
-import { Injectable } from '@nestjs/common';
+import {Injectable, InternalServerErrorException} from '@nestjs/common';
+import {FAILED_TO_RETRIEVE_REVIEWS} from "../../auth/constants";
 
+/**
+ * Data service layer for the reviews service of our backend.
+ * Provides methods to create, retrieve, update or handle any other CRUD operations for reviews in the database.
+ */
 @Injectable()
 export class ReviewModel {
   constructor(private readonly databaseService: DatabaseService) {}
@@ -23,7 +28,7 @@ export class ReviewModel {
       inputReview.flagged = filterResult.flagged;
       inputReview.flagged_reason = filterResult.flagged_reason;
 
-      const id = (
+      const id: number = (
         await this.databaseService.sql<{ id: number }[]>`
           INSERT INTO review
           (landlord, country_code, city, state, zip, review, repair, health, stability, privacy, respect, flagged,
@@ -42,5 +47,40 @@ export class ReviewModel {
     } catch (e) {
       throw e;
     }
+  }
+
+  public async getExistingReviewsForLandlord(
+    inputReview: Review,
+  ): Promise<Review[]> {
+    try {
+      return await this.databaseService.sql<Review[]>`SELECT REVIEW
+        FROM review
+        WHERE landlord = ${inputReview.landlord.toLocaleUpperCase()}
+          AND ZIP = ${inputReview.zip.toLocaleUpperCase()};`;
+    } catch (e) {
+      throw new InternalServerErrorException(FAILED_TO_RETRIEVE_REVIEWS);
+    }
+  }
+
+  public async update(id: number, review: Review): Promise<Review> {
+    await this.databaseService.sql`UPDATE review
+           SET landlord = ${review.landlord.toLocaleUpperCase()},
+               country_code = ${review.country_code.toLocaleUpperCase()},
+               city = ${review.city.toLocaleUpperCase()},
+               state = ${review.state.toLocaleUpperCase()},
+               zip = ${review.zip.toLocaleUpperCase()},
+               review = ${review.review.toLocaleUpperCase()},
+               repair = ${review.repair},
+               health = ${review.health},
+               stability = ${review.stability},
+               privacy = ${review.privacy},
+               respect = ${review.respect},
+               flagged = ${review.flagged},
+               flagged_reason = ${review.flagged_reason.toLocaleUpperCase()},
+               admin_approved = ${review.admin_approved},
+               admin_edited   = ${review.admin_edited}
+           WHERE id = ${id};`;
+
+    return review;
   }
 }

@@ -25,19 +25,6 @@ export class ReviewService {
     private reviewDataLayerService: ReviewModel,
   ) {}
 
-  private async getExistingRevewsForUser(
-    inputReview: Review,
-  ): Promise<Review[]> {
-    try {
-      return await this.databaseService.sql<Review[]>`SELECT REVIEW
-        FROM review
-        WHERE landlord = ${inputReview.landlord.toLocaleUpperCase()}
-          AND ZIP = ${inputReview.zip.toLocaleUpperCase()};`;
-    } catch (e) {
-      throw new InternalServerErrorException(FAILED_TO_RETRIEVE_REVIEWS);
-    }
-  }
-
   public async get(params: ReviewQuery): Promise<ReviewsResponse> {
     const {
       page: pageParam,
@@ -160,15 +147,12 @@ export class ReviewService {
     try {
       const filterResult: IResult = await filterReviewWithAI(inputReview);
 
-      // Check existing reviews for that landlord, if we detect the new review matches any existing ones by 75%
-      const existingReviews: Review[] = await this.getExistingRevewsForUser(inputReview);
+      const existingReviewsForLandlord: Review[] =
+        await this.reviewDataLayerService.getExistingReviewsForLandlord(inputReview);
       const reviewSpamDetected: boolean =
-        await this.reviewSimilarityService.checkReviewsForSimilarity(
-          existingReviews,
-          inputReview.review,
-        );
-
+        await this.reviewSimilarityService.checkReviewsForSimilarity(existingReviewsForLandlord, inputReview.review);
       if (reviewSpamDetected) return inputReview;
+
       return this.reviewDataLayerService.createReview(inputReview, filterResult); // hit data layer to create review
     } catch (e) {
       throw e;
@@ -176,25 +160,7 @@ export class ReviewService {
   }
 
   public async update(id: number, review: Review): Promise<Review> {
-    await this.databaseService.sql`UPDATE review
-           SET landlord       = ${review.landlord},
-               country_code   = ${review.country_code},
-               city           = ${review.city},
-               state          = ${review.state},
-               zip            = ${review.zip},
-               review         = ${review.review},
-               repair         = ${review.repair},
-               health         = ${review.health},
-               stability      = ${review.stability},
-               privacy        = ${review.privacy},
-               respect        = ${review.respect},
-               flagged        = ${review.flagged},
-               flagged_reason = ${review.flagged_reason},
-               admin_approved = ${review.admin_approved},
-               admin_edited   = ${review.admin_edited}
-           WHERE id = ${id};`;
-
-    return review;
+    return this.reviewDataLayerService.update(id, review);
   }
 
   public async report(id: number, reason: string): Promise<number> {

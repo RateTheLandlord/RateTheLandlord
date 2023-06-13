@@ -78,7 +78,7 @@ export class ReviewController {
     return this.reviewService.findOne(Number(id));
   }
 
-  //Update Review
+  // Update Review
   @Throttle(10, 10)
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
