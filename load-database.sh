@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prompt the user for the Docker container name
-read -p "Enter the name of your Docker container: " container_name
+read -p "Enter the CONTAINER ID of your Docker container: " container_name
 
 # Prompt the user for the PostgreSQL username
 read -p "Enter the PostgreSQL username: " username
