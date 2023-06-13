@@ -1,0 +1,8 @@
+{
+  "alerts": {
+    "success": "Success!",
+    "fail": "Failure: Something went wrong, please try again.",
+    "dismiss": "Dismiss",
+    "maliciousString": "Warning! We've detected that a link or script in your entry. Please remove or rephrase before submitting."
+  }
+}

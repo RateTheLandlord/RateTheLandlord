@@ -163,14 +163,11 @@ export class ReviewService {
     return this.reviewDataLayerService.update(id, review);
   }
 
-  public async report(id: number, reason: string): Promise<number> {
-    reason.length > 250
-      ? (reason = `${reason.substring(0, 250)}...`)
-      : (reason = reason);
-    await this.databaseService.sql`UPDATE review
-           SET flagged        = true,
-               flagged_reason = ${reason}
-           WHERE id = ${id};`;
+  async report(id: number, reason: string): Promise<number> {
+    reason.length > 250 ? (reason = `${reason.substring(0, 250)}...`) : reason;
+    await this.databaseService
+      .sql`UPDATE review SET flagged = true, flagged_reason = ${reason}
+      WHERE id = ${id};`;
 
     return id;
   }
@@ -183,10 +180,10 @@ export class ReviewService {
     return true;
   }
 
-  public async getFlagged(): Promise<Review[]> {
-    return await this.databaseService.sql<Review[]>`SELECT *
-      FROM review
-      WHERE flagged = true;`;
+  async getFlagged(): Promise<Review[]> {
+    return this.databaseService.sql<
+      Review[]
+    >`SELECT * FROM review WHERE flagged = true;`;
   }
 
   public async getStats(): Promise<IStats> {
@@ -333,12 +330,10 @@ export class ReviewService {
     };
   }
 
-  public async getLandlords(): Promise<string[]> {
-    const landlords = await this.databaseService.sql`SELECT DISTINCT landlord
-           FROM review;`;
-    const landlordList = landlords.map(({ landlord }) => landlord);
-
-    return landlordList;
+  async getLandlords(): Promise<string[]> {
+    const landlords = await this.databaseService
+      .sql`SELECT DISTINCT landlord FROM review;`;
+    return landlords.map(({ landlord }) => landlord);
   }
 
   public async getLandlordReviews(landlord: string): Promise<Review[]> {

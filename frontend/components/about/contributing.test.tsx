@@ -30,7 +30,7 @@ describe('Contributing', () => {
 		expect(titleElement).toBeInTheDocument()
 
 		// Check if the contributing paragraph is displayed correctly
-		const paragraphElement = getByText('about.contributing.p-1')
+		const paragraphElement = getByText('about.contributing.info')
 		expect(paragraphElement).toBeInTheDocument()
 	})
 
