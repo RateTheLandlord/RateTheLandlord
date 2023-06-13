@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Put, UseGuards } from '@nestjs/common';
 import { PasswordService } from './password.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 interface IPassProps {
   password: string;

@@ -2,35 +2,31 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import {render, RenderResult} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import Contact from './contact'
 
-describe('Contact', () => {
-	let renderResult: RenderResult
+jest.mock('react-i18next', () => ({
+	useTranslation: jest.fn().mockReturnValue({
+		t: jest.fn().mockImplementation((key) => {
+			if (key === 'about.contact.title') {
+				return 'Contact Us'
+			} else if (key === 'about.contact.email') {
+				return 'contact@ratethelandlord.org'
+			}
+		}),
+	}),
+}))
 
-	beforeEach(() => {
-		renderResult = render(<Contact />)
-	})
+test('renders contact section with title and email', () => {
+	render(<Contact />)
+	const contactSection = screen.getByTestId('about-contact-1')
+	expect(contactSection).toBeInTheDocument()
 
-	test('renders the component with contact information', () => {
-		const {getByTestId, getByText} = renderResult
+	expect(screen.getByText('Contact Us')).toBeInTheDocument()
 
-		// Check if the component renders correctly
-		const contactElement = getByTestId('about-contact-1')
-		expect(contactElement).toBeInTheDocument()
-
-		// Check if the contact title is displayed correctly
-		const titleElement = getByText('Contact Us')
-		expect(titleElement).toBeInTheDocument()
-
-		// Check if the contact email is displayed correctly
-		const emailElement = getByText('Email us: contact@ratethelandlord.org')
-		expect(emailElement).toBeInTheDocument()
-		expect(emailElement).toHaveAttribute(
-			'href',
-			'mailto:contact@ratethelandlord.org',
-		)
-	})
-
-	// Add more test cases as needed
+	const emailLink = contactSection.querySelector(
+		"a[href='mailto:contact@ratethelandlord.org']",
+	)
+	expect(emailLink).toBeInTheDocument()
+	expect(emailLink).toHaveTextContent('contact@ratethelandlord.org')
 })

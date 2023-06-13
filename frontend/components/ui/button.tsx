@@ -1,16 +1,12 @@
 import React from 'react'
 
-//Default Button. Design determined by Figma
-
-function Button({
-	children,
-	disabled = false,
-	onClick,
-}: {
+interface IProps {
 	children: string
 	disabled?: boolean
 	onClick?: () => void
-}): JSX.Element {
+}
+
+function Button({children, disabled = false, onClick}: IProps): JSX.Element {
 	return (
 		<button
 			onClick={onClick}

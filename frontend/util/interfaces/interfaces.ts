@@ -28,3 +28,14 @@ export interface NewFilter {
 	key: string
 	value: string
 }
+
+export interface ILinks {
+	name: string
+	href: string
+	icon: JSX.Element
+}
+
+export interface INav {
+	href: string
+	name: string
+}
