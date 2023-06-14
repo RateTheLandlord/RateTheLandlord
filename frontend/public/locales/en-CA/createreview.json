@@ -43,6 +43,10 @@
 			"add-review": "Please Add a Written Review",
 			"add-review-desc": "We love your enthusiasm to leave a rating for your Landlord! However, can you please leave a small review to give more context to your rating so that other tenants can be better informed!",
 			"close": "Close"
+		},
+		"spam-modal": {
+			"title": "It appears you have reviewed this Landlord before...",
+			"description": "We understand you want to voice your frustration about your previous Landlord in a safe and public way. However, leaving multiple reviews about the same landlord causes both the reviews for that Landlord, and the site, to lose their integrity. Please only leave 1 review per landlord you've had so that this site can remain a fair representation for both the Tenants and Landlords."
 		}
 	}
 }
