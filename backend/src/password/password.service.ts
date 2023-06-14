@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
-import * as bcrypt from 'bcrypt';
+import { Injectable } from "@nestjs/common";
+import { DatabaseService } from "../database/database.service";
+
+const bcrypt = require('bcryptjs')
 
 const saltOrRounds = 10;
 
