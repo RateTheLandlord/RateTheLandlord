@@ -46,7 +46,7 @@
 		},
 		"spam-modal": {
 			"title": "It appears you have reviewed this Landlord before...",
-			"description": "We understand you want to voice your frustration about your previous Landlord in a safe and public way. However, leaving multiple reviews about the same landlord causes both the reviews for that Landlord, and the site, to lose their integrity. Please only leave 1 review per landlord you've had so that this site can remain a fair representation for both the Tenants and Landlords."
+			"description": "Please only leave one review per landlord you've had so that this site can remain a fair representation of rental experiences. Any repeat reviews or spam will be deleted. If you have any questions, please reach out to us at contact@ratethelandlord.org"
 		}
 	}
 }
