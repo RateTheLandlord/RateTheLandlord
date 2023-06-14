@@ -50,7 +50,7 @@ function SheldonModal({isOpen, setIsOpen}: IProps) {
                         If you are seeing this message, please contact us at contact@ratethelandlord.org.
                       </p>
                       <p className="text-sm text-gray-500">
-                        This Landlord has experienced a high number of reviews with this text. We'd like an opportunity to explain why these reviews are being removed.
+                        This Landlord has experienced a high number of reviews with this text. We&apos;d like an opportunity to explain why these reviews are being removed.
                       </p>
                     </div>
                   </div>
