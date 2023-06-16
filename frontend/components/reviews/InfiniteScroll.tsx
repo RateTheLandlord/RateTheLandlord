@@ -27,12 +27,12 @@ function InfiniteScroll({
 }: IProps) {
 	const [content, setContent] = useState<Review[]>([]) // Store loaded content
 	// Add a scroll event listener
-	const debouncedHandleScroll = debounce(handleScroll, 200): //200ms delay
+	
 	useEffect(() => {
 		window.addEventListener('scroll', debouncedHandleScroll)
 		return () => window.removeEventListener('scroll', debouncedHandleScroll)
 	}, [])
-
+	
 	// Fetch more content when reaching the bottom
 	const handleScroll = () => {
 		if (
@@ -46,7 +46,7 @@ function InfiniteScroll({
 			setPage((page) => page + 1)
 		}
 	}
-
+	const debouncedHandleScroll = debounce(handleScroll, 5000) //1000ms delay
 	// Fetch initial content when the component mounts
 	useEffect(() => {
 		// Fetch initial content here
