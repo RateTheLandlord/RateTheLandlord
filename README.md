@@ -12,14 +12,13 @@ Set the environment to `development`
 
 Then run the following commands:
 
-- Pull the latest Images
-  `docker-compose pull`
-
-- Build
-  `docker-compose -f docker-compose.dev.yml build`
+- Install Packages
+  `cd frontend && npm i && cd ../backend && npm i`
 
 - Start
-  `docker-compose -f docker-compose.dev.yml up -d`
+  `docker-compose -f docker-compose.dev.yml up -d --build`
+
+The project should not be running at `http://localhost` and pick up changes you make in you IDE
 
 ## Load the Database with Dummy Reviews
 

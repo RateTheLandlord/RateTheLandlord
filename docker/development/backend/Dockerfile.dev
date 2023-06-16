@@ -11,8 +11,7 @@ WORKDIR /app
 # to the /app working directory
 COPY ./backend/package*.json /app/
 COPY ./.env /app/
-
-RUN npm install
+COPY ./backend/node_modules /app/node_modules
 
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app
