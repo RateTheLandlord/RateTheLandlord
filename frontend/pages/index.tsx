@@ -1,8 +1,8 @@
-import Hero from '@/components/home/hero'
-import IconSection from '@/components/home/icon-section'
-import {NextSeo} from 'next-seo'
-import {useRouter} from 'next/router'
-import React from 'react'
+import Hero from "@/components/home/hero";
+import IconSection from "@/components/home/icon-section";
+import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
+import React from "react";
 
 //This page should be statically generated at build. No need for Data fetching here
 

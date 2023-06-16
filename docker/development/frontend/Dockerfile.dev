@@ -8,13 +8,13 @@ RUN mkdir -p /app
 # Set /app as the working directory
 WORKDIR /app
 
+ENV NEXT_TELEMETRY_DISABLED 1
+
 # Copy package.json and package-lock.json
 # to the /app working directory
 COPY ./frontend/package*.json  /app/
 COPY ./.env /app/
-
-# Install dependencies in /app
-RUN npm install
+COPY ./frontend/node_modules /app/node_modules
 
 # Copy the rest of our Next.js folder into /app
 COPY ./frontend /app

@@ -23,7 +23,7 @@ services:
     container_name: backend
     build:
       context: .
-      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile
+      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile.dev
     restart: unless-stopped
     ports:
       - ${BEPORT}:${BEPORT}
@@ -38,7 +38,7 @@ services:
     container_name: frontend
     build:
       context: .
-      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile
+      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile.dev
     restart: unless-stopped
     ports:
       - ${FEPORT}:${FEPORT}

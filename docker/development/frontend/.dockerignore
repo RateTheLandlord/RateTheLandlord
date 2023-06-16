@@ -1,5 +1,13 @@
-.next
-node_modules
+.tmp/
+.cache/
+.git/
+build/
+.gitignore
+.next/
+.dockerignore
+Dockerfile
+docker-compose.yml
+nginx/
 
 .git
 .gitignore
@@ -9,7 +17,6 @@ README.md
 CONTRIBUTING.md
 docker-compose.yml
 Dockerfile
-node_modules/
 .github
 .vscode
 npm-debug.log
