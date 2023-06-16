@@ -1,7 +1,7 @@
-import { AppModule } from './app.module';
-import { NestFactory } from '@nestjs/core';
-import ley from 'ley';
-import requestIp from 'request-ip';
+import { AppModule } from "./app.module";
+import { NestFactory } from "@nestjs/core";
+import ley from "ley";
+import requestIp from "request-ip";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

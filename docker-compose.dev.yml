@@ -33,6 +33,9 @@ services:
     depends_on:
       - postgres
     env_file: .env
+    volumes:
+      - ./backend:/app
+      - /backend/node_modules
 
   frontend:
     container_name: frontend
@@ -49,6 +52,9 @@ services:
       - ./.env
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app
+      - /frontend/node_modules
 
   postgres:
     image: postgres
