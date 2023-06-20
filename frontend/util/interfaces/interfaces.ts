@@ -39,3 +39,34 @@ export interface INav {
 	href: string
 	name: string
 }
+
+export interface ILocationResponse {
+	address: {
+		["code"]: string,
+		city: string
+		country: string
+		country_code: string
+		county: string
+		postcode: string
+		state: string
+		state_district: string
+	}
+	boundingbox: Array<string>
+	class: string
+	display_name: string
+	icon: string
+	importance: number
+	lat: string
+	licence: string
+	lon: string
+	osm_id: number
+	osm_type: string
+	place_id: number
+	type: string
+}
+
+export interface ILocationHookResponse {
+	id: number,
+	city: string
+	state: string
+}
