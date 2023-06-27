@@ -15,7 +15,7 @@ export default function CityComboBox({
   state, setState, options, name, searching
 }: ComponentProps) {
   return (<Combobox value={state} onChange={setState}>
-    <div className="relative w-full pt-2 lg:px-2 lg:pt-0">
+    <div className="relative w-full pt-2 lg:pt-0">
       <label
         htmlFor="city"
         className="block text-sm font-medium text-gray-700"
@@ -36,12 +36,12 @@ export default function CityComboBox({
         leaveTo="opacity-0"
       >
         <Combobox.Options
-          className="absolute z-10 mt-1 max-h-60 w-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm flex flex-col">
+          className="absolute z-10 mt-1 max-h-60 w-60 overflow-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm flex flex-col">
           {options.length === 0 && state !== "" ? searching ? (<div className="relative cursor-default select-none py-2 px-4 text-gray-700">
             Loading...
           </div>) : <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
             City Not Found
-          </div> : (options.map(option => <Combobox.Option key={option.id} className="text-left p-2 hover:bg-teal-100 cursor-pointer" value={option}>{option.city}</Combobox.Option>))}
+          </div> : (options.map(option => <Combobox.Option key={option.id} className="rounded-md text-left p-2 hover:bg-teal-100 cursor-pointer" value={option}>{option.city}</Combobox.Option>))}
         </Combobox.Options>
       </Transition>
     </div>
