@@ -11,7 +11,7 @@ export const useLocation = (input: string, country: string) => {
       setSearching(true);
       timer = setTimeout(() => {
         searchLocations();
-      }, 1000);
+      }, 500);
     }
 
     return () => {
