@@ -21,6 +21,9 @@ import { country_codes } from "@/util/helpers/getCountryCodes";
 import SpamReviewModal from "@/components/create-review/SpamReviewModal";
 import SheldonModal from "@/components/create-review/SheldonModal";
 import { sheldonReview } from "@/components/create-review/helper";
+import { useLocation } from "@/util/hooks/useLocation";
+import CityComboBox from "@/components/create-review/components/CityComboBox";
+import { ILocationHookResponse } from "@/util/interfaces/interfaces";
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
@@ -40,6 +43,8 @@ function ReviewForm(): JSX.Element {
 	const [city, setCity] = useState<string>('')
 	const [province, setProvince] = useState<string>('Alberta')
 	const [postal, setPostal] = useState<string>('')
+
+	const { searching, locations }: { searching: boolean, locations: Array<ILocationHookResponse> }= useLocation(city, country)
 
 	const [repair, setRepair] = useState<number>(3)
 	const [health, setHealth] = useState<number>(3)
@@ -317,24 +322,7 @@ function ReviewForm(): JSX.Element {
 							</div>
 
 							<div className="sm:col-span-2">
-								<label
-									htmlFor="city"
-									className="block text-sm font-medium text-gray-700"
-								>
-									{t('create-review.review-form.city')}
-								</label>
-								<div className="mt-1">
-									<input
-										type="text"
-										name="city"
-										id="city"
-										placeholder={t('create-review.review-form.city')}
-										required
-										onChange={(e) => handleTextChange(e, 'city')}
-										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-										data-testid="create-review-form-city-1"
-									/>
-								</div>
+								<CityComboBox name={t('create-review.review-form.city')} state={city} setState={setCity} options={locations} searching={searching} />
 							</div>
 
 							<div className="sm:col-span-2">
