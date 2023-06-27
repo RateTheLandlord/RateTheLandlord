@@ -15,7 +15,7 @@ export default function CityComboBox({
   state, setState, options, name, searching
 }: ComponentProps) {
   return (<Combobox value={state} onChange={setState}>
-    <div className="relative w-full pt-2 lg:pt-0">
+    <div data-testid="create-review-form-city-1" className="relative w-full pt-2 lg:pt-0">
       <label
         htmlFor="city"
         className="block text-sm font-medium text-gray-700"
