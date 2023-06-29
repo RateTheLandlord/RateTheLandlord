@@ -41,7 +41,7 @@ export default function CityComboBox({
             Loading...
           </div>) : <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
             City Not Found
-          </div> : (options.map(option => <Combobox.Option key={option.id} className="rounded-md text-left p-2 hover:bg-teal-100 cursor-pointer" value={option}>{option.city}</Combobox.Option>))}
+          </div> : (options.map(option => <Combobox.Option key={option.id} className="rounded-md text-left p-2 hover:bg-teal-100 cursor-pointer" value={option.city}>{option.city}</Combobox.Option>))}
         </Combobox.Options>
       </Transition>
     </div>
