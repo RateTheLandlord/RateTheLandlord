@@ -351,4 +351,14 @@ export class ReviewService {
       FROM review
       WHERE landlord IN (${landlord});`;
   }
+
+  public async getLandlordSuggestions(landlord: string): Promise<string[]> {
+    if (!landlord) return [];
+    const suggestions = await this.databaseService.sql`
+    SELECT DISTINCT landlord FROM review WHERE landlord LIKE ${
+      '%' + landlord + '%'
+    }
+    `;
+    return suggestions.map(({ landlord }) => landlord);
+  }
 }
