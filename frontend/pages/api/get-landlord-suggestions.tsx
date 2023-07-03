@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const url = 'http://localhost:8080'
 
 export const removeSpecialChars = (input: string) => {
@@ -25,6 +26,7 @@ export const getLandlordSuggestions = async (landlord: string) => {
             return []
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const data: string[] = await response.json()
 		console.log('Response data:', data)
 		return data
