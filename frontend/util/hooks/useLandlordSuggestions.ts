@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import {getLandlordSuggestions} from '../../pages/api/get-landlord-suggestions'
 
 export const useLandlordSuggestions = (landlord: string) => {
 	const [landlordSuggestions, setLandlordSuggestions] = useState<string[]>([])
@@ -9,7 +10,17 @@ export const useLandlordSuggestions = (landlord: string) => {
 		if (landlord) {
 			setIsSearching(true)
 			timer = setTimeout(() => {
-				getLandlordSuggestions()
+				const fetchData = async () => {
+					try {
+						const suggestions: string[] = await getLandlordSuggestions(landlord)
+						setLandlordSuggestions(suggestions)
+						setIsSearching(false)
+					} catch (err) {
+						console.error(err)
+						setLandlordSuggestions([])
+					}
+				}
+				void fetchData();
 			}, 500)
 		}
 
@@ -18,40 +29,5 @@ export const useLandlordSuggestions = (landlord: string) => {
 		}
 	}, [landlord])
 
-	const getLandlordSuggestions = async () => {
-		const url = 'http://localhost:8080'
-		const sanitizedLandlord = removeSpecialChars(landlord)
-
-		try {
-			const response = await fetch(
-				`${url}/review/landlord/suggestions?landlord=${encodeURIComponent(
-					sanitizedLandlord,
-				)}`,
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				},
-			)
-
-			if (!response.ok) {
-				setLandlordSuggestions([])
-				return
-			}
-
-			const data: string[] = await response.json()
-			console.log('Response data:', data)
-			setLandlordSuggestions(data)
-		} catch (err) {
-			console.log(err)
-			setLandlordSuggestions([])
-		}
-	}
-
 	return {isSearching, landlordSuggestions}
-}
-
-const removeSpecialChars = (input: string) => {
-	const specialCharsRegex = /[\/@#$%^*<>?\[\]{}|]/g
-	return input.replace(specialCharsRegex, '')
 }
