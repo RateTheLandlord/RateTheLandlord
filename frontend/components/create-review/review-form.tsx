@@ -270,31 +270,13 @@ function ReviewForm(): JSX.Element {
 						</div>
 						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 							<div className="sm:col-span-3">
-								{/* <label
-									htmlFor="landlord"
-									className="block text-sm font-medium text-gray-700"
-								>
-									{t('create-review.review-form.landlord')}
-								</label> */}
-								<div className="mt-1">
-									{/* <input
-										type="text"
-										name="landlord"
-										id="landlord"
-										required
-										placeholder={t('create-review.review-form.landlord')}
-										onChange={(e) => handleTextChange(e, 'landlord')}
-										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-										data-testid="create-review-form-landlord-1"
-									/> */}
-									<LandlordComboBox 
-										name={t('create-review.review-form.landlord')}
-										state={landlord}
-										setState={setLandlord}
-										suggestions={landlordSuggestions}
-										isSearching={isSearching}
-									/>
-								</div>
+								<LandlordComboBox 
+									name={t('create-review.review-form.landlord')}
+									state={landlord}
+									setState={setLandlord}
+									suggestions={landlordSuggestions}
+									isSearching={isSearching}
+								/>
 							</div>
 
 							<div className="sm:col-span-3">
