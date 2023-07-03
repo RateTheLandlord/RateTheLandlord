@@ -160,6 +160,7 @@ export class ReviewController {
   }
 
   // Get landlord name suggestions
+  @Throttle(10, 30)
   @Get('/landlord/suggestions')
   async getLandlordSuggestions(
     @Query('landlord') landlord: string,
