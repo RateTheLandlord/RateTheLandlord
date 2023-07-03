@@ -2,12 +2,12 @@ import {useEffect, useState} from 'react'
 
 export const useLandlordSuggestions = (landlord: string) => {
 	const [landlordSuggestions, setLandlordSuggestions] = useState<string[]>([])
-	const [searching, setSearching] = useState(false)
+	const [isSearching, setIsSearching] = useState(false)
 
 	useEffect(() => {
 		let timer: NodeJS.Timeout
 		if (landlord) {
-			setSearching(true)
+			setIsSearching(true)
 			timer = setTimeout(() => {
 				getLandlordSuggestions()
 			}, 500)
@@ -48,7 +48,7 @@ export const useLandlordSuggestions = (landlord: string) => {
 		}
 	}
 
-	return {searching, landlordSuggestions}
+	return {isSearching, landlordSuggestions}
 }
 
 const removeSpecialChars = (input: string) => {

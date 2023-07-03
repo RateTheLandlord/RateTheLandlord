@@ -47,7 +47,7 @@ function ReviewForm(): JSX.Element {
 	const [postal, setPostal] = useState<string>('')
 
 	const { searching, locations }: { searching: boolean, locations: Array<ILocationHookResponse> }= useLocation(city, country)
-	const { isSearching, landlordNames }: { isSearching: boolean, landlordNames: Array<string> } = useLandlordSuggestions(landlord)
+	const { isSearching, landlordSuggestions }: { isSearching: boolean, landlordSuggestions: Array<string> } = useLandlordSuggestions(landlord)
 
 	const [repair, setRepair] = useState<number>(3)
 	const [health, setHealth] = useState<number>(3)
@@ -270,12 +270,12 @@ function ReviewForm(): JSX.Element {
 						</div>
 						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 							<div className="sm:col-span-3">
-								<label
+								{/* <label
 									htmlFor="landlord"
 									className="block text-sm font-medium text-gray-700"
 								>
 									{t('create-review.review-form.landlord')}
-								</label>
+								</label> */}
 								<div className="mt-1">
 									{/* <input
 										type="text"
@@ -291,7 +291,7 @@ function ReviewForm(): JSX.Element {
 										name={t('create-review.review-form.landlord')}
 										state={landlord}
 										setState={setLandlord}
-										suggestions={landlordNames}
+										suggestions={landlordSuggestions}
 										isSearching={isSearching}
 									/>
 								</div>
