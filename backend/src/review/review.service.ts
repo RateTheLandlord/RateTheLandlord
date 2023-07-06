@@ -1,10 +1,9 @@
-import { DatabaseService } from 'src/database/database.service';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { IStats, Review, ReviewsResponse } from './models/review';
-import { filterReviewWithAI, IResult } from './helpers';
-import { ReviewSimilarityService } from './review-text-match';
-import { FAILED_TO_RETRIEVE_REVIEWS } from '../auth/constants';
-import { ReviewModel } from './models/review-data-layer';
+import { DatabaseService } from "src/database/database.service";
+import { Injectable } from "@nestjs/common";
+import { IStats, Review, ReviewsResponse } from "./models/review";
+import { filterReviewWithAI, IResult } from "./helpers";
+import { ReviewSimilarityService } from "./review-text-match";
+import { ReviewModel } from "./models/review-data-layer";
 
 type ReviewQuery = {
   page?: number;
@@ -350,5 +349,15 @@ export class ReviewService {
     return this.databaseService.sql<Review[]>`Select *
       FROM review
       WHERE landlord IN (${landlord});`;
+  }
+
+  public async getLandlordSuggestions(landlord: string): Promise<string[]> {
+    if (!landlord) return [];
+    const suggestions = await this.databaseService.sql`
+    SELECT DISTINCT landlord FROM review WHERE landlord LIKE ${
+      '%' + landlord.toLocaleUpperCase() + '%'
+    }
+    `;
+    return suggestions.map(({ landlord }) => landlord);
   }
 }

@@ -158,4 +158,13 @@ export class ReviewController {
   ): Promise<Review[]> {
     return this.reviewService.getLandlordReviews(landlord.landlord);
   }
+
+  // Get landlord name suggestions
+  @Throttle(10, 30)
+  @Get('/landlord/suggestions')
+  async getLandlordSuggestions(
+    @Query('landlord') landlord: string,
+  ): Promise<string[]> {
+    return this.reviewService.getLandlordSuggestions(landlord);
+  }
 }

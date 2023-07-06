@@ -22,7 +22,9 @@ import SpamReviewModal from "@/components/create-review/SpamReviewModal";
 import SheldonModal from "@/components/create-review/SheldonModal";
 import { sheldonReview } from "@/components/create-review/helper";
 import { useLocation } from "@/util/hooks/useLocation";
+import { useLandlordSuggestions } from "@/util/hooks/useLandlordSuggestions"
 import CityComboBox from "@/components/create-review/components/CityComboBox";
+import LandlordComboBox from '@/components/create-review/components/LandlordComboBox';
 import { ILocationHookResponse } from "@/util/interfaces/interfaces";
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
@@ -45,6 +47,7 @@ function ReviewForm(): JSX.Element {
 	const [postal, setPostal] = useState<string>('')
 
 	const { searching, locations }: { searching: boolean, locations: Array<ILocationHookResponse> }= useLocation(city, country)
+	const { isSearching, landlordSuggestions }: { isSearching: boolean, landlordSuggestions: Array<string> } = useLandlordSuggestions(landlord)
 
 	const [repair, setRepair] = useState<number>(3)
 	const [health, setHealth] = useState<number>(3)
@@ -267,24 +270,13 @@ function ReviewForm(): JSX.Element {
 						</div>
 						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 							<div className="sm:col-span-3">
-								<label
-									htmlFor="landlord"
-									className="block text-sm font-medium text-gray-700"
-								>
-									{t('create-review.review-form.landlord')}
-								</label>
-								<div className="mt-1">
-									<input
-										type="text"
-										name="landlord"
-										id="landlord"
-										required
-										placeholder={t('create-review.review-form.landlord')}
-										onChange={(e) => handleTextChange(e, 'landlord')}
-										className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-										data-testid="create-review-form-landlord-1"
-									/>
-								</div>
+								<LandlordComboBox 
+									name={t('create-review.review-form.landlord')}
+									state={landlord}
+									setState={setLandlord}
+									suggestions={landlordSuggestions}
+									isSearching={isSearching}
+								/>
 							</div>
 
 							<div className="sm:col-span-3">
