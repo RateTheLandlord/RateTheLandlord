@@ -108,6 +108,10 @@ jobs:
           echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .env
           echo PGPORT=${{secrets.PGPORT}} >> .env
           echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
+          echo UMUSERNAME=${{secrets.UMUSERNAME}} >> .env
+          echo UMPASSWORD="${{secrets.UMPASSWORD}}" >> .env
+          echo UMDATABASE=${{secrets.UMDATABASE}} >> .env
+          echo DATABASE_URL=${{secrets.DATABASEURL}} >> .env
           cat .env
       - name: Pull Docker
         run: docker-compose pull

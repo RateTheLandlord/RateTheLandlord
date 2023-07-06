@@ -72,9 +72,39 @@ services:
       - postgres-data:/var/lib/postgresql/data/
     networks:
       - internal
+  umami:
+    container_name: umami
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    ports:
+      - "3500:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_TYPE: postgresql
+      APP_SECRET: replace-me-with-a-random-string
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - internal
+  db:
+    container_name: umamidb
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${UMDATABASE}
+      POSTGRES_USER: ${UMUSERNAME}
+      POSTGRES_PASSWORD: ${UMPASSWORD}
+    volumes:
+      - ./sql/schema.postgresql.sql:/docker-entrypoint-initdb.d/schema.postgresql.sql:ro
+      - umami-db-data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "7654:5432"
+    networks:
+      - internal
 
 volumes:
   postgres-data:
+  umami-db-data:
 
 networks:
   internal:
