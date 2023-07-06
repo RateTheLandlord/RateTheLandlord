@@ -1,37 +1,38 @@
 /* eslint-disable no-useless-escape */
-const url = 'http://localhost:8080'
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const removeSpecialChars = (input: string) => {
 	const specialCharsRegex = /[\/@#$%^*<>?\[\]{}|]/g
 	return input.replace(specialCharsRegex, '')
 }
 
-export const getLandlordSuggestions = async (landlord: string) => {
-	const sanitizedLandlord = removeSpecialChars(landlord)
+const getLandlordSuggestions = (req: NextApiRequest, res: NextApiResponse) => {
+	const url = process.env.API_URL as string
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const {body}: {body: {input: string}} = req
+	const sanitizedLandlord = removeSpecialChars(body.input)
 
-	try {
-		const response = await fetch(
-			`${url}/review/landlord/suggestions?landlord=${encodeURIComponent(
-				sanitizedLandlord,
-			)}`,
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				},
+	fetch(`${url}/review/landlord/suggestions?landlord=${encodeURIComponent(
+			sanitizedLandlord,
+		)}`,
+		{
+			headers: {
+				'Content-Type': 'application/json',
 			},
-		)
-
-		if (!response.ok) {
-            console.error('Failed to get landlord suggestions')
-            return []
+		},
+	).then((result: Response) => {
+		if (!result.ok) {
+			throw result
 		}
-
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		const data: string[] = await response.json()
-		console.log('Response data:', data)
-		return data
-	} catch (err) {
-		console.error(err)
-        return []
-	}
+		return result.json()
+	}).then(data => {
+		res.status(200).json(data)
+	}).catch((error: Response) => {
+		console.log('error: ', error)
+		res
+			.status(error.status)
+			.json({error: 'Failed to Report Review', response: error.statusText})
+	})
 }
+
+export default getLandlordSuggestions
