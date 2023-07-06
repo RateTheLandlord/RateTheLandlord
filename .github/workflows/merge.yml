@@ -99,17 +99,17 @@ jobs:
           echo FEPORT=${{secrets.FEPORT}} >> .env
           echo HCPATCHA_SECRET_KEY=${{secrets.HCPATCHA_SECRET_KEY}} >> .env
           echo HCPATCHA_SITE_KEY=${{secrets.API_TOKEN_SALT}} >> .env
-          echo JWT_KEY=${{secrets.JWT_KEY}} >> .env
+          echo JWT_KEY="${{secrets.JWT_KEY}}" >> .env
           echo API_URL=${{secrets.API_URL}} >> .env
           echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
           echo OPENAI_API_KEY=${{secrets.OPENAI_API_KEY}} >> .env
           echo PGDATABASE=${{secrets.PGDATABASE}} >> .env
           echo PGHOST=${{secrets.PGHOST}} >> .env
-          echo PGPASSWORD=${{secrets.PGPASSWORD}} >> .env
+          echo PGPASSWORD="${{secrets.PGPASSWORD}}" >> .env
           echo PGPORT=${{secrets.PGPORT}} >> .env
           echo PGUSERNAME=${{secrets.PGUSERNAME}} >> .env
           echo UMUSERNAME=${{secrets.UMUSERNAME}} >> .env
-          echo UMPASSWORD=${{secrets.UMPASSWORD}} >> .env
+          echo UMPASSWORD="${{secrets.UMPASSWORD}}" >> .env
           echo UMDATABASE=${{secrets.UMDATABASE}} >> .env
           echo DATABASE_URL=${{secrets.DATABASEURL}} >> .env
           cat .env
