@@ -1,31 +1,31 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react'
 
-import AddReviewModal from "./add-review-modal";
-import Alert from "../alerts/Alert";
-import Button from "../ui/button";
-import ButtonLight from "../ui/button-light";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import MaliciousStringAlert from "../alerts/MaliciousStringAlert";
-import RatingsRadio from "./ratings-radio";
-import SuccessModal from "./success-modal";
-import countries from "@/util/countries/countries.json";
-import { postcodeValidator } from "postcode-validator";
-import provinces from "@/util/countries/canada/provinces.json";
-import regions from "@/util/countries/unitedKingdom/regions.json";
-import states from "@/util/countries/unitedStates/states.json";
-import territories from "@/util/countries/australia/territories.json";
-import nz_provinces from "@/util/countries/newZealand/nz-provinces.json";
-import { useTranslation } from "react-i18next";
-import { country_codes } from "@/util/helpers/getCountryCodes";
-import SpamReviewModal from "@/components/create-review/SpamReviewModal";
-import SheldonModal from "@/components/create-review/SheldonModal";
-import { sheldonReview } from "@/components/create-review/helper";
-import { useLocation } from "@/util/hooks/useLocation";
-import { useLandlordSuggestions } from "@/util/hooks/useLandlordSuggestions"
-import CityComboBox from "@/components/create-review/components/CityComboBox";
-import LandlordComboBox from '@/components/create-review/components/LandlordComboBox';
-import { ILocationHookResponse } from "@/util/interfaces/interfaces";
+import AddReviewModal from './add-review-modal'
+import Alert from '../alerts/Alert'
+import Button from '../ui/button'
+import ButtonLight from '../ui/button-light'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import MaliciousStringAlert from '../alerts/MaliciousStringAlert'
+import RatingsRadio from './ratings-radio'
+import SuccessModal from './success-modal'
+import countries from '@/util/countries/countries.json'
+import {postcodeValidator} from 'postcode-validator'
+import provinces from '@/util/countries/canada/provinces.json'
+import regions from '@/util/countries/unitedKingdom/regions.json'
+import states from '@/util/countries/unitedStates/states.json'
+import territories from '@/util/countries/australia/territories.json'
+import nz_provinces from '@/util/countries/newZealand/nz-provinces.json'
+import {useTranslation} from 'react-i18next'
+import {country_codes} from '@/util/helpers/getCountryCodes'
+import SpamReviewModal from '@/components/create-review/SpamReviewModal'
+import SheldonModal from '@/components/create-review/SheldonModal'
+import {sheldonReview} from '@/components/create-review/helper'
+import {useLocation} from '@/util/hooks/useLocation'
+import {useLandlordSuggestions} from '@/util/hooks/useLandlordSuggestions'
+import CityComboBox from '@/components/create-review/components/CityComboBox'
+import LandlordComboBox from '@/components/create-review/components/LandlordComboBox'
+import {ILocationHookResponse} from '@/util/interfaces/interfaces'
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
@@ -46,8 +46,16 @@ function ReviewForm(): JSX.Element {
 	const [province, setProvince] = useState<string>('Alberta')
 	const [postal, setPostal] = useState<string>('')
 
-	const { searching, locations }: { searching: boolean, locations: Array<ILocationHookResponse> }= useLocation(city, country)
-	const { isSearching, landlordSuggestions }: { isSearching: boolean, landlordSuggestions: Array<string> } = useLandlordSuggestions(landlord)
+	const {
+		searching,
+		locations,
+	}: {searching: boolean; locations: Array<ILocationHookResponse>} =
+		useLocation(city, country)
+	const {
+		isSearching,
+		landlordSuggestions,
+	}: {isSearching: boolean; landlordSuggestions: Array<string>} =
+		useLandlordSuggestions(landlord)
 
 	const [repair, setRepair] = useState<number>(3)
 	const [health, setHealth] = useState<number>(3)
@@ -63,31 +71,33 @@ function ReviewForm(): JSX.Element {
 	const [loading, setLoading] = useState<boolean>(false)
 
 	const [postalError, setPostalError] = useState(false)
+	const [touchedPostal, setTouchedPostal] = useState(false)
 
 	// Additional state for disabling submit
 	const [maliciousStringDetected, setMaliciousStringDetected] = useState(false)
 
 	// Check for already reviewed landlord from browser
-	const [localReviewedLandlords, setLocalReviewedLandlords] = useState<Array<string> | null>(null)
+	const [localReviewedLandlords, setLocalReviewedLandlords] =
+		useState<Array<string> | null>(null)
 
 	useEffect(() => {
 		const prevLandlords = localStorage.getItem('rtl')
-		if(prevLandlords){
+		if (prevLandlords) {
 			const landlordArr = prevLandlords.split(',')
 			setLocalReviewedLandlords(landlordArr)
 		}
 	}, [])
 
-	const checkLandlord = (str: string) =>{
-		if(localReviewedLandlords){
-			return (localReviewedLandlords.indexOf(str) > -1)
+	const checkLandlord = (str: string) => {
+		if (localReviewedLandlords) {
+			return localReviewedLandlords.indexOf(str) > -1
 		}
 		return false
 	}
 
 	const checkSheldon = () => {
-		if(/sheldon rakowsky/i.test(landlord)){
-			return review === sheldonReview;
+		if (/sheldon rakowsky/i.test(landlord)) {
+			return review === sheldonReview
 		}
 		return false
 	}
@@ -131,6 +141,7 @@ function ReviewForm(): JSX.Element {
 				} else {
 					setPostal(e.target.value)
 					setMaliciousStringDetected(false)
+					setTouchedPostal(true)
 				}
 				break
 			case 'review':
@@ -145,21 +156,32 @@ function ReviewForm(): JSX.Element {
 		}
 	}
 
+	useEffect(() => {
+		if (touchedPostal) {
+			if (postcodeValidator(postal, country)) {
+				setPostalError(false)
+				setLoading(false)
+			} else {
+				setPostalError(true)
+			}
+		}
+	}, [postal, country, touchedPostal])
+
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
-		if(checkLandlord(landlord.toLocaleUpperCase())){
+		if (checkLandlord(landlord.toLocaleUpperCase())) {
 			setSpamReviewModalOpen(true)
 			return
 		}
-		if(checkSheldon()){
+		if (checkSheldon()) {
 			setSheldonReviewOpen(true)
 			return
 		}
-		setLoading(true)
 		if (review.trim().length < 1) {
 			setReviewModalOpen(true)
 		} else {
 			if (postcodeValidator(postal, country)) {
+				setLoading(true)
 				fetch(`/api/submit-review`, {
 					method: 'POST',
 					headers: {
@@ -196,10 +218,10 @@ function ReviewForm(): JSX.Element {
 					.then(() => {
 						setSuccessModalOpen(true)
 						const storageItem = localStorage.getItem('rtl')
-						if(storageItem){
+						if (storageItem) {
 							const newItem = `${storageItem},${landlord.toLocaleUpperCase()}`
 							localStorage.setItem('rtl', newItem)
-						}else {
+						} else {
 							localStorage.setItem('rtl', `${landlord.toLocaleUpperCase()}`)
 						}
 					})
@@ -247,8 +269,14 @@ function ReviewForm(): JSX.Element {
 			) : null}
 			<SuccessModal isOpen={successModalOpen} setIsOpen={setSuccessModalOpen} />
 			<AddReviewModal isOpen={reviewModalOpen} setIsOpen={setReviewModalOpen} />
-			<SpamReviewModal isOpen={spamReviewModalOpen} setIsOpen={setSpamReviewModalOpen}/>
-			<SheldonModal isOpen={sheldonReviewOpen} setIsOpen={setSheldonReviewOpen}/>
+			<SpamReviewModal
+				isOpen={spamReviewModalOpen}
+				setIsOpen={setSpamReviewModalOpen}
+			/>
+			<SheldonModal
+				isOpen={sheldonReviewOpen}
+				setIsOpen={setSheldonReviewOpen}
+			/>
 			<div className="my-3 w-full">
 				<h1 className="border-b-2 border-b-teal-600 text-4xl font-extrabold">
 					{t('create-review.review-form.header')}
@@ -270,7 +298,7 @@ function ReviewForm(): JSX.Element {
 						</div>
 						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 							<div className="sm:col-span-3">
-								<LandlordComboBox 
+								<LandlordComboBox
 									name={t('create-review.review-form.landlord')}
 									state={landlord}
 									setState={setLandlord}
@@ -314,7 +342,13 @@ function ReviewForm(): JSX.Element {
 							</div>
 
 							<div className="sm:col-span-2">
-								<CityComboBox name={t('create-review.review-form.city')} state={city} setState={setCity} options={locations} searching={searching} />
+								<CityComboBox
+									name={t('create-review.review-form.city')}
+									state={city}
+									setState={setCity}
+									options={locations}
+									searching={searching}
+								/>
 							</div>
 
 							<div className="sm:col-span-2">
