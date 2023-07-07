@@ -71,7 +71,7 @@ function ReviewForm(): JSX.Element {
 	const [loading, setLoading] = useState<boolean>(false)
 
 	const [postalError, setPostalError] = useState(false)
-	const [touchedPostal, setTouchedPostal] = useState(false);
+	const [touchedPostal, setTouchedPostal] = useState(false)
 
 	// Additional state for disabling submit
 	const [maliciousStringDetected, setMaliciousStringDetected] = useState(false)
@@ -157,7 +157,7 @@ function ReviewForm(): JSX.Element {
 	}
 
 	useEffect(() => {
-		if (touchedPostal){
+		if (touchedPostal) {
 			if (postcodeValidator(postal, country)) {
 				setPostalError(false)
 				setLoading(false)
