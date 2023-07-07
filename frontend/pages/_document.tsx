@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
 								src="https://static.cloudflareinsights.com/beacon.min.js"
 								data-cf-beacon='{"token": "8cf4d134ee8a33518b72e78bc9e1eaa8", "spa": true}'
 							/>
-							<script async src="http://159.203.4.57:3500/script.js" data-website-id="035d8dc9-e6d9-40b7-852b-e6a750c46a09"></script>
+							<script async src="https://umami.ratethelandlord.org/script.js" data-website-id="16199009-12ed-4ff2-818d-1109411869a3"></script>
 						</>
 					)}
 				</body>
