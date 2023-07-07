@@ -98,7 +98,7 @@ jobs:
           echo ENVIRONMENT=${{secrets.ENVIRONMENT}} >> .env
           echo FEPORT=${{secrets.FEPORT}} >> .env
           echo HCPATCHA_SECRET_KEY=${{secrets.HCPATCHA_SECRET_KEY}} >> .env
-          echo HCPATCHA_SITE_KEY=${{secrets.API_TOKEN_SALT}} >> .env
+          echo HCPATCHA_SITE_KEY=${{secrets.HCPATCHA_SITE_KEY}} >> .env
           echo JWT_KEY="${{secrets.JWT_KEY}}" >> .env
           echo API_URL=${{secrets.API_URL}} >> .env
           echo NEXT_PUBLIC_HCPATCHA_SITE_KEY=${{secrets.NEXT_PUBLIC_HCPATCHA_SITE_KEY}} >> .env
