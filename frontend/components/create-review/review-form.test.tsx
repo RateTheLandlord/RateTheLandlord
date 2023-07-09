@@ -64,3 +64,19 @@ test('Review content exceeds 2000 should show warning', async () => {
 	expect(charWarningText).toBeInTheDocument()
 	expect(charWarningText).toHaveClass('text-red-400')
 })
+
+test('Reset button clears the form', () => {
+	const result = render(<ReviewForm />)
+
+	const zipInput = result.getByTestId('create-review-form-postal-code-1')
+	fireEvent.change(zipInput, {target: {value: 'V6C 1S9'}})
+
+	const reviewText = result.getByTestId('create-review-form-text-1')
+	fireEvent.change(reviewText, {target: {value: 'some review'}})
+
+	const resetButton = result.getByTestId('light-button')
+	fireEvent.click(resetButton)
+
+	expect(zipInput).toHaveValue('')
+	expect(reviewText).toHaveValue('')
+})
