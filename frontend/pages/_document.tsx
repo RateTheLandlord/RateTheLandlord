@@ -23,13 +23,13 @@ export default class MyDocument extends Document {
 								src="https://umami.ratethelandlord.org/script.js"
 								data-website-id="16199009-12ed-4ff2-818d-1109411869a3"
 							></script>
+							<script
+								async
+								src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233437669445756"
+								crossOrigin="anonymous"
+							></script>
 						</>
 					)}
-					<script
-						async
-						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233437669445756"
-						crossOrigin="anonymous"
-					></script>
 				</body>
 			</Html>
 		)
