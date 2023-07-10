@@ -1,12 +1,12 @@
-import { classNames } from "@/util/helpers/helper-functions";
-import { Review } from "@/util/interfaces/interfaces";
-import { StarIcon } from "@heroicons/react/solid";
-import React, { Dispatch, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
-import ButtonLight from "../ui/button-light";
-import Link from "next/link";
-import { OpenLinkIcon } from "../icons/OpenLinkIcon";
-import { useAppSelector } from "@/redux/hooks";
+import {classNames} from '@/util/helpers/helper-functions'
+import {Review} from '@/util/interfaces/interfaces'
+import {StarIcon} from '@heroicons/react/solid'
+import React, {Dispatch, SetStateAction} from 'react'
+import {useTranslation} from 'react-i18next'
+import ButtonLight from '../ui/button-light'
+import Link from 'next/link'
+import {OpenLinkIcon} from '../icons/OpenLinkIcon'
+import {useAppSelector} from '@/redux/hooks'
 
 interface IProps {
 	data: Review[]
@@ -76,7 +76,7 @@ function ReviewTable({
 												<a
 													target="_blank"
 													rel="noopener noreferrer"
-													className="mb-4 flex w-full cursor-pointer flex-row items-center text-lg font-medium hover:underline lg:mb-0 break-all"
+													className="mb-4 flex w-full cursor-pointer flex-row items-center break-words text-lg font-medium hover:underline lg:mb-0"
 												>
 													{review.landlord}
 													<span className="ml-2">
