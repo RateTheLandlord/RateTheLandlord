@@ -575,7 +575,7 @@ function ReviewForm(): JSX.Element {
 						className="flex justify-center sm:justify-end"
 						data-testid="create-review-form-submit-button-1"
 					>
-						<ButtonLight>{t('create-review.review-form.reset')}</ButtonLight>
+						<ButtonLight umami="create review page Reset button">{t('create-review.review-form.reset')}</ButtonLight>
 						{loading ? (
 							<div
 								className={`hover:bg-teal-700' } ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-200 bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500
@@ -592,6 +592,7 @@ function ReviewForm(): JSX.Element {
 							</div>
 						) : (
 							<Button
+								umami="create review page Submit button"
 								disabled={
 									!token ||
 									!disclaimerOne ||

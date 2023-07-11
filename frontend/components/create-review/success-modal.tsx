@@ -57,6 +57,7 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 								</div>
 								<div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
 									<ButtonLight
+										umami="create review success page Submit Another button"
 										onClick={() => {
 											setIsOpen(false)
 											router.reload()
@@ -65,6 +66,7 @@ function SuccessModal({isOpen, setIsOpen}: IProps) {
 										{t('create-review.modal.submit-another')}
 									</ButtonLight>
 									<Button
+										umami="create review success page Go to Reviews button"
 										onClick={() => {
 											setIsOpen(false)
 											router.push('/reviews').catch((err) => console.log(err))
