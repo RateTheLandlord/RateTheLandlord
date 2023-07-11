@@ -77,6 +77,7 @@ function ReviewTable({
 													target="_blank"
 													rel="noopener noreferrer"
 													className="mb-4 flex w-full cursor-pointer flex-row items-center break-words text-lg font-medium hover:underline lg:mb-0"
+													data-umami-event="reviews page Landlord link"
 												>
 													{review.landlord}
 													<span className="ml-2">
@@ -118,19 +119,19 @@ function ReviewTable({
 												{date}
 											</p>
 											<div className="mt-4 w-full">
-												<ButtonLight onClick={() => handleReport(review)}>
+												<ButtonLight onClick={() => handleReport(review)} umami="reviews page REPORT button">
 													{t('reviews.report-review')}
 												</ButtonLight>
 											</div>
 											{user.jwt.access_token ? (
 												<>
 													<div className="mt-4 w-full">
-														<ButtonLight onClick={() => handleDelete(review)}>
+														<ButtonLight onClick={() => handleDelete(review)} umami="reviews page Remove Review button">
 															Remove Review
 														</ButtonLight>
 													</div>
 													<div className="mt-4 w-full">
-														<ButtonLight onClick={() => handleEdit(review)}>
+														<ButtonLight onClick={() => handleEdit(review)} umami="reviews page Edit Review button">
 															Edit Review
 														</ButtonLight>
 													</div>

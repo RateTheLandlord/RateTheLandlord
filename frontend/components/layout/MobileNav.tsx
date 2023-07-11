@@ -16,6 +16,7 @@ const MobileNav = ({navigation, activeTab}: IProps) => {
 					<Link key={link.href} href={link.href}>
 						<Disclosure.Button
 							as="a"
+							data-umami-event= {link.mobileumami}
 							className={`block cursor-pointer bg-teal-50 py-2 pl-3 pr-4 text-base font-medium text-teal-700 ${
 								activeTab === link.href ? 'border-l-4 border-teal-500' : ''
 							}`}
@@ -27,6 +28,7 @@ const MobileNav = ({navigation, activeTab}: IProps) => {
 				<Link href="/create-review">
 					<Disclosure.Button
 						as="a"
+						data-umami-event= "mobile navbar Submit a Review link"
 						className={`block cursor-pointer border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 ${
 							activeTab === '/create-review' ? 'border-l-4 border-teal-500' : ''
 						}`}

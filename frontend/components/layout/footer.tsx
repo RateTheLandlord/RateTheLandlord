@@ -11,21 +11,25 @@ const socialLinks: Array<ILinks> = [
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',
 		icon: <Instagram />,
+		umami: "footer Instagram icon"
 	},
 	{
 		name: 'Twitter',
 		href: 'https://twitter.com/r8thelandlord',
 		icon: <Twitter />,
+		umami: "footer Twitter icon"
 	},
 	{
 		name: 'TikTok',
 		href: 'https://www.tiktok.com/@ratethelandlord',
 		icon: <TikTok />,
+		umami: "footer TikTok icon"
 	},
 	{
 		name: 'Github',
 		href: 'https://github.com/RateTheLandlord',
 		icon: <Github />,
+		umami: "footer GitHub icon"
 	},
 ]
 
@@ -39,6 +43,7 @@ function Footer(): JSX.Element {
 				<div className="flex justify-center space-x-6 md:order-2">
 					{socialLinks.map((item) => (
 						<a
+							data-umami-event={item.umami}
 							key={item.name}
 							href={item.href}
 							className="text-gray-400 hover:text-gray-500"

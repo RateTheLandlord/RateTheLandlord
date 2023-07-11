@@ -99,7 +99,7 @@ const LandlordPage = ({
 											{date}
 										</p>
 										<div className="mt-4 w-full">
-											<ButtonLight onClick={() => handleReport(review)}>
+											<ButtonLight onClick={() => handleReport(review)} umami="landlord page REPORT button">
 												{t('reviews.report-review')}
 											</ButtonLight>
 										</div>
