@@ -15,7 +15,9 @@ function ToggleSwitch({enabled, setEnabled}: IProps) {
 				enabled ? 'bg-blue-600' : 'bg-gray-200'
 			} relative inline-flex h-6 w-11 items-center rounded-full`}
 		>
-			<span className="sr-only" data-testid="toggle-switch-1">Enable notifications</span>
+			<span className="sr-only" data-testid="toggle-switch-1">
+				Enable
+			</span>
 			<span
 				className={`${
 					enabled ? 'translate-x-6' : 'translate-x-1'

@@ -2,8 +2,8 @@
 import React, {Fragment, useRef, useState} from 'react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {Combobox, Transition} from '@headlessui/react'
-import {Options} from '@/util/interfaces'
-import { useVirtualizer } from '@tanstack/react-virtual';
+import {Options} from '@/util/interfaces/interfaces'
+import {useVirtualizer} from '@tanstack/react-virtual'
 
 interface ComponentProps {
 	name: string
@@ -20,9 +20,6 @@ export default function ComboBox({
 }: ComponentProps) {
 	const [query, setQuery] = useState('')
 
-	console.log(options)
-	console.log(state)
-
 	const filterOptions =
 		query === ''
 			? options
@@ -38,7 +35,6 @@ export default function ComboBox({
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 					<Combobox.Input
 						className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-						data-umami-event={`Select List Interaction for ${name}`}
 						displayValue={(state: Options) => state?.name}
 						placeholder={`Search ${name}`}
 						onChange={(event) => setQuery(event.target.value)}

@@ -28,7 +28,12 @@
 			"review": "Written Review",
 			"submit": "Submit",
 			"reset": "Reset",
-			"postal-error": "Error. Postal Code / ZIP Invalid"
+			"postal-error": "Error. Postal Code / ZIP Invalid",
+			"limit": "Character Limit: {{length}}/2000",
+			"civil": "Please keep this review as civil and objective as possible. Do not post any specific addresses as these will be removed. Any malicious or defamatory language may result in the review being edited or removed.",
+			"disclaimer-1": "I understand that posting a review on Rate The Landlord is public and can be viewed by anyone including the landlord in my review.",
+			"disclaimer-2": "I understand that once I post this review I cannot have it taken down unless it violates the Rate The Landlord policy and recognize that Rate The Landlord recommends posting reviews after my tenancy is over.",
+			"disclaimer-3": "I understand that Rate The Landlord is not responsible for any consequences that occur as a result my review."
 		},
 		"modal": {
 			"success": "Review Submitted Successfully!",
@@ -39,8 +44,9 @@
 			"add-review-desc": "We love your enthusiasm to leave a rating for your Landlord! However, can you please leave a small review to give more context to your rating so that other tenants can be better informed!",
 			"close": "Close"
 		},
-		"alert": {
-			"maliciousString": "Warning! We've detected that a link or script in your entry. Please remove or rephrase before submitting."
+		"spam-modal": {
+			"title": "It appears you have reviewed this Landlord before...",
+			"description": "Please only leave one review per landlord you've had so that this site can remain a fair representation of rental experiences. Any repeat reviews or spam will be deleted. If you have any questions, please reach out to us at contact@ratethelandlord.org"
 		}
 	}
 }

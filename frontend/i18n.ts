@@ -7,14 +7,20 @@ import homeENCA from './public/locales/en-CA/home.json'
 import createreviewENCA from './public/locales/en-CA/createreview.json'
 import reviewsENCA from './public/locales/en-CA/reviews.json'
 import aboutENCA from './public/locales/en-CA/about.json'
+import landlordENCA from './public/locales/en-CA/landlord.json'
+import alertsENCA from './public/locales/en-CA/alerts.json'
+import resourcesENCA from './public/locales/en-CA/resources.json'
 
 const resources = {
 	en: {
-		home: homeENCA,
-		layout: layoutENCA,
-		create: createreviewENCA,
-		reviews: reviewsENCA,
 		about: aboutENCA,
+		alerts: alertsENCA,
+		create: createreviewENCA,
+		home: homeENCA,
+		landlord: landlordENCA,
+		layout: layoutENCA,
+		resourcesPage: resourcesENCA,
+		reviews: reviewsENCA,
 	},
 }
 

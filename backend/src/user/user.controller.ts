@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { IUser } from './models/user';
+import { IGetUsers, IUser } from './models/user';
 import { UserService } from './user.service';
 import { Throttle } from '@nestjs/throttler';
 
@@ -39,6 +39,13 @@ export class UserController {
   @Put('/:id')
   update(@Param('id') id: number, @Body() user: IUser): Promise<boolean> {
     return this.userService.update(id, user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Throttle(3, 60)
+  @Get('/:id')
+  getUser(@Param('id') id: number): Promise<IGetUsers> {
+    return this.userService.getMe(id);
   }
 
   @UseGuards(JwtAuthGuard)

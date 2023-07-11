@@ -17,3 +17,52 @@ export interface Review {
   admin_approved: boolean | null;
   admin_edited: boolean;
 }
+
+export type ReviewsResponse = {
+  reviews: Review[];
+  total: number;
+  countries: string[];
+  states: string[];
+  cities: string[];
+  zips: string[];
+  limit: number;
+};
+
+export interface IStats {
+  total_reviews: number;
+  total_ca_reviews: {
+    total: number;
+    states: Array<{
+      key: string;
+      total: number;
+    }>;
+  };
+  total_us_reviews: {
+    total: number;
+    states: Array<{
+      key: string;
+      total: number;
+    }>;
+  };
+  total_au_reviews: {
+    total: number;
+    states: Array<{
+      key: string;
+      total: number;
+    }>;
+  };
+  total_uk_reviews: {
+    total: number;
+    states: Array<{
+      key: string;
+      total: number;
+    }>;
+  };
+  total_nz_reviews: {
+    total: number;
+    states: Array<{
+      key: string;
+      total: number;
+    }>;
+  };
+}

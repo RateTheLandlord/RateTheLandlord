@@ -2,7 +2,7 @@ import React, {SetStateAction, useState} from 'react'
 import {Dialog} from '@headlessui/react'
 import ButtonLight from '../ui/button-light'
 import Button from '../ui/button'
-import {Review} from '@/util/interfaces'
+import {Review} from '@/util/interfaces/interfaces'
 import {useTranslation} from 'react-i18next'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 
@@ -27,34 +27,19 @@ const reportReasons: Array<IReportReason> = [
 		reason: 'Address is in the review',
 	},
 	{
-		id: 2,
-		key: 'allegation',
-		reason: 'Allegations or defamatory remarks in review',
-	},
-	{
 		id: 3,
 		key: 'fake',
 		reason: 'Fake Review',
 	},
 	{
 		id: 4,
-		key: 'landlord',
-		reason: 'Landlord posted this review',
+		key: 'language',
+		reason: 'Review contains inappropriate language',
 	},
 	{
 		id: 5,
 		key: 'sensitive',
 		reason: 'This review contains sensitive information',
-	},
-	{
-		id: 6,
-		key: 'missing',
-		reason: 'Review is missing information',
-	},
-	{
-		id: 7,
-		key: 'aboutme',
-		reason: 'I am the Landlord in this review and have questions',
 	},
 	{
 		id: 8,
@@ -200,15 +185,6 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 								</select>
 							</div>
 
-							{selectedReason.key === 'aboutme' ? (
-								<div className="mb-2">
-									<p>
-										Please email us at contact@ratethelandlord.org
-									</p>
-									
-								</div>
-							) : null}
-
 							{selectedReason.key === 'other' ? (
 								<div className="mb-3">
 									<label
@@ -250,14 +226,12 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 										setReason(reportReasons[0].reason)
 										setIsOpen(false)
 									}}
-									data-umami-event="Report Cancelled"
 								>
 									{t('reviews.report.cancel')}
 								</ButtonLight>
 								<Button
 									onClick={() => handleSubmit()}
-									data-umami-event="Report Submitted"
-									disabled={!token || reason.length >= 255 || selectedReason.key === 'aboutme'}
+									disabled={!token || reason.length >= 255}
 								>
 									{t('reviews.report.submit')}
 								</Button>

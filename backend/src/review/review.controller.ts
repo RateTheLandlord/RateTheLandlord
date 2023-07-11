@@ -4,6 +4,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -14,9 +16,15 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
 import { CreateReview } from './models/create-review';
-import { Review } from './models/review';
-import { ReviewService, ReviewsResponse } from './review.service';
-import { SkipThrottle, Throttle } from '@nestjs/throttler';
+import { IStats, Review, ReviewsResponse } from './models/review';
+import { ReviewService } from './review.service';
+import { Throttle } from '@nestjs/throttler';
+import { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from '../auth/constants';
+
+export type ReviewControllerException = {
+  statusCode: number;
+  message: string | object;
+};
 
 @Controller('review')
 export class ReviewController {
@@ -24,6 +32,19 @@ export class ReviewController {
     private readonly reviewService: ReviewService,
     private captchaService: CaptchaService,
   ) {}
+
+  private handleException(
+    e: BadRequestException | HttpException | unknown,
+  ): never {
+    if (e instanceof BadRequestException) {
+      throw new HttpException(NOT_ACCEPTABLE, HttpStatus.NOT_ACCEPTABLE);
+    } else {
+      throw new HttpException(
+        INTERNAL_SERVER_ERROR,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 
   // Get All Reviews
   @Throttle(5, 60)
@@ -57,7 +78,7 @@ export class ReviewController {
     return this.reviewService.findOne(Number(id));
   }
 
-  //Update Review
+  // Update Review
   @Throttle(10, 10)
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
@@ -75,7 +96,7 @@ export class ReviewController {
     @Body() body: any,
     @IpAddress() ip: string,
   ): Promise<number> {
-    const validRequest = await this.captchaService.verifyToken(
+    const validRequest: boolean = await this.captchaService.verifyToken(
       body.captchaToken,
       ip,
     );
@@ -95,22 +116,18 @@ export class ReviewController {
   }
 
   //Create Review
-  @Throttle(2, 60)
+  @Throttle(2, 2628000)
   @Post()
   async create(
     @Body() review: CreateReview,
     @IpAddress() ip: string,
-  ): Promise<Review> {
-    const validRequest = await this.captchaService.verifyToken(
-      review.captchaToken,
-      ip,
-    );
-
-    if (!validRequest) {
-      throw new BadRequestException('Invalid captcha');
+  ): Promise<Review | ReviewControllerException> {
+    try {
+      await this.captchaService.verifyToken(review.captchaToken, ip);
+      return await this.reviewService.create(review.review);
+    } catch (e) {
+      return this.handleException(e);
     }
-
-    return this.reviewService.create(review.review);
   }
 
   //Get Flagged Reviews
@@ -119,5 +136,35 @@ export class ReviewController {
   @Get('/flagged')
   getFlagged(): Promise<Review[]> {
     return this.reviewService.getFlagged();
+  }
+
+  @Throttle(10, 120)
+  @UseGuards(JwtAuthGuard)
+  @Get('/stats')
+  getStats(): Promise<IStats> {
+    return this.reviewService.getStats();
+  }
+
+  @Throttle(10, 120)
+  @Get('/landlords')
+  getLandlords(): Promise<string[]> {
+    return this.reviewService.getLandlords();
+  }
+
+  @Throttle(10, 120)
+  @Post('/landlords/landlord')
+  getLandlordReviews(
+    @Body() landlord: { landlord: string },
+  ): Promise<Review[]> {
+    return this.reviewService.getLandlordReviews(landlord.landlord);
+  }
+
+  // Get landlord name suggestions
+  @Throttle(10, 30)
+  @Get('/landlord/suggestions')
+  async getLandlordSuggestions(
+    @Query('landlord') landlord: string,
+  ): Promise<string[]> {
+    return this.reviewService.getLandlordSuggestions(landlord);
   }
 }

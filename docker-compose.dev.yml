@@ -23,28 +23,38 @@ services:
     container_name: backend
     build:
       context: .
-      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile
+      dockerfile: ./docker/${ENVIRONMENT}/backend/Dockerfile.dev
     restart: unless-stopped
     ports:
       - ${BEPORT}:${BEPORT}
+      - 9999:9999
     networks:
       - internal
     depends_on:
       - postgres
     env_file: .env
+    volumes:
+      - ./backend:/app
+      - /backend/node_modules
 
   frontend:
     container_name: frontend
     build:
       context: .
-      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile
+      dockerfile: ./docker/${ENVIRONMENT}/frontend/Dockerfile.dev
     restart: unless-stopped
     ports:
       - ${FEPORT}:${FEPORT}
+      - 9998:9998
     networks:
       - internal
     env_file:
       - ./.env
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /frontend/node_modules
 
   postgres:
     image: postgres

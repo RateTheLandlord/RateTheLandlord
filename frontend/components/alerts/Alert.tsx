@@ -1,5 +1,6 @@
-import {CheckCircleIcon, XIcon, XCircleIcon} from '@heroicons/react/solid'
+import {CheckCircleIcon, XCircleIcon, XIcon} from '@heroicons/react/solid'
 import {Dispatch, SetStateAction} from 'react'
+import {useTranslation} from 'react-i18next'
 
 interface IProps {
 	success: boolean
@@ -7,6 +8,7 @@ interface IProps {
 }
 
 const Alert = ({success, setAlertOpen}: IProps) => {
+	const {t} = useTranslation('alerts')
 	return (
 		<div className="rounded-md bg-green-50 p-4" data-testid="alert-1">
 			<div className="flex">
@@ -22,10 +24,12 @@ const Alert = ({success, setAlertOpen}: IProps) => {
 				</div>
 				<div className="ml-3">
 					{success ? (
-						<p className="text-sm font-medium text-green-800">Success!</p>
+						<p className="text-sm font-medium text-green-800">
+							{t('alerts.success')}
+						</p>
 					) : (
 						<p className="text-sm font-medium text-red-800">
-							Failure: Something went wrong, please try again.
+							{t('alerts.fail')}
 						</p>
 					)}
 				</div>
@@ -36,7 +40,7 @@ const Alert = ({success, setAlertOpen}: IProps) => {
 							onClick={() => setAlertOpen((p) => !p)}
 							className="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
 						>
-							<span className="sr-only">Dismiss</span>
+							<span className="sr-only">{t('alerts.dismiss')}</span>
 							<XIcon className="h-5 w-5" aria-hidden="true" />
 						</button>
 					</div>

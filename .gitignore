@@ -1,4 +1,5 @@
 # Secrets
 .env
+.idea/codeStyles/Project.xml
 
 logs

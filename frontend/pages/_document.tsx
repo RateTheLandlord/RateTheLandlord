@@ -1,4 +1,5 @@
 import Document, {Head, Html, Main, NextScript} from 'next/document'
+
 const isProd = process.env.NODE_ENV === 'production'
 
 export default class MyDocument extends Document {
@@ -19,8 +20,13 @@ export default class MyDocument extends Document {
 							/>
 							<script
 								async
-								src="https://analytics.umami.is/script.js"
-								data-website-id="7feb6f2e-e933-4615-a403-d2be156c61e2"
+								src="https://umami.ratethelandlord.org/script.js"
+								data-website-id="16199009-12ed-4ff2-818d-1109411869a3"
+							></script>
+							<script
+								async
+								src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233437669445756"
+								crossOrigin="anonymous"
 							></script>
 						</>
 					)}

@@ -1,5 +1,8 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
+import { INVALID_CAPTCHA } from '../auth/constants';
+import { CaptchaPayload } from './captcha-types';
 
 @Injectable()
 export class CaptchaService {
@@ -8,7 +11,7 @@ export class CaptchaService {
   constructor(private readonly httpService: HttpService) {}
 
   async verifyToken(token: string, ip?: string): Promise<boolean> {
-    const data = {
+    const data: CaptchaPayload = {
       secret: process.env.HCPATCHA_SECRET_KEY,
       sitekey: process.env.HCPATCHA_SITE_KEY,
       response: token,
@@ -16,7 +19,7 @@ export class CaptchaService {
     };
 
     Object.keys(data).forEach(
-      (key) => data[key] === undefined && delete data[key],
+      (key: string) => data[key] === undefined && delete data[key],
     );
 
     const response = await this.httpService.axiosRef.post(
@@ -28,7 +31,8 @@ export class CaptchaService {
         },
       },
     );
-
-    return response.data?.success ?? false;
+    const success: boolean = response.data?.success;
+    if (!success) throw new BadRequestException(INVALID_CAPTCHA);
+    return true;
   }
 }

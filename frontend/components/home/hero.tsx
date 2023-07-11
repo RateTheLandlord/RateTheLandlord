@@ -17,16 +17,10 @@ function Hero(): JSX.Element {
 						</p>
 
 						<div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
-							<LinkButtonLG
-								href="/create-review"
-								data-umami-event="Home Link to Create Review"
-							>
+							<LinkButtonLG href="/create-review">
 								{t('home.hero.submit')}
 							</LinkButtonLG>
-							<LinkButtonLightLG
-								href="/reviews"
-								data-umami-event="Home Link to Reviews Page"
-							>
+							<LinkButtonLightLG href="/reviews">
 								{t('home.hero.read')}
 							</LinkButtonLightLG>
 						</div>

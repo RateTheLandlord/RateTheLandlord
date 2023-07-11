@@ -1,19 +1,20 @@
 import ReviewFilters from '@/components/reviews/review-filters'
-import ReviewTable from '@/components/reviews/review-table'
-import {sortOptions} from '@/util/filter-options'
-import {Options, Review} from '@/util/interfaces'
+import {sortOptions} from '@/util/helpers/filter-options'
+import {Options, Review} from '@/util/interfaces/interfaces'
 import {
 	updateActiveFilters,
 	getStateOptions,
 	getCityOptions,
 	getZipOptions,
 } from '@/components/reviews/functions'
-import countries from '@/util/countries.json'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
-import Head from 'next/head'
 import useSWR from 'swr'
-import Paginator from './paginator'
+import Alert from '../alerts/Alert'
+import {fetcher} from '@/util/helpers/fetcher'
+import EditReviewModal from '../modal/EditReviewModal'
+import RemoveReviewModal from '../modal/RemoveReviewModal'
+import InfiniteScroll from './InfiniteScroll'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -24,12 +25,6 @@ export type ReviewsResponse = {
 	zips: string[]
 	limit: number
 }
-
-const country_codes: string[] = Object.keys(countries).filter(
-	(c) => c === 'CA' || c === 'US' || c === 'GB' || c === 'AU',
-)
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const Review = () => {
 	const [selectedSort, setSelectedSort] = useState<Options>(sortOptions[2])
@@ -42,43 +37,90 @@ const Review = () => {
 	const [cityFilter, setCityFilter] = useState<Options | null>(null)
 	const [zipFilter, setZipFilter] = useState<Options | null>(null)
 	const [activeFilters, setActiveFilters] = useState<Options[] | null>(null)
+	const [success, setSuccess] = useState(false)
+	const [removeAlertOpen, setRemoveAlertOpen] = useState(false)
+	const [editReviewOpen, setEditReviewOpen] = useState(false)
+	const [hasMore, setHasMore] = useState(true) // Track if there is more content to load
 
-	const queryParams = new URLSearchParams({
-		page: page.toString(),
-		sort: selectedSort.value,
-		state: stateFilter?.value || '',
-		country: countryFilter?.value || '',
-		city: cityFilter?.value || '',
-		zip: zipFilter?.value || '',
-		search: searchState || '',
-		limit: '25',
-	})
+	const [reportOpen, setReportOpen] = useState<boolean>(false)
+	const [removeReviewOpen, setRemoveReviewOpen] = useState(false)
+
+	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
+
+	const [previousQueryParams, setPreviousQueryParams] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
+
+	const queryParams = useMemo(() => {
+		const params = new URLSearchParams({
+			sort: selectedSort.value,
+			state: stateFilter?.value || '',
+			country: countryFilter?.value || '',
+			city: cityFilter?.value || '',
+			zip: zipFilter?.value || '',
+			search: searchState || '',
+			limit: '25',
+		})
+		return params.toString()
+	}, [
+		selectedSort,
+		stateFilter,
+		countryFilter,
+		cityFilter,
+		zipFilter,
+		searchState,
+	])
 
 	const {data} = useSWR<ReviewsResponse>(
-		`/api/get-reviews?${queryParams.toString()}`,
+		`/api/get-reviews?page=${page}&${queryParams.toString()}`,
 		fetcher,
 	)
 
 	const [reviews, setReviews] = useState<Review[]>(data?.reviews || [])
-	const [reportOpen, setReportOpen] = useState<boolean>(false)
 
-	const [selectedReview, setSelectedReview] = useState<Review | undefined>()
+	useEffect(() => {
+		if (queryParams !== previousQueryParams) {
+			setReviews(data?.reviews || [])
+			setIsLoading(false)
+		} else if (data) {
+			setReviews((prevReviews) => [...prevReviews, ...data.reviews])
+			setIsLoading(false)
+		}
+		setPreviousQueryParams(queryParams)
+	}, [data, queryParams, previousQueryParams])
 
 	useEffect(() => {
 		if (data) {
-			setReviews(data.reviews)
+			if (reviews.length >= data?.total || data.reviews.length <= 0)
+				setHasMore(false)
 		}
-	}, [data])
+	}, [reviews, data])
 
-	const countryOptions: Options[] = country_codes.map(
-		(item: string, ind: number): Options => {
-			return {id: ind + 1, name: countries[item] as string, value: item}
-		},
+	useEffect(() => {
+		setActiveFilters(
+			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
+		)
+		setPage(1)
+	}, [
+		cityFilter,
+		stateFilter,
+		countryFilter,
+		zipFilter,
+		searchState,
+		selectedSort,
+	])
+
+	const cityOptions = useMemo(
+		() => getCityOptions(data?.cities ?? []),
+		[data?.cities],
 	)
-
-	const cityOptions = getCityOptions(data?.cities ?? [])
-	const stateOptions = getStateOptions(data?.states ?? [])
-	const zipOptions = getZipOptions(data?.zips ?? [])
+	const stateOptions = useMemo(
+		() => getStateOptions(data?.states ?? []),
+		[data?.states],
+	)
+	const zipOptions = useMemo(
+		() => getZipOptions(data?.zips ?? []),
+		[data?.zips],
+	)
 
 	const removeFilter = (index: number) => {
 		if (activeFilters?.length) {
@@ -89,30 +131,41 @@ const Review = () => {
 		}
 	}
 
-	useEffect(() => {
-		setActiveFilters(
-			updateActiveFilters(countryFilter, stateFilter, cityFilter, zipFilter),
-		)
-	}, [
-		cityFilter,
-		stateFilter,
-		countryFilter,
-		zipFilter,
-		searchState,
-		selectedSort,
-	])
-
 	return (
 		<>
-			<Head>
-				<title>Reviews | Rate The Landlord</title>
-			</Head>
 			<ReportModal
 				isOpen={reportOpen}
 				setIsOpen={setReportOpen}
 				selectedReview={selectedReview}
 			/>
+			{selectedReview ? (
+				<>
+					<EditReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setEditReviewOpen={setEditReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						editReviewOpen={editReviewOpen}
+						setSelectedReview={setSelectedReview}
+					/>
+					<RemoveReviewModal
+						selectedReview={selectedReview}
+						mutateString={`/api/get-reviews?${queryParams.toString()}`}
+						setRemoveReviewOpen={setRemoveReviewOpen}
+						setSuccess={setSuccess}
+						setRemoveAlertOpen={setRemoveAlertOpen}
+						removeReviewOpen={removeReviewOpen}
+						setSelectedReview={setSelectedReview}
+					/>
+				</>
+			) : null}
 			<div className="w-full">
+				{removeAlertOpen ? (
+					<div className="w-full">
+						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
+					</div>
+				) : null}
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
@@ -128,21 +181,20 @@ const Review = () => {
 					setZipFilter={setZipFilter}
 					cityOptions={cityOptions}
 					stateOptions={stateOptions}
-					countryOptions={countryOptions}
 					zipOptions={zipOptions}
 					removeFilter={removeFilter}
 					setSearchState={setSearchState}
 				/>
-				<ReviewTable
+				<InfiniteScroll
 					data={reviews}
 					setReportOpen={setReportOpen}
 					setSelectedReview={setSelectedReview}
-				/>
-				<Paginator
-					onSelect={(page: number) => setPage(page)}
-					currentPage={page}
-					totalPages={data?.total ?? 0}
-					limit={data?.limit ?? 25}
+					setRemoveReviewOpen={setRemoveReviewOpen}
+					setEditReviewOpen={setEditReviewOpen}
+					setPage={setPage}
+					hasMore={hasMore}
+					isLoading={isLoading}
+					setIsLoading={setIsLoading}
 				/>
 			</div>
 		</>

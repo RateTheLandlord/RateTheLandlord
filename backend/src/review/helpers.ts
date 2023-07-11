@@ -2,11 +2,15 @@ import { Configuration, OpenAIApi } from 'openai';
 
 import BadWordsFilter from 'bad-words';
 import { Review } from './models/review';
+import { HttpException } from '@nestjs/common';
+
+export interface IResult {
+  flagged: boolean;
+  flagged_reason: string;
+}
 
 const SYSTEM_MESSAGE = `
-You are a review moderator. You are tasked with editing reviews.
-    
-This type of content is not allowed:
+You are a review moderator. You are tasked with determining if a review violates the following policies which are not allowed:
 
 - Home addresses
 - Phone numbers
@@ -16,11 +20,9 @@ This type of content is not allowed:
 
 Here's how this will work
 - I will provide you with a single review, which may have multiple paragraphs, and may or may not contain content that is not allowed
-- You will keep the review as close as possible to the original words and format
-- You will use the rules above to replace all content that is not allowed with *********
-- You will reply ONLY with the edited review, no additional prose or commentary    
+- You will reply ONLY with TRUE if the review violates the policies or FALSE if the review does not violate the policies
 
-Here is the review you need to edit (reminder, you can only edit the review, no additional prose or commentary): 
+Here is the review you need to check (reminder, you can only reply with TRUE or FALSE, no additional prose or commentary): 
 
 `;
 
@@ -29,18 +31,26 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export const filterReviewWithAI = async (review: Review): Promise<Review> => {
-  const completion = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      { role: 'system', content: SYSTEM_MESSAGE },
-      { role: 'user', content: review.review },
-    ],
-  });
+export const filterReviewWithAI = async (review: Review): Promise<IResult> => {
+  try {
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: SYSTEM_MESSAGE },
+        { role: 'user', content: review.review },
+      ],
+    });
 
-  review.review = completion.data.choices[0].message.content ?? '';
+    const result = completion.data.choices[0].message.content ?? '';
 
-  return review;
+    if (result.includes('TRUE')) {
+      return { flagged: true, flagged_reason: 'AI FLAGGED REVIEW' };
+    } else {
+      return { flagged: false, flagged_reason: '' };
+    }
+  } catch (e) {
+    throw e;
+  }
 };
 
 const badWordsFilter = new BadWordsFilter();
@@ -53,20 +63,19 @@ export const filterReview = (review: Review) => {
   // Replace phone numbers
   const phonePattern =
     /(\+\d{1,4}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4}[-.\s]?){2,4}\d{1,4}([-.\s]?(x|ext\.?|extension)\s?\d{1,6})?/gi;
-  
 
   // Replace emails
   const emailPattern = /[\w\.-]+@[\w\.-]+\.\w+/gi;
 
-  if(addressPattern.test(review.review)){
-    return {flagged: true, reason: 'Filter Flagged for Address'}
-  } else if(emailPattern.test(review.review)) {
-    return {flagged: true, reason: 'Filter Flagged for Email'}
-  } else if(phonePattern.test(review.review)) {
-    return {flagged: true, reason: 'Filter flagged for Phone Number'}
-  } else if(badWordsFilter.isProfane(review.review)){
-    return {flagged: true, reason: 'Filter flagged for Language'}
+  if (addressPattern.test(review.review)) {
+    return { flagged: true, reason: 'Filter Flagged for Address' };
+  } else if (emailPattern.test(review.review)) {
+    return { flagged: true, reason: 'Filter Flagged for Email' };
+  } else if (phonePattern.test(review.review)) {
+    return { flagged: true, reason: 'Filter flagged for Phone Number' };
+  } else if (badWordsFilter.isProfane(review.review)) {
+    return { flagged: true, reason: 'Filter flagged for Language' };
   } else {
-    return {flagged: false, reason: ''}
+    return { flagged: false, reason: '' };
   }
 };

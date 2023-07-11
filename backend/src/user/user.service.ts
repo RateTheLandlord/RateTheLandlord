@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IUser, IGetUsers } from './models/user';
-import { DatabaseService } from 'src/database/database.service';
-import * as bcrypt from 'bcrypt';
+import { IGetUsers, IUser } from './models/user';
+import { DatabaseService } from '../database/database.service';
+import bcrypt = require('bcryptjs');
 
 const saltOrRounds = 10;
 
@@ -13,6 +13,19 @@ export class UserService {
     return this.databaseService.sql<
       IUser[]
     >`SELECT * FROM users WHERE email = ${email}`;
+  }
+
+  async getMe(id: number): Promise<IGetUsers> {
+    const users = await this.databaseService.sql<
+      IUser[]
+    >`SELECT * FROM users WHERE id = ${id}`;
+
+    const arrUsers = (await users).map((user) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...result } = user;
+      return result;
+    });
+    return arrUsers[0];
   }
 
   async deleteUser(id: number): Promise<boolean> {
