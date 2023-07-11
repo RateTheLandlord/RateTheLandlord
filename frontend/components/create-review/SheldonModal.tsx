@@ -57,6 +57,7 @@ function SheldonModal({isOpen, setIsOpen}: IProps) {
                 </div>
                 <div className="mt-5 flex w-full justify-end sm:mt-6">
                   <Button
+                    umami="sheldon modal create review Close button"
                     onClick={() => {
                       setIsOpen(false)
                     }}
