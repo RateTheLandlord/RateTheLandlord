@@ -50,7 +50,7 @@ const LandlordInfo = ({name, average, total}: IProps) => {
 
 				<div>
 					<Link  href="/create-review">
-						<p data-umami-event = "landlord page Submit a Review button" className="mt-2 inline-flex cursor-pointer items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+						<p data-umami-event = "Landlord / Submit a Review Button" className="mt-2 inline-flex cursor-pointer items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
 							{t('landlord.submit')}
 						</p>
 					</Link>

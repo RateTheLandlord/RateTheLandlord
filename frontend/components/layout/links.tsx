@@ -7,20 +7,20 @@ export const navigation: Array<INav> = [
 	{
 		href: '/reviews',
 		name: 'layout.nav.reviews',
-		umami: 'navbar Reviews link',
-		mobileumami: 'mobile navbar Reviews link'
+		umami: 'Navbar / Reviews Link',
+		mobileumami: 'Mobile Navbar / Reviews Link'
 	},
 	{
 		href: '/resources',
 		name: 'layout.nav.resources',
-		umami: 'navbar Resources link',
-		mobileumami: 'mobile navbar Resources link'
+		umami: 'Navbar / Resources link',
+		mobileumami: 'Mobile Navbar / Resources Link'
 	},
 	{
 		href: '/about',
 		name: 'layout.nav.about',
-		umami: 'navbar About link',
-		mobileumami: 'mobile navbar About link'
+		umami: 'Navbar / About Link',
+		mobileumami: 'Mobile Navbar / About Link'
 	},
 ]
 
@@ -29,18 +29,18 @@ export const socialLinks: Array<ILinks> = [
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',
 		icon: <Instagram />,
-		umami: "navbar Instagram icon"
+		umami: "Navbar / Instagram Icon"
 	},
 	{
 		name: 'Twitter',
 		href: 'https://twitter.com/r8thelandlord',
 		icon: <Twitter />,
-		umami: "navbar Twitter icon"
+		umami: "Navbar / Twitter Icon"
 	},
 	{
 		name: 'TikTok',
 		href: 'https://www.tiktok.com/@ratethelandlord',
 		icon: <TikTok />,
-		umami: "navbar TikTok icon"
+		umami: "Navbar / TikTok Icon"
 	},
 ]

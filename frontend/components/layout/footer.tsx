@@ -11,25 +11,25 @@ const socialLinks: Array<ILinks> = [
 		name: 'Instagram',
 		href: 'https://www.instagram.com/ratethelandlord',
 		icon: <Instagram />,
-		umami: "footer Instagram icon"
+		umami: "Footer / Instagram icon"
 	},
 	{
 		name: 'Twitter',
 		href: 'https://twitter.com/r8thelandlord',
 		icon: <Twitter />,
-		umami: "footer Twitter icon"
+		umami: "Footer / Twitter Icon"
 	},
 	{
 		name: 'TikTok',
 		href: 'https://www.tiktok.com/@ratethelandlord',
 		icon: <TikTok />,
-		umami: "footer TikTok icon"
+		umami: "Footer / TikTok Icon"
 	},
 	{
 		name: 'Github',
 		href: 'https://github.com/RateTheLandlord',
 		icon: <Github />,
-		umami: "footer GitHub icon"
+		umami: "Footer / GitHub Icon"
 	},
 ]
 

@@ -12,20 +12,20 @@ describe('MobileNav', () => {
 		{
 			href: '/reviews',
 			name: 'layout.nav.reviews',
-			umami: 'mobile navbar reviews link',
-			mobileumami: 'mobile navbar reviews link',
+			umami: 'Navbar / Reviews Link',
+			mobileumami: 'Mobile Navbar / Reviews Link',
 		},
 		{
 			href: '/resources',
 			name: 'layout.nav.resources',
-			umami: 'mobile navbar resources link',
-			mobileumami: 'mobile navbar resources link',
+			umami: 'Navbar / Resources Link',
+			mobileumami: 'Mobile Navbar / Resources Link',
 		},
 		{
 			href: '/about',
 			name: 'layout.nav.about',
-			umami: 'mobile navbar about link',
-			mobileumami: 'mobile navbar about link',
+			umami: 'Navbar / About Link',
+			mobileumami: 'Mobile Navbar / About Link',
 		},
 	]
 
