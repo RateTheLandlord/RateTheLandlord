@@ -33,11 +33,14 @@ export interface ILinks {
 	name: string
 	href: string
 	icon: JSX.Element
+	umami: string
 }
 
 export interface INav {
 	href: string
 	name: string
+	umami: string
+	mobileumami: string
 }
 
 export interface ILocationResponse {

@@ -117,6 +117,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 							</Dialog.Title>
 							<div className="flex w-full justify-end">
 								<ButtonLight
+									umami = "Report Error Modal / Close Button"
 									onClick={() => {
 										setReason(reportReasons[0].reason)
 										setSubmitSuccess(false)
@@ -134,6 +135,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 							<Dialog.Title>{t('reviews.report.success')}</Dialog.Title>
 							<div className="flex w-full justify-end">
 								<ButtonLight
+									umami = "Report Success Modal / Close Button"
 									onClick={() => {
 										setReason(reportReasons[0].reason)
 										setSubmitSuccess(false)
@@ -221,6 +223,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 
 							<div className="flex flex-row justify-end">
 								<ButtonLight
+									umami = "Report Review Modal / Cancel Button"
 									onClick={() => {
 										setSelectedReason(reportReasons[0])
 										setReason(reportReasons[0].reason)
@@ -230,6 +233,7 @@ function ReportModal({isOpen, setIsOpen, selectedReview}: IProps) {
 									{t('reviews.report.cancel')}
 								</ButtonLight>
 								<Button
+									umami = "Report Review Modal / Submit Button"
 									onClick={() => handleSubmit()}
 									disabled={!token || reason.length >= 255}
 								>
