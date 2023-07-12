@@ -56,7 +56,7 @@ jobs:
             echo UMUSERNAME=${{secrets.UMUSERNAME}} >> .env
             echo UMPASSWORD="${{secrets.UMPASSWORD}}" >> .env
             echo UMDATABASE=${{secrets.UMDATABASE}} >> .env
-            echo DATABASE_URL=${{secrets.DATABASE_URL}} >> .env
+            echo DATABASE_URL="${{secrets.DATABASE_URL}}" >> .env
             cat .env
             echo "[Building Docker Containers]"
             docker-compose build --no-cache
