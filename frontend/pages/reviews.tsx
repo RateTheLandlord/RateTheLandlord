@@ -1,13 +1,14 @@
 import Review, {ReviewsResponse} from '@/components/reviews/review'
-
 import {NextSeo} from 'next-seo'
 import React from 'react'
 import {SWRConfig} from 'swr'
 import {useRouter} from 'next/router'
 
-//fallback is the data from getStaticProps. It is used as the initial data for building the page. This data is then checked against the data received from useSWR and will be updated accordingly
+interface IProps {
+	fallback: ReviewsResponse
+}
 
-export default function Reviews({fallback}: {fallback: Review[]}): JSX.Element {
+export default function Reviews({fallback}: IProps): JSX.Element {
 	const title = 'Reviews | Rate The Landlord'
 	const desc =
 		'View and Search for Landlord Reviews. We are a community platform that elevates tenant voices to promote landlord accountability.'
