@@ -9,7 +9,7 @@ describe('LinkButtonLightLG', () => {
 	it('renders button text correctly', () => {
 		const buttonText = 'Click me'
 		const {getByText} = render(
-			<LinkButtonLightLG href="/">{buttonText}</LinkButtonLightLG>,
+			<LinkButtonLightLG umami = "test LinkButtonLightLG" href="/">{buttonText}</LinkButtonLightLG>,
 		)
 		const buttonElement = getByText(buttonText)
 		expect(buttonElement).toBeInTheDocument()
@@ -18,7 +18,7 @@ describe('LinkButtonLightLG', () => {
 	it('navigates to the correct URL when clicked', () => {
 		const href = '/about'
 		const {getByTestId} = render(
-			<LinkButtonLightLG href={href}>Click Me</LinkButtonLightLG>,
+			<LinkButtonLightLG umami = "test LinkButtonLightLG" href={href}>Click Me</LinkButtonLightLG>,
 		)
 		const buttonElement = getByTestId('home-hero-read-btn-1')
 		fireEvent.click(buttonElement)

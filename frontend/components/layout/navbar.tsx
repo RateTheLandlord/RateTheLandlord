@@ -92,13 +92,14 @@ export default function Navbar(): JSX.Element {
 								<div className="flex flex-shrink-0 items-center gap-4">
 									<Logo styling="h-8 w-auto" />
 									<Link href="/">
-										<a>{t('layout.nav.title')}</a>
+										<a data-umami-event="Navbar / Rate The Landlord Link">{t('layout.nav.title')}</a>
 									</Link>
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{navigation.map((link) => (
 										<Link key={link.href} href={link.href}>
 											<a
+												data-umami-event={link.umami}
 												className={`${
 													activeTab === link.href
 														? 'border-b-2 border-teal-500'
@@ -128,6 +129,7 @@ export default function Navbar(): JSX.Element {
 								<div className="hidden justify-center space-x-6 lg:flex">
 									{socialLinks.map((item) => (
 										<a
+											data-umami-event={item.umami}
 											key={item.name}
 											href={item.href}
 											className="text-gray-400 hover:text-gray-500"
@@ -139,7 +141,7 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									<Link href="/create-review">
-										<a className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+										<a data-umami-event="Navbar / Submit a Review Button" className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
 											{t('layout.nav.submit')}
 										</a>
 									</Link>

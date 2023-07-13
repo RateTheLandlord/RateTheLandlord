@@ -54,6 +54,7 @@ function SpamReviewModal({isOpen, setIsOpen}: IProps) {
                 </div>
                 <div className="mt-5 flex w-full justify-end sm:mt-6">
                   <Button
+                    umami="Spam Modal / Close Button"
                     onClick={() => {
                       setIsOpen(false)
                     }}

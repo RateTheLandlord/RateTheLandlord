@@ -105,10 +105,10 @@ export default function MobileReviewFilters({
 										name={t('reviews.country')}
 									/>
 									<ComboBox
-										state={stateFilter}
-										setState={setStateFilter}
-										options={stateOptions}
-										name={t('reviews.state')}
+											state={stateFilter}
+											setState={setStateFilter}
+											options={stateOptions}
+											name={t('reviews.state')}
 									/>
 									<ComboBox
 										state={cityFilter}
