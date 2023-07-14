@@ -102,7 +102,10 @@ function ReviewFilters({
 								name={t('reviews.sort')}
 							/>
 							<div className="block lg:hidden">
-								<ButtonLight onClick={() => setMobileFiltersOpen(true)}>
+								<ButtonLight
+									onClick={() => setMobileFiltersOpen(true)}
+									umami="Reviews / Review Filters"
+								>
 									{t('reviews.filters')}
 								</ButtonLight>
 							</div>
