@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react'
 import ReviewTable from './review-table'
 import {Review} from '@/util/interfaces/interfaces'
-
+import {debounce} from 'lodash'
 interface IProps {
 	data: Review[]
 	setReportOpen: Dispatch<SetStateAction<boolean>>
@@ -27,11 +27,12 @@ function InfiniteScroll({
 }: IProps) {
 	const [content, setContent] = useState<Review[]>([]) // Store loaded content
 	// Add a scroll event listener
+	
 	useEffect(() => {
-		window.addEventListener('scroll', handleScroll)
-		return () => window.removeEventListener('scroll', handleScroll)
+		window.addEventListener('scroll', debouncedHandleScroll)
+		return () => window.removeEventListener('scroll', debouncedHandleScroll)
 	}, [])
-
+	
 	// Fetch more content when reaching the bottom
 	const handleScroll = () => {
 		if (
@@ -45,7 +46,7 @@ function InfiniteScroll({
 			setPage((page) => page + 1)
 		}
 	}
-
+	const debouncedHandleScroll = debounce(handleScroll, 5000) //1000ms delay
 	// Fetch initial content when the component mounts
 	useEffect(() => {
 		// Fetch initial content here
