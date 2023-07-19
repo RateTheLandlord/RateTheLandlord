@@ -1,26 +1,25 @@
+import AdSense from 'react-adsense'
+
 const isProd = process.env.NODE_ENV === 'production'
 
-const Adsense = () => {
+const AdsComponent = () => {
 	if (isProd) {
 		return (
 			<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-				<script
-					async
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233437669445756"
-					crossOrigin="anonymous"
-				></script>
-				<ins
-					className="adsbygoogle h-[100px] md:h-[90px]"
+				<AdSense.Google
+					client="ca-pub-1233437669445756"
+					slot="2009320000"
 					style={{display: 'block'}}
-					data-ad-client="ca-pub-1233437669445756"
-					data-ad-slot="2009320000"
-					data-ad-format="auto"
-					data-full-width-responsive="true"
-				></ins>
-				<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+					format="auto"
+					responsive="true"
+					className="adsbygoogle h-[100px] md:h-[90px]"
+				/>
 			</div>
 		)
-	} else return null
+	} else {
+		// For development environment, don't render the ad unit
+		return null
+	}
 }
 
-export default Adsense
+export default AdsComponent
