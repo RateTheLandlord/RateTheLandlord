@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import {useEffect} from 'react'
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -6,8 +7,11 @@ const AdsComponent = () => {
 	useEffect(() => {
 		// Only load the Google AdSense script in production to comply with AdSense policies
 		if (isProd) {
-			// @ts-ignore
-			;(window.adsbygoogle = window.adsbygoogle || []).push({})
+			try {
+				;(window.adsbygoogle = window.adsbygoogle || []).push({})
+			} catch (err) {
+				console.log(err)
+			}
 		}
 	}, [])
 
