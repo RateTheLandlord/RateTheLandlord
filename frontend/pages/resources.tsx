@@ -2,6 +2,7 @@ import ResourcesInfo from '@/components/resources/resourcesInfo'
 import ResourceTenantLinks from '@/components/resources/resourcesLinks'
 import {NextSeo} from 'next-seo'
 import {useRouter} from 'next/router'
+import Adsense from '@/components/adsense/Adsense'
 
 function Resources(): JSX.Element {
 	const title = 'Resources | Rate The Landlord'
@@ -41,6 +42,7 @@ function Resources(): JSX.Element {
 				]}
 			/>
 			<div className="container mt-5 flex flex-col items-center gap-4 px-2">
+				<Adsense />
 				<ResourcesInfo />
 				<ResourceTenantLinks />
 				<p className="mt-8 text-center text-xl leading-8 text-gray-500">
