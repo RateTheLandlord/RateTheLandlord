@@ -15,7 +15,7 @@ import {fetcher} from '@/util/helpers/fetcher'
 import EditReviewModal from '../modal/EditReviewModal'
 import RemoveReviewModal from '../modal/RemoveReviewModal'
 import InfiniteScroll from './InfiniteScroll'
-import Adsense from '@/components/adsense/Adsense'
+import AdsComponent from '@/components/adsense/Adsense'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -167,7 +167,7 @@ const Review = () => {
 						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
 					</div>
 				) : null}
-				<Adsense />
+				<AdsComponent />
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
