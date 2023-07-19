@@ -2,10 +2,10 @@ import ReviewFilters from '@/components/reviews/review-filters'
 import {sortOptions} from '@/util/helpers/filter-options'
 import {Options, Review} from '@/util/interfaces/interfaces'
 import {
-	updateActiveFilters,
-	getStateOptions,
 	getCityOptions,
+	getStateOptions,
 	getZipOptions,
+	updateActiveFilters,
 } from '@/components/reviews/functions'
 import React, {useEffect, useMemo, useState} from 'react'
 import ReportModal from '@/components/reviews/report-modal'
@@ -15,6 +15,7 @@ import {fetcher} from '@/util/helpers/fetcher'
 import EditReviewModal from '../modal/EditReviewModal'
 import RemoveReviewModal from '../modal/RemoveReviewModal'
 import InfiniteScroll from './InfiniteScroll'
+import Adsense from '@/components/adsense/Adsense'
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -166,6 +167,7 @@ const Review = () => {
 						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
 					</div>
 				) : null}
+				<Adsense />
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
