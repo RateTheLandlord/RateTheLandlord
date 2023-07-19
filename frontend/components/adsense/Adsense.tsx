@@ -1,31 +1,19 @@
-/* eslint-disable  */
-import {useEffect} from 'react'
+import AdSense from 'react-adsense'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const AdsComponent = () => {
-	useEffect(() => {
-		// Only load the Google AdSense script in production to comply with AdSense policies
-		if (isProd) {
-			try {
-				;(window.adsbygoogle = window.adsbygoogle || []).push({})
-			} catch (err) {
-				console.log(err)
-			}
-		}
-	}, [])
-
 	if (isProd) {
 		return (
 			<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-				<ins
-					className="adsbygoogle h-[100px] md:h-[90px]"
+				<AdSense.Google
+					client="ca-pub-1233437669445756"
+					slot="2009320000"
 					style={{display: 'block'}}
-					data-ad-client="ca-pub-1233437669445756"
-					data-ad-slot="2009320000"
-					data-ad-format="auto"
-					data-full-width-responsive="true"
-				></ins>
+					format="auto"
+					responsive="true"
+					className="adsbygoogle h-[100px] md:h-[90px]"
+				/>
 			</div>
 		)
 	} else {
