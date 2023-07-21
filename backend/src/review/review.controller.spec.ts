@@ -4,6 +4,7 @@ import { ReviewService } from './review.service';
 import { Review, ReviewsResponse } from './models/review';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { BadRequestException } from '@nestjs/common';
 
 describe('ReviewController', () => {
   let reviewController: ReviewController;
@@ -177,6 +178,20 @@ describe('ReviewController', () => {
       );
       expect(reviewService.report).toBeCalledWith(mockId, mockReason);
       expect(result).toBe(mockId);
+    });
+
+    it('should throw error with invalid captcha', async () => {
+      const mockCaptchaToken = 'invalid-captcha-token';
+
+      jest.spyOn(captchaService, 'verifyToken').mockResolvedValue(false);
+
+      await expect(
+        reviewController.report(
+          mockId,
+          { captchaToken: mockCaptchaToken, flagged_reason: mockReason },
+          mockIp,
+        ),
+      ).rejects.toThrow(BadRequestException);
     });
   });
 });
