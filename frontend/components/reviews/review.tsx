@@ -167,7 +167,7 @@ const Review = () => {
 						<Alert success={success} setAlertOpen={setRemoveAlertOpen} />
 					</div>
 				) : null}
-				<AdsComponent />
+				<AdsComponent slot="2009320000" />
 				<ReviewFilters
 					selectedSort={selectedSort}
 					setSelectedSort={setSelectedSort}
