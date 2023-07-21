@@ -149,6 +149,7 @@ describe('ReviewController', () => {
             getStats: jest.fn().mockReturnValue(mockStats),
             getLandlords: jest.fn().mockReturnValue(mockLandlords),
             getLandlordReviews: jest.fn().mockReturnValue(mockReviews.reviews),
+            getLandlordSuggestions: jest.fn().mockReturnValue(mockLandlords),
           },
         },
         {
@@ -376,6 +377,19 @@ describe('ReviewController', () => {
 
       expect(reviewService.getLandlordReviews).toBeCalledWith(mockLandlord);
       expect(result).toStrictEqual(mockLandlordReviews);
+    });
+  });
+
+  describe('getLandlordSuggestions', () => {
+    const mockLandlord = 'Dom';
+
+    it('shoudl call reviewService.getLandlordSuggestions with correct params and return names', async () => {
+      const result = await reviewController.getLandlordSuggestions(
+        mockLandlord,
+      );
+
+      expect(reviewService.getLandlordSuggestions).toBeCalledWith(mockLandlord);
+      expect(result).toStrictEqual(mockLandlords);
     });
   });
 });
