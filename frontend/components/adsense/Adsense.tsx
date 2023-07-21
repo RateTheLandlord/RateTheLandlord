@@ -6,9 +6,15 @@ interface IProps {
 	slot: string
 	format?: string
 	layout?: string
+	layoutKey?: string
 }
 
-const AdsComponent = ({slot, format = 'auto', layout = ''}: IProps) => {
+const AdsComponent = ({
+	slot,
+	format = 'auto',
+	layout = '',
+	layoutKey = '',
+}: IProps) => {
 	if (isProd) {
 		return (
 			<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -18,6 +24,7 @@ const AdsComponent = ({slot, format = 'auto', layout = ''}: IProps) => {
 					style={{display: 'block'}}
 					format={format}
 					layout={layout}
+					layoutKey={layoutKey}
 					responsive="true"
 					className="adsbygoogle h-[100px] md:h-[90px]"
 				/>

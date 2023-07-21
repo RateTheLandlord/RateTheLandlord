@@ -67,7 +67,7 @@ function ReviewTable({
 											<AdsComponent
 												slot="3829259014"
 												format="fluid"
-												layout="-gw-3+1f-3d+2z"
+												layoutKey="-gw-3+1f-3d+2z"
 											/>
 										)}
 										<div
