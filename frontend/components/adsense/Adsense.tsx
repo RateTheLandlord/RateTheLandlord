@@ -11,7 +11,7 @@ interface IProps {
 
 const AdsComponent = ({
 	slot,
-	format = 'auto',
+	format = 'horizontal,auto',
 	layout = '',
 	layoutKey = '',
 }: IProps) => {
@@ -26,7 +26,7 @@ const AdsComponent = ({
 					layout={layout}
 					layoutKey={layoutKey}
 					responsive="true"
-					className="adsbygoogle h-[100px] md:h-[90px]"
+					className="adsbygoogle"
 				/>
 			</div>
 		)
