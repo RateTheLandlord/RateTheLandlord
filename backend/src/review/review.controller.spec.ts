@@ -65,6 +65,7 @@ describe('ReviewController', () => {
           provide: ReviewService,
           useValue: {
             get: jest.fn().mockReturnValue(mockReviews),
+            findOne: jest.fn().mockReturnValue(mockReviews.reviews[0]),
           },
         },
         {
@@ -116,6 +117,17 @@ describe('ReviewController', () => {
 
       expect(mockGetReviews).toBeCalledWith(queryParams);
       expect(result).toBe(mockReviews);
+    });
+  });
+
+  describe('getOneReview', () => {
+    it('should return correct review', async () => {
+      const reviewId = 1;
+
+      const result = await reviewController.findOne(reviewId.toString());
+
+      expect(reviewService.findOne).toBeCalledWith(reviewId);
+      expect(result).toBe(mockReviews.reviews[0]);
     });
   });
 });
