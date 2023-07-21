@@ -2,7 +2,19 @@ import AdSense from 'react-adsense'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const AdsComponent = ({slot}: {slot: string}) => {
+interface IProps {
+	slot: string
+	format?: string
+	layout?: string
+	layoutKey?: string
+}
+
+const AdsComponent = ({
+	slot,
+	format = 'horizontal,auto',
+	layout = '',
+	layoutKey = '',
+}: IProps) => {
 	if (isProd) {
 		return (
 			<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -10,9 +22,11 @@ const AdsComponent = ({slot}: {slot: string}) => {
 					client="ca-pub-1233437669445756"
 					slot={slot}
 					style={{display: 'block'}}
-					format="auto"
+					format={format}
+					layout={layout}
+					layoutKey={layoutKey}
 					responsive="true"
-					className="adsbygoogle h-[100px] md:h-[90px]"
+					className="adsbygoogle"
 				/>
 			</div>
 		)
