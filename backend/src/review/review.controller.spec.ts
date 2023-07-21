@@ -71,6 +71,7 @@ describe('ReviewController', () => {
             findOne: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             update: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             report: jest.fn().mockReturnValue(1),
+            delete: jest.fn().mockReturnValue(true),
           },
         },
         {
@@ -192,6 +193,16 @@ describe('ReviewController', () => {
           mockIp,
         ),
       ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  describe('deleteReview', () => {
+    const reviewId = 1;
+    it('should call reviewService.delete correctly if auth', async () => {
+      const result = await reviewController.delete(reviewId);
+
+      expect(reviewService.delete).toBeCalledWith(reviewId);
+      expect(result).toBe(true);
     });
   });
 });
