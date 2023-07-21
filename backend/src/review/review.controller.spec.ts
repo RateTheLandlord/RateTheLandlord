@@ -27,7 +27,7 @@ describe('ReviewController', () => {
         stability: 3,
         privacy: 3,
         respect: 3,
-        flagged: false,
+        flagged: true,
         flagged_reason: 'unknown',
         admin_approved: true,
         admin_edited: false,
@@ -74,6 +74,7 @@ describe('ReviewController', () => {
             report: jest.fn().mockReturnValue(1),
             delete: jest.fn().mockReturnValue(true),
             create: jest.fn().mockReturnValue(mockReviews.reviews[0]),
+            getFlagged: jest.fn().mockReturnValue(mockReviews),
           },
         },
         {
@@ -251,6 +252,21 @@ describe('ReviewController', () => {
       await expect(
         reviewController.create(mockReview, mockIp),
       ).rejects.toHaveProperty('status', HttpStatus.INTERNAL_SERVER_ERROR);
+    });
+  });
+
+  describe('getFlaggedReviews', () => {
+    it('should call reviewService.getFlagged and return its result', async () => {
+      const mockFlaggedReviews = [mockReviews.reviews[0]];
+
+      jest
+        .spyOn(reviewService, 'getFlagged')
+        .mockResolvedValue(mockFlaggedReviews);
+
+      const result = await reviewController.getFlagged();
+
+      expect(reviewService.getFlagged).toBeCalled();
+      expect(result).toBe(mockFlaggedReviews);
     });
   });
 });
