@@ -5,6 +5,7 @@ import { Review, ReviewsResponse } from './models/review';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BadRequestException } from '@nestjs/common';
+import { CreateReview } from './models/create-review';
 
 describe('ReviewController', () => {
   let reviewController: ReviewController;
@@ -72,6 +73,7 @@ describe('ReviewController', () => {
             update: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             report: jest.fn().mockReturnValue(1),
             delete: jest.fn().mockReturnValue(true),
+            create: jest.fn().mockReturnValue(mockReviews.reviews[0]),
           },
         },
         {
@@ -203,6 +205,27 @@ describe('ReviewController', () => {
 
       expect(reviewService.delete).toBeCalledWith(reviewId);
       expect(result).toBe(true);
+    });
+  });
+
+  describe('createReview', () => {
+    const mockReview: CreateReview = {
+      captchaToken: 'valid-captcha-token',
+      review: mockReviews.reviews[0],
+    };
+    const mockIp = '127.0.0.1';
+
+    it('should call reviewService.create with correct params if valid captcha', async () => {
+      jest.spyOn(captchaService, 'verifyToken').mockResolvedValue(true);
+
+      const result = await reviewController.create(mockReview, mockIp);
+
+      expect(captchaService.verifyToken).toBeCalledWith(
+        mockReview.captchaToken,
+        mockIp,
+      );
+      expect(reviewService.create).toBeCalledWith(mockReview.review);
+      expect(result).toBe(mockReview.review);
     });
   });
 });
