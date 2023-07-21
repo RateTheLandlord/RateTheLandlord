@@ -4,7 +4,7 @@ import { ReviewService } from './review.service';
 import { Review, ReviewsResponse } from './models/review';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateReview } from './models/create-review';
 
 describe('ReviewController', () => {
@@ -226,6 +226,20 @@ describe('ReviewController', () => {
       );
       expect(reviewService.create).toBeCalledWith(mockReview.review);
       expect(result).toBe(mockReview.review);
+    });
+
+    it('should throw HttpException with status NOT_ACCEPTABLE when BadRequestException is thrown', async () => {
+      jest
+        .spyOn(captchaService, 'verifyToken')
+        .mockRejectedValue(new BadRequestException());
+
+      await expect(reviewController.create(mockReview, mockIp)).rejects.toThrow(
+        HttpException,
+      );
+
+      await expect(
+        reviewController.create(mockReview, mockIp),
+      ).rejects.toHaveProperty('status', HttpStatus.NOT_ACCEPTABLE);
     });
   });
 });
