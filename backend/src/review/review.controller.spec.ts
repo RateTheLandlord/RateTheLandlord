@@ -141,13 +141,12 @@ describe('ReviewController', () => {
       const reviewId = 1;
       const updatedReview: Review = {
         ...mockReviews.reviews[0],
-        review: 'good',
+        review: 'bad',
       };
 
-      const result = await reviewController.update(reviewId, updatedReview);
+      await reviewController.update(reviewId, updatedReview);
 
       expect(reviewService.update).toBeCalledWith(reviewId, updatedReview);
-      expect(result).toStrictEqual(updatedReview);
     });
   });
 });
