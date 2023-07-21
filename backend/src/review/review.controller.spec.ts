@@ -8,6 +8,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 describe('ReviewController', () => {
   let reviewController: ReviewController;
   let reviewService: ReviewService;
+  let captchaService: CaptchaService;
 
   const mockReviews: ReviewsResponse = {
     reviews: [
@@ -68,11 +69,14 @@ describe('ReviewController', () => {
             get: jest.fn().mockReturnValue(mockReviews),
             findOne: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             update: jest.fn().mockReturnValue(mockReviews.reviews[0]),
+            report: jest.fn().mockReturnValue(1),
           },
         },
         {
           provide: CaptchaService,
-          useValue: {},
+          useValue: {
+            verifyToken: jest.fn(),
+          },
         },
       ],
     })
@@ -82,6 +86,7 @@ describe('ReviewController', () => {
 
     reviewController = module.get<ReviewController>(ReviewController);
     reviewService = module.get<ReviewService>(ReviewService);
+    captchaService = module.get<CaptchaService>(CaptchaService);
   });
 
   describe('getAllReviews', () => {
@@ -147,6 +152,31 @@ describe('ReviewController', () => {
       await reviewController.update(reviewId, updatedReview);
 
       expect(reviewService.update).toBeCalledWith(reviewId, updatedReview);
+    });
+  });
+
+  describe('reportReview', () => {
+    const mockId = 1;
+    const mockReason = 'This is a test reason';
+    const mockIp = '127.0.0.1';
+
+    it('should call reviewService.report with correct params and return id with valid captcha', async () => {
+      const mockCaptchaToken = 'valid-captcha-token';
+
+      jest.spyOn(captchaService, 'verifyToken').mockResolvedValue(true);
+
+      const result = await reviewController.report(
+        mockId,
+        { captchaToken: mockCaptchaToken, flagged_reason: mockReason },
+        mockIp,
+      );
+
+      expect(captchaService.verifyToken).toBeCalledWith(
+        mockCaptchaToken,
+        mockIp,
+      );
+      expect(reviewService.report).toBeCalledWith(mockId, mockReason);
+      expect(result).toBe(mockId);
     });
   });
 });
