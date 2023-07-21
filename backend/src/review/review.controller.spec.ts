@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ReviewController } from './review.controller';
 import { ReviewService } from './review.service';
-import { ReviewsResponse } from './models/review';
+import { Review, ReviewsResponse } from './models/review';
 import { CaptchaService } from 'src/captcha/captcha-service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 describe('ReviewController', () => {
   let reviewController: ReviewController;
@@ -66,6 +67,7 @@ describe('ReviewController', () => {
           useValue: {
             get: jest.fn().mockReturnValue(mockReviews),
             findOne: jest.fn().mockReturnValue(mockReviews.reviews[0]),
+            update: jest.fn().mockReturnValue(mockReviews.reviews[0]),
           },
         },
         {
@@ -73,7 +75,10 @@ describe('ReviewController', () => {
           useValue: {},
         },
       ],
-    }).compile();
+    })
+      .overrideGuard(JwtAuthGuard)
+      .useValue({ canActivate: jest.fn().mockReturnValue(true) })
+      .compile();
 
     reviewController = module.get<ReviewController>(ReviewController);
     reviewService = module.get<ReviewService>(ReviewService);
@@ -128,6 +133,21 @@ describe('ReviewController', () => {
 
       expect(reviewService.findOne).toBeCalledWith(reviewId);
       expect(result).toBe(mockReviews.reviews[0]);
+    });
+  });
+
+  describe('updateReview', () => {
+    it('should call reviewDataLayerService.update if auth', async () => {
+      const reviewId = 1;
+      const updatedReview: Review = {
+        ...mockReviews.reviews[0],
+        review: 'good',
+      };
+
+      const result = await reviewController.update(reviewId, updatedReview);
+
+      expect(reviewService.update).toBeCalledWith(reviewId, updatedReview);
+      expect(result).toStrictEqual(updatedReview);
     });
   });
 });
