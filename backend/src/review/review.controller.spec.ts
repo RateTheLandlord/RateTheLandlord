@@ -241,5 +241,16 @@ describe('ReviewController', () => {
         reviewController.create(mockReview, mockIp),
       ).rejects.toHaveProperty('status', HttpStatus.NOT_ACCEPTABLE);
     });
+
+    it('should throw HttpException with status INTERNAL_SERVER_ERROR when other error is thrown', async () => {
+      jest.spyOn(captchaService, 'verifyToken').mockRejectedValue(new Error());
+
+      await expect(reviewController.create(mockReview, mockIp)).rejects.toThrow(
+        HttpException,
+      );
+      await expect(
+        reviewController.create(mockReview, mockIp),
+      ).rejects.toHaveProperty('status', HttpStatus.INTERNAL_SERVER_ERROR);
+    });
   });
 });
