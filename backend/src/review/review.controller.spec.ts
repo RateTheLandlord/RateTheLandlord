@@ -148,6 +148,7 @@ describe('ReviewController', () => {
             getFlagged: jest.fn().mockReturnValue(mockReviews),
             getStats: jest.fn().mockReturnValue(mockStats),
             getLandlords: jest.fn().mockReturnValue(mockLandlords),
+            getLandlordReviews: jest.fn().mockReturnValue(mockReviews.reviews),
           },
         },
         {
@@ -358,6 +359,23 @@ describe('ReviewController', () => {
 
       expect(reviewService.getLandlords).toBeCalled();
       expect(result).toBe(mockLandlords);
+    });
+  });
+
+  describe('getLandlordReviews', () => {
+    const mockLandlord = 'Ket Long';
+    const mockLandlordReviews = [
+      mockReviews.reviews[0],
+      mockReviews.reviews[1],
+    ];
+
+    it('should call reviewService.getLandlordReviews with correct params and return LandlordReviews correctly', async () => {
+      const result = await reviewController.getLandlordReviews({
+        landlord: mockLandlord,
+      });
+
+      expect(reviewService.getLandlordReviews).toBeCalledWith(mockLandlord);
+      expect(result).toStrictEqual(mockLandlordReviews);
     });
   });
 });
