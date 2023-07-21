@@ -137,7 +137,7 @@ describe('ReviewController', () => {
   });
 
   describe('updateReview', () => {
-    it('should call reviewDataLayerService.update if auth', async () => {
+    it('should call reviewService.update if auth', async () => {
       const reviewId = 1;
       const updatedReview: Review = {
         ...mockReviews.reviews[0],
