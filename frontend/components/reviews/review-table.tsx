@@ -64,7 +64,11 @@ function ReviewTable({
 								return (
 									<>
 										{i % 20 === 0 && i !== 0 && (
-											<AdsComponent slot="3829259014" />
+											<AdsComponent
+												slot="3829259014"
+												format="fluid"
+												layoutKey="-gw-3+1f-3d+2z"
+											/>
 										)}
 										<div
 											key={review.id}
