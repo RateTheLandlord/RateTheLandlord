@@ -1,9 +1,9 @@
-import { DatabaseService } from "src/database/database.service";
-import { Injectable } from "@nestjs/common";
-import { IStats, Review, ReviewsResponse } from "./models/review";
-import { filterReviewWithAI, IResult } from "./helpers";
-import { ReviewSimilarityService } from "./review-text-match";
-import { ReviewModel } from "./models/review-data-layer";
+import { DatabaseService } from 'src/database/database.service';
+import { Injectable } from '@nestjs/common';
+import { IStats, Review, ReviewsResponse } from './models/review';
+import { filterReviewWithAI, IResult } from './helpers';
+import { ReviewSimilarityService } from './review-text-match';
+import { ReviewModel } from './models/review-data-layer';
 
 type ReviewQuery = {
   page?: number;
