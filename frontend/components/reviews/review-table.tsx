@@ -63,7 +63,9 @@ function ReviewTable({
 								const date = new Date(review.date_added).toLocaleDateString()
 								return (
 									<>
-										{i % 20 === 0 && <AdsComponent slot="3829259014" />}
+										{i % 20 === 0 && i !== 0 && (
+											<AdsComponent slot="3829259014" />
+										)}
 										<div
 											key={review.id}
 											className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
