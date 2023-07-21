@@ -130,6 +130,8 @@ describe('ReviewController', () => {
     },
   };
 
+  const mockLandlords = ['John Smith', 'Daniel Smith', 'Sandy Smith'];
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ReviewController],
@@ -145,6 +147,7 @@ describe('ReviewController', () => {
             create: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             getFlagged: jest.fn().mockReturnValue(mockReviews),
             getStats: jest.fn().mockReturnValue(mockStats),
+            getLandlords: jest.fn().mockReturnValue(mockLandlords),
           },
         },
         {
@@ -346,6 +349,15 @@ describe('ReviewController', () => {
 
       expect(reviewService.getStats).toBeCalled();
       expect(result).toBe(mockStats);
+    });
+  });
+
+  describe('getLandlords', () => {
+    it('should call reviewService.getLandlords and return landlords correctly', async () => {
+      const result = await reviewController.getLandlords();
+
+      expect(reviewService.getLandlords).toBeCalled();
+      expect(result).toBe(mockLandlords);
     });
   });
 });
