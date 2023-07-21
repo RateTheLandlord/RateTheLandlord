@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ReviewController } from './review.controller';
 import { ReviewService } from './review.service';
-import { Review, ReviewsResponse } from './models/review';
+import { IStats, Review, ReviewsResponse } from './models/review';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
@@ -61,6 +61,75 @@ describe('ReviewController', () => {
     limit: 25,
   };
 
+  const mockStats: IStats = {
+    total_reviews: 10,
+    total_ca_reviews: {
+      total: 2,
+      states: [
+        {
+          key: '1',
+          total: 1,
+        },
+        {
+          key: '2',
+          total: 1,
+        },
+      ],
+    },
+    total_us_reviews: {
+      total: 2,
+      states: [
+        {
+          key: '1',
+          total: 1,
+        },
+        {
+          key: '2',
+          total: 1,
+        },
+      ],
+    },
+    total_au_reviews: {
+      total: 2,
+      states: [
+        {
+          key: '1',
+          total: 1,
+        },
+        {
+          key: '2',
+          total: 1,
+        },
+      ],
+    },
+    total_uk_reviews: {
+      total: 2,
+      states: [
+        {
+          key: '1',
+          total: 1,
+        },
+        {
+          key: '2',
+          total: 1,
+        },
+      ],
+    },
+    total_nz_reviews: {
+      total: 2,
+      states: [
+        {
+          key: '1',
+          total: 1,
+        },
+        {
+          key: '2',
+          total: 1,
+        },
+      ],
+    },
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ReviewController],
@@ -75,6 +144,7 @@ describe('ReviewController', () => {
             delete: jest.fn().mockReturnValue(true),
             create: jest.fn().mockReturnValue(mockReviews.reviews[0]),
             getFlagged: jest.fn().mockReturnValue(mockReviews),
+            getStats: jest.fn().mockReturnValue(mockStats),
           },
         },
         {
@@ -267,6 +337,15 @@ describe('ReviewController', () => {
 
       expect(reviewService.getFlagged).toBeCalled();
       expect(result).toBe(mockFlaggedReviews);
+    });
+  });
+
+  describe('getStats', () => {
+    it('should call reviewService.getStats and return stats correctly', async () => {
+      const result = await reviewController.getStats();
+
+      expect(reviewService.getStats).toBeCalled();
+      expect(result).toBe(mockStats);
     });
   });
 });
