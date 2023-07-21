@@ -86,5 +86,36 @@ describe('ReviewController', () => {
 
       expect(result).toBe(mockReviews);
     });
+
+    it('should call query params correctly', async () => {
+      const mockGetReviews = jest.fn().mockReturnValue(mockReviews);
+
+      jest.spyOn(reviewService, 'get').mockImplementation(mockGetReviews);
+
+      const queryParams = {
+        page: 1,
+        limit: 10,
+        search: 'John Wright',
+        sort: 'az' as 'az' | 'za' | 'new' | 'old',
+        state: 'CA',
+        country: 'US',
+        city: 'San Francisco',
+        zip: '123',
+      };
+
+      const result = await reviewController.get(
+        queryParams.page,
+        queryParams.limit,
+        queryParams.search,
+        queryParams.sort,
+        queryParams.state,
+        queryParams.country,
+        queryParams.city,
+        queryParams.zip,
+      );
+
+      expect(mockGetReviews).toBeCalledWith(queryParams);
+      expect(result).toBe(mockReviews);
+    });
   });
 });
