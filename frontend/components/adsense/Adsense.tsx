@@ -26,7 +26,7 @@ const AdsComponent = ({
 					layout={layout}
 					layoutKey={layoutKey}
 					responsive="true"
-					className="adsbygoogle"
+					className="adsbygoogle h-[100px] w-full md:h-[90px]"
 				/>
 			</div>
 		)
