@@ -11,7 +11,7 @@ interface IProps {
 
 const AdsComponent = ({
 	slot,
-	format = 'auto',
+	format = 'horizontal,auto',
 	layout = '',
 	layoutKey = '',
 }: IProps) => {
