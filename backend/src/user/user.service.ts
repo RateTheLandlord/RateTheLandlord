@@ -29,8 +29,14 @@ export class UserService {
   }
 
   async deleteUser(id: number): Promise<boolean> {
-    await this.databaseService.sql`DELETE FROM users WHERE ID = ${id}`;
+    const user = await this.databaseService
+      .sql`SELECT * FROM users WHERE ID = ${id}`;
 
+    if (user.length === 0) {
+      throw new Error('User not found');
+    }
+
+    await this.databaseService.sql`DELETE FROM users WHERE ID = ${id}`;
     return true;
   }
 
