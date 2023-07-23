@@ -7,6 +7,8 @@ import LoginForm from './login-form'
 import {Provider} from 'react-redux'
 import {store} from '@/redux/store'
 
+jest.mock('next/router', () => require('next-router-mock'))
+
 describe('LoginForm', () => {
 	test('renders the login form ', () => {
 		render(

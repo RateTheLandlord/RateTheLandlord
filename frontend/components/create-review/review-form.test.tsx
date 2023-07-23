@@ -2,8 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
+import {fireEvent, render} from '@testing-library/react'
 import ReviewForm from './review-form'
+
+jest.mock('next/router', () => require('next-router-mock'))
 
 beforeEach(() => {
 	const mockIntersectionObserver = jest.fn()
