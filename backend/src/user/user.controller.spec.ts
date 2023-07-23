@@ -53,6 +53,7 @@ describe('UserController', () => {
               last_login_attempt: '123',
               lockout_time: '12345',
             }),
+            deleteUser: jest.fn().mockReturnValue(true),
           },
         },
       ],
@@ -129,6 +130,25 @@ describe('UserController', () => {
         last_login_attempt: '123',
         lockout_time: '12345',
       });
+    });
+  });
+
+  describe('deleteUser', () => {
+    it('should call userService.deleteUser and return true/false', async () => {
+      const result = await userController.deleteUser(2);
+
+      expect(userService.deleteUser).toBeCalledWith(2);
+      expect(result).toBe(true);
+    });
+
+    it('should throw error if user does not exist', async () => {
+      jest.spyOn(userService, 'deleteUser').mockImplementation(() => {
+        throw new Error('User not found');
+      });
+
+      await expect(userController.deleteUser(2)).rejects.toThrow(
+        'User not found',
+      );
     });
   });
 });
