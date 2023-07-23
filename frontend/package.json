@@ -25,7 +25,7 @@
 		"i18next": "^21.8.14",
 		"i18next-browser-languagedetector": "^6.1.4",
 		"i18next-http-backend": "^1.4.1",
-		"next": "12.1.6",
+		"next": "13.4.12",
 		"next-seo": "^6.0.0",
 		"nookies": "^2.5.2",
 		"postal-codes-js": "^2.5.2",
