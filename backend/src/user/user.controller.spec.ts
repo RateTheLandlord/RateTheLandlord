@@ -45,6 +45,14 @@ describe('UserController', () => {
               lockout_time: '12345',
             }),
             update: jest.fn().mockReturnValue(true),
+            getMe: jest.fn().mockReturnValue({
+              ...mockUser,
+              id: 2,
+              login_attempts: 3,
+              login_lockout: false,
+              last_login_attempt: '123',
+              lockout_time: '12345',
+            }),
           },
         },
       ],
@@ -105,6 +113,22 @@ describe('UserController', () => {
 
       expect(userService.update).toBeCalledWith(2, mockUpdateUser);
       expect(result).toBe(true);
+    });
+  });
+
+  describe('getSingleUser', () => {
+    it('should call userService.getMe and return the user', async () => {
+      const result = await userController.getUser(2);
+
+      expect(userService.getMe).toBeCalledWith(2);
+      expect(result).toEqual({
+        ...mockUser,
+        id: 2,
+        login_attempts: 3,
+        login_lockout: false,
+        last_login_attempt: '123',
+        lockout_time: '12345',
+      });
     });
   });
 });
