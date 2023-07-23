@@ -30,7 +30,7 @@ export class UserService {
 
   async deleteUser(id: number): Promise<boolean> {
     const user = await this.databaseService
-      .sql`DELETE FROM users WHERE ID = ${id}`;
+      .sql`SELECT * FROM users WHERE ID = ${id}`;
 
     if (user.length === 0) {
       throw new Error('User not found');
