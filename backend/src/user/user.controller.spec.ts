@@ -44,6 +44,7 @@ describe('UserController', () => {
               last_login_attempt: '123',
               lockout_time: '12345',
             }),
+            update: jest.fn().mockReturnValue(true),
           },
         },
       ],
@@ -82,6 +83,28 @@ describe('UserController', () => {
         last_login_attempt: '123',
         lockout_time: '12345',
       });
+    });
+  });
+
+  describe('update', () => {
+    const mockUpdateUser: IUser = {
+      id: 2,
+      name: 'Peter Smith',
+      email: 'peter@smith.com',
+      password: 'password',
+      blocked: false,
+      role: 'USER',
+      login_attempts: 3,
+      login_lockout: false,
+      last_login_attempt: '123',
+      lockout_time: '12345',
+    };
+
+    it('should call userService.update with correct params and return result', async () => {
+      const result = await userController.update(2, mockUpdateUser);
+
+      expect(userService.update).toBeCalledWith(2, mockUpdateUser);
+      expect(result).toBe(true);
     });
   });
 });
