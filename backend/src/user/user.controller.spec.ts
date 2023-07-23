@@ -20,17 +20,12 @@ describe('UserController', () => {
     lockout_time: '12345',
   };
 
-  const mockUser: IUser = {
-    id: 2,
+  const mockUser = {
     name: 'Peter Smith',
     email: 'peter@smith.com',
     password: 'password',
     blocked: false,
     role: 'USER',
-    login_attempts: 3,
-    login_lockout: false,
-    last_login_attempt: '123',
-    lockout_time: '12345',
   };
 
   beforeEach(async () => {
@@ -41,7 +36,14 @@ describe('UserController', () => {
           provide: UserService,
           useValue: {
             getAll: jest.fn().mockReturnValue([mockUsers]),
-            create: jest.fn().mockReturnValue(mockUser),
+            create: jest.fn().mockReturnValue({
+              ...mockUser,
+              id: 2,
+              login_attempts: 3,
+              login_lockout: false,
+              last_login_attempt: '123',
+              lockout_time: '12345',
+            }),
           },
         },
       ],
@@ -72,7 +74,14 @@ describe('UserController', () => {
       const result = await userController.create(mockReq);
 
       expect(userService.create).toBeCalledWith(mockUser);
-      expect(result).toBe(mockUser);
+      expect(result).toEqual({
+        ...mockUser,
+        id: 2,
+        login_attempts: 3,
+        login_lockout: false,
+        last_login_attempt: '123',
+        lockout_time: '12345',
+      });
     });
   });
 });
