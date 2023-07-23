@@ -5,6 +5,7 @@ import React from 'react'
 import {fireEvent, render} from '@testing-library/react'
 import ReviewForm from './review-form'
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('next/router', () => require('next-router-mock'))
 
 beforeEach(() => {
