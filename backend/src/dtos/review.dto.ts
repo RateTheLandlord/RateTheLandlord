@@ -4,13 +4,13 @@ import { Type } from 'class-transformer';
 export class Review {
   id: number;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'landlord name must not be empty' })
   @IsString()
   landlord: string;
 
   country_code: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'city must not be empty' })
   @IsString()
   city: string;
 
