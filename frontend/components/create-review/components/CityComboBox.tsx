@@ -9,6 +9,8 @@ interface ComponentProps {
   setState: (state: string) => void;
   options: Array<ILocationHookResponse>;
   searching: boolean;
+  error: boolean;
+  errorText: string
 }
 
 export default function CityComboBox({
@@ -17,7 +19,10 @@ export default function CityComboBox({
 	options,
 	name,
 	searching,
+	error,
+	errorText
 }: ComponentProps) {
+	const comboboxClassName = `mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${error ? 'border-red-400' : ''}`
 	return (
 		<Combobox value={state} onChange={setState}>
 			<div
@@ -31,7 +36,7 @@ export default function CityComboBox({
 					{name}
 				</label>
 				<Combobox.Input
-					className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+					className={comboboxClassName}
 					placeholder={`${name}`}
 					displayValue={(state: string) => state}
 					onChange={(event) => setState(event.target.value)}
@@ -69,6 +74,11 @@ export default function CityComboBox({
 						)}
 					</Combobox.Options>
 				</Transition>
+				{error ? (
+					<p className="text-xs text-red-400">
+						{errorText}
+					</p>
+				) : null}
 			</div>
 		</Combobox>
 	)
