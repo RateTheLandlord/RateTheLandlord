@@ -10,6 +10,8 @@ interface RenderComponentProps {
 	setState: (state: string) => void
 	suggestions: string[]
 	isSearching: boolean
+	error: boolean
+	errorText: string
 }
 
 describe('LandlordComboBox', () => {
@@ -22,6 +24,8 @@ describe('LandlordComboBox', () => {
 		setState,
 		suggestions,
 		isSearching,
+		error,
+		errorText
 	}: RenderComponentProps) => {
 		return render(
 			<LandlordComboBox
@@ -30,6 +34,8 @@ describe('LandlordComboBox', () => {
 				setState={setState}
 				suggestions={suggestions}
 				isSearching={isSearching}
+				error={error}
+				errorText={errorText}
 			/>,
 		)
 	}
@@ -40,6 +46,8 @@ describe('LandlordComboBox', () => {
 			setState: handleChange,
 			suggestions: suggestions,
 			isSearching: false,
+			error:false,
+			errorText: ''
 		})
 
 		const labelElement = screen.getByText('Landlord Name (or Property Management Company) - No Addresses')
@@ -55,6 +63,8 @@ describe('LandlordComboBox', () => {
 			setState: handleChange,
 			suggestions: suggestions,
 			isSearching: false,
+			error: false,
+			errorText: ''
 		})
 
 		const inputElement = screen.getByPlaceholderText('Landlord Name (or Property Management Company) - No Addresses')
@@ -76,6 +86,8 @@ describe('LandlordComboBox', () => {
 			setState: handleChange,
             suggestions: suggestions,
 			isSearching: false,
+			error: false,
+			errorText: ''
 		})
 
 		const inputElement = screen.getByPlaceholderText('Landlord Name (or Property Management Company) - No Addresses')
@@ -99,6 +111,8 @@ describe('LandlordComboBox', () => {
 				setState={handleChange}
 				suggestions={[]}
 				isSearching={true}
+				error={false}
+				errorText=''
 			/>,
 		)
 

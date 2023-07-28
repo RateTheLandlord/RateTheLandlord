@@ -11,6 +11,8 @@ interface RenderComponentProps {
 	setState: (state: string) => void
 	options: Array<ILocationHookResponse>
 	searching: boolean
+	error: boolean
+	errorText: string
 }
 
 describe('CityComboBox', () => {
@@ -27,6 +29,8 @@ describe('CityComboBox', () => {
 		setState,
 		options,
 		searching,
+		error,
+		errorText
 	}: RenderComponentProps) => {
 		return render(
 			<CityComboBox
@@ -35,6 +39,8 @@ describe('CityComboBox', () => {
 				setState={setState}
 				options={options}
 				searching={searching}
+				error={error}
+				errorText={errorText}
 			/>,
 		)
 	}
@@ -45,6 +51,8 @@ describe('CityComboBox', () => {
 			setState: handleChange,
 			options: options,
 			searching: false,
+			error: false,
+			errorText: ''
 		})
 
 		const labelElement = screen.getByText('City')
@@ -60,6 +68,8 @@ describe('CityComboBox', () => {
 			setState: handleChange,
 			options: options,
 			searching: false,
+			error: false,
+			errorText: ''
 		})
 
 		const inputElement = screen.getByPlaceholderText('City')
@@ -81,6 +91,8 @@ describe('CityComboBox', () => {
 			setState: handleChange,
 			options: options,
 			searching: false,
+			error: false,
+			errorText: ''
 		})
 
 		const inputElement = screen.getByPlaceholderText('City')
@@ -104,6 +116,8 @@ describe('CityComboBox', () => {
 				setState={handleChange}
 				options={[]}
 				searching={true}
+				error={false}
+				errorText=''
 			/>,
 		)
 
