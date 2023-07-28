@@ -7,7 +7,11 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe()); // enable validation for our next app
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  ); // enable validation for our nest app
 
   await ley.up({
     cwd: './src/database/',

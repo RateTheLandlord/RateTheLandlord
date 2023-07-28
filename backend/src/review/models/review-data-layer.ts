@@ -17,13 +17,6 @@ export class ReviewModel {
     filterResult: IResult,
   ): Promise<Review> {
     try {
-      inputReview.landlord = inputReview.landlord
-        .substring(0, 150)
-        .toLocaleUpperCase();
-      inputReview.country_code = inputReview.country_code.toLocaleUpperCase();
-      inputReview.city = inputReview.city.substring(0, 150).toLocaleUpperCase();
-      inputReview.state = inputReview.state.toLocaleUpperCase();
-      inputReview.zip = inputReview.zip.substring(0, 50).toLocaleUpperCase();
       inputReview.admin_approved = null;
       inputReview.flagged = filterResult.flagged;
       inputReview.flagged_reason = filterResult.flagged_reason;

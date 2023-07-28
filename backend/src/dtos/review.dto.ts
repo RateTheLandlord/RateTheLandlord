@@ -1,21 +1,30 @@
 import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 export class Review {
   id: number;
 
+  @Transform(({ value }) => value.trim().substring(0, 150).toLocaleUpperCase())
   @IsNotEmpty({ message: 'landlord name must not be empty' })
   @IsString()
   landlord: string;
 
+  @Transform(({ value }) => value.trim().substring(0, 150).toLocaleUpperCase())
   country_code: string;
 
+  @Transform(({ value }) => value.trim().substring(0, 150).toLocaleUpperCase())
   @IsNotEmpty({ message: 'city must not be empty' })
   @IsString()
   city: string;
 
+  @Transform(({ value }) => value.trim().substring(0, 150).toLocaleUpperCase())
   state: string;
+
+  @Transform(({ value }) => value.trim().substring(0, 50).toLocaleUpperCase())
+  @IsString()
+  @IsNotEmpty({ message: 'zip must not be empty' })
   zip: string;
+
   review: string;
   repair: number;
   health: number;
