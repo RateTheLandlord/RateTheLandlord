@@ -13,7 +13,7 @@ export default function LinkButtonLG({children, href, umami}: IProps) {
 			data-testid="home-hero-submit-btn-1"
 		>
 			<Link href={href} data-umami-event={umami}>
-				<p className="px-8 py-3 text-base font-medium text-teal-600 text-white md:px-10 md:py-4 md:text-lg">
+				<p className="px-8 py-3 text-base font-medium text-white md:px-10 md:py-4 md:text-lg">
 					{children}
 				</p>
 			</Link>
