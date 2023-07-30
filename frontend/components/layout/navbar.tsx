@@ -106,12 +106,9 @@ export default function Navbar(): JSX.Element {
 													? 'border-b-2 border-teal-500'
 													: ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
+											key={link.href}
 										>
-											<Link
-												key={link.href}
-												href={link.href}
-												data-umami-event={link.umami}
-											>
+											<Link href={link.href} data-umami-event={link.umami}>
 												{t(link.name)}
 											</Link>
 										</div>
