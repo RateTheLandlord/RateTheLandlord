@@ -100,30 +100,32 @@ export default function Navbar(): JSX.Element {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{navigation.map((link) => (
-										<Link
-											key={link.href}
-											href={link.href}
-											data-umami-event={link.umami}
+										<div
 											className={`${
 												activeTab === link.href
 													? 'border-b-2 border-teal-500'
 													: ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
-											{t(link.name)}
-										</Link>
+											<Link
+												key={link.href}
+												href={link.href}
+												data-umami-event={link.umami}
+											>
+												{t(link.name)}
+											</Link>
+										</div>
 									))}
 									{user?.jwt.access_token && (
-										<Link
-											href={`/admin/${user.result.id || 0}`}
+										<div
 											className={`${
 												activeTab === '/admin'
 													? 'border-b-2 border-teal-500'
 													: ''
 											} inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900`}
 										>
-											Admin
-										</Link>
+											<Link href={`/admin/${user.result.id || 0}`}>Admin</Link>
+										</div>
 									)}
 								</div>
 							</div>
@@ -142,13 +144,14 @@ export default function Navbar(): JSX.Element {
 									))}
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
-									<Link
-										href="/create-review"
-										data-umami-event="Navbar / Submit a Review Button"
-										className="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-									>
-										{t('layout.nav.submit')}
-									</Link>
+									<div className="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-teal-600 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+										<Link
+											href="/create-review"
+											data-umami-event="Navbar / Submit a Review Button"
+										>
+											<p className="px-4 py-2">{t('layout.nav.submit')}</p>
+										</Link>
+									</div>
 								</div>
 							</div>
 							<div className="flex items-center lg:hidden">

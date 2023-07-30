@@ -8,13 +8,14 @@ interface IProps {
 }
 export default function LinkButtonLG({children, href, umami}: IProps) {
 	return (
-		<div className="rounded-md shadow" data-testid="home-hero-submit-btn-1">
-			<Link
-				href={href}
-				data-umami-event={umami}
-				className="flex w-full items-center justify-center rounded-md border border-transparent bg-teal-600 px-8 py-3 text-base font-medium text-white hover:bg-teal-700 md:px-10 md:py-4 md:text-lg"
-			>
-				{children}
+		<div
+			className="rounded-md border border-teal-600 bg-teal-600 hover:bg-teal-500"
+			data-testid="home-hero-submit-btn-1"
+		>
+			<Link href={href} data-umami-event={umami}>
+				<p className="px-8 py-3 text-base font-medium text-teal-600 text-white md:px-10 md:py-4 md:text-lg">
+					{children}
+				</p>
 			</Link>
 		</div>
 	)
