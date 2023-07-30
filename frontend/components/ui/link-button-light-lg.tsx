@@ -9,7 +9,7 @@ interface IProps {
 export default function LinkButtonLightLG({children, href, umami}: IProps) {
 	return (
 		<div
-			className="rounded-md border border-teal-600 bg-white"
+			className="cursor-pointer rounded-md border border-teal-600 bg-white"
 			data-testid="home-hero-read-btn-1"
 		>
 			<Link href={href} data-umami-event={umami}>

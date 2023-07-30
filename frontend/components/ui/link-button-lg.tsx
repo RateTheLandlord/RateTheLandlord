@@ -9,7 +9,7 @@ interface IProps {
 export default function LinkButtonLG({children, href, umami}: IProps) {
 	return (
 		<div
-			className="rounded-md border border-teal-600 bg-teal-600 hover:bg-teal-500"
+			className="cursor-pointer rounded-md border border-teal-600 bg-teal-600 hover:bg-teal-500"
 			data-testid="home-hero-submit-btn-1"
 		>
 			<Link href={href} data-umami-event={umami}>
