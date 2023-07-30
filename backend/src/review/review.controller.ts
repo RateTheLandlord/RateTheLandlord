@@ -15,11 +15,12 @@ import {
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CaptchaService } from 'src/captcha/captcha-service';
 import { IpAddress } from 'src/decorators/ip-address/ip-address.decorator';
-import { CreateReview } from './models/create-review';
+// import { CreateReview } from './models/create-review';
 import { IStats, Review, ReviewsResponse } from './models/review';
 import { ReviewService } from './review.service';
 import { Throttle } from '@nestjs/throttler';
 import { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from '../auth/constants';
+import { CreateReviewDto } from 'src/dtos/review.dto';
 
 export type ReviewControllerException = {
   statusCode: number;
@@ -119,7 +120,7 @@ export class ReviewController {
   @Throttle(2, 2628000)
   @Post()
   async create(
-    @Body() review: CreateReview,
+    @Body() review: CreateReviewDto,
     @IpAddress() ip: string,
   ): Promise<Review | ReviewControllerException> {
     try {
