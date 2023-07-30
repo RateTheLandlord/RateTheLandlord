@@ -4,7 +4,7 @@ const getUsers = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
 	const cookies = req.cookies
-	const jwt = cookies.ratethelandlord
+	const jwt: string = cookies.ratethelandlord || ''
 
 	fetch(`${url}/user`, {
 		headers: {

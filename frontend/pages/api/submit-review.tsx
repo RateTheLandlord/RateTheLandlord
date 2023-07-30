@@ -21,6 +21,12 @@ interface IBody {
 	}
 }
 
+interface IErrorDetails {
+	statusCode?: number
+	message?: string[]
+	error?: string
+}
+
 const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 	const url = process.env.API_URL as string
 
@@ -36,14 +42,27 @@ const SubmitReview = (req: NextApiRequest, res: NextApiResponse) => {
 	})
 		.then((result: Response) => {
 			if (!result.ok) {
-				throw result
+				return result.json().then((errorDetails) => {
+					throw errorDetails
+				})
 			}
-			res.status(200).json(result)
+			return result.json()
 		})
-		.catch((error: Response) => {
+		.then((resultJSON) => {
+			res.status(200).json(resultJSON)
+		})
+		.catch((error: IErrorDetails) => {
+			let errorMessage = 'Failed to Submit Review'
+			if (
+				error.message &&
+				error.message[0] === 'review.landlord name must not be empty'
+			) {
+				errorMessage = 'Landlord name must not be empty'
+			}
+
 			res
-				.status(error.status)
-				.json({error: 'Failed to Submit Review', response: error.statusText})
+				.status(error.statusCode || 500)
+				.json({error: errorMessage, response: error.error})
 		})
 }
 

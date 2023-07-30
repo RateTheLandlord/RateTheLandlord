@@ -73,6 +73,12 @@ function ReviewForm(): JSX.Element {
 	const [postalError, setPostalError] = useState(false)
 	const [touchedPostal, setTouchedPostal] = useState(false)
 
+	const [landlordValidationError, setLandlordValidationError] = useState(false)
+	const [landlordValidationText, setLandlordValidationText] = useState('')
+
+	const [cityValidationError, setCityValidationError] = useState(false)
+	const [cityValidationErrorText, setCityValidationErrorText] = useState('')
+
 	// Additional state for disabling submit
 	const [maliciousStringDetected, setMaliciousStringDetected] = useState(false)
 
@@ -169,8 +175,18 @@ function ReviewForm(): JSX.Element {
 
 	const handleSubmit = (e: React.FormEvent): void => {
 		e.preventDefault()
+		if (landlord.trim().length < 1) {
+			setLandlordValidationError(true)
+			setLandlordValidationText('Landlord Name cannot be empty')
+			return
+		}
 		if (checkLandlord(landlord.toLocaleUpperCase())) {
 			setSpamReviewModalOpen(true)
+			return
+		}
+		if (city.trim().length < 1) {
+			setCityValidationError(true)
+			setCityValidationErrorText('City cannot be empty')
 			return
 		}
 		if (checkSheldon()) {
@@ -256,6 +272,16 @@ function ReviewForm(): JSX.Element {
 		}
 	}, [country])
 
+	const setLandlordName = (landlordName:string) => {
+		setLandlordValidationError(false)
+		setLandlord(landlordName)
+	}
+
+	const setCityName = (cityName:string) => {
+		setCityValidationError(false)
+		setCity(cityName)
+	}
+
 	return (
 		<div
 			className="container flex w-full flex-col items-center px-4 sm:px-0"
@@ -301,9 +327,11 @@ function ReviewForm(): JSX.Element {
 								<LandlordComboBox
 									name={t('create-review.review-form.landlord')}
 									state={landlord}
-									setState={setLandlord}
+									setState={setLandlordName}
 									suggestions={landlordSuggestions}
 									isSearching={isSearching}
+									error={landlordValidationError}
+									errorText={landlordValidationText}
 								/>
 							</div>
 
@@ -345,9 +373,11 @@ function ReviewForm(): JSX.Element {
 								<CityComboBox
 									name={t('create-review.review-form.city')}
 									state={city}
-									setState={setCity}
+									setState={setCityName}
 									options={locations}
 									searching={searching}
+									error={cityValidationError}
+									errorText={cityValidationErrorText}
 								/>
 							</div>
 

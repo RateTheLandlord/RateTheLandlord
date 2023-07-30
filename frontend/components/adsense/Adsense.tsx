@@ -17,7 +17,7 @@ const AdsComponent = ({
 }: IProps) => {
 	if (isProd) {
 		return (
-			<div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+			<div className="mx-auto max-w-2xl px-4 pt-4 sm:px-6 lg:max-w-7xl lg:px-8">
 				<AdSense.Google
 					client="ca-pub-1233437669445756"
 					slot={slot}
