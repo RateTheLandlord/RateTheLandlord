@@ -22,7 +22,7 @@ interface IResult {
 export default function Navbar({
 	maintenanceMode = false,
 }: {
-	maintenanceMode: boolean
+	maintenanceMode?: boolean
 }): JSX.Element {
 	const cookies = parseCookies()
 	const {t} = useTranslation('layout')
