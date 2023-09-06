@@ -57,6 +57,7 @@ jobs:
             echo UMPASSWORD="${{secrets.UMPASSWORD}}" >> .env
             echo UMDATABASE=${{secrets.UMDATABASE}} >> .env
             echo DATABASE_URL="${{secrets.DATABASE_URL}}" >> .env
+            echo NEXT_PUBLIC_FEATURE_FLAG_ID="${{secrets.NEXT_PUBLIC_FEATURE_FLAG_ID}}" >> .env
             cat .env
             echo "[Building Docker Containers]"
             docker-compose build --no-cache

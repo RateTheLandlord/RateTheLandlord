@@ -22,6 +22,7 @@
 		"@tanstack/react-virtual": "beta",
 		"axios": "^1.4.0",
 		"cors": "^2.8.5",
+		"flagsmith": "^3.19.1",
 		"i18next": "^21.8.14",
 		"i18next-browser-languagedetector": "^6.1.4",
 		"i18next-http-backend": "^1.4.1",
