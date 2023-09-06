@@ -4,14 +4,22 @@ import '../styles/global.css'
 import '../i18n'
 import {Provider} from 'react-redux'
 import {store} from '@/redux/store'
-//State for Admin Login may be held here (Admin Status {Logged In? Username?})
+import {FlagsmithProvider} from 'flagsmith/react'
+import flagsmith from 'flagsmith'
 
 function MyApp({Component, pageProps}: AppProps): JSX.Element {
 	return (
 		<Provider store={store}>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
+			<FlagsmithProvider
+				options={{
+					environmentID: 'GMBtYhHadnvrnRJ3oJk5r8',
+				}}
+				flagsmith={flagsmith}
+			>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</FlagsmithProvider>
 		</Provider>
 	)
 }
