@@ -26,11 +26,13 @@ import {useLandlordSuggestions} from '@/util/hooks/useLandlordSuggestions'
 import CityComboBox from '@/components/create-review/components/CityComboBox'
 import LandlordComboBox from '@/components/create-review/components/LandlordComboBox'
 import {ILocationHookResponse} from '@/util/interfaces/interfaces'
+import {useFlags} from 'flagsmith/react'
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
 function ReviewForm(): JSX.Element {
 	const {t} = useTranslation('create')
+	const {maintenance_mode} = useFlags(['maintenance_mode'])
 
 	const [success, setSuccess] = useState(false)
 	const [alertOpen, setAlertOpen] = useState(false)
@@ -272,12 +274,12 @@ function ReviewForm(): JSX.Element {
 		}
 	}, [country])
 
-	const setLandlordName = (landlordName:string) => {
+	const setLandlordName = (landlordName: string) => {
 		setLandlordValidationError(false)
 		setLandlord(landlordName)
 	}
 
-	const setCityName = (cityName:string) => {
+	const setCityName = (cityName: string) => {
 		setCityValidationError(false)
 		setCity(cityName)
 	}
@@ -322,7 +324,7 @@ function ReviewForm(): JSX.Element {
 								{t('create-review.review-form.sub')}
 							</p>
 						</div>
-						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+						<div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
 							<div className="sm:col-span-3">
 								<LandlordComboBox
 									name={t('create-review.review-form.landlord')}
@@ -605,10 +607,12 @@ function ReviewForm(): JSX.Element {
 						className="flex justify-center sm:justify-end"
 						data-testid="create-review-form-submit-button-1"
 					>
-						<ButtonLight umami="Create Review / Reset Button">{t('create-review.review-form.reset')}</ButtonLight>
+						<ButtonLight umami="Create Review / Reset Button">
+							{t('create-review.review-form.reset')}
+						</ButtonLight>
 						{loading ? (
 							<div
-								className={`hover:bg-teal-700' } ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-200 bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500
+								className={`hover:bg-teal-700' } ml-3 inline-flex justify-center rounded-md border border-transparent bg-teal-200 bg-teal-600 px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500
 							focus:ring-offset-2`}
 							>
 								<div
@@ -630,7 +634,8 @@ function ReviewForm(): JSX.Element {
 									!disclaimerThree ||
 									maliciousStringDetected ||
 									loading ||
-									review.length > 2000
+									review.length > 2000 ||
+									!maintenance_mode.enabled
 								}
 							>
 								{t('create-review.review-form.submit')}

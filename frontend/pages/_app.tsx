@@ -12,7 +12,7 @@ function MyApp({Component, pageProps}: AppProps): JSX.Element {
 		<Provider store={store}>
 			<FlagsmithProvider
 				options={{
-					environmentID: 'GMBtYhHadnvrnRJ3oJk5r8',
+					environmentID: process.env.NEXT_PUBLIC_FEATURE_FLAG_ID as string,
 				}}
 				flagsmith={flagsmith}
 			>

@@ -1,9 +1,11 @@
 import {useTranslation} from 'react-i18next'
 import LinkButtonLG from '../ui/link-button-lg'
 import LinkButtonLightLG from '../ui/link-button-light-lg'
+import {useFlags} from 'flagsmith/react'
 
 function Hero(): JSX.Element {
 	const {t} = useTranslation('home')
+	const {maintenance_mode} = useFlags(['maintenance_mode'])
 	return (
 		<div data-testid="home-hero-1" className="relative min-w-full">
 			<div className="relative pt-6">
@@ -17,12 +19,14 @@ function Hero(): JSX.Element {
 						</p>
 
 						<div className="mx-auto mt-5 flex max-w-md flex-col gap-2 sm:flex-row sm:justify-center md:mt-8">
-							<LinkButtonLG
-								href="/create-review"
-								umami="Homepage / Submit a Review Button"
-							>
-								{t('home.hero.submit')}
-							</LinkButtonLG>
+							{!maintenance_mode.enabled && (
+								<LinkButtonLG
+									href="/create-review"
+									umami="Homepage / Submit a Review Button"
+								>
+									{t('home.hero.submit')}
+								</LinkButtonLG>
+							)}
 							<LinkButtonLightLG
 								href="/reviews"
 								umami="Homepage / Read Reviews Button"
