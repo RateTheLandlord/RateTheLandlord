@@ -32,7 +32,11 @@ describe('MobileNav', () => {
 	it('renders MobileNav component correctly', () => {
 		render(
 			<Disclosure>
-				<MobileNav navigation={navigation} activeTab="/" />
+				<MobileNav
+					navigation={navigation}
+					activeTab="/"
+					maintenanceMode={false}
+				/>
 			</Disclosure>,
 		)
 	})

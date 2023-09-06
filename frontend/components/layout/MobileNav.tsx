@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next'
 interface IProps {
 	navigation: Array<INav>
 	activeTab: string
-	maintenanceMode: boolean
+	maintenanceMode?: boolean
 }
 const MobileNav = ({
 	navigation,
