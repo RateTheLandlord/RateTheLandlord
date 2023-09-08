@@ -30,8 +30,6 @@ services:
       - 9999:9999
     networks:
       - internal
-    depends_on:
-      - postgres
     env_file: .env
     volumes:
       - ./backend:/app
@@ -55,24 +53,6 @@ services:
     volumes:
       - ./frontend:/app
       - /frontend/node_modules
-
-  postgres:
-    image: postgres
-    container_name: postgres
-    platform: linux/amd64
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      POSTGRES_USER: ${PGUSERNAME}
-      POSTGRES_PASSWORD: ${PGPASSWORD}
-      POSTGRES_DB: ${PGDATABASE}
-    volumes:
-      - postgres-data:/var/lib/postgresql/data/
-    networks:
-      - internal
-
-volumes:
-  postgres-data:
 
 networks:
   internal:
