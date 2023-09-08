@@ -635,7 +635,7 @@ function ReviewForm(): JSX.Element {
 									maliciousStringDetected ||
 									loading ||
 									review.length > 2000 ||
-									!maintenance_mode.enabled
+									maintenance_mode.enabled
 								}
 							>
 								{t('create-review.review-form.submit')}
