@@ -12,7 +12,7 @@ WORKDIR /app
 COPY ./backend/package*.json /app/
 COPY ./.env /app/
 
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Copy the rest of our Nest folder into /app
 COPY ./backend /app

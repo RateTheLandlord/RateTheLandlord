@@ -30,6 +30,9 @@ services:
       - 9999:9999
     networks:
       - internal
+    dns:
+      - 8.8.8.8
+      - 4.4.4.4
     env_file: .env
     volumes:
       - ./backend:/app
@@ -48,8 +51,6 @@ services:
       - internal
     env_file:
       - ./.env
-    depends_on:
-      - backend
     volumes:
       - ./frontend:/app
       - /frontend/node_modules
