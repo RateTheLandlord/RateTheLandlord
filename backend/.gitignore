@@ -36,3 +36,4 @@ lerna-debug.log*
 
 # Secrets
 .env
+/certificates/
