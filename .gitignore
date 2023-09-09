@@ -3,5 +3,6 @@
 .idea/codeStyles/Project.xml
 
 **/certificates/
-
+/backend/certificates/
+*.crt
 logs
