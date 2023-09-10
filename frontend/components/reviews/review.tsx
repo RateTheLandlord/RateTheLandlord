@@ -1,21 +1,16 @@
-import ReviewFilters from '@/components/reviews/review-filters'
-import {sortOptions} from '@/util/helpers/filter-options'
-import {Options, Review} from '@/util/interfaces/interfaces'
-import {
-	getCityOptions,
-	getStateOptions,
-	getZipOptions,
-	updateActiveFilters,
-} from '@/components/reviews/functions'
-import React, {useEffect, useMemo, useState} from 'react'
-import ReportModal from '@/components/reviews/report-modal'
-import useSWR from 'swr'
-import Alert from '../alerts/Alert'
-import {fetcher} from '@/util/helpers/fetcher'
-import EditReviewModal from '../modal/EditReviewModal'
-import RemoveReviewModal from '../modal/RemoveReviewModal'
-import InfiniteScroll from './InfiniteScroll'
-import AdsComponent from '@/components/adsense/Adsense'
+import ReviewFilters from "@/components/reviews/review-filters";
+import { sortOptions } from "@/util/helpers/filter-options";
+import { Options, Review } from "@/util/interfaces/interfaces";
+import { getCityOptions, getStateOptions, getZipOptions, updateActiveFilters } from "@/components/reviews/functions";
+import React, { useEffect, useMemo, useState } from "react";
+import ReportModal from "@/components/reviews/report-modal";
+import useSWR from "swr";
+import Alert from "../alerts/Alert";
+import { fetcher } from "@/util/helpers/fetcher";
+import EditReviewModal from "../modal/EditReviewModal";
+import RemoveReviewModal from "../modal/RemoveReviewModal";
+import InfiniteScroll from "./InfiniteScroll";
+import AdsComponent from "@/components/adsense/Adsense";
 
 export type ReviewsResponse = {
 	reviews: Review[]
@@ -90,7 +85,7 @@ const Review = () => {
 	}, [data, queryParams, previousQueryParams])
 
 	useEffect(() => {
-		if (data) {
+		if (data && data.reviews) {
 			if (reviews.length >= data?.total || data.reviews.length <= 0)
 				setHasMore(false)
 		}
