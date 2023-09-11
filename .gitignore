@@ -2,4 +2,8 @@
 .env
 .idea/codeStyles/Project.xml
 
+**/certificates/
+*.crt
+./backend/certificates/
 logs
+/backend/certificates/

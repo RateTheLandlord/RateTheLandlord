@@ -1,32 +1,32 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 
-import AddReviewModal from './add-review-modal'
-import Alert from '../alerts/Alert'
-import Button from '../ui/button'
-import ButtonLight from '../ui/button-light'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
-import MaliciousStringAlert from '../alerts/MaliciousStringAlert'
-import RatingsRadio from './ratings-radio'
-import SuccessModal from './success-modal'
-import countries from '@/util/countries/countries.json'
-import {postcodeValidator} from 'postcode-validator'
-import provinces from '@/util/countries/canada/provinces.json'
-import regions from '@/util/countries/unitedKingdom/regions.json'
-import states from '@/util/countries/unitedStates/states.json'
-import territories from '@/util/countries/australia/territories.json'
-import nz_provinces from '@/util/countries/newZealand/nz-provinces.json'
-import {useTranslation} from 'react-i18next'
-import {country_codes} from '@/util/helpers/getCountryCodes'
-import SpamReviewModal from '@/components/create-review/SpamReviewModal'
-import SheldonModal from '@/components/create-review/SheldonModal'
-import {sheldonReview} from '@/components/create-review/helper'
-import {useLocation} from '@/util/hooks/useLocation'
-import {useLandlordSuggestions} from '@/util/hooks/useLandlordSuggestions'
-import CityComboBox from '@/components/create-review/components/CityComboBox'
-import LandlordComboBox from '@/components/create-review/components/LandlordComboBox'
-import {ILocationHookResponse} from '@/util/interfaces/interfaces'
-import {useFlags} from 'flagsmith/react'
+import AddReviewModal from "./add-review-modal";
+import Alert from "../alerts/Alert";
+import Button from "../ui/button";
+import ButtonLight from "../ui/button-light";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import MaliciousStringAlert from "../alerts/MaliciousStringAlert";
+import RatingsRadio from "./ratings-radio";
+import SuccessModal from "./success-modal";
+import countries from "@/util/countries/countries.json";
+import { postcodeValidator } from "postcode-validator";
+import provinces from "@/util/countries/canada/provinces.json";
+import regions from "@/util/countries/unitedKingdom/regions.json";
+import states from "@/util/countries/unitedStates/states.json";
+import territories from "@/util/countries/australia/territories.json";
+import nz_provinces from "@/util/countries/newZealand/nz-provinces.json";
+import { useTranslation } from "react-i18next";
+import { country_codes } from "@/util/helpers/getCountryCodes";
+import SpamReviewModal from "@/components/create-review/SpamReviewModal";
+import SheldonModal from "@/components/create-review/SheldonModal";
+import { sheldonReview } from "@/components/create-review/helper";
+import { useLocation } from "@/util/hooks/useLocation";
+import { useLandlordSuggestions } from "@/util/hooks/useLandlordSuggestions";
+import CityComboBox from "@/components/create-review/components/CityComboBox";
+import LandlordComboBox from "@/components/create-review/components/LandlordComboBox";
+import { ILocationHookResponse } from "@/util/interfaces/interfaces";
+import { useFlags } from "flagsmith/react";
 
 const siteKey = process.env.NEXT_PUBLIC_HCPATCHA_SITE_KEY as string
 
