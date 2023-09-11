@@ -6,7 +6,7 @@ import * as fs from 'fs';
 export class DatabaseService {
   sql = postgres(process.env.PGURL, {
     ssl: {
-      ca: [fs.readFileSync('./certificates/ca-certificate.crt')],
+      ca: [fs.readFileSync('./src/certificates/ca-certificate.crt')],
     },
   });
 }
